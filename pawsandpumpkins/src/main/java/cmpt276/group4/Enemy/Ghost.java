@@ -10,7 +10,7 @@ public class Ghost implements Enemy {
         this.enemyMovement = new EnemyMovement();
         this.playerPosition = new Position(5, 5); // Placeholder position
         this.findPlayer = false;
-        System.out.println("Ghost created.");
+        //System.out.println("Ghost created.");
     }
 
     public void moveTowardPlayer() {

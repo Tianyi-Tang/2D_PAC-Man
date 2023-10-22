@@ -4,23 +4,28 @@ import java.util.List;
 
 
 public class EnemyFactory {
-    public List<Enemy> createEnemies(EnemyType type, int number) {
-        List<Enemy> enemies = new ArrayList<>();
 
+    public List<Enemy> createEnemies(EnemyType type, int number) {
+        System.out.println("Creating " + number + " " + type + " enemies.");  // Added for clarity
+        List<Enemy> enemies = new ArrayList<>();
         for (int i = 0; i < number; i++) {
+            //System.out.println(i);
             switch (type) {
                 case GHOST:
-                    enemies.add((Enemy)(new Ghost()));
+                    enemies.add(new Ghost());
+                    System.out.println("Ghost created.");
                     break;
                 case SPIDER:
-                    enemies.add((Enemy)(new Spider()));
+                    enemies.add(new Spider());
+                    System.out.println("Spider created.");
                     break;
                 default:
-                    throw new IllegalArgumentException("Unknown enemy type");
+                    throw new IllegalArgumentException("Invalid enemy type");
             }
         }
-
-        System.out.println(number + " " + type + " enemies created.");
         return enemies;
     }
+    
 }
+
+

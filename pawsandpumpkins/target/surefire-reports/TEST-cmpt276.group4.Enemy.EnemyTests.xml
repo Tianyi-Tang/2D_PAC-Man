@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="cmpt276.group4.Enemy.EnemyTests" time="0.05" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="cmpt276.group4.Enemy.EnemyTests" time="0.042" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="20"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-20\bin"/>
-    <property name="sun.java.command" value="C:\Users\rosem\AppData\Local\Temp\surefire9371389671578776054\surefirebooter10083608130994439545.jar C:\Users\rosem\AppData\Local\Temp\surefire9371389671578776054 2023-10-21T16-13-44_233-jvmRun1 surefire7789085075332553242tmp surefire_012069995498081115487tmp"/>
+    <property name="sun.java.command" value="C:\Users\rosem\AppData\Local\Temp\surefire7808258528620994373\surefirebooter15832227913881813383.jar C:\Users\rosem\AppData\Local\Temp\surefire7808258528620994373 2023-10-21T17-08-37_826-jvmRun1 surefire3294583169097673126tmp surefire_014666237818024777332tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\rosem\Documents\CMPT267\CMPT276_project\CMPT276F23_group4\pawsandpumpkins\target\test-classes;C:\Users\rosem\Documents\CMPT267\CMPT276_project\CMPT276F23_group4\pawsandpumpkins\target\classes;C:\Users\rosem\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\rosem\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\rosem\.m2\repository\org\junit\jupiter\junit-jupiter\5.7.0\junit-jupiter-5.7.0.jar;C:\Users\rosem\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.0\junit-jupiter-api-5.7.0.jar;C:\Users\rosem\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\rosem\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\rosem\.m2\repository\org\junit\platform\junit-platform-commons\1.7.0\junit-platform-commons-1.7.0.jar;C:\Users\rosem\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.0\junit-jupiter-params-5.7.0.jar;C:\Users\rosem\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.0\junit-jupiter-engine-5.7.0.jar;C:\Users\rosem\.m2\repository\org\junit\platform\junit-platform-engine\1.7.0\junit-platform-engine-1.7.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\rosem\AppData\Local\Temp\surefire9371389671578776054\surefirebooter10083608130994439545.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\rosem\AppData\Local\Temp\surefire7808258528620994373\surefirebooter15832227913881813383.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="20+36-2344"/>
@@ -58,8 +58,6 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="64.0"/>
   </properties>
-  <testcase name="testCreateSpiderEnemies" classname="cmpt276.group4.Enemy.EnemyTests" time="0.036"/>
-  <testcase name="testEnemyInitializationWithSpiders" classname="cmpt276.group4.Enemy.EnemyTests" time="0"/>
-  <testcase name="testCreateGhostEnemies" classname="cmpt276.group4.Enemy.EnemyTests" time="0.004"/>
-  <testcase name="testEnemyInitializationWithGhosts" classname="cmpt276.group4.Enemy.EnemyTests" time="0.002"/>
+  <testcase name="testCreateSpiderEnemies" classname="cmpt276.group4.Enemy.EnemyTests" time="0.031"/>
+  <testcase name="testCreateGhostEnemies" classname="cmpt276.group4.Enemy.EnemyTests" time="0.002"/>
 </testsuite>
