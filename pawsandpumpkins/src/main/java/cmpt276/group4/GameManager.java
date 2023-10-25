@@ -11,7 +11,7 @@ public class GameManager {
 
     // setter
     public void setTypeOfRoom(int i) {
-        typeOfRoom = i;
+        this.typeOfRoom = i;
     }
 
     //instance
