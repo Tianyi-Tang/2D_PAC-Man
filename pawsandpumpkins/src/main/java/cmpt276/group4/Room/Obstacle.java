@@ -5,17 +5,15 @@ import cmpt276.group4.Position;
 
 public class Obstacle implements CharacterAvaliablePosition {
 
-    // Should these be private???
-    boolean playerAccess;
-    boolean enemyTraversability;
+    private boolean playerAccess;
+    private boolean enemyTraversability;
+    private Position[] positions;
 
-    //Should this have [] for array
-    Position position;
-
-    public Obstacle() {
-        this.playerAccess = true;
-        this.enemyTraversability = true;
-        this.position = new Position(5, 5);
+    // Constructor to initialize an obstacle with player access, enemy traversability, and positions
+    public Obstacle(boolean playerAccess, boolean enemyTraversability, Position[] positions) {
+        this.playerAccess = playerAccess;
+        this.enemyTraversability = enemyTraversability;
+        this.positions = positions;
     }
     
     @Override

@@ -6,6 +6,9 @@ public class Door implements CharacterAvaliablePosition{
     // open variable
     private boolean open;
 
+    public Door(boolean IsOpen) {
+        this.open = IsOpen;
+    }
     // getter for open
     public boolean getOpen() {
         return open;
@@ -25,7 +28,7 @@ public class Door implements CharacterAvaliablePosition{
     public void meetCondition() {
 
     }
-    
+
     @Override
     public boolean getPlayerAvaliable() {
         throw new UnsupportedOperationException("is player avaliable");
