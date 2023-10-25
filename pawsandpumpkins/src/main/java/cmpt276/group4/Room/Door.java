@@ -1,6 +1,8 @@
 package cmpt276.group4.Room;
 
-public class Door {
+import cmpt276.group4.CharacterAvaliablePosition;
+
+public class Door implements CharacterAvaliablePosition{
     // open variable
     private boolean open;
 
@@ -22,5 +24,15 @@ public class Door {
     // if player available is true call private openDoor()
     public void meetCondition() {
 
+    }
+    
+    @Override
+    public boolean getPlayerAvaliable() {
+        throw new UnsupportedOperationException("is player avaliable");
+    }
+
+    @Override
+    public boolean getEnemyAvaliable() {
+        throw new UnsupportedOperationException("is enemy avaliable");
     }
 }
