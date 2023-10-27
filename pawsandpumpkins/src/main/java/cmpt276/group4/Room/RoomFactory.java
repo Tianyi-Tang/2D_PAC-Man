@@ -2,15 +2,16 @@ package cmpt276.group4.Room;
 
 import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.Position;
-import cmpt276.group4.GameManager;
 public class RoomFactory {
 
-    public Room createRoom(int roomLength, GameManager typeOfRoom) {
-        return new Room(roomLength, typeOfRoom);
+    //creating actual object of obstacle and door and room in factory 
+    //use enum instead of GameManger
+    public Room createRoom(int roomLength) {
+        return new Room(roomLength);
     }
 
-    public Obstacle createObstacle(boolean playerAccess, boolean enemyTraversability, Position[] positions) {
-        return new Obstacle(playerAccess, enemyTraversability, positions);
+    public Obstacle createObstacle(Position[] positions) {
+        return new Obstacle(positions);
     }
 
     public Door createDoor(Boolean IsOpen) {

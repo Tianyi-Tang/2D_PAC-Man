@@ -10,9 +10,7 @@ public class Obstacle implements CharacterAvaliablePosition {
     private Position[] positions;
 
     // Constructor to initialize an obstacle with player access, enemy traversability, and positions
-    public Obstacle(boolean playerAccess, boolean enemyTraversability, Position[] positions) {
-        this.playerAccess = playerAccess;
-        this.enemyTraversability = enemyTraversability;
+    public Obstacle(Position[] positions) {
         this.positions = positions;
     }
     
