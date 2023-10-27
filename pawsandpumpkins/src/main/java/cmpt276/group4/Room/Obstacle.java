@@ -13,6 +13,33 @@ public class Obstacle implements CharacterAvaliablePosition {
     public Obstacle(Position[] positions) {
         this.positions = positions;
     }
+
+    // Getter and setter methods for playerAccess
+    public boolean isPlayerAccess() {
+        return playerAccess;
+    }
+
+    public void setPlayerAccess(boolean playerAccess) {
+        this.playerAccess = playerAccess;
+    }
+
+    // Getter and setter methods for enemyTraversability
+    public boolean isEnemyTraversability() {
+        return enemyTraversability;
+    }
+
+    public void setEnemyTraversability(boolean enemyTraversability) {
+        this.enemyTraversability = enemyTraversability;
+    }
+
+    // Getter and setter methods for positions
+    public Position[] getPositions() {
+        return positions;
+    }
+
+    public void setPositions(Position[] positions) {
+        this.positions = positions;
+    }
     
     @Override
     public boolean getPlayerAvaliable() {
