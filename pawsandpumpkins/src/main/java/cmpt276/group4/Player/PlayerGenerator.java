@@ -4,7 +4,7 @@ import cmpt276.group4.Position;
 
 public class PlayerGenerator {
 
-    public Player creatPlayer(Position position){
+    public static Player creatPlayer(Position position){
         Player player = Player.getInstance();
 
         player.setPosition(position);

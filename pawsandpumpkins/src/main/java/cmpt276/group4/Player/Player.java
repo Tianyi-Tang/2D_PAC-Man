@@ -1,8 +1,9 @@
 package cmpt276.group4.Player;
 
 import cmpt276.group4.Position;
+import cmpt276.group4.WindowAndInput.MoveDirection;
 
-public class Player {
+public class Player implements KeyMovingObserver {
     private Position playerPosition;
     private static Player _instance = null;
 
@@ -28,6 +29,22 @@ public class Player {
 
     public void setPlayerMovement(PlayerMovement playerMovement){
         movement = playerMovement;
+    }
+
+    @Override
+    public void update(MoveDirection direction) {
+        if(direction == MoveDirection.Up){
+            
+        }
+        else if(direction == MoveDirection.Down){
+
+        }
+        else if(direction == MoveDirection.Left){
+
+        }
+        else if(direction == MoveDirection.Right){
+
+        }
     }
 
 

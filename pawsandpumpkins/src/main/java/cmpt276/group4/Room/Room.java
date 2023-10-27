@@ -1,9 +1,9 @@
 package cmpt276.group4.Room;
 
+import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.Room.Obstacle;
 import cmpt276.group4.Room.Door;
-import cmpt276.group4.GameManager;
 
 public class Room {
     private Position doorPosition;
@@ -17,12 +17,12 @@ public class Room {
 
         // Initialize obstacle objects based on roomLength
         for (int i = 0; i < roomLength; i++) {
-            obstacle[i] = new Obstacle();
+            // obstacle[i] = new Obstacle();
         }
 
         // Initialize door objects based on roomLength
         for (int i = 0; i < roomLength; i++) {
-            door[i] = new Door(IsOpen);
+            // door[i] = new Door(IsOpen);
         }
     }
 
