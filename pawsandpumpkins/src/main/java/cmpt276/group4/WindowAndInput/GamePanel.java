@@ -24,13 +24,15 @@ public class GamePanel extends JPanel implements Runnable {
     private double timeInterval = 1000000000/FPS;
 
     private Thread gameThread;
+    private keyboardListener listener = new keyboardListener();
 
     public GamePanel(){
 
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
-
+        this.addKeyListener(listener);
+        this.setFocusable(true);
     }
 
     public void createTimeLine(){

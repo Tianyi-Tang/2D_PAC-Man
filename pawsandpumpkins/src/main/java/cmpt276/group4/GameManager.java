@@ -35,6 +35,7 @@ public class GameManager {
         gamePanel = new GamePanel();
         window.add(gamePanel);
         window.pack();
+        gamePanel.createTimeLine();
     }
 
     //instance
