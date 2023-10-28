@@ -3,5 +3,5 @@ package cmpt276.group4.Player;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
 public interface KeyMovingObserver {
-    public void update(MoveDirection direction);
+    public void observerUpdate(MoveDirection direction);
 }

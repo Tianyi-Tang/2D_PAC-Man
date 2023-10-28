@@ -17,6 +17,22 @@ public class Position{
         return y_axis;
     }
 
+
+    public void addOnX_axis(int x_increment){
+        x_axis += x_increment;
+    }
+
+    public void addOnY_axis(int y_increment){
+        y_axis += y_increment;
+    }
+
+    public boolean equal(Position position){
+        if(position.getX_axis() == x_axis && position.getY_axis() == y_axis)
+            return true;
+        else
+            return false;
+    }
+
     public void setX_axis(int x_axis){
         this.x_axis = x_axis;
     }
