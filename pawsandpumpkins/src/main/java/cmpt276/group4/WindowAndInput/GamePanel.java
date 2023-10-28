@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import cmpt276.group4.Player.Player;
+
 
 public class GamePanel extends JPanel implements Runnable {
     
@@ -24,15 +26,12 @@ public class GamePanel extends JPanel implements Runnable {
     private double timeInterval = 1000000000/FPS;
 
     private Thread gameThread;
-    private keyboardListener listener = new keyboardListener();
 
     public GamePanel(){
 
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
-        this.addKeyListener(listener);
-        this.setFocusable(true);
     }
 
     public void createTimeLine(){
@@ -62,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(){
-
+        Player.getInstance().update();
     }
 
     @Override
@@ -71,6 +70,9 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+        
+        Player.getInstance().draw(g2);
+        g2.dispose();
     }
 
 }
