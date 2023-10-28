@@ -6,20 +6,20 @@ import java.util.List;
 import java.util.Random;
 
 import cmpt276.group4.Position;
-import cmpt276.group4.Player.Player;
+import cmpt276.group4.RecordUsedPlace;
 
 public class Ghost implements Enemy {
     private EnemyMovement enemyMovement;
     private Position playerPosition;
     private Position enemyPosition;
-    //private boolean findPlayer;
+    // private boolean findPlayer;
 
     public Ghost() {
         this.enemyMovement = new EnemyMovement();
         // Initialize playerPosition and enemyPosition with placeholder values
         this.playerPosition = new Position(0, 0);
         this.enemyPosition = new Position(5, 5);
-        //this.findPlayer = false;
+        // this.findPlayer = false;
     }
 
     public void ghostNextPosition() {
@@ -39,8 +39,8 @@ public class Ghost implements Enemy {
 
     private void getPlayerPosition() {
         // Get the player's position
-        Player playerInstance = Player.getInstance();
-        playerPosition = playerInstance.getPosition();
+        RecordUsedPlace record = RecordUsedPlace.getInstance();
+        playerPosition = record.getPlayerPosition();
     }
 
     private boolean isPlayerAround(int range) {
@@ -54,59 +54,68 @@ public class Ghost implements Enemy {
 
     private void moveToClosestPlayerPosition() {
 
-         List<Position> availableDirections = getPriorityPositions();
- 
-         Position highestPriorityAvailablePosition = null;
-         for (Position position : availableDirections) {
-             if (enemyMovement.isPositionAvailable(position)) {
-                 highestPriorityAvailablePosition = position;
-                 break;
-             }
-         }
- 
-         if (highestPriorityAvailablePosition != null) {
+        List<Position> availableDirections = getPriorityPositions();
+
+        Position highestPriorityAvailablePosition = null;
+        for (Position position : availableDirections) {
+            if (enemyMovement.isPositionAvailable(position)) {
+                highestPriorityAvailablePosition = position;
+                break;
+            }
+        }
+
+        if (highestPriorityAvailablePosition != null) {
+            System.out.println("Highest priority available position: (" + highestPriorityAvailablePosition.getX_axis()
+                    + ", " + highestPriorityAvailablePosition.getY_axis() + ")");
             enemyPosition = highestPriorityAvailablePosition;
-            System.out.println("Highest priority available position: (" + highestPriorityAvailablePosition.getX_axis() + ", " + highestPriorityAvailablePosition.getY_axis() + ")");
-         } else {
-             System.out.println("No available position found.");
-         }
+        } else {
+            System.out.println("No available position found.");
+        }
     }
 
     private List<Position> getPriorityPositions() {
         int deltaX = playerPosition.getX_axis() - enemyPosition.getX_axis();
         int deltaY = playerPosition.getY_axis() - enemyPosition.getY_axis();
         Position newPositionRight = new Position(enemyPosition.getX_axis() + 1, enemyPosition.getY_axis());
-         Position newPositionLeft = new Position(enemyPosition.getX_axis() - 1, enemyPosition.getY_axis());
-         Position newPositionUp = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() + 1);
-         Position newPositionDown = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() - 1);
+        Position newPositionLeft = new Position(enemyPosition.getX_axis() - 1, enemyPosition.getY_axis());
+        Position newPositionUp = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() + 1);
+        Position newPositionDown = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() - 1);
         List<Position> priorityList = new ArrayList<>();
 
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
             if (deltaX > 0) {
                 if (deltaY > 0) {
-                    priorityList.addAll(Arrays.asList(newPositionRight, newPositionLeft, newPositionUp, newPositionDown));
+                    priorityList
+                            .addAll(Arrays.asList(newPositionRight, newPositionLeft, newPositionUp, newPositionDown));
                 } else {
-                    priorityList.addAll(Arrays.asList(newPositionRight, newPositionLeft, newPositionDown, newPositionUp));
+                    priorityList
+                            .addAll(Arrays.asList(newPositionRight, newPositionLeft, newPositionDown, newPositionUp));
                 }
             } else {
                 if (deltaY > 0) {
-                    priorityList.addAll(Arrays.asList(newPositionLeft, newPositionRight, newPositionUp, newPositionDown));
+                    priorityList
+                            .addAll(Arrays.asList(newPositionLeft, newPositionRight, newPositionUp, newPositionDown));
                 } else {
-                    priorityList.addAll(Arrays.asList(newPositionLeft, newPositionRight, newPositionDown, newPositionUp));
+                    priorityList
+                            .addAll(Arrays.asList(newPositionLeft, newPositionRight, newPositionDown, newPositionUp));
                 }
             }
         } else {
             if (deltaY > 0) {
                 if (deltaX > 0) {
-                    priorityList.addAll(Arrays.asList(newPositionUp, newPositionDown, newPositionRight, newPositionLeft));
+                    priorityList
+                            .addAll(Arrays.asList(newPositionUp, newPositionDown, newPositionRight, newPositionLeft));
                 } else {
-                    priorityList.addAll(Arrays.asList(newPositionUp, newPositionDown, newPositionLeft, newPositionRight));
+                    priorityList
+                            .addAll(Arrays.asList(newPositionUp, newPositionDown, newPositionLeft, newPositionRight));
                 }
             } else {
                 if (deltaX > 0) {
-                    priorityList.addAll(Arrays.asList(newPositionDown, newPositionUp, newPositionRight, newPositionLeft));
+                    priorityList
+                            .addAll(Arrays.asList(newPositionDown, newPositionUp, newPositionRight, newPositionLeft));
                 } else {
-                    priorityList.addAll(Arrays.asList(newPositionDown, newPositionUp, newPositionLeft, newPositionRight));
+                    priorityList
+                            .addAll(Arrays.asList(newPositionDown, newPositionUp, newPositionLeft, newPositionRight));
                 }
             }
         }
@@ -166,7 +175,6 @@ public class Ghost implements Enemy {
             }
         }
     }
-
 
     @Override
     public void catchPlayer() {
