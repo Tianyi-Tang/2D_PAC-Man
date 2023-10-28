@@ -1,5 +1,8 @@
 package cmpt276.group4.Enemy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import cmpt276.group4.Position;
@@ -31,7 +34,7 @@ public class Ghost implements Enemy {
             // If the player is not around, move to a random position
             moveToRandomPosition();
         }
-
+        enemyMovement.moveTo(enemyPosition);
     }
 
     private void getPlayerPosition() {
@@ -57,19 +60,31 @@ public class Ghost implements Enemy {
         // Move towards the player along the axis with the greater absolute difference
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
             if (deltaX > 0) {
-                // Move right
-                enemyPosition.setX_axis(enemyPosition.getX_axis() + 1);
+                // Check if the new position is movable
+                Position newPosition = new Position(enemyPosition.getX_axis() + 1, enemyPosition.getY_axis());
+                if (enemyMovement.movable(newPosition)) {
+                    enemyPosition.setX_axis(enemyPosition.getX_axis() + 1);
+                }
             } else {
-                // Move left
-                enemyPosition.setX_axis(enemyPosition.getX_axis() - 1);
+                // Check if the new position is movable
+                Position newPosition = new Position(enemyPosition.getX_axis() - 1, enemyPosition.getY_axis());
+                if (enemyMovement.movable(newPosition)) {
+                    enemyPosition.setX_axis(enemyPosition.getX_axis() - 1);
+                }
             }
         } else {
             if (deltaY > 0) {
-                // Move down
-                enemyPosition.setY_axis(enemyPosition.getY_axis() + 1);
+                // Check if the new position is movable
+                Position newPosition = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() + 1);
+                if (enemyMovement.movable(newPosition)) {
+                    enemyPosition.setY_axis(enemyPosition.getY_axis() + 1);
+                }
             } else {
-                // Move up
-                enemyPosition.setY_axis(enemyPosition.getY_axis() - 1);
+                // Check if the new position is movable
+                Position newPosition = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() - 1);
+                if (enemyMovement.movable(newPosition)) {
+                    enemyPosition.setY_axis(enemyPosition.getY_axis() - 1);
+                }
             }
         }
     }
@@ -78,39 +93,65 @@ public class Ghost implements Enemy {
         // Create a random number generator
         Random random = new Random();
 
-        // Generate a random direction (0: up, 1: down, 2: left, 3: right)
-        int direction = random.nextInt(4);
+        // Create a list to store the available directions
+        List<Integer> availableDirections = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
 
-        // Move the ghost based on the random direction
-        switch (direction) {
-            case 0:
-                // Move up
-                enemyPosition.setY_axis(enemyPosition.getY_axis() - 1);
-                break;
-            case 1:
-                // Move down
-                enemyPosition.setY_axis(enemyPosition.getY_axis() + 1);
-                break;
-            case 2:
-                // Move left
-                enemyPosition.setX_axis(enemyPosition.getX_axis() - 1);
-                break;
-            case 3:
-                // Move right
-                enemyPosition.setX_axis(enemyPosition.getX_axis() + 1);
-                break;
+        while (!availableDirections.isEmpty()) {
+            // Generate a random index for the available directions
+            int randomIndex = random.nextInt(availableDirections.size());
+
+            // Get the direction at the random index
+            int direction = availableDirections.get(randomIndex);
+
+            // Create variables for the new position
+            int newX = enemyPosition.getX_axis();
+            int newY = enemyPosition.getY_axis();
+
+            // Update the new position based on the selected direction
+            switch (direction) {
+                case 0:
+                    // Move up
+                    newY = newY - 1;
+                    break;
+                case 1:
+                    // Move down
+                    newY = newY + 1;
+                    break;
+                case 2:
+                    // Move left
+                    newX = newX - 1;
+                    break;
+                case 3:
+                    // Move right
+                    newX = newX + 1;
+                    break;
+            }
+
+            // Create a new position object for the intended movement
+            Position newPosition = new Position(newX, newY);
+
+            // Check if the new position is movable
+            if (enemyMovement.movable(newPosition)) {
+                // Update the enemy position
+                enemyPosition.setX_axis(newX);
+                enemyPosition.setY_axis(newY);
+                break; // Exit the loop if a movable direction is found
+            } else {
+                // Remove the selected direction from the available directions
+                availableDirections.remove(randomIndex);
+            }
         }
     }
 
+
     @Override
     public void catchPlayer() {
-        // If the next player input moves to the enemyPosition
         getPlayerPosition();
-        if (playerPosition == enemyPosition){
+        if (playerPosition == enemyPosition) {
             System.out.println("Ghost caught the player!");
         } else {
-             System.out.println("Ghost fail to catch the player!");
+            System.out.println("Ghost fail to catch the player!");
         }
-        
+
     }
 }
