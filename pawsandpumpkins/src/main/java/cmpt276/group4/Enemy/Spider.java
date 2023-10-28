@@ -32,9 +32,4 @@ public class Spider implements Enemy {
     public boolean isMovable() {
         return movable;
     }
-
-    @Override
-    public void setMovable(boolean movable) {
-        this.movable = movable;
-    }
 }

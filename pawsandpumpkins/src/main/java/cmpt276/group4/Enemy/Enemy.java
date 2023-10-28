@@ -11,6 +11,5 @@ public interface Enemy {
     Position getEnemyPosition();
     void setEnemyPosition(Position newPosition);
     boolean isMovable();
-    void setMovable(boolean movable);
 
 }
