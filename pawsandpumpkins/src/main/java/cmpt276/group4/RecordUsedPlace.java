@@ -1,9 +1,6 @@
+package cmpt276.group4;
 import java.util.ArrayList;
 
-import javax.swing.UIDefaults.ActiveValue;
-
-import cmpt276.group4.CharacterAvaliablePosition;
-import cmpt276.group4.Position;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Player.Player;
 
