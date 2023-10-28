@@ -16,7 +16,7 @@ public class PlayerMovement implements Movement {
     }
 
     @Override
-    public boolean movable(Position position) {
+    public boolean isPositionAvailable(Position position) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'moveable'");
     }

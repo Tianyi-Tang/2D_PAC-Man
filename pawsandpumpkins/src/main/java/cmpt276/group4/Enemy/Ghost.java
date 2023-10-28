@@ -12,14 +12,14 @@ public class Ghost implements Enemy {
     private EnemyMovement enemyMovement;
     private Position playerPosition;
     private Position enemyPosition;
-    private boolean findPlayer;
+    //private boolean findPlayer;
 
     public Ghost() {
         this.enemyMovement = new EnemyMovement();
         // Initialize playerPosition and enemyPosition with placeholder values
         this.playerPosition = new Position(0, 0);
         this.enemyPosition = new Position(5, 5);
-        this.findPlayer = false;
+        //this.findPlayer = false;
     }
 
     public void ghostNextPosition() {
@@ -27,7 +27,7 @@ public class Ghost implements Enemy {
         getPlayerPosition();
 
         // Check if the player is around
-        if (isPlayerAround()) {
+        if (isPlayerAround(4)) {
             // If the player is around, move towards the player
             moveToClosestPlayerPosition();
         } else {
@@ -43,50 +43,74 @@ public class Ghost implements Enemy {
         playerPosition = playerInstance.getPosition();
     }
 
-    private boolean isPlayerAround() {
+    private boolean isPlayerAround(int range) {
         // Calculate the absolute differences in x and y coordinates
         int deltaX = Math.abs(playerPosition.getX_axis() - enemyPosition.getX_axis());
         int deltaY = Math.abs(playerPosition.getY_axis() - enemyPosition.getY_axis());
 
         // Check if both differences are less than or equal to 4
-        return deltaX <= 4 && deltaY <= 4;
+        return deltaX <= range && deltaY <= range;
     }
 
     private void moveToClosestPlayerPosition() {
-        // Calculate the differences in x and y coordinates
+
+         List<Position> availableDirections = getPriorityPositions();
+ 
+         Position highestPriorityAvailablePosition = null;
+         for (Position position : availableDirections) {
+             if (enemyMovement.isPositionAvailable(position)) {
+                 highestPriorityAvailablePosition = position;
+                 break;
+             }
+         }
+ 
+         if (highestPriorityAvailablePosition != null) {
+            enemyPosition = highestPriorityAvailablePosition;
+            System.out.println("Highest priority available position: (" + highestPriorityAvailablePosition.getX_axis() + ", " + highestPriorityAvailablePosition.getY_axis() + ")");
+         } else {
+             System.out.println("No available position found.");
+         }
+    }
+
+    private List<Position> getPriorityPositions() {
         int deltaX = playerPosition.getX_axis() - enemyPosition.getX_axis();
         int deltaY = playerPosition.getY_axis() - enemyPosition.getY_axis();
+        Position newPositionRight = new Position(enemyPosition.getX_axis() + 1, enemyPosition.getY_axis());
+         Position newPositionLeft = new Position(enemyPosition.getX_axis() - 1, enemyPosition.getY_axis());
+         Position newPositionUp = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() + 1);
+         Position newPositionDown = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() - 1);
+        List<Position> priorityList = new ArrayList<>();
 
-        // Move towards the player along the axis with the greater absolute difference
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
             if (deltaX > 0) {
-                // Check if the new position is movable
-                Position newPosition = new Position(enemyPosition.getX_axis() + 1, enemyPosition.getY_axis());
-                if (enemyMovement.movable(newPosition)) {
-                    enemyPosition.setX_axis(enemyPosition.getX_axis() + 1);
+                if (deltaY > 0) {
+                    priorityList.addAll(Arrays.asList(newPositionRight, newPositionLeft, newPositionUp, newPositionDown));
+                } else {
+                    priorityList.addAll(Arrays.asList(newPositionRight, newPositionLeft, newPositionDown, newPositionUp));
                 }
             } else {
-                // Check if the new position is movable
-                Position newPosition = new Position(enemyPosition.getX_axis() - 1, enemyPosition.getY_axis());
-                if (enemyMovement.movable(newPosition)) {
-                    enemyPosition.setX_axis(enemyPosition.getX_axis() - 1);
+                if (deltaY > 0) {
+                    priorityList.addAll(Arrays.asList(newPositionLeft, newPositionRight, newPositionUp, newPositionDown));
+                } else {
+                    priorityList.addAll(Arrays.asList(newPositionLeft, newPositionRight, newPositionDown, newPositionUp));
                 }
             }
         } else {
             if (deltaY > 0) {
-                // Check if the new position is movable
-                Position newPosition = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() + 1);
-                if (enemyMovement.movable(newPosition)) {
-                    enemyPosition.setY_axis(enemyPosition.getY_axis() + 1);
+                if (deltaX > 0) {
+                    priorityList.addAll(Arrays.asList(newPositionUp, newPositionDown, newPositionRight, newPositionLeft));
+                } else {
+                    priorityList.addAll(Arrays.asList(newPositionUp, newPositionDown, newPositionLeft, newPositionRight));
                 }
             } else {
-                // Check if the new position is movable
-                Position newPosition = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() - 1);
-                if (enemyMovement.movable(newPosition)) {
-                    enemyPosition.setY_axis(enemyPosition.getY_axis() - 1);
+                if (deltaX > 0) {
+                    priorityList.addAll(Arrays.asList(newPositionDown, newPositionUp, newPositionRight, newPositionLeft));
+                } else {
+                    priorityList.addAll(Arrays.asList(newPositionDown, newPositionUp, newPositionLeft, newPositionRight));
                 }
             }
         }
+        return priorityList;
     }
 
     private void moveToRandomPosition() {
@@ -131,7 +155,7 @@ public class Ghost implements Enemy {
             Position newPosition = new Position(newX, newY);
 
             // Check if the new position is movable
-            if (enemyMovement.movable(newPosition)) {
+            if (enemyMovement.isPositionAvailable(newPosition)) {
                 // Update the enemy position
                 enemyPosition.setX_axis(newX);
                 enemyPosition.setY_axis(newY);

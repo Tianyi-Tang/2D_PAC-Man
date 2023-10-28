@@ -12,8 +12,8 @@ public class EnemyMovement implements Movement {
     }
 
     @Override
-    public boolean moveable(Position position) {
+    public boolean isPositionAvailable(Position position) {
         System.out.println("Checking if position is an obstacle: " + position.getX_axis() + ", " + position.getY_axis());
-        return true;
+        return false;
     }
 }
