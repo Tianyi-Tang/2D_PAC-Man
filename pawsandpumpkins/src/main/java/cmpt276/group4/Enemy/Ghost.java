@@ -15,6 +15,7 @@ public class Ghost implements Enemy {
 
     public void moveTowardPlayer() {
         System.out.println("Ghost is moving towards the player.");
+        
         enemyMovement.moveTo(playerPosition);
     }
 
