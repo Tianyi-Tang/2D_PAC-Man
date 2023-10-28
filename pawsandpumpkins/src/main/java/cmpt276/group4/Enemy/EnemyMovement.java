@@ -6,13 +6,14 @@ import cmpt276.group4.Movement;
 public class EnemyMovement implements Movement {
     @Override
     public boolean moveTo(Position position) {
-        System.out.println("Moving to position: " + position.getX_axis() + ", " + position.getY_axis());
+        //Call image controller to enemy image to new position
+        System.out.println("Moving Enemy to position: " + position.getX_axis() + ", " + position.getY_axis());
         return true;
     }
 
     @Override
-    public boolean moveable(Position position) {
-        System.out.println("Checking if position is moveable: " + position.getX_axis() + ", " + position.getY_axis());
+    public boolean movable(Position position) {
+        System.out.println("Checking if position is an obstacle: " + position.getX_axis() + ", " + position.getY_axis());
         return true;
     }
 }
