@@ -19,27 +19,22 @@ public class keyboardListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        System.out.println("key pressed");
         switch (code) {
             case KeyEvent.VK_W:
             case KeyEvent.VK_UP:
-                System.out.println("Player wants to move up");
-                notify(MoveDirection.Up);
+                notify(MoveDirection.Up,true);
                 break;
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
-                System.out.println("Player wants to move down");
-                notify(MoveDirection.Down);
+                notify(MoveDirection.Down,true);
                 break;
             case KeyEvent.VK_A:
             case KeyEvent.VK_LEFT:
-                System.out.println("Player wants to move left");
-                notify(MoveDirection.Left);
+                notify(MoveDirection.Left,true);
                 break;
             case KeyEvent.VK_D:
             case KeyEvent.VK_RIGHT:
-                System.out.println("Player wants to move right");
-                notify(MoveDirection.Right);
+                notify(MoveDirection.Right,true);
                 break;
             default:
                 System.out.println("Invalid input");
@@ -49,12 +44,33 @@ public class keyboardListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        notify(MoveDirection.StaySame);
+        int code = e.getKeyCode();
+         switch (code) {
+            case KeyEvent.VK_W:
+            case KeyEvent.VK_UP:
+                notify(MoveDirection.Up,false);
+                break;
+            case KeyEvent.VK_S:
+            case KeyEvent.VK_DOWN:
+                notify(MoveDirection.Down,false);
+                break;
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_LEFT:
+                notify(MoveDirection.Left,false);
+                break;
+            case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
+                notify(MoveDirection.Right,false);
+                break;
+            default:
+                System.out.println("Invalid input");
+                break;
+        }
     }
 
-    private void notify(MoveDirection direction){
+    private void notify(MoveDirection direction, boolean turnOn){
         if(player != null)
-            player.observerUpdate(direction);
+            player.observerUpdate(direction,turnOn);
     }
     
 }
