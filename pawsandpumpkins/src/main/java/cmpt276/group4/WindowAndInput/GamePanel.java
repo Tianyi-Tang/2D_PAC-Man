@@ -29,6 +29,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     final int FPS = 60;
     private double timeInterval = 1000000000/FPS;
+    private int enemyMoveCounter = 0;
+    // Change the enemy's position every 30 frames (every half second at 60 FPS)
+    private final int ENEMY_MOVE_INTERVAL = 30; 
+    
 
     private Thread gameThread;
 
@@ -67,10 +71,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update(){
         Player.getInstance().update();
-        for (Enemy enemy : record.getEnemyList()) {
-            if (enemy instanceof Ghost) {
-                ((Ghost)enemy).ghostMoveNextPosition();
+        if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
+            for (Enemy enemy : record.getEnemyList()) {
+                if (enemy instanceof Ghost) {
+                    ((Ghost)enemy).ghostMoveNextPosition();
+                }
             }
+            enemyMoveCounter = 0; // Reset the counter
+        } else {
+            enemyMoveCounter++;
         }
         
     }
