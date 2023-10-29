@@ -7,6 +7,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 import cmpt276.group4.Position;
+import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
 public class Player implements KeyMovingObserver {
@@ -151,7 +152,7 @@ public class Player implements KeyMovingObserver {
                 break;
         }
 
-        g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), 48, 48,null);
+        g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize,null);
     }
 
     private void updateDestination(int x_increment,int y_increment){

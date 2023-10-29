@@ -19,14 +19,14 @@ public class GamePanel extends JPanel implements Runnable {
     RecordUsedPlace record = RecordUsedPlace.getInstance();
     
     //Screen Sitting 
-    final int original_tileSize = 16;
-    final  int scale = 3;
-    final int tileSize = original_tileSize * scale;
+    private static final int original_tileSize = 16;
+    private static final  int scale = 3;
+    public static final int tileSize = original_tileSize * scale;
 
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 16;
-    final int screenWidth = maxScreenCol * tileSize;
-    final int screenHeight = maxScreenRow * tileSize;
+    private static final int maxScreenCol = 16;
+    private static final int maxScreenRow = 16;
+    public static final int screenWidth = maxScreenCol * tileSize;
+    public static final int screenHeight = maxScreenRow * tileSize;
 
     final int FPS = 60;
     private double timeInterval = 1000000000/FPS;
