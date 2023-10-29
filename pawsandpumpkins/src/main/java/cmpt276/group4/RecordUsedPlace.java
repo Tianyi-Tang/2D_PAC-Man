@@ -19,12 +19,18 @@ public class RecordUsedPlace {
 
     public RecordUsedPlace(){
         alreadyUsed = new ArrayList<Position>();
-        available = new ArrayList<Position>();
+        initalAvailableArray();
 
         playerAvaliable_pos = new ArrayList<Position>();
         enemyAvaliable_pos = new ArrayList<Position>();
         enemies = new ArrayList<Enemy>();
         player = Player.getInstance();
+    }
+
+    private void initalAvailableArray(){
+        available = new ArrayList<Position>();
+
+        // add all aviable area in this function
     }
 
     public static RecordUsedPlace getInstance(){
@@ -33,18 +39,23 @@ public class RecordUsedPlace {
         return instance;
     }
 
-    public void addElementToMap(CharacterAvaliablePosition object){
-        if(object.getEnemyAvaliable())
-            enemyAvaliable_pos.add(object.getPosition());
-        if(object.getPlayerAvaliable())
-            playerAvaliable_pos.add(object.getPosition());
+    public boolean addElementToMap(CharacterAvaliablePosition object){
+        if(isPlaceAviable(object.getPosition())){
+            if(object.getEnemyAvaliable())
+                enemyAvaliable_pos.add(object.getPosition());
+            if(object.getPlayerAvaliable())
+                playerAvaliable_pos.add(object.getPosition());
 
-        if(object.getTakenPlace()){
-            alreadyUsed.add(object.getPosition());
-            RemoveFromAviable(object.getPosition());
+            if(object.getTakenPlace()){
+                alreadyUsed.add(object.getPosition());
+                RemoveFromAviable(object.getPosition());
+            }
+            else
+                available.add(object.getPosition());
+            return true;
         }
-        else
-            available.add(object.getPosition());
+        else 
+            return false;
     }
 
     public void addEnemy(Enemy enemy){
@@ -80,6 +91,14 @@ public class RecordUsedPlace {
                 return true;
         }
         return false;
+    }
+
+    private boolean isPlaceAviable(Position planingPosition){
+        for (Position position : alreadyUsed) {
+            if(position.equal(planingPosition))
+                return false;
+        }
+        return true;
     }
 
 
