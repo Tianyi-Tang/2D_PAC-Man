@@ -1,5 +1,6 @@
 package cmpt276.group4;
 import java.util.ArrayList;
+import java.util.List;
 
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Player.Player;
@@ -87,5 +88,8 @@ public class RecordUsedPlace {
                 available.remove(position);
         }
     }
-
+    
+    public List<Enemy> getEnemyList(){
+        return enemies;
+    }
 }

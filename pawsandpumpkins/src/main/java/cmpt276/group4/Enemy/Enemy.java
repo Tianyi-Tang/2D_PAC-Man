@@ -1,5 +1,5 @@
 package cmpt276.group4.Enemy;
-
+import java.awt.Graphics2D;
 import cmpt276.group4.Position;
 
 public interface Enemy {
@@ -11,5 +11,7 @@ public interface Enemy {
     Position getEnemyPosition();
     void setEnemyPosition(Position newPosition);
     boolean isMovable();
+    void draw(Graphics2D g2);
+
 
 }

@@ -7,10 +7,15 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.Enemy.Ghost;
 import cmpt276.group4.Player.Player;
 
 
 public class GamePanel extends JPanel implements Runnable {
+
+    RecordUsedPlace record = RecordUsedPlace.getInstance();
     
     //Screen Sitting 
     final int original_tileSize = 16;
@@ -62,6 +67,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update(){
         Player.getInstance().update();
+        for (Enemy enemy : record.getEnemyList()) {
+            if (enemy instanceof Ghost) {
+                ((Ghost)enemy).ghostMoveNextPosition();
+            }
+        }
+        
     }
 
     @Override
@@ -72,7 +83,15 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         
         Player.getInstance().draw(g2);
+        
+
+        for (Enemy enemy : record.getEnemyList()) {
+        enemy.draw(g2);
+        }
+
         g2.dispose();
+
+
     }
 
 }

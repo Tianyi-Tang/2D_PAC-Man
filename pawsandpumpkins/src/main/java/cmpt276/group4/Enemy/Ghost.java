@@ -1,4 +1,6 @@
 package cmpt276.group4.Enemy;
+import java.awt.Color;
+import java.awt.Graphics2D;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,13 +18,11 @@ public class Ghost implements Enemy {
 
     public Ghost() {
         this.enemyMovement = new EnemyMovement();
-
-        this.playerPosition = new Position(0, 0);
         this.enemyPosition = new Position(5, 5);
-        // this.findPlayer = false;
+        getPlayerPosition();
     }
 
-    public void ghostNextPosition() {
+    public void ghostMoveNextPosition() {
         // Get player's current position
         getPlayerPosition();
 
@@ -194,4 +194,10 @@ public class Ghost implements Enemy {
     public boolean isMovable() {
         return movable;
     }
+
+    public void draw(Graphics2D g2){
+        g2.setColor(Color.white);
+        g2.fillRect(enemyPosition.getX_axis(), enemyPosition.getY_axis(), 48, 48);
+    }
+
 }
