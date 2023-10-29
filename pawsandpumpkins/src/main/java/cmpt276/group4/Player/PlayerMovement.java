@@ -11,14 +11,20 @@ public class PlayerMovement implements Movement {
 
     @Override
     public boolean moveTo(Position position) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'moveTo'");
+        return isPositionAvailable(position);
     }
 
     @Override
     public boolean isPositionAvailable(Position position) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'moveable'");
+        if(position.getX_axis() == 48 && position.getY_axis() == 96)
+            return false;
+        else
+            return true;
+
+        // if(RecordUsedPlace.getInstance().playerMovable(position))
+        //     return true;
+        // else
+        //     return false;
     }
     
 }

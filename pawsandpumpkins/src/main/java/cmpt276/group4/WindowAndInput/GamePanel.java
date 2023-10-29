@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+
 import javax.swing.JPanel;
 
 import cmpt276.group4.RecordUsedPlace;
@@ -97,10 +98,16 @@ public class GamePanel extends JPanel implements Runnable {
         for (Enemy enemy : record.getEnemyList()) {
         enemy.draw(g2);
         }
+        testDrawObstacle(g2);
 
         g2.dispose();
+        
 
+    }
 
+    private void testDrawObstacle(Graphics2D g2){
+        g2.setColor(Color.white);
+        g2.fillRect(48, 96, 48, 48);
     }
 
 }

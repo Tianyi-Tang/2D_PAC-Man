@@ -17,7 +17,6 @@ public class Position{
         return y_axis;
     }
 
-
     public void addOnX_axis(int x_increment){
         x_axis += x_increment;
     }
@@ -31,6 +30,11 @@ public class Position{
             return true;
         else
             return false;
+    }
+
+    public void setPosition(Position position){
+        x_axis = position.getX_axis();
+        y_axis = position.getY_axis();
     }
 
     public void setX_axis(int x_axis){

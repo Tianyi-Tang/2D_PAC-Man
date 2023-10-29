@@ -11,6 +11,7 @@ import cmpt276.group4.WindowAndInput.MoveDirection;
 
 public class Player implements KeyMovingObserver {
     private Position playerPosition;
+    private Position destination;
     private static Player _instance = null;
 
     private boolean move_up, move_down, move_left, move_right = false;
@@ -27,6 +28,7 @@ public class Player implements KeyMovingObserver {
     Player(){
         System.out.println("create player");
         getPlayerImage();
+        destination = new Position(0, 0);
     }
 
     public static Player getInstance(){
@@ -92,22 +94,26 @@ public class Player implements KeyMovingObserver {
             stateCounter =0;
         }
         
-        if(time_counter >= 20){
+        if(time_counter >= 15){
             if(move_up){
                 direction = MoveDirection.Up;
-                playerPosition.addOnY_axis(-48);
+                updateDestination(0, -48);
+                updatePosition();
             }
             else if(move_down){
                 direction = MoveDirection.Down;
-                playerPosition.addOnY_axis(48);
+                updateDestination(0, 48);
+                updatePosition();
             }
             else if(move_right){
                 direction = MoveDirection.Right;
-                playerPosition.addOnX_axis(48);
+                updateDestination(48, 0);
+                updatePosition();
             }
             else if(move_left){
                 direction = MoveDirection.Left;
-                playerPosition.addOnX_axis(-48);
+                updateDestination(-48, 0);
+                updatePosition();
             }
             time_counter =0;
         }
@@ -115,8 +121,6 @@ public class Player implements KeyMovingObserver {
     }
 
     public void draw(Graphics2D g2){
-
-        g2.fillRect(playerPosition.getX_axis(), playerPosition.getY_axis(), 48, 48);
 
         switch (direction) {
             case Up:
@@ -146,6 +150,17 @@ public class Player implements KeyMovingObserver {
         }
 
         g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), 48, 48,null);
+    }
+
+    private void updateDestination(int x_increment,int y_increment){
+        destination.setPosition(playerPosition);
+        destination.addOnX_axis(x_increment);
+        destination.addOnY_axis(y_increment);
+    }
+
+    private void updatePosition(){
+        if(movement.isPositionAvailable(destination))
+            playerPosition.setPosition(destination);
     }
 
 

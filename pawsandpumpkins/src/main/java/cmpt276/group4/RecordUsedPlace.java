@@ -82,6 +82,7 @@ public class RecordUsedPlace {
         return false;
     }
 
+
     private void RemoveFromAviable(Position takePosition){
         for (Position position : available) {
             if(position.equal(takePosition))
