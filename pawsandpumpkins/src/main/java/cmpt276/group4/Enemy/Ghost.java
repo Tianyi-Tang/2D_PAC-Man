@@ -16,14 +16,14 @@ public class Ghost implements Enemy {
 
     public Ghost() {
         this.enemyMovement = new EnemyMovement();
-        // Initialize playerPosition and enemyPosition with placeholder values
+
         this.playerPosition = new Position(0, 0);
         this.enemyPosition = new Position(5, 5);
         // this.findPlayer = false;
     }
 
     public void ghostNextPosition() {
-        // Get the player's position
+        // Get player's current position
         getPlayerPosition();
 
         // Check if the player is around
@@ -38,17 +38,14 @@ public class Ghost implements Enemy {
     }
 
     private void getPlayerPosition() {
-        // Get the player's position
+
         RecordUsedPlace record = RecordUsedPlace.getInstance();
         playerPosition = record.getPlayerPosition();
     }
 
     private boolean isPlayerAround(int range) {
-        // Calculate the absolute differences in x and y coordinates
         int deltaX = Math.abs(playerPosition.getX_axis() - enemyPosition.getX_axis());
         int deltaY = Math.abs(playerPosition.getY_axis() - enemyPosition.getY_axis());
-
-        // Check if both differences are less than or equal to 4
         return deltaX <= range && deltaY <= range;
     }
 
@@ -123,7 +120,6 @@ public class Ghost implements Enemy {
     }
 
     private void moveToRandomPosition() {
-        // Create a random number generator
         Random random = new Random();
 
         // Create a list to store the available directions
@@ -136,7 +132,6 @@ public class Ghost implements Enemy {
             // Get the direction at the random index
             int direction = availableDirections.get(randomIndex);
 
-            // Create variables for the new position
             int newX = enemyPosition.getX_axis();
             int newY = enemyPosition.getY_axis();
 
@@ -165,12 +160,10 @@ public class Ghost implements Enemy {
 
             // Check if the new position is movable
             if (enemyMovement.isPositionAvailable(newPosition)) {
-                // Update the enemy position
                 enemyPosition.setX_axis(newX);
                 enemyPosition.setY_axis(newY);
                 break; // Exit the loop if a movable direction is found
             } else {
-                // Remove the selected direction from the available directions
                 availableDirections.remove(randomIndex);
             }
         }
