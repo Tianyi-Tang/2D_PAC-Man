@@ -46,6 +46,7 @@ public class Player implements KeyMovingObserver {
             left2 = ImageIO.read(new File(directory +"/res/Player/left2.png"));
             right1 = ImageIO.read(new File(directory +"/res/Player/right1.png"));
             right2 = ImageIO.read(new File(directory +"/res/Player/right2.png"));
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,7 +117,7 @@ public class Player implements KeyMovingObserver {
 
     public void draw(Graphics2D g2){
 
-        g2.fillRect(playerPosition.getX_axis(), playerPosition.getY_axis(), 48, 48);
+        //g2.fillRect(playerPosition.getX_axis(), playerPosition.getY_axis(), 48, 48);
 
         switch (direction) {
             case Up:
