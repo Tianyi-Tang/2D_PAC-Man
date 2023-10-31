@@ -25,6 +25,7 @@ cmpt276\group4\Reward\BonusReward.class
 cmpt276\group4\Position.class
 cmpt276\group4\Room\Wall.class
 cmpt276\group4\Enemy\Ghost.class
+cmpt276\group4\Enemy\Spider$SpiderType.class
 cmpt276\group4\Room\Floor.class
 cmpt276\group4\Enemy\EnemyFactory.class
 cmpt276\group4\Player\Player$1.class
@@ -37,5 +38,6 @@ cmpt276\group4\Movement.class
 cmpt276\group4\Enemy\Ghost$1.class
 cmpt276\group4\Reward\Candy.class
 cmpt276\group4\Reward\RewardInitialization.class
+cmpt276\group4\Enemy\Spider$1.class
 cmpt276\group4\Enemy\Enemy.class
 cmpt276\group4\Room\RoomInitialization.class
