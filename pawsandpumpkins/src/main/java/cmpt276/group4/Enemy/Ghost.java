@@ -28,9 +28,10 @@ public class Ghost implements Enemy {
     EnemyType enemyType;
     private  BufferedImage ghost_basic, ghost_advanced;
     private  BufferedImage currentImage = null;
+    private RecordUsedPlace record;
 
     public Ghost(EnemyType type) {
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
+        record = RecordUsedPlace.getInstance();
         enemyType = type;
         getEnemyImage();
         //getPlayerPosition();

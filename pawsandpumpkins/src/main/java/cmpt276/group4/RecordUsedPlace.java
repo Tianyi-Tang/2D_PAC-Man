@@ -1,6 +1,7 @@
 package cmpt276.group4;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Player.Player;
@@ -17,6 +18,15 @@ public class RecordUsedPlace {
     private ArrayList<Reward> rewards;
     private Player player;
     public static RecordUsedPlace instance;
+
+    public Position getRandomFromAvailablePosition(){
+    //return a random position from variable available
+        if (available == null || available.isEmpty()) {
+            return null; // or you can throw an exception if you prefer
+        }
+        Random random = new Random();
+        return available.get(random.nextInt(available.size()));
+    }
 
     public RecordUsedPlace(){
         initalAvailableArray();
