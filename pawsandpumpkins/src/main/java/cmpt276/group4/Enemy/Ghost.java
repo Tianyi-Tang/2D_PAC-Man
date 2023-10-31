@@ -28,15 +28,14 @@ public class Ghost implements Enemy {
     EnemyType enemyType;
     private  BufferedImage ghost_basic, ghost_advanced;
     private  BufferedImage currentImage = null;
+    private RecordUsedPlace record;
 
     public Ghost(EnemyType type) {
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
+        record = RecordUsedPlace.getInstance();
         enemyType = type;
         getEnemyImage();
-        //getPlayerPosition();
-        //avoid placing on the player when start
         this.enemyMovement = new EnemyMovement();
-        this.enemyPosition = new Position(5, 5);
+        this.enemyPosition = record.getRandomFromAvailablePosition();
         record.addEnemy(this);
     }
 

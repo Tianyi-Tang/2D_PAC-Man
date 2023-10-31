@@ -20,7 +20,7 @@ public class EnemyTests {
 
     @Test
     public void testCreateGhostEnemies() {
-        List<Enemy> enemies = enemyFactory.createEnemies(EnemyType.GHOST, enemyInitialization.getEnemyNum());
+        List<Enemy> enemies = enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
         assertEquals(5, enemies.size(), "Should create 5 ghost enemies");
         // Add more assertions or checks if needed, e.g., check the type of enemies
     }

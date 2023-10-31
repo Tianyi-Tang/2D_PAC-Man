@@ -6,4 +6,6 @@ public abstract class BonusReward implements Reward{
     private int score;
     private Position position;
     private boolean available;
+
+    
 }

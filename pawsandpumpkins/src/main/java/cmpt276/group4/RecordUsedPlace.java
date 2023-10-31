@@ -1,24 +1,35 @@
 package cmpt276.group4;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Player.Player;
+import cmpt276.group4.Reward.Reward;
 
 public class RecordUsedPlace {
     // for reward to check 
-    private ArrayList<Position> alreadyUsed;
     private ArrayList<Position> available;
 
     private ArrayList<Position> playerAvaliable_pos;
     private ArrayList<Position> enemyAvaliable_pos;
 
     private ArrayList<Enemy> enemies;
+    private ArrayList<Reward> rewards;
     private Player player;
     public static RecordUsedPlace instance;
 
+    public Position getRandomFromAvailablePosition(){
+    //return a random position from variable available
+        if (available == null || available.isEmpty()) {
+            System.out.println("No available used place to choose from");
+            return null; 
+        }
+        Random random = new Random();
+        return available.get(random.nextInt(available.size()));
+    }
+
     public RecordUsedPlace(){
-        alreadyUsed = new ArrayList<Position>();
         initalAvailableArray();
 
         playerAvaliable_pos = new ArrayList<Position>();
@@ -46,20 +57,31 @@ public class RecordUsedPlace {
             if(object.getPlayerAvaliable())
                 playerAvaliable_pos.add(object.getPosition());
 
-            if(object.getTakenPlace()){
-                alreadyUsed.add(object.getPosition());
-                RemoveFromAviable(object.getPosition());
-            }
-            else
-                available.add(object.getPosition());
+            elementTakenPlace(object.getTakenPlace(), object.getPosition());
             return true;
         }
         else 
             return false;
     }
 
-    public void addEnemy(Enemy enemy){
-        enemies.add(enemy);
+    public boolean addEnemy(Enemy enemy){
+        if(isPlaceAviable(enemy.getEnemyPosition())){
+            enemies.add(enemy);
+            elementTakenPlace(false, enemy.getEnemyPosition());
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public boolean addReward(Reward reward){
+        if(isPlaceAviable(reward.getPosition())){
+            rewards.add(reward);
+            elementTakenPlace(false, reward.getPosition());
+            return true;
+        }
+        else
+            return false;
     }
 
     public Position getPlayerPosition(){
@@ -94,11 +116,17 @@ public class RecordUsedPlace {
     }
 
     private boolean isPlaceAviable(Position planingPosition){
-        for (Position position : alreadyUsed) {
+        for (Position position : available) {
             if(position.equal(planingPosition))
-                return false;
+                return true;
         }
-        return true;
+        return false;
+    }
+
+    private void elementTakenPlace(boolean takenPlace, Position position){
+        if(takenPlace){
+            RemoveFromAviable(position);
+        }
     }
 
 
