@@ -4,6 +4,9 @@ import cmpt276.group4.GameManager;
 
 public class RoomInitialization {
     private int roomLength;
+    public int max_X;
+    public int max_Y;
+
     
     // Getter for roomLength
     public int getRoomLength() {
@@ -18,6 +21,6 @@ public class RoomInitialization {
     // Dont know if this is correct? should i be entering type of room?
     public Room createRoom() {
         RoomFactory factory = new RoomFactory();
-        return factory.createRoom(roomLength);
+        return factory.createRoom(max_X, max_Y);
     }
 }

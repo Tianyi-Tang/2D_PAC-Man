@@ -4,7 +4,7 @@ import cmpt276.group4.Position;
 
 public class Wall extends Obstacle {
 
-    public Wall(boolean playerAccess, boolean enemyTraversability, Position[] position) {
+    public Wall(Position[] position) {
         super(position);
     }
 }
