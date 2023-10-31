@@ -42,8 +42,6 @@ public class Player implements KeyMovingObserver {
         try {
             String directory = System.getProperty("user.dir");
             up1 = ImageIO.read(new File(directory +"/res/Player/up1.png"));
-            System.out.println("Width: " + up1.getWidth());
-            System.out.println("Height: " + up1.getHeight());
             up2 = ImageIO.read(new File(directory +"/res/Player/up2.png"));
             down1 = ImageIO.read(new File(directory +"/res/Player/down1.png"));
             down2 = ImageIO.read(new File(directory +"/res/Player/down2.png"));
