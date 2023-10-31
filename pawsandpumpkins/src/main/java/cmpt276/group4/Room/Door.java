@@ -1,6 +1,7 @@
 package cmpt276.group4.Room;
 
 import cmpt276.group4.CharacterAvaliablePosition;
+import cmpt276.group4.Position;
 
 public class Door implements CharacterAvaliablePosition{
     // open variable
@@ -32,5 +33,15 @@ public class Door implements CharacterAvaliablePosition{
     @Override
     public boolean getEnemyAvaliable() {
         throw new UnsupportedOperationException("is enemy avaliable");
+    }
+    @Override
+    public Position getPosition() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
+    }
+    @Override
+    public boolean getTakenPlace() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTakenPlace'");
     }
 }

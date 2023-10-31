@@ -1,18 +1,21 @@
 package cmpt276.group4.Enemy;
 
 import cmpt276.group4.Position;
+import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Movement;
+import cmpt276.group4.RecordUsedPlace;
 
 public class EnemyMovement implements Movement {
     @Override
     public boolean moveTo(Position position) {
-        System.out.println("Moving to position: " + position.getX_axis() + ", " + position.getY_axis());
+        //Call image controller to enemy image to new position
+        System.out.println("Moving Enemy to position: " + position.getX_axis() + ", " + position.getY_axis());
         return true;
     }
 
     @Override
-    public boolean moveable(Position position) {
-        System.out.println("Checking if position is moveable: " + position.getX_axis() + ", " + position.getY_axis());
-        return true;
+    public boolean isPositionAvailable(Position position) {
+        RecordUsedPlace record = RecordUsedPlace.getInstance();
+        return record.enemyMovable(position);
     }
 }

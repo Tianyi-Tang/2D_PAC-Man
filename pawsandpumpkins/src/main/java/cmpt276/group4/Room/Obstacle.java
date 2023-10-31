@@ -51,6 +51,18 @@ public class Obstacle implements CharacterAvaliablePosition {
         throw new UnsupportedOperationException("is enemy avaliable");
     }
 
+    @Override
+    public Position getPosition() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
+    }
+
+    @Override
+    public boolean getTakenPlace() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTakenPlace'");
+    }
+
 
 
 

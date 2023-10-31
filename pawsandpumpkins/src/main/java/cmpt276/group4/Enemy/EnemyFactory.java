@@ -9,10 +9,10 @@ public class EnemyFactory {
         System.out.println("Creating " + number + " " + type + " enemies.");  // Added for clarity
         List<Enemy> enemies = new ArrayList<>();
         for (int i = 0; i < number; i++) {
-            //System.out.println(i);
             switch (type) {
-                case GHOST:
-                    enemies.add(new Ghost());
+                case GHOST_BASIC:
+                case GHOST_ADVANCED:
+                    enemies.add(new Ghost(type));
                     System.out.println("Ghost created.");
                     break;
                 case SPIDER:
