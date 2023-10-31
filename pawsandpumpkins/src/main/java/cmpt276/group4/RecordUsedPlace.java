@@ -65,14 +65,16 @@ public class RecordUsedPlace {
             return false;
     }
 
-    public void addEnemy(Enemy enemy){
+    public boolean addEnemy(Enemy enemy){
         enemies.add(enemy);
         elementTakenPlace(false, enemy.getEnemyPosition());
+        return true;
     }
 
-    public void addReward(Reward reward){
+    public boolean addReward(Reward reward){
         rewards.add(reward);
         elementTakenPlace(false, reward.getPosition());
+        return true;
     }
 
     public Position getPlayerPosition(){
