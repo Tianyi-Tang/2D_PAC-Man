@@ -22,7 +22,8 @@ public class RecordUsedPlace {
     public Position getRandomFromAvailablePosition(){
     //return a random position from variable available
         if (available == null || available.isEmpty()) {
-            return null; // or you can throw an exception if you prefer
+            System.out.println("No available used place to choose from");
+            return null; 
         }
         Random random = new Random();
         return available.get(random.nextInt(available.size()));
