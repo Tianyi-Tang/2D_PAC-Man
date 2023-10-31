@@ -4,7 +4,7 @@ import cmpt276.group4.Position;
 
 public class Tombstone extends Obstacle {
 
-    public Tombstone(boolean playerAccess, boolean enemyTraversability, Position[] position) {
-        super(playerAccess, enemyTraversability, position);
+    public Tombstone(Position[] position) {
+        super(position);
     }
 }

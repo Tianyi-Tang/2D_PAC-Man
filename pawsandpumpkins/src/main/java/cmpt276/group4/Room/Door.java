@@ -21,13 +21,8 @@ public class Door implements CharacterAvaliablePosition{
     }
 
     // this function opens door by setting open to true
-    private void openDoor() {
+    public void openDoor() {
         this.open = true;
-    }
-
-    // if player available is true call private openDoor()
-    public void meetCondition() {
-
     }
 
     @Override

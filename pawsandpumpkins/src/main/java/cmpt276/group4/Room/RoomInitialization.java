@@ -4,8 +4,6 @@ import cmpt276.group4.GameManager;
 
 public class RoomInitialization {
     private int roomLength;
-    //How do i make this private and use it with out error?
-    public GameManager typeOfRoom;
     
     // Getter for roomLength
     public int getRoomLength() {
@@ -17,10 +15,9 @@ public class RoomInitialization {
         this.roomLength = x;
     }
 
-
     // Dont know if this is correct? should i be entering type of room?
-    public Room createRoom(GameManager typeOfRoom) {
+    public Room createRoom() {
         RoomFactory factory = new RoomFactory();
-        return factory.createRoom(roomLength, typeOfRoom);
+        return factory.createRoom(roomLength);
     }
 }
