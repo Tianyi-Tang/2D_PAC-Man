@@ -4,6 +4,7 @@ import java.util.List;
 
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Player.Player;
+import cmpt276.group4.Reward.Reward;
 
 public class RecordUsedPlace {
     // for reward to check 
@@ -14,6 +15,7 @@ public class RecordUsedPlace {
     private ArrayList<Position> enemyAvaliable_pos;
 
     private ArrayList<Enemy> enemies;
+    private ArrayList<Reward> rewards;
     private Player player;
     public static RecordUsedPlace instance;
 
@@ -46,12 +48,7 @@ public class RecordUsedPlace {
             if(object.getPlayerAvaliable())
                 playerAvaliable_pos.add(object.getPosition());
 
-            if(object.getTakenPlace()){
-                alreadyUsed.add(object.getPosition());
-                RemoveFromAviable(object.getPosition());
-            }
-            else
-                available.add(object.getPosition());
+            elementTakenPlace(object.getTakenPlace(), object.getPosition());
             return true;
         }
         else 
@@ -60,6 +57,12 @@ public class RecordUsedPlace {
 
     public void addEnemy(Enemy enemy){
         enemies.add(enemy);
+        elementTakenPlace(false, enemy.getEnemyPosition());
+    }
+
+    public void addReward(Reward reward){
+        rewards.add(reward);
+        elementTakenPlace(false, reward.getPosition());
     }
 
     public Position getPlayerPosition(){
@@ -99,6 +102,14 @@ public class RecordUsedPlace {
                 return false;
         }
         return true;
+    }
+
+    private void elementTakenPlace(boolean takenPlace, Position position){
+        if(takenPlace){
+            alreadyUsed.add(position);
+            RemoveFromAviable(position);
+        }
+
     }
 
 
