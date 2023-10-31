@@ -120,6 +120,14 @@ public class RecordUsedPlace {
         return false;
     }
 
+    public Reward playerGetReward(){
+        for (Reward reward : rewards) {
+            if(player.getPosition().equal(reward.getPosition()))
+                return reward;
+        }
+        return null;
+    }
+
     private boolean isPlaceAviable(Position planingPosition){
         for (Position position : available) {
             if(position.equal(planingPosition))
