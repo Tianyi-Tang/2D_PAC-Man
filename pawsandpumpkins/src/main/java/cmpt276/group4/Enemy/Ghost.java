@@ -195,6 +195,12 @@ public class Ghost implements Enemy {
         }
     }
 
+
+    @Override
+    public Position getPosition(){
+        return enemyPosition;
+    }
+
     @Override
     public void catchPlayer() {
         getPlayerPosition();

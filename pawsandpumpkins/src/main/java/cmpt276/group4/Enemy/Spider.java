@@ -47,17 +47,18 @@ public class Spider implements Enemy {
     void deleteImage() {
         // not done yet
     }
-
-    void deductScore(Player player, int score) {
-        // not done yet
+    
+    @Override
+    public Position getPosition(){
+        return enemyPosition;
     }
 
     @Override
     public void catchPlayer() {
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
         Position playerPosition = record.getPlayerPosition();
 
         if (playerPosition == enemyPosition) {
+            //tell RecordUsedPlace to remove spider
             System.out.println("Bagel stepped on spider!");
         }
     }

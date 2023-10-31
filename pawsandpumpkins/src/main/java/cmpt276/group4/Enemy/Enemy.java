@@ -12,6 +12,7 @@ public interface Enemy {
     void setEnemyPosition(Position newPosition);
     boolean isMovable();
     void draw(Graphics2D g2);
+    Position getPosition();
 
 
 }
