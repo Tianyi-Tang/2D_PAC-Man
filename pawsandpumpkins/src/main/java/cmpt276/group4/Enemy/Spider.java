@@ -17,9 +17,10 @@ public class Spider implements Enemy {
     private boolean movable = false;
     private Position enemyPosition = new Position(0, 0);
     // private boolean org_State = true;
-    //private BufferedImage spider1, spider2;
+    // private BufferedImage spider1, spider2;
     SpiderType spideType;
     private BufferedImage currentImage;
+    private RecordUsedPlace record;
 
     public enum SpiderType {
         type_spider_1,
@@ -27,9 +28,9 @@ public class Spider implements Enemy {
     }
 
     Spider() {
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        int numOfEnemy = record.getEnemyList().size() + 1;
-        switch (numOfEnemy % 2) {
+        record = RecordUsedPlace.getInstance();
+        //get the list of enemy from recordUsedPlace and randomly picked one.
+        switch ((record.getEnemyList().size()) % 2) {
             case 1:
                 spideType = SpiderType.type_spider_1;
                 break;
