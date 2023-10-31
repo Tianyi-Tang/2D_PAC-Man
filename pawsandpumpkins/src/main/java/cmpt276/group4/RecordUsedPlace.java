@@ -44,6 +44,15 @@ public class RecordUsedPlace {
         // add all aviable area in this function
     }
 
+    public boolean addAviable(Position position){
+        if(isPlaceAviable(position))
+            return false;
+        else{
+            available.add(position);
+            return true;
+        }
+    }
+
     public static RecordUsedPlace getInstance(){
         if(instance ==null)
             instance = new RecordUsedPlace();
