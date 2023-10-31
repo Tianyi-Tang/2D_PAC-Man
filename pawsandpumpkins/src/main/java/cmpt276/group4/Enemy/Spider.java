@@ -16,8 +16,6 @@ public class Spider implements Enemy {
 
     private boolean movable = false;
     private Position enemyPosition = new Position(0, 0);
-    // private boolean org_State = true;
-    // private BufferedImage spider1, spider2;
     SpiderType spideType;
     private BufferedImage currentImage;
     private RecordUsedPlace record;
@@ -41,7 +39,7 @@ public class Spider implements Enemy {
         }
         System.out.println("Spider.java: Creating spider");
         getEnemyImage();
-        enemyPosition = new Position(0, 0);
+        enemyPosition = record.getRandomFromAvailablePosition();
         record.addEnemy(this);
 
     }
