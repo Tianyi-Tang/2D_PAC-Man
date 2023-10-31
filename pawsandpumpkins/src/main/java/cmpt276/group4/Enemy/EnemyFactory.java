@@ -10,8 +10,9 @@ public class EnemyFactory {
         List<Enemy> enemies = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             switch (type) {
-                case GHOST:
-                    enemies.add(new Ghost());
+                case GHOST_BASIC:
+                case GHOST_ADVANCED:
+                    enemies.add(new Ghost(type));
                     System.out.println("Ghost created.");
                     break;
                 case SPIDER:

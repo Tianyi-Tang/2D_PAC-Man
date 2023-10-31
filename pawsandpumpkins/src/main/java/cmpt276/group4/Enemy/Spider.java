@@ -4,12 +4,21 @@ import java.awt.Graphics2D;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Player.Player;
 
 public class Spider implements Enemy {
 
     private boolean movable = false;
     private Position enemyPosition = new Position(0, 0);
     private boolean org_State = true;
+
+    void deleteImage(){
+        //not done yet
+    }
+    void deductScore(Player player,int score){
+        //not done yet
+    }
+
     @Override
     public void catchPlayer() {
         RecordUsedPlace record = RecordUsedPlace.getInstance();

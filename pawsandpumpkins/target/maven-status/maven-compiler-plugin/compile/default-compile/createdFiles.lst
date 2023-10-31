@@ -34,6 +34,7 @@ cmpt276\group4\Reward\Reward.class
 cmpt276\group4\Enemy\Spider.class
 cmpt276\group4\Reward\RewardFactory.class
 cmpt276\group4\Movement.class
+cmpt276\group4\Enemy\Ghost$1.class
 cmpt276\group4\Reward\Candy.class
 cmpt276\group4\Reward\RewardInitialization.class
 cmpt276\group4\Enemy\Enemy.class

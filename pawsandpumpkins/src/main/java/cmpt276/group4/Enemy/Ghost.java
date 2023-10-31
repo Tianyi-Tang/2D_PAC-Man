@@ -1,25 +1,41 @@
 package cmpt276.group4.Enemy;
 import java.awt.Color;
 import java.awt.Graphics2D;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Player.PlayerMovement;
+import cmpt276.group4.WindowAndInput.GamePanel;
+
 
 public class Ghost implements Enemy {
     private EnemyMovement enemyMovement;
+
+
     private Position playerPosition;
     private Position enemyPosition;
+    //private boolean org_State = true;
+    private   
     // private boolean findPlayer;
+    EnemyType enemyType;
+    private  BufferedImage ghost_basic, ghost_advanced;
+    private  BufferedImage currentImage = null;
 
-    public Ghost() {
+    public Ghost(EnemyType type) {
+        enemyType = type;
+        getEnemyImage();
+        //getPlayerPosition();
+        //avoid placing on the player when start
         this.enemyMovement = new EnemyMovement();
         this.enemyPosition = new Position(5, 5);
-        getPlayerPosition();
     }
 
     public void ghostMoveNextPosition() {
@@ -42,6 +58,15 @@ public class Ghost implements Enemy {
         RecordUsedPlace record = RecordUsedPlace.getInstance();
         playerPosition = record.getPlayerPosition();
     }
+
+    public void setPlayerMovement(EnemyMovement eMovement){
+        enemyMovement = eMovement;
+    }
+
+    public EnemyMovement getPlayerMovement(){
+        return enemyMovement;
+    }
+
 
     private boolean isPlayerAround(int range) {
         int deltaX = Math.abs(playerPosition.getX_axis() - enemyPosition.getX_axis());
@@ -196,8 +221,30 @@ public class Ghost implements Enemy {
     }
 
     public void draw(Graphics2D g2){
-        g2.setColor(Color.white);
-        g2.fillRect(enemyPosition.getX_axis(), enemyPosition.getY_axis(), 48, 48);
+        //g2.setColor(Color.white);
+        //g2.fillRect(enemyPosition.getX_axis(), enemyPosition.getY_axis(), 48, 48);
+        switch (enemyType) {
+            case GHOST_BASIC:
+                currentImage = ghost_basic;
+                break;
+        
+            default:
+                currentImage = ghost_advanced;
+                break;
+        }
+        g2.drawImage(currentImage, enemyPosition.getX_axis(), enemyPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize,null);
+    }
+
+    //get enemy image
+    private void getEnemyImage(){
+        try {
+            String directory = System.getProperty("user.dir");
+            ghost_basic = ImageIO.read(new File(directory +"/res/Enemy/ghost_basic.png"));
+            ghost_advanced = ImageIO.read(new File(directory +"/res/Enemy/ghost_advanced.png"));
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
