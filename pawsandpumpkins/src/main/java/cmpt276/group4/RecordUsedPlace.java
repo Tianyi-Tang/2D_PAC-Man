@@ -84,6 +84,11 @@ public class RecordUsedPlace {
             return false;
     }
 
+    public void removeReward(Reward reward){
+        available.add(reward.getPosition());
+        rewards.remove(reward);
+    }
+
     public Position getPlayerPosition(){
         return player.getPosition();
     }
