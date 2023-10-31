@@ -11,6 +11,9 @@ public class Room {
     public int RoomSize;
     public int max_X;
     public int max_Y;
+    public int roomCenterX;
+    public int roomCenterY;
+    public int RoomX1, RoomX2, RoomY1, RoomY2;
 
     
     //room size is it avaliable 
@@ -20,7 +23,16 @@ public class Room {
             System.out.println("Screen too small");
         }
         else 
-        RoomSize = max_X * max_Y; 
+            //Assuming centre of screen will always be even after division
+            roomCenterX = GamePanel.maxScreenRow/2;
+            roomCenterY = GamePanel.maxScreenCol/2;
+
+            // X1 Y1 is a corner oposite of corner X2 Y2 and with these to points we
+            // can generate a room to fill in the room with tiles
+            RoomX1 = roomCenterX -  (max_X/2);
+            RoomX2 = roomCenterX +  (max_X/2);
+            RoomY1 = roomCenterY -  (max_Y/2);
+            RoomY2 = roomCenterY +  (max_Y/2);
     }
 
     // Getter methods for attributes
