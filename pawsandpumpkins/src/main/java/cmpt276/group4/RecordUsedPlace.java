@@ -9,7 +9,6 @@ import cmpt276.group4.Reward.Reward;
 
 public class RecordUsedPlace {
     // for reward to check 
-    private ArrayList<Position> alreadyUsed; 
     private ArrayList<Position> available;
 
     private ArrayList<Position> playerAvaliable_pos;
@@ -31,7 +30,6 @@ public class RecordUsedPlace {
     }
 
     public RecordUsedPlace(){
-        alreadyUsed = new ArrayList<Position>();
         initalAvailableArray();
 
         playerAvaliable_pos = new ArrayList<Position>();
@@ -67,15 +65,23 @@ public class RecordUsedPlace {
     }
 
     public boolean addEnemy(Enemy enemy){
-        enemies.add(enemy);
-        elementTakenPlace(false, enemy.getEnemyPosition());
-        return true;
+        if(isPlaceAviable(enemy.getEnemyPosition())){
+            enemies.add(enemy);
+            elementTakenPlace(false, enemy.getEnemyPosition());
+            return true;
+        }
+        else
+            return false;
     }
 
     public boolean addReward(Reward reward){
-        rewards.add(reward);
-        elementTakenPlace(false, reward.getPosition());
-        return true;
+        if(isPlaceAviable(reward.getPosition())){
+            rewards.add(reward);
+            elementTakenPlace(false, reward.getPosition());
+            return true;
+        }
+        else
+            return false;
     }
 
     public Position getPlayerPosition(){
@@ -110,19 +116,17 @@ public class RecordUsedPlace {
     }
 
     private boolean isPlaceAviable(Position planingPosition){
-        for (Position position : alreadyUsed) {
+        for (Position position : available) {
             if(position.equal(planingPosition))
-                return false;
+                return true;
         }
-        return true;
+        return false;
     }
 
     private void elementTakenPlace(boolean takenPlace, Position position){
         if(takenPlace){
-            alreadyUsed.add(position);
             RemoveFromAviable(position);
         }
-
     }
 
 
