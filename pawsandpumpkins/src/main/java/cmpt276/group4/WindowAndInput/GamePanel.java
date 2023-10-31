@@ -72,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update(){
         Player.getInstance().update();
+
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
             for (Enemy enemy : record.getEnemyList()) {
                 if (enemy instanceof Ghost) {
@@ -98,6 +99,7 @@ public class GamePanel extends JPanel implements Runnable {
         for (Enemy enemy : record.getEnemyList()) {
         enemy.draw(g2);
         }
+
         testDrawObstacle(g2);
 
         g2.dispose();

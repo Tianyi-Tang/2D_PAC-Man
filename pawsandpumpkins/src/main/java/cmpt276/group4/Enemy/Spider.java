@@ -9,7 +9,7 @@ public class Spider implements Enemy {
 
     private boolean movable = false;
     private Position enemyPosition = new Position(0, 0);
-
+    private boolean org_State = true;
     @Override
     public void catchPlayer() {
         RecordUsedPlace record = RecordUsedPlace.getInstance();
