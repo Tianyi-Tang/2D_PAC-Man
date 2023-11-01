@@ -12,13 +12,8 @@ public class RewardInitialization {
         initializeRewards();
     }
     private void initializeRewards(){
-        List<Reward> rewardList = new ArrayList<Reward>();
-        for (int i = 0; i< numberOfCandy; i++){
-            rewardList.add(RewardFactory.createCandy());
-        }
-        for (int i = 0; i< numberOfPumpkinHead; i++){
-            rewardList.add(RewardFactory.createPumpkinHead());
-        }
+
+
 
     }
 }
