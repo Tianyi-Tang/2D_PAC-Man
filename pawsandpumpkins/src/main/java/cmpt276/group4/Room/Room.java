@@ -47,8 +47,6 @@ public class Room {
                 RecordUsedPlace.getInstance().addAviable(position);
             }
         }
-        System.out.println(RoomX2);
-        System.out.println(RecordUsedPlace.getInstance().getAviablePosition().size());
     }
 
     // Getter methods for attributes

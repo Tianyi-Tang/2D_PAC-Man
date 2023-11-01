@@ -58,6 +58,13 @@ public class GameManager {
         window.add(gamePanel);
         window.pack();
         gamePanel.createTimeLine();
+
+        RoomInitialization initialization_room = new RoomInitialization();
+        initialization_room.setX(12);
+        initialization_room.setY(12);
+        room = initialization_room.createRoom();
+
+        
     }
 
     public void enemyCatachPlayer(boolean moveable){
