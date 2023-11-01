@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
     private int enemyMoveCounter = 0;
     // Change the enemy's position every 30 frames (every half second at 60 FPS)
     private final int ENEMY_MOVE_INTERVAL = 30; 
+    private Player player;
     
 
     private Thread gameThread;
@@ -50,6 +51,10 @@ public class GamePanel extends JPanel implements Runnable {
             gameThread = new Thread(this);
             gameThread.start();
         }
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
     }
 
     @Override
@@ -89,7 +94,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     protected void paintComponent(Graphics g) {
-
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
@@ -105,18 +109,15 @@ public class GamePanel extends JPanel implements Runnable {
             element.draw(g2);            
         }
 
-         Player.getInstance().draw(g2);
+        if(player != null)
+            player.draw(g2);
+
        
-        //testDrawObstacle(g2);
+    
 
         g2.dispose();
         
 
-    }
-
-    private void testDrawObstacle(Graphics2D g2){
-        g2.setColor(Color.white);
-        g2.fillRect(48, 96, 48, 48);
     }
 
 }

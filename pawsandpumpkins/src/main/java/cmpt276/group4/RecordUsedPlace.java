@@ -55,7 +55,10 @@ public class RecordUsedPlace {
         // enemyAvaliable_pos.add(new Position(48, 48-GamePanel.tileSize));
 
         enemies = new ArrayList<Enemy>();
-        player = Player.getInstance();
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
     }
 
     private void initalAvailableArray(){
