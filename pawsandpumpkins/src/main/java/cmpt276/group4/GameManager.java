@@ -58,6 +58,15 @@ public class GameManager {
         window.add(gamePanel);
         window.pack();
         gamePanel.createTimeLine();
+<<<<<<< HEAD
+=======
+
+        RoomInitialization initialization_room = new RoomInitialization();
+        initialization_room.setX(12);
+        initialization_room.setY(12);
+        room = initialization_room.createRoom();
+
+>>>>>>> ef9747bfa273da922f723e0e310d783bb2a4d5e7
         
     }
 
