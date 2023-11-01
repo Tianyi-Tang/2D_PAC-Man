@@ -58,6 +58,7 @@ public class GameManager {
         window.add(gamePanel);
         window.pack();
         gamePanel.createTimeLine();
+        
     }
 
     public void enemyCatachPlayer(boolean moveable){
