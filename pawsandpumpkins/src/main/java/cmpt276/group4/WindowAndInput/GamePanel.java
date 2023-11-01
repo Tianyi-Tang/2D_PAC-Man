@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
@@ -100,6 +101,10 @@ public class GamePanel extends JPanel implements Runnable {
              System.out.println("Enemy List size: "+ record.getEnemyList().size());
 
                 enemy.draw(g2);
+        }
+
+        for (CharacterAvaliablePosition element : record.getElemet()) {
+            element.draw(g2);            
         }
        
         //testDrawObstacle(g2);

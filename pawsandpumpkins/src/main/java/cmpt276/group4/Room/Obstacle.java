@@ -1,5 +1,7 @@
 package cmpt276.group4.Room;
 
+import java.awt.Graphics2D;
+
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
 
@@ -61,6 +63,12 @@ public class Obstacle implements CharacterAvaliablePosition {
     public boolean getTakenPlace() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getTakenPlace'");
+    }
+
+    @Override
+    public void draw(Graphics2D g2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'draw'");
     }
 
 

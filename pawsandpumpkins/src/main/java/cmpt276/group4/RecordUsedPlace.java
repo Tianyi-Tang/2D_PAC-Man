@@ -1,15 +1,16 @@
 package cmpt276.group4;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
-import cmpt276.group4.WindowAndInput.GamePanel;
 
 public class RecordUsedPlace {
     // for reward to check 
+    private ArrayList<CharacterAvaliablePosition> elements;
     private ArrayList<Position> available;
 
     private ArrayList<Position> playerAvaliable_pos;
@@ -18,7 +19,9 @@ public class RecordUsedPlace {
     private ArrayList<Enemy> enemies;
     private ArrayList<Reward> rewards;
     private Player player;
+    private Iterator<Position> iterator;
     public static RecordUsedPlace instance;
+    static int counter = 0;
 
     public Position getRandomFromAvailablePosition(){
     //return a random position from variable available
@@ -42,6 +45,7 @@ public class RecordUsedPlace {
 
         playerAvaliable_pos = new ArrayList<Position>();
         enemyAvaliable_pos = new ArrayList<Position>();
+        elements = new ArrayList<CharacterAvaliablePosition>();
          //for testing please dont delete below yet. Rosemary
         // enemyAvaliable_pos.add(new Position(0, 0));
         // enemyAvaliable_pos.add(new Position(48, 48));
@@ -82,6 +86,7 @@ public class RecordUsedPlace {
             if(object.getPlayerAvaliable())
                 playerAvaliable_pos.add(object.getPosition());
 
+            elements.add(object);
             elementTakenPlace(object.getTakenPlace(), object.getPosition());
             return true;
         }
@@ -97,6 +102,10 @@ public class RecordUsedPlace {
         }
         else
             return false;
+    }
+
+    public ArrayList<CharacterAvaliablePosition>  getElemet(){
+        return elements;
     }
 
     public boolean addReward(Reward reward){
@@ -163,15 +172,19 @@ public class RecordUsedPlace {
 
     private void elementTakenPlace(boolean takenPlace, Position position){
         if(takenPlace){
-            RemoveFromAviable(position);
+            //RemoveFromAviable(position);
         }
     }
 
 
     private void RemoveFromAviable(Position takePosition){
-        for (Position position : available) {
-            if(position.equal(takePosition))
-                available.remove(position);
+        iterator = available.iterator();
+        while (iterator.hasNext()) {
+            Position position = iterator.next();
+            if(position.equal(takePosition)){
+                iterator.remove(); 
+                break;
+            }         
         }
     }
     
