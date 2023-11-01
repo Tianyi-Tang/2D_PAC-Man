@@ -1,7 +1,13 @@
 package cmpt276.group4;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 
+import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.Enemy.EnemyFactory;
+import cmpt276.group4.Enemy.EnemyInitialization;
+import cmpt276.group4.Enemy.EnemyType;
 import cmpt276.group4.Player.PlayerGenerator;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.keyboardListener;
@@ -15,6 +21,12 @@ public class GameManager {
     private JFrame window;
     private GamePanel gamePanel;
     private keyboardListener listener;
+
+    private EnemyFactory enemyFactory;
+
+    private EnemyInitialization enemyInitialization;
+
+    private RecordUsedPlace record;
 
     // getter
     public int getTypeOfRoom() {
@@ -43,6 +55,13 @@ public class GameManager {
         window.add(gamePanel);
         window.pack();
         gamePanel.createTimeLine();
+        
+        record = new RecordUsedPlace();
+        enemyFactory = new EnemyFactory();
+        enemyInitialization = new EnemyInitialization(1); // Initializing 1 enemies
+        enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
+
+        //List<Enemy> enemiesSpider = enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
     }
 
     public void enemyCatachPlayer(boolean moveable){

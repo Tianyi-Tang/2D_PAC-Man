@@ -10,12 +10,14 @@ public class EnemyMovement implements Movement {
     public boolean moveTo(Position position) {
         //Call image controller to enemy image to new position
         System.out.println("Moving Enemy to position: " + position.getX_axis() + ", " + position.getY_axis());
+        
         return true;
     }
 
     @Override
     public boolean isPositionAvailable(Position position) {
         RecordUsedPlace record = RecordUsedPlace.getInstance();
+        System.out.println("Enemymovement/isPositionAvaiale "+ record.enemyMovable(position));
         return record.enemyMovable(position);
     }
 }

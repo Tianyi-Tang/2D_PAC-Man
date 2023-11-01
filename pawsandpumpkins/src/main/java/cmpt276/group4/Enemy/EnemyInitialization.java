@@ -1,6 +1,6 @@
 package cmpt276.group4.Enemy;
 
-//import java.util.List;
+import java.util.List;
 
 public class EnemyInitialization {
     int enemyNum;
