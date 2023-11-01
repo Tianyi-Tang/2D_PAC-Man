@@ -1,5 +1,7 @@
 package cmpt276.group4.Reward;
 
+import cmpt276.group4.Reward.BonusReward;
+
 public class MangeBonusReward {
     private float apperintrenal;
 

@@ -2,6 +2,7 @@ cmpt276/group4/Enemy/EnemyFactory$1.class
 cmpt276/group4/WindowAndInput/MoveDirection.class
 cmpt276/group4/Movement.class
 cmpt276/group4/Room/RoomInitialization.class
+cmpt276/group4/Reward/RewardType.class
 cmpt276/group4/RecordUsedPlace.class
 cmpt276/group4/Room/Tile.class
 cmpt276/group4/Enemy/EnemyInitialization.class
@@ -41,3 +42,4 @@ cmpt276/group4/Player/Player$1.class
 cmpt276/group4/Enemy/EnemyFactory.class
 cmpt276/group4/WindowAndInput/GamePanel.class
 cmpt276/group4/Enemy/EnemyMovement.class
+cmpt276/group4/Reward/RewardFactory$1.class
