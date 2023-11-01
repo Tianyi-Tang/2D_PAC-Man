@@ -1,5 +1,7 @@
 package cmpt276.group4;
 
+import java.awt.Graphics2D;
+
 public interface CharacterAvaliablePosition {
     Position position = new Position(0, 0);
 
@@ -8,4 +10,6 @@ public interface CharacterAvaliablePosition {
     public boolean getPlayerAvaliable();
     public boolean getEnemyAvaliable();
     public boolean getTakenPlace();
+
+    public void draw(Graphics2D g2);
 }

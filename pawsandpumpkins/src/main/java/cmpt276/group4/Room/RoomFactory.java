@@ -17,5 +17,9 @@ public class RoomFactory {
     public Door createDoor(Boolean IsOpen) {
         return new Door(IsOpen);
     }
+
+    public Tile creaTile(Position position){
+        return new Tile(position);
+    }
 }
 

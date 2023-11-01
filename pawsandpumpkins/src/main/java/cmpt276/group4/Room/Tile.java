@@ -2,6 +2,7 @@ package cmpt276.group4.Room;
 
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
+import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 
@@ -15,6 +16,7 @@ public class Tile implements CharacterAvaliablePosition {
 
     public Tile(Position position){
         location = position;
+        RecordUsedPlace.getInstance().addElementToMap(this);
     }
 
     @Override

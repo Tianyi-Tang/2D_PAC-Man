@@ -63,7 +63,6 @@ public class GameManager {
         initialization_room.setX(12);
         initialization_room.setY(12);
         room = initialization_room.createRoom();
-
         
     }
 
