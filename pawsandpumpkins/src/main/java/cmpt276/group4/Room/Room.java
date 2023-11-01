@@ -2,6 +2,7 @@ package cmpt276.group4.Room;
 
 //import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
+import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 public class Room {
@@ -22,17 +23,32 @@ public class Room {
         if (GamePanel.maxScreenRow < max_X || GamePanel.maxScreenCol < max_Y){
             System.out.println("Screen too small");
         }
-        else 
+        else{
             //Assuming centre of screen will always be even after division
             roomCenterX = GamePanel.maxScreenRow/2;
             roomCenterY = GamePanel.maxScreenCol/2;
 
             // X1 Y1 is a corner oposite of corner X2 Y2 and with these to points we
             // can generate a room to fill in the room with tiles
-            RoomX1 = roomCenterX -  (max_X/2);
-            RoomX2 = roomCenterX +  (max_X/2);
+            RoomX1 = (roomCenterX -  (max_X/2));
+            RoomX2 = (roomCenterX +  (max_X/2));
             RoomY1 = roomCenterY -  (max_Y/2);
             RoomY2 = roomCenterY +  (max_Y/2);
+            generateAllPosition();
+        } 
+            
+            
+    }
+
+    private void generateAllPosition(){
+        for (int x = RoomX1; x < RoomX2; x++){
+            for(int y = RoomY1; y <RoomY2; y++){
+                Position position = new Position(x, y);
+                RecordUsedPlace.getInstance().addAviable(position);
+            }
+        }
+        System.out.println(RoomX2);
+        System.out.println(RecordUsedPlace.getInstance().getAviablePosition().size());
     }
 
     // Getter methods for attributes
