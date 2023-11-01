@@ -1,6 +1,5 @@
 package cmpt276.group4;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -12,7 +11,6 @@ import cmpt276.group4.Enemy.EnemyType;
 import cmpt276.group4.Player.PlayerGenerator;
 import cmpt276.group4.Room.Room;
 import cmpt276.group4.Room.RoomInitialization;
-import cmpt276.group4.Room.Tile;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.keyboardListener;
 
@@ -61,18 +59,12 @@ public class GameManager {
         window.pack();
         gamePanel.createTimeLine();
 
+
         RoomInitialization initialization_room = new RoomInitialization();
         initialization_room.setX(12);
         initialization_room.setY(12);
         room = initialization_room.createRoom();
 
-
-        ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
-        int counter =0;
-        for (Position position : tilesPosition) {
-            RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
-        }
-        System.out.println("number of tile:" + RecordUsedPlace.getInstance().getElemet().size());
         
     }
 
