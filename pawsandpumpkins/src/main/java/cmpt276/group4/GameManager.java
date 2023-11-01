@@ -4,6 +4,7 @@ package cmpt276.group4;
 import java.util.ArrayList;
 
 import java.util.Timer;
+import java.util.List;
 
 
 import javax.swing.JFrame;
@@ -72,16 +73,24 @@ public class GameManager {
         window.add(gamePanel);
         window.pack();
 
+
         RoomInitialization initialization_room = new RoomInitialization();
         initialization_room.setX(12);
         initialization_room.setY(12);
         room = initialization_room.createRoom();
 
-
+        record = new RecordUsedPlace();
+        enemyFactory = new EnemyFactory();
+        enemyInitialization = new EnemyInitialization(1); // Initializing 1 enemies
+        enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
+        //testing: made up a temp enemyAvaliable_pos
+         
+        // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
+
         
     }
 

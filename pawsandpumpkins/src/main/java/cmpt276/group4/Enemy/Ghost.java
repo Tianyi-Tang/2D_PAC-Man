@@ -46,7 +46,7 @@ public class Ghost implements Enemy {
         getPlayerPosition();
 
         // Check if the player is around
-        if (isPlayerAround(4)) {
+        if (isPlayerAround(4*GamePanel.tileSize)) {
             // If the player is around, move towards the player
             moveToClosestPlayerPosition();
         } else {
