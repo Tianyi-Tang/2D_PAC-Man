@@ -37,23 +37,23 @@ public class RecordUsedPlace {
     public RecordUsedPlace(){
         initalAvailableArray();
         //for testing please dont delete below yet. Rosemary
-        available.add(new Position(0, 0));
-        available.add(new Position(48, 48));
-        available.add(new Position(48+GamePanel.tileSize, 48));
-        available.add(new Position(48, 48+GamePanel.tileSize));
-        available.add(new Position(48-GamePanel.tileSize, 48));
-        available.add(new Position(48, 48-GamePanel.tileSize));
+        // available.add(new Position(0, 0));
+        // available.add(new Position(48, 48));
+        // available.add(new Position(48+GamePanel.tileSize, 48));
+        // available.add(new Position(48, 48+GamePanel.tileSize));
+        // available.add(new Position(48-GamePanel.tileSize, 48));
+        // available.add(new Position(48, 48-GamePanel.tileSize));
 
         playerAvaliable_pos = new ArrayList<Position>();
         enemyAvaliable_pos = new ArrayList<Position>();
         elements = new ArrayList<CharacterAvaliablePosition>();
          //for testing please dont delete below yet. Rosemary
-        enemyAvaliable_pos.add(new Position(0, 0));
-        enemyAvaliable_pos.add(new Position(48, 48));
-        enemyAvaliable_pos.add(new Position(48+GamePanel.tileSize, 48));
-        enemyAvaliable_pos.add(new Position(48, 48+GamePanel.tileSize));
-        enemyAvaliable_pos.add(new Position(48-GamePanel.tileSize, 48));
-        enemyAvaliable_pos.add(new Position(48, 48-GamePanel.tileSize));
+        // enemyAvaliable_pos.add(new Position(0, 0));
+        // enemyAvaliable_pos.add(new Position(48, 48));
+        // enemyAvaliable_pos.add(new Position(48+GamePanel.tileSize, 48));
+        // enemyAvaliable_pos.add(new Position(48, 48+GamePanel.tileSize));
+        // enemyAvaliable_pos.add(new Position(48-GamePanel.tileSize, 48));
+        // enemyAvaliable_pos.add(new Position(48, 48-GamePanel.tileSize));
 
         enemies = new ArrayList<Enemy>();
         player = Player.getInstance();
