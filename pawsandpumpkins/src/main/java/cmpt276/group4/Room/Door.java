@@ -44,4 +44,9 @@ public class Door implements CharacterAvaliablePosition{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getTakenPlace'");
     }
+
+    @Override
+    public void draw(Graphics2D g2) {
+        
+    }
 }

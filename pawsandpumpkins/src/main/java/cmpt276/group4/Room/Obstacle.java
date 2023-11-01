@@ -63,6 +63,12 @@ public class Obstacle implements CharacterAvaliablePosition {
         throw new UnsupportedOperationException("Unimplemented method 'getTakenPlace'");
     }
 
+    @Override
+    public void draw(Graphics2D g2);() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTakenPlace'");
+    }
+
 
 
 
