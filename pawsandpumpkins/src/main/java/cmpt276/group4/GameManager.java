@@ -65,6 +65,14 @@ public class GameManager {
         initialization_room.setY(12);
         room = initialization_room.createRoom();
 
+        record = new RecordUsedPlace();
+        enemyFactory = new EnemyFactory();
+        enemyInitialization = new EnemyInitialization(1); // Initializing 1 enemies
+        enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
+        //testing: made up a temp enemyAvaliable_pos
+         
+
+
         
     }
 
