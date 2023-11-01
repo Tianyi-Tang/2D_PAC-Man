@@ -1,8 +1,16 @@
 package cmpt276.group4;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 
+import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.Enemy.EnemyFactory;
+import cmpt276.group4.Enemy.EnemyInitialization;
+import cmpt276.group4.Enemy.EnemyType;
 import cmpt276.group4.Player.PlayerGenerator;
+import cmpt276.group4.Room.Room;
+import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.keyboardListener;
 
@@ -15,6 +23,13 @@ public class GameManager {
     private JFrame window;
     private GamePanel gamePanel;
     private keyboardListener listener;
+    private Room room;
+
+    private EnemyFactory enemyFactory;
+
+    private EnemyInitialization enemyInitialization;
+
+    private RecordUsedPlace record;
 
     // getter
     public int getTypeOfRoom() {
