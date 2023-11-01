@@ -94,8 +94,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
         
-        Player.getInstance().draw(g2);
-        
 
         for (Enemy enemy : record.getEnemyList()) {
              System.out.println("Enemy List size: "+ record.getEnemyList().size());
@@ -106,6 +104,8 @@ public class GamePanel extends JPanel implements Runnable {
         for (CharacterAvaliablePosition element : record.getElemet()) {
             element.draw(g2);            
         }
+
+         Player.getInstance().draw(g2);
        
         //testDrawObstacle(g2);
 

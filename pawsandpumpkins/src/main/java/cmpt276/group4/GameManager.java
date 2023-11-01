@@ -68,11 +68,10 @@ public class GameManager {
 
 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
-        int counter =0;
         for (Position position : tilesPosition) {
+            System.out.println("X:" +position.getX_axis() + " ; Y:" + position.getY_axis());
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
-        System.out.println("number of tile:" + RecordUsedPlace.getInstance().getElemet().size());
         
     }
 
