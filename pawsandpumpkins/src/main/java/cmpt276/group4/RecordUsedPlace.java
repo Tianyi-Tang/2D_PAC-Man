@@ -140,16 +140,17 @@ public class RecordUsedPlace {
     }
 
     public boolean enemyMovable(Position destination){
-        //Edit by rosemary, use availabe for testing. will to change it back
-        //when enemyAvailable_pos is ready
-        for (Position position : available) {
-            if(destination.equal(position))
-                return true;
-        }
-        // for (Position position : enemyAvaliable_pos) {
+        //Edit by rosemary: use this for testing ghost functions
+        // for (Position position : available) {
         //     if(destination.equal(position))
         //         return true;
         // }
+
+        //This is the official one
+        for (Position position : enemyAvaliable_pos) {
+            if(destination.equal(position))
+                return true;
+        }
         return false;
     }
 
