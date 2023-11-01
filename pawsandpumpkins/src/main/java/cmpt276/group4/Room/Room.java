@@ -43,7 +43,7 @@ public class Room {
     private void generateAllPosition(){
         for (int x = RoomX1; x < RoomX2; x++){
             for(int y = RoomY1; y <RoomY2; y++){
-                Position position = new Position(x, y);
+                Position position = new Position((x*GamePanel.tileSize), (y*GamePanel.tileSize));
                 RecordUsedPlace.getInstance().addAviable(position);
             }
         }

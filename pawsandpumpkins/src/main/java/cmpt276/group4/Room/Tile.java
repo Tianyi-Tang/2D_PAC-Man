@@ -5,7 +5,7 @@ import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
-
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Tile implements CharacterAvaliablePosition {
@@ -16,7 +16,6 @@ public class Tile implements CharacterAvaliablePosition {
 
     public Tile(Position position){
         location = position;
-        RecordUsedPlace.getInstance().addElementToMap(this);
     }
 
     @Override
@@ -38,8 +37,10 @@ public class Tile implements CharacterAvaliablePosition {
     public boolean getTakenPlace() {
         return takenPlace;
     }
-
+    
+    @Override
     public void draw(Graphics2D g2){
+        g2.setColor(Color.white);
         g2.fillRect(location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize);
     }
     

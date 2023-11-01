@@ -1,5 +1,7 @@
 package cmpt276.group4.Room;
 
+import java.awt.Graphics2D;
+
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
 
@@ -7,7 +9,7 @@ public class Obstacle implements CharacterAvaliablePosition {
 
     private boolean playerAccess;
     private boolean enemyTraversability;
-    private Position position;
+    protected Position position;
 
     // Constructor to initialize an obstacle with player access, enemy traversability, and positions
     public Obstacle(Position position) {
@@ -64,9 +66,9 @@ public class Obstacle implements CharacterAvaliablePosition {
     }
 
     @Override
-    public void draw(Graphics2D g2);() {
+    public void draw(Graphics2D g2) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTakenPlace'");
+        throw new UnsupportedOperationException("Unimplemented method 'draw'");
     }
 
 
