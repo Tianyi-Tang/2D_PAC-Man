@@ -1,8 +1,8 @@
-package cmpt276.group4.Reward;
+package main.java.cmpt276.group4.Reward;
 
 import cmpt276.group4.Position;
 
-public abstract class GeneralReward implements Reward{
+public abstract class GeneralReward implements Reward {
     private int score;
     private Position position;
     private boolean available;

@@ -6,7 +6,7 @@ import java.util.Random;
 
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Player.Player;
-import cmpt276.group4.Reward.Reward;
+import main.java.cmpt276.group4.Reward.Reward;
 
 public class RecordUsedPlace {
     // for reward to check 
