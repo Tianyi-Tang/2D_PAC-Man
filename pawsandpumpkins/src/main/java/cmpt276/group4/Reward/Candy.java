@@ -1,4 +1,4 @@
-package main.java.cmpt276.group4.Reward;
+package cmpt276.group4.Reward;
 
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
