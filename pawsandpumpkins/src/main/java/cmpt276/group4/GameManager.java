@@ -66,6 +66,7 @@ public class GameManager {
         initialization_room.setY(12);
         room = initialization_room.createRoom();
 
+
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         int counter =0;
         for (Position position : tilesPosition) {

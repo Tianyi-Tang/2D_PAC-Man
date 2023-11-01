@@ -4,11 +4,13 @@ import cmpt276.group4.Position;
 
 
 public class Tombstone extends Obstacle {
-    boolean playerAvaliable = false;
-    boolean enemeyAvaliable = true;
-    boolean getTakenPlace = true;
-    public Tombstone(Position[] position) {
-        super(position);
+    private boolean playerAvaliable = false;
+    private boolean enemyAvaliable = true;
+    private boolean takenPlace = true;
+    private Position position;
+
+    public Tombstone(Position location) {
+        super(location);
     }
 
     @Override
@@ -18,17 +20,17 @@ public class Tombstone extends Obstacle {
 
     @Override
     public boolean getEnemyAvaliable() {
-        return enemeyAvaliable;
+        return enemyAvaliable;
     }
 
-   // @Override
-   // public Position getPosition() {
-
-    //}
+    @Override
+    public Position getPosition() {
+        return position;
+    }
 
     @Override
     public boolean getTakenPlace() {
-        return getTakenPlace;
+        return takenPlace;
     }
 
 }
