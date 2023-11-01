@@ -2,7 +2,7 @@ package cmpt276.group4;
 public class Main {
     public static void main( String[] args )
     {
-        GameManager manager = new GameManager();
+        GameManager manager = GameManager.getInstance();
         manager.createWindows();
         System.out.println("Hello World" );
     }

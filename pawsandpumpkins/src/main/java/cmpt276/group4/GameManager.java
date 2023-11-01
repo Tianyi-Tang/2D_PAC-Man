@@ -1,6 +1,11 @@
 package cmpt276.group4;
 
+
+import java.util.ArrayList;
+
+import java.util.Timer;
 import java.util.List;
+
 
 import javax.swing.JFrame;
 
@@ -8,9 +13,11 @@ import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
 import cmpt276.group4.Enemy.EnemyType;
+import cmpt276.group4.Player.Player;
 import cmpt276.group4.Player.PlayerGenerator;
 import cmpt276.group4.Room.Room;
 import cmpt276.group4.Room.RoomInitialization;
+import cmpt276.group4.Room.Tile;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.keyboardListener;
 
@@ -19,6 +26,7 @@ import cmpt276.group4.WindowAndInput.keyboardListener;
 public class GameManager {
     // typeOfRoom
     private int typeOfRoom;
+    private static GameManager instance;
 
     private JFrame window;
     private GamePanel gamePanel;
@@ -30,6 +38,7 @@ public class GameManager {
     private EnemyInitialization enemyInitialization;
 
     private RecordUsedPlace record;
+    private boolean existPlayer = false;
 
     // getter
     public int getTypeOfRoom() {
@@ -39,6 +48,12 @@ public class GameManager {
     // setter
     public void setTypeOfRoom(int i) {
         this.typeOfRoom = i;
+    }
+
+    public static GameManager getInstance(){
+        if(instance == null)
+            instance = new GameManager();
+        return instance;
     }
 
     public void createWindows(){
@@ -51,13 +66,12 @@ public class GameManager {
         window.setVisible(true);
 
         listener = new keyboardListener();
-        listener.addPlayer(PlayerGenerator.creatPlayer());
+        //listener.addPlayer(PlayerGenerator.creatPlayer());
         window.addKeyListener(listener);
 
         gamePanel = new GamePanel();
         window.add(gamePanel);
         window.pack();
-        gamePanel.createTimeLine();
 
 
         RoomInitialization initialization_room = new RoomInitialization();
@@ -71,9 +85,27 @@ public class GameManager {
         enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
         
          
-
+        // put tile to all aviable position 
+        ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
+        for (Position position : tilesPosition) {
+            RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
+        }
 
         
+    }
+
+    public void RecordUsedPlaceAviable(){
+        if(existPlayer ==false){
+            existPlayer = true;
+            creatPlayer();
+        }
+    }
+
+    private void creatPlayer(){
+        Player player = PlayerGenerator.creatPlayer();
+        player.addKeyListener(listener);
+        player.addInGamePanel(gamePanel);
+        RecordUsedPlace.getInstance().setPlayer(PlayerGenerator.creatPlayer());
     }
 
     public void enemyCatachPlayer(boolean moveable){

@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import cmpt276.group4.Position;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
+import cmpt276.group4.WindowAndInput.keyboardListener;
 
 public class Player implements KeyMovingObserver {
     private Position playerPosition;
@@ -27,14 +28,16 @@ public class Player implements KeyMovingObserver {
    private  BufferedImage currentImage = null;
 
     Player(){
-        System.out.println("create player");
+        playerPosition = new Position(2 * GamePanel.tileSize, 2 * GamePanel.tileSize);
+        movement = new PlayerMovement();
         getPlayerImage();
         destination = new Position(0, 0);
     }
 
     public static Player getInstance(){
-        if(_instance == null)
+        if(_instance == null){
             _instance = new Player();
+        }      
         return _instance;
     }
 
@@ -55,8 +58,13 @@ public class Player implements KeyMovingObserver {
         }
     }
 
-    public void setPosition(Position position){
-        playerPosition = position;
+    public void addKeyListener( keyboardListener listener){
+        listener.addPlayer(this);
+    }
+
+    public void addInGamePanel(GamePanel gamePanel){
+        gamePanel.setPlayer(this);
+        gamePanel.createTimeLine();
     }
 
     public Position getPosition(){
@@ -150,8 +158,10 @@ public class Player implements KeyMovingObserver {
                 break;
         }
 
-        g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize,null);
+        g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize,null); 
+        
     }
+
 
     private void updateDestination(int x_increment,int y_increment){
         destination.setPosition(playerPosition);
