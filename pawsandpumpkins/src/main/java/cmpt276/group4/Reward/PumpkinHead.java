@@ -3,7 +3,7 @@ package cmpt276.group4.Reward;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
 import cmpt276.group4.WindowAndInput.GamePanel;
-import main.java.cmpt276.group4.Reward.BonusReward;
+import cmpt276.group4.Reward.BonusReward;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
