@@ -8,7 +8,7 @@ public interface Reward {
     boolean isAvailable();
     void deleteImage();
     void addBenefit();
-    void setAvailable(boolean available);
+
     void addScore(Player player,int score);
 
 

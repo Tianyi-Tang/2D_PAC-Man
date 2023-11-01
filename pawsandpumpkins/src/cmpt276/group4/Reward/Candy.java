@@ -43,6 +43,7 @@ public class Candy extends GeneralReward{
     @Override
     public void deleteImage() {
         this.cd1=null;
+        this.cd2=null;
     }
 
     @Override
@@ -51,13 +52,9 @@ public class Candy extends GeneralReward{
     }
 
     @Override
-    public void setAvailable(boolean available) {
-
-    }
-
-    @Override
     public void addScore(Player player, int score) {
-
+        player.addScore(score);
+        deleteImage();
     }
     public void update() {
         stateCounter++;

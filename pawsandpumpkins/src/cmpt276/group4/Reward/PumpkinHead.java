@@ -8,63 +8,70 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
-public class PumpkinHead extends BonusReward{
-    public int score=5;
-    private BufferedImage ppk1 , ppk2;
-    private Position ppkpsition;
+public class PumpkinHead extends BonusReward {
+    private static final int SCORE = 5;
+    private BufferedImage ppk1, ppk2, currentImage;
+    private Position ppkPosition;
+    private boolean available;
+
+    public PumpkinHead() {
+        getPumpkinImage();
+        // Initialize ppkPosition here if necessary, or through a setPosition method
+    }
+
     @Override
     public int getScore() {
-        return score;
+        return SCORE;
     }
 
     @Override
     public Position getPosition() {
-        return null;
+        return ppkPosition;
     }
 
     @Override
     public void setPosition(Position position) {
-
+        this.ppkPosition = position;
     }
 
     @Override
     public boolean isAvailable() {
-        return false;
+        return available;
     }
+
+
 
     @Override
     public void deleteImage() {
-
+        this.ppk1 = null;
+        this.ppk2 = null;
     }
 
     @Override
     public void addBenefit() {
-
-    }
-
-    @Override
-    public void setAvailable(boolean available) {
-
+        
     }
 
     @Override
     public void addScore(Player player, int score) {
-
     }
-    private void getPumpkinImage(){
-        try{
+
+    private void getPumpkinImage() {
+        try {
             String directory = System.getProperty("user.dir");
-            ppk1= ImageIO.read(new File(directory +"/res/Rewards/pumpkin1.png"));
-            ppk2= ImageIO.read(new File(directory +"/res/Rewards/pumpkin2.png"));
-        }
-        catch (Exception e) {
+            ppk1 = ImageIO.read(new File("res/Rewards/pumpkin1.png"));
+            ppk2 = ImageIO.read(new File("res/Rewards/pumpkin2.png"));
+            currentImage = ppk1;
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-    public void drawPumpkin(Graphics2D g1){
 
-        g1.drawImage(ppk1,ppkpsition.getX_axis(),ppkpsition.getY_axis(), GamePanel.tileSize,GamePanel.tileSize,null);
+    public void drawPumpkin(Graphics2D g1) {
+        if (ppkPosition != null && currentImage != null) {
+            g1.drawImage(currentImage, ppkPosition.getX_axis(), ppkPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize, null);
+        }
     }
 }
