@@ -104,7 +104,7 @@ public class Player implements KeyMovingObserver {
             stateCounter =0;
         }
         
-        if(time_counter >= 15){
+        if(time_counter >= 10){
             if(move_up){
                 direction = MoveDirection.Up;
                 updateDestination(0, -48);
