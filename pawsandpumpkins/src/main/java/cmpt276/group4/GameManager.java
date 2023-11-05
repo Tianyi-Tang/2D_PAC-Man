@@ -9,7 +9,9 @@ import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
 import cmpt276.group4.Enemy.EnemyType;
 import cmpt276.group4.Player.PlayerGenerator;
+import cmpt276.group4.Room.Obstacle;
 import cmpt276.group4.Room.Room;
+import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.keyboardListener;
@@ -64,6 +66,7 @@ public class GameManager {
         initialization_room.setX(12);
         initialization_room.setY(12);
         room = initialization_room.createRoom();
+
 
         record = new RecordUsedPlace();
         enemyFactory = new EnemyFactory();

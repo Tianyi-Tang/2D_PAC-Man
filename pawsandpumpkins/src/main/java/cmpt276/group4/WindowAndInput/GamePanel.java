@@ -107,7 +107,7 @@ public class GamePanel extends JPanel implements Runnable {
             element.draw(g2);            
         }
        
-        //testDrawObstacle(g2);
+        testDrawObstacle(g2);
 
         g2.dispose();
         
