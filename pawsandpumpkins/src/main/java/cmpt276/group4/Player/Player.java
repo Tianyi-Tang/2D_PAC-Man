@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 import cmpt276.group4.Position;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
-import cmpt276.group4.WindowAndInput.keyboardListener;
 
 public class Player implements KeyMovingObserver {
     private Position playerPosition;
@@ -56,15 +55,6 @@ public class Player implements KeyMovingObserver {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void addKeyListener( keyboardListener listener){
-        listener.addPlayer(this);
-    }
-
-    public void addInGamePanel(GamePanel gamePanel){
-        gamePanel.setPlayer(this);
-        gamePanel.createTimeLine();
     }
 
     public Position getPosition(){

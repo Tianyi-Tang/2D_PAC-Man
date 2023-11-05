@@ -102,9 +102,10 @@ public class GameManager {
 
     private void creatPlayer(){
         Player player = PlayerGenerator.creatPlayer();
-        player.addKeyListener(listener);
-        player.addInGamePanel(gamePanel);
-        RecordUsedPlace.getInstance().setPlayer(PlayerGenerator.creatPlayer());
+        listener.addPlayer(player);
+        gamePanel.setPlayer(player);
+        RecordUsedPlace.getInstance().setPlayer(player);
+        gamePanel.createTimeLine();
     }
 
     public void enemyCatachPlayer(boolean moveable){
