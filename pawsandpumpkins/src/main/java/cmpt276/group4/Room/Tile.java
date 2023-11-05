@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
 public class Tile implements CharacterAvaliablePosition {
     private boolean playerAvaliable = true;
     private boolean enemyAvialiable = true;
-    private boolean takenPlace = true;
+    private boolean takenPlace = false;
     private Position location;
 
     public Tile(Position position){

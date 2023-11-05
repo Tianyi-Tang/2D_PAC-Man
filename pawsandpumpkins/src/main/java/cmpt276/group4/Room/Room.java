@@ -1,5 +1,6 @@
 package cmpt276.group4.Room;
 
+import cmpt276.group4.GameManager;
 //import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
@@ -43,10 +44,11 @@ public class Room {
     private void generateAllPosition(){
         for (int x = RoomX1; x < RoomX2; x++){
             for(int y = RoomY1; y <RoomY2; y++){
-                Position position = new Position((x*GamePanel.tileSize), (y*GamePanel.tileSize));
+                Position position = new Position(x *GamePanel.tileSize, y * GamePanel.tileSize);
                 RecordUsedPlace.getInstance().addAviable(position);
             }
         }
+        GameManager.getInstance().RecordUsedPlaceAviable();
     }
 
     // Getter methods for attributes
