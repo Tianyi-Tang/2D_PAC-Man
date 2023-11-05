@@ -7,7 +7,6 @@ import java.util.Random;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
-import cmpt276.group4.WindowAndInput.GamePanel;
 
 public class RecordUsedPlace {
     // for reward to check 
@@ -20,7 +19,8 @@ public class RecordUsedPlace {
     private ArrayList<Enemy> enemies;
     private ArrayList<Reward> rewards;
     private Player player;
-    private Iterator<Position> iterator;
+    private Iterator<Position> iterator_pos;
+    private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;
     static int counter = 0;
 
@@ -124,7 +124,13 @@ public class RecordUsedPlace {
 
     public void removeReward(Reward reward){
         available.add(reward.getPosition());
-        rewards.remove(reward);
+        iterator_reward = rewards.iterator();
+        Reward rewardInList;
+        while (iterator_reward.hasNext()) {
+            rewardInList = iterator_reward.next();
+            if(rewardInList == reward)
+                iterator_reward.remove();
+        }
     }
 
     public Position getPlayerPosition(){
@@ -183,17 +189,18 @@ public class RecordUsedPlace {
 
     private void elementTakenPlace(boolean takenPlace, Position position){
         if(takenPlace){
-            //RemoveFromAviable(position);
+            RemoveFromAviable(position);
         }
     }
 
 
     private void RemoveFromAviable(Position takePosition){
-        iterator = available.iterator();
-        while (iterator.hasNext()) {
-            Position position = iterator.next();
+        iterator_pos = available.iterator();
+        Position position;
+        while (iterator_pos.hasNext()) {
+            position = iterator_pos.next();
             if(position.equal(takePosition)){
-                iterator.remove(); 
+                iterator_pos.remove(); 
                 break;
             }         
         }

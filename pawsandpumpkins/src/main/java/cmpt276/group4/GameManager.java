@@ -66,7 +66,6 @@ public class GameManager {
         window.setVisible(true);
 
         listener = new keyboardListener();
-        //listener.addPlayer(PlayerGenerator.creatPlayer());
         window.addKeyListener(listener);
 
         gamePanel = new GamePanel();
@@ -83,14 +82,12 @@ public class GameManager {
         enemyFactory = new EnemyFactory();
         enemyInitialization = new EnemyInitialization(1); // Initializing 1 enemies
         enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
-        
-         
+
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
-
         
     }
 
@@ -103,9 +100,10 @@ public class GameManager {
 
     private void creatPlayer(){
         Player player = PlayerGenerator.creatPlayer();
-        player.addKeyListener(listener);
-        player.addInGamePanel(gamePanel);
-        RecordUsedPlace.getInstance().setPlayer(PlayerGenerator.creatPlayer());
+        listener.addPlayer(player);
+        gamePanel.setPlayer(player);
+        RecordUsedPlace.getInstance().setPlayer(player);
+        gamePanel.createTimeLine();
     }
 
     public void enemyCatachPlayer(boolean moveable){
