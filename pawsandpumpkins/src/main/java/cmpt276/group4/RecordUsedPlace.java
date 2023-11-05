@@ -154,7 +154,7 @@ public class RecordUsedPlace {
             if(destination.equal(position))
                 return true;
         }
-        return false;
+         return false;
     }
 
     public boolean playerMovable(Position destination){

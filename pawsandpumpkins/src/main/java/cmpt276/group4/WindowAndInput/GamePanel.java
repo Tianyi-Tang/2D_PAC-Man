@@ -111,10 +111,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         if(player != null)
             player.draw(g2);
-
-       
-
-
         g2.dispose();
         
 
