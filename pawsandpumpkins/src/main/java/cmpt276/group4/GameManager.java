@@ -82,14 +82,12 @@ public class GameManager {
         enemyFactory = new EnemyFactory();
         enemyInitialization = new EnemyInitialization(1); // Initializing 1 enemies
         enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
-        
-         
+
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
-
         
     }
 
