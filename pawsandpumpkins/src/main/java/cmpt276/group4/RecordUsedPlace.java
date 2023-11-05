@@ -7,7 +7,6 @@ import java.util.Random;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
-import cmpt276.group4.WindowAndInput.GamePanel;
 
 public class RecordUsedPlace {
     // for reward to check 
@@ -183,7 +182,7 @@ public class RecordUsedPlace {
 
     private void elementTakenPlace(boolean takenPlace, Position position){
         if(takenPlace){
-            //RemoveFromAviable(position);
+            RemoveFromAviable(position);
         }
     }
 

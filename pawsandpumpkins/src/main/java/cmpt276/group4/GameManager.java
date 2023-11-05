@@ -66,7 +66,6 @@ public class GameManager {
         window.setVisible(true);
 
         listener = new keyboardListener();
-        //listener.addPlayer(PlayerGenerator.creatPlayer());
         window.addKeyListener(listener);
 
         gamePanel = new GamePanel();

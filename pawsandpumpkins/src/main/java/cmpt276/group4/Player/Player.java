@@ -34,7 +34,7 @@ public class Player implements KeyMovingObserver {
         destination = new Position(0, 0);
     }
 
-    public static Player getInstance(){
+    public static synchronized Player getInstance(){
         if(_instance == null){
             _instance = new Player();
         }      
