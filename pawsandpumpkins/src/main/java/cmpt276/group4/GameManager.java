@@ -25,6 +25,7 @@ import cmpt276.group4.WindowAndInput.keyboardListener;
 
 public class GameManager {
     // typeOfRoom
+    private gameLevel level = gameLevel.BASIC;
     private int typeOfRoom;
     private static GameManager instance;
 
@@ -34,7 +35,6 @@ public class GameManager {
     private Room room;
 
     private EnemyFactory enemyFactory;
-
     private EnemyInitialization enemyInitialization;
 
     private RecordUsedPlace record;
@@ -80,8 +80,8 @@ public class GameManager {
 
         record = new RecordUsedPlace();
         enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(1); // Initializing 1 enemies
-        enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
+        enemyInitialization = new EnemyInitialization(level, enemyFactory); // Initializing 1 enemies
+        //enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
 
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
