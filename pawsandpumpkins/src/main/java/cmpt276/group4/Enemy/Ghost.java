@@ -1,4 +1,5 @@
 package cmpt276.group4.Enemy;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -15,19 +16,17 @@ import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Player.PlayerMovement;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
-
 public class Ghost implements Enemy {
     private EnemyMovement enemyMovement;
 
-
     private Position playerPosition;
     private Position enemyPosition;
-    //private boolean org_State = true;
-    private   
+    // private boolean org_State = true;
+    private
     // private boolean findPlayer;
     EnemyType enemyType;
-    private  BufferedImage ghost_basic, ghost_advanced;
-    private  BufferedImage currentImage = null;
+    private BufferedImage ghost_basic, ghost_advanced;
+    private BufferedImage currentImage = null;
     private RecordUsedPlace record;
 
     public Ghost(EnemyType type) {
@@ -38,17 +37,12 @@ public class Ghost implements Enemy {
         getEnemyImage();
         this.enemyMovement = new EnemyMovement();
 
-        //this.enemyPosition.setPosition(record.getRandomSafePosition());
-        //this.enemyPosition = new Position(10, 10);
-
-
-
         Position potentialPosition = new Position(0, 0);
         potentialPosition.equal(playerPosition);
         do {
             potentialPosition = record.getRandomSafePosition();
-        }while (isPlayerNearBy(8*GamePanel.tileSize, potentialPosition));
-    
+        } while (isPlayerNearBy(8 * GamePanel.tileSize, potentialPosition));
+
         this.enemyPosition.setPosition(potentialPosition);
         record.addEnemy(this);
     }
@@ -59,9 +53,9 @@ public class Ghost implements Enemy {
         getPlayerPosition();
 
         // Check if the player is around
-        if (isPlayerNearBy(4*GamePanel.tileSize, enemyPosition)) {
-                // If the player is around, move towards the player
-                setToClosestPlayerPosition();
+        if (isPlayerNearBy(4 * GamePanel.tileSize, enemyPosition)) {
+            // If the player is around, move towards the player
+            setToClosestPlayerPosition();
         } else {
             // If the player is not around, move to a random position
             moveToRandomPosition();
@@ -75,14 +69,13 @@ public class Ghost implements Enemy {
         playerPosition = record.getPlayerPosition();
     }
 
-    public void setPlayerMovement(EnemyMovement eMovement){
+    public void setPlayerMovement(EnemyMovement eMovement) {
         enemyMovement = eMovement;
     }
 
-    public EnemyMovement getPlayerMovement(){
+    public EnemyMovement getPlayerMovement() {
         return enemyMovement;
     }
-
 
     private boolean isPlayerNearBy(int range, Position p) {
         int deltaX = Math.abs(playerPosition.getX_axis() - p.getX_axis());
@@ -92,10 +85,10 @@ public class Ghost implements Enemy {
 
     private void setToClosestPlayerPosition() {
 
-        if (enemyPosition.equal(playerPosition) ) {
+        if (enemyPosition.equal(playerPosition)) {
             System.out.println("IN gHOST:Overlapp: trying to set ghost on player");
-                enemyPosition.setPosition(playerPosition);
-                return;
+            enemyPosition.setPosition(playerPosition);
+            return;
         }
         List<Position> availableDirections = getPriorityPositions();
 
@@ -108,8 +101,9 @@ public class Ghost implements Enemy {
         }
 
         if (highestPriorityAvailablePosition != null) {
-            // System.out.println("Highest priority available position: (" + highestPriorityAvailablePosition.getX_axis()
-            //         + ", " + highestPriorityAvailablePosition.getY_axis() + ")");
+            // System.out.println("Highest priority available position: (" +
+            // highestPriorityAvailablePosition.getX_axis()
+            // + ", " + highestPriorityAvailablePosition.getY_axis() + ")");
             enemyPosition.setPosition(highestPriorityAvailablePosition);
         } else {
             System.out.println("No available position found.");
@@ -119,10 +113,14 @@ public class Ghost implements Enemy {
     private List<Position> getPriorityPositions() {
         int deltaX = playerPosition.getX_axis() - enemyPosition.getX_axis();
         int deltaY = playerPosition.getY_axis() - enemyPosition.getY_axis();
-        Position newPositionRight = new Position(enemyPosition.getX_axis() + GamePanel.tileSize, enemyPosition.getY_axis());
-        Position newPositionLeft = new Position(enemyPosition.getX_axis() - GamePanel.tileSize, enemyPosition.getY_axis());
-        Position newPositionUp = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() + GamePanel.tileSize);
-        Position newPositionDown = new Position(enemyPosition.getX_axis(), enemyPosition.getY_axis() - GamePanel.tileSize);
+        Position newPositionRight = new Position(enemyPosition.getX_axis() + GamePanel.tileSize,
+                enemyPosition.getY_axis());
+        Position newPositionLeft = new Position(enemyPosition.getX_axis() - GamePanel.tileSize,
+                enemyPosition.getY_axis());
+        Position newPositionUp = new Position(enemyPosition.getX_axis(),
+                enemyPosition.getY_axis() + GamePanel.tileSize);
+        Position newPositionDown = new Position(enemyPosition.getX_axis(),
+                enemyPosition.getY_axis() - GamePanel.tileSize);
         List<Position> priorityList = new ArrayList<>();
 
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
@@ -221,9 +219,8 @@ public class Ghost implements Enemy {
 
     }
 
-
     @Override
-    public Position getPosition(){
+    public Position getPosition() {
         return enemyPosition;
     }
 
@@ -253,28 +250,29 @@ public class Ghost implements Enemy {
         return movable;
     }
 
-    public void draw(Graphics2D g2){
-        //g2.setColor(Color.white);
-        //g2.fillRect(enemyPosition.getX_axis(), enemyPosition.getY_axis(), 48, 48);
+    public void draw(Graphics2D g2) {
+        // g2.setColor(Color.white);
+        // g2.fillRect(enemyPosition.getX_axis(), enemyPosition.getY_axis(), 48, 48);
         switch (enemyType) {
             case GHOST_BASIC:
                 currentImage = ghost_basic;
                 break;
-        
+
             default:
                 currentImage = ghost_advanced;
                 break;
         }
-        g2.drawImage(currentImage, enemyPosition.getX_axis(), enemyPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize,null);
+        g2.drawImage(currentImage, enemyPosition.getX_axis(), enemyPosition.getY_axis(), GamePanel.tileSize,
+                GamePanel.tileSize, null);
     }
 
-    //get enemy image
-    private void getEnemyImage(){
+    // get enemy image
+    private void getEnemyImage() {
         try {
             String directory = System.getProperty("user.dir");
-            ghost_basic = ImageIO.read(new File(directory +"/res/Enemy/ghost_basic.png"));
-            ghost_advanced = ImageIO.read(new File(directory +"/res/Enemy/ghost_advanced.png"));
-            
+            ghost_basic = ImageIO.read(new File(directory + "/res/Enemy/ghost_basic.png"));
+            ghost_advanced = ImageIO.read(new File(directory + "/res/Enemy/ghost_advanced.png"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }

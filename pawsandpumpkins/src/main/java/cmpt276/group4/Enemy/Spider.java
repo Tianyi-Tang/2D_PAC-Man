@@ -19,6 +19,7 @@ public class Spider implements Enemy {
     SpiderType spideType;
     private BufferedImage currentImage;
     private RecordUsedPlace record;
+    private Position playerPosition;
 
     public enum SpiderType {
         type_spider_1,
@@ -26,6 +27,7 @@ public class Spider implements Enemy {
     }
 
     Spider() {
+        getPlayerPosition();
         record = RecordUsedPlace.getInstance();
         //get the list of enemy from recordUsedPlace and randomly picked one.
         switch ((record.getEnemyList().size()) % 2) {
@@ -39,10 +41,24 @@ public class Spider implements Enemy {
         }
         System.out.println("Spider.java: Creating spider");
         getEnemyImage();
-        //enemyPosition.setPosition(record.getRandomFromAvailablePosition());
-        enemyPosition.setPosition(record.getRandomSafePosition());
+        Position potentialPosition = new Position(0, 0);
+        potentialPosition.equal(playerPosition);
+
+        do {
+            potentialPosition = record.getRandomSafePosition();
+        } while (potentialPosition.equal(playerPosition));
+
+
+
+        enemyPosition.setPosition(potentialPosition);
         record.addEnemy(this);
 
+    }
+
+    private void getPlayerPosition() {
+
+        RecordUsedPlace record = RecordUsedPlace.getInstance();
+        playerPosition = record.getPlayerPosition();
     }
 
     void deleteImage() {

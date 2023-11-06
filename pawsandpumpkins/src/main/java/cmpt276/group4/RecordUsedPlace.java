@@ -119,10 +119,25 @@ public class RecordUsedPlace {
         if(isPlaceAviable(enemy.getEnemyPosition())){
             enemies.add(enemy);
             elementTakenPlace(false, enemy.getEnemyPosition());
+            //testing
+            // Remove enemy's position from enemyAvaliable_pos only if enemy is an Spider
+            if (enemy instanceof Spider) {
+            Iterator<Position> it = enemyAvaliable_pos.iterator();
+            while (it.hasNext()) {
+                Position p = it.next();
+                if (p.equal(enemy.getEnemyPosition())) {
+                    System.out.println("removing from enepos ");
+                    it.remove();
+                    break; // Stop the loop once the position is found and removed
+                }
+            }
+            }
             return true;
         }
-        else
+        else{
+            System.out.println("no did not add");
             return false;
+        }
     }
 
     public ArrayList<CharacterAvaliablePosition>  getElemet(){
@@ -226,4 +241,14 @@ public class RecordUsedPlace {
     public List<Enemy> getEnemyList(){
         return enemies;
     }
+
+    public boolean isNotSpiderPosition(Position pos){
+        for (Enemy enemy : enemies) {
+                if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
 }
