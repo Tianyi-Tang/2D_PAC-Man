@@ -47,8 +47,8 @@ public class Ghost implements Enemy {
 
         // Check if the player is around
         if (isPlayerAround(4*GamePanel.tileSize)) {
-            // If the player is around, move towards the player
-            moveToClosestPlayerPosition();
+                // If the player is around, move towards the player
+                setToClosestPlayerPosition();
         } else {
             // If the player is not around, move to a random position
             moveToRandomPosition();
@@ -77,8 +77,12 @@ public class Ghost implements Enemy {
         return deltaX <= range && deltaY <= range;
     }
 
-    private void moveToClosestPlayerPosition() {
+    private void setToClosestPlayerPosition() {
 
+        if (playerPosition.equals(enemyPosition) ) {
+                enemyPosition = playerPosition;
+                return;
+        }
         List<Position> availableDirections = getPriorityPositions();
 
         Position highestPriorityAvailablePosition = null;
@@ -90,8 +94,8 @@ public class Ghost implements Enemy {
         }
 
         if (highestPriorityAvailablePosition != null) {
-            System.out.println("Highest priority available position: (" + highestPriorityAvailablePosition.getX_axis()
-                    + ", " + highestPriorityAvailablePosition.getY_axis() + ")");
+            // System.out.println("Highest priority available position: (" + highestPriorityAvailablePosition.getX_axis()
+            //         + ", " + highestPriorityAvailablePosition.getY_axis() + ")");
             enemyPosition = highestPriorityAvailablePosition;
         } else {
             System.out.println("No available position found.");

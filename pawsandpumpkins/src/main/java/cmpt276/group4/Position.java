@@ -1,5 +1,7 @@
 package cmpt276.group4;
 
+import java.util.Objects;
+
 public class Position{
     private int x_axis;
     private int y_axis;
@@ -44,4 +46,19 @@ public class Position{
     public void setY_axis(int y_axis){
         this.y_axis = y_axis;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Position)) return false;
+        Position position = (Position) o;
+        return x_axis == position.x_axis &&
+               y_axis == position.y_axis;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x_axis, y_axis);
+    }
+
 }
