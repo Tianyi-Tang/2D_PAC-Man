@@ -32,17 +32,19 @@ public class Ghost implements Enemy {
 
     public Ghost(EnemyType type) {
         record = RecordUsedPlace.getInstance();
+        enemyPosition = new Position(0, 0);
         enemyType = type;
         getEnemyImage();
         this.enemyMovement = new EnemyMovement();
 
-        this.enemyPosition = record.getRandomFromAvailablePosition();
+        this.enemyPosition.setPosition(record.getRandomFromAvailablePosition());
         //this.enemyPosition = new Position(10, 10);
         record.addEnemy(this);
     }
 
     public void ghostMoveNextPosition() {
         // Get player's current position
+        catchPlayer();
         getPlayerPosition();
 
         // Check if the player is around
@@ -79,8 +81,9 @@ public class Ghost implements Enemy {
 
     private void setToClosestPlayerPosition() {
 
-        if (playerPosition.equals(enemyPosition) ) {
-                enemyPosition = playerPosition;
+        if (enemyPosition.equal(playerPosition) ) {
+            System.out.println("IN gHOST:Overlapp: trying to set ghost on player");
+                enemyPosition.setPosition(playerPosition);
                 return;
         }
         List<Position> availableDirections = getPriorityPositions();
@@ -96,7 +99,7 @@ public class Ghost implements Enemy {
         if (highestPriorityAvailablePosition != null) {
             // System.out.println("Highest priority available position: (" + highestPriorityAvailablePosition.getX_axis()
             //         + ", " + highestPriorityAvailablePosition.getY_axis() + ")");
-            enemyPosition = highestPriorityAvailablePosition;
+            enemyPosition.setPosition(highestPriorityAvailablePosition);
         } else {
             System.out.println("No available position found.");
         }
@@ -216,7 +219,7 @@ public class Ghost implements Enemy {
     @Override
     public void catchPlayer() {
         getPlayerPosition();
-        if (playerPosition == enemyPosition) {
+        if (playerPosition.equal(enemyPosition)) {
             System.out.println("Ghost caught the player!");
         } else {
             System.out.println("Ghost fail to catch the player!");
@@ -231,7 +234,7 @@ public class Ghost implements Enemy {
 
     @Override
     public void setEnemyPosition(Position newPosition) {
-        enemyPosition = newPosition;
+        enemyPosition.setPosition(newPosition);
     }
 
     @Override

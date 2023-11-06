@@ -39,7 +39,7 @@ public class Spider implements Enemy {
         }
         System.out.println("Spider.java: Creating spider");
         getEnemyImage();
-        enemyPosition = record.getRandomFromAvailablePosition();
+        enemyPosition.setPosition(record.getRandomFromAvailablePosition());
         record.addEnemy(this);
 
     }
@@ -57,7 +57,7 @@ public class Spider implements Enemy {
     public void catchPlayer() {
         Position playerPosition = record.getPlayerPosition();
 
-        if (playerPosition == enemyPosition) {
+        if (playerPosition.equals(enemyPosition)) {
             //tell RecordUsedPlace to remove spider
             System.out.println("Bagel stepped on spider!");
         }

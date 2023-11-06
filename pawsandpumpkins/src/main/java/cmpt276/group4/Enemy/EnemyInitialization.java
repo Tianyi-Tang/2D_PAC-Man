@@ -18,7 +18,7 @@ public class EnemyInitialization {
         this.gameLevel = gameLevel;
         switch (gameLevel) {
             case BASIC:
-                spider = 0;
+                spider = 3;
                 basicGhost = 1; 
                 advancedGhost = 0 ;
                 break;
