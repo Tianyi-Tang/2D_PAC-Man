@@ -40,7 +40,7 @@ public class Spider implements Enemy {
         System.out.println("Spider.java: Creating spider");
         getEnemyImage();
         //enemyPosition.setPosition(record.getRandomFromAvailablePosition());
-        enemyPosition.setPosition(record.getRandomFromAvailablePositioAvoidSpider());
+        enemyPosition.setPosition(record.getRandomSafePosition());
         record.addEnemy(this);
 
     }

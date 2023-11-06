@@ -36,7 +36,7 @@ public class RecordUsedPlace {
     }
 
 
-    public Position getRandomFromAvailablePositioAvoidSpider() {
+    public Position getRandomSafePosition() {
         ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
     
         Iterator<Position> positionIterator = availableWithoutSpiders.iterator();
@@ -44,7 +44,8 @@ public class RecordUsedPlace {
         while (positionIterator.hasNext()) {
             Position pos = positionIterator.next();
             for (Enemy enemy : enemies) {
-                if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
+                //if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
+                    if (enemy.getEnemyPosition().equals(pos)) {
                     // Remove the position if there is a spider on it
                     positionIterator.remove();
                     break; // No need to check the other spiders for this position
