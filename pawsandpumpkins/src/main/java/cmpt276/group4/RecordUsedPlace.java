@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
 
@@ -33,6 +34,39 @@ public class RecordUsedPlace {
         Random random = new Random();
         return available.get(random.nextInt(available.size()));
     }
+
+
+    public Position getRandomFromAvailablePositioAvoidSpider() {
+        // Assuming Position has an 'equal' method correctly overridden.
+        // Copy the list of available positions to avoid modifying the original list.
+        ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
+    
+        // Use an iterator to avoid ConcurrentModificationException
+        Iterator<Position> positionIterator = availableWithoutSpiders.iterator();
+    
+        while (positionIterator.hasNext()) {
+            Position pos = positionIterator.next();
+            for (Enemy enemy : enemies) {
+                // Assuming 'enemy' is of type Spider or has a method to check if it's a spider.
+                if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
+                    // Remove the position if there is a spider on it
+                    positionIterator.remove();
+                    break; // No need to check the other spiders for this position
+                }
+            }
+        }
+    
+        // Now 'availableWithoutSpiders' contains positions not occupied by spiders.
+        if (availableWithoutSpiders.isEmpty()) {
+            System.out.println("No available positions without spiders");
+            return null;
+        }
+    
+        // Return a random position from the list of positions without spiders.
+        Random random = new Random();
+        return availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
+    }
+    
 
     public RecordUsedPlace(){
         initalAvailableArray();

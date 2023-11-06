@@ -25,7 +25,8 @@ import cmpt276.group4.WindowAndInput.keyboardListener;
 
 public class GameManager {
     // typeOfRoom
-    private gameLevel level = gameLevel.BASIC;
+    //level: BASIC, MEDIUM, HARD
+    private gameLevel level = gameLevel.HARD;
     private int typeOfRoom;
     private static GameManager instance;
 
