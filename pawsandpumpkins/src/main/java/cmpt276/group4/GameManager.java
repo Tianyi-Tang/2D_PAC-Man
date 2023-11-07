@@ -69,11 +69,14 @@ public class GameManager {
         listener = new keyboardListener();
         window.addKeyListener(listener);
 
-        gamePanel = new GamePanel();
+        
+
+        gamePanel = new GamePanel(this);
         window.add(gamePanel);
         window.pack();
 
-
+        gamePanel.addMouseListener(listener);    
+        gamePanel.addMouseMotionListener(listener); 
         RoomInitialization initialization_room = new RoomInitialization();
         initialization_room.setX(12);
         initialization_room.setY(12);
@@ -114,6 +117,16 @@ public class GameManager {
         else{
             // game continues
         }
+    }
+
+    // Call this method in game update loop to check for mouse input
+    public void handleMouseInput() {
+        if (listener.isMouseClicked()) {
+            // Handle mouse click using inputListener.getMousePosition()
+            System.out.println(String.format("MOUSE CLICKED AT POSITION x:%d y: %d", listener.getMousePosition().getX_axis(), listener.getMousePosition().getY_axis()));
+            listener.clearMouseClick(); // Clear the click once it's handled
+        }
+        //  Handle mouse position and pressed state
     }
 
     //instance

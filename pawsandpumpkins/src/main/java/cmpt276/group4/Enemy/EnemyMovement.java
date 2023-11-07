@@ -18,6 +18,7 @@ public class EnemyMovement implements Movement {
     public boolean isPositionAvailable(Position position) {
         RecordUsedPlace record = RecordUsedPlace.getInstance();
         System.out.println("Enemymovement/isPositionAvaiale "+ record.enemyMovable(position));
-        return record.enemyMovable(position)&&record.isNotSpiderPosition(position);
+        return record.enemyMovable(position);
+        //return record.enemyMovable(position)&&record.isNotSpiderPosition(position);
     }
 }
