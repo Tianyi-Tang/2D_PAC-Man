@@ -7,7 +7,6 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 import cmpt276.group4.Position;
-import cmpt276.group4.Reward.BonusReward;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 

@@ -55,6 +55,8 @@ public class Tile implements CharacterAvaliablePosition {
     public void draw(Graphics2D g2){
         if(tileImage != null)
             g2.drawImage(tileImage, location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
+        
+        
     }
     
 }
