@@ -2,21 +2,44 @@ package cmpt276.group4.Room;
 
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
 
 public class Tile implements CharacterAvaliablePosition {
     private boolean playerAvaliable = true;
-    private boolean enemyAvialiable = true;
+    private boolean enemyAvaliable = true;
     private boolean takenPlace = false;
     private Position location;
+    BufferedImage tileImage;
 
     public Tile(Position position){
         location = position;
+        initalTileImage();
     }
+
+    public void initalTileImage(){
+        try {
+            tileImage = ImageIO.read(new File(System.getProperty("user.dir") + "/res/Tiles/tile1.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    // setters for wall and tombstone classes
+    public void setPlayerAccess(boolean playerAvaliable) {
+        this.playerAvaliable = playerAvaliable;
+    }
+
+    public void setEnemyAccess(boolean enemyAvaliable){
+        this.enemyAvaliable = enemyAvaliable;
+    }
+
 
     @Override
     public Position getPosition() {
@@ -30,7 +53,7 @@ public class Tile implements CharacterAvaliablePosition {
 
     @Override
     public boolean getEnemyAvaliable() {
-        return enemyAvialiable;
+        return enemyAvaliable;
     }
 
     @Override
@@ -40,8 +63,9 @@ public class Tile implements CharacterAvaliablePosition {
     
     @Override
     public void draw(Graphics2D g2){
-        g2.setColor(Color.white);
-        g2.fillRect(location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize);
+        if(tileImage != null)
+            g2.drawImage(tileImage, location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
+        //g2.fillRect(location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize);
     }
     
 }

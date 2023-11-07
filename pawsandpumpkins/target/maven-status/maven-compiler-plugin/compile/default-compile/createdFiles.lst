@@ -21,10 +21,12 @@ cmpt276/group4/Reward/MangeBonusReward.class
 cmpt276/group4/Room/Obstacle.class
 cmpt276/group4/Position.class
 cmpt276/group4/Room/Tombstone.class
+cmpt276/group4/gameLevel.class
 cmpt276/group4/Room/Wall.class
 cmpt276/group4/Reward/BonusReward.class
 cmpt276/group4/Reward/GeneralReward.class
 cmpt276/group4/App.class
+cmpt276/group4/Enemy/EnemyInitialization$1.class
 cmpt276/group4/Enemy/Ghost$1.class
 cmpt276/group4/Enemy/Enemy.class
 cmpt276/group4/Player/PlayerMovement.class

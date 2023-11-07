@@ -5,14 +5,19 @@ import java.util.List;
 import java.util.Random;
 
 import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
-import cmpt276.group4.WindowAndInput.GamePanel;
+import cmpt276.group4.Room.Obstacle;
+import cmpt276.group4.Room.Wall;
 
 public class RecordUsedPlace {
     // for reward to check 
     private ArrayList<CharacterAvaliablePosition> elements;
     private ArrayList<Position> available;
+
+    private ArrayList<Wall> walls;
+    //private ArrayList<Wall> walls = new ArrayList<>();
 
     private ArrayList<Position> playerAvaliable_pos;
     private ArrayList<Position> enemyAvaliable_pos;
@@ -20,7 +25,8 @@ public class RecordUsedPlace {
     private ArrayList<Enemy> enemies;
     private ArrayList<Reward> rewards;
     private Player player;
-    private Iterator<Position> iterator;
+    private Iterator<Position> iterator_pos;
+    private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;
     static int counter = 0;
 
@@ -34,26 +40,43 @@ public class RecordUsedPlace {
         return available.get(random.nextInt(available.size()));
     }
 
+
+    public Position getRandomSafePosition() {
+        ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
+    
+        Iterator<Position> positionIterator = availableWithoutSpiders.iterator();
+    
+        while (positionIterator.hasNext()) {
+            Position pos = positionIterator.next();
+            for (Enemy enemy : enemies) {
+                //if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
+                    if (enemy.getEnemyPosition().equals(pos)) {
+                    // Remove the position if there is a spider on it
+                    positionIterator.remove();
+                    break; // No need to check the other spiders for this position
+                }
+            }
+        }
+    
+        // Now 'availableWithoutSpiders' contains positions not occupied by spiders.
+        if (availableWithoutSpiders.isEmpty()) {
+            System.out.println("No available positions without spiders");
+            return null;
+        }
+    
+        // Return a random position from the list of positions without spiders.
+        Random random = new Random();
+        return availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
+    }
+    
+
     public RecordUsedPlace(){
         initalAvailableArray();
-        //for testing please dont delete below yet. Rosemary
-        // available.add(new Position(0, 0));
-        // available.add(new Position(48, 48));
-        // available.add(new Position(48+GamePanel.tileSize, 48));
-        // available.add(new Position(48, 48+GamePanel.tileSize));
-        // available.add(new Position(48-GamePanel.tileSize, 48));
-        // available.add(new Position(48, 48-GamePanel.tileSize));
 
         playerAvaliable_pos = new ArrayList<Position>();
         enemyAvaliable_pos = new ArrayList<Position>();
         elements = new ArrayList<CharacterAvaliablePosition>();
-         //for testing please dont delete below yet. Rosemary
-        // enemyAvaliable_pos.add(new Position(0, 0));
-        // enemyAvaliable_pos.add(new Position(48, 48));
-        // enemyAvaliable_pos.add(new Position(48+GamePanel.tileSize, 48));
-        // enemyAvaliable_pos.add(new Position(48, 48+GamePanel.tileSize));
-        // enemyAvaliable_pos.add(new Position(48-GamePanel.tileSize, 48));
-        // enemyAvaliable_pos.add(new Position(48, 48-GamePanel.tileSize));
+        walls = new ArrayList<Wall>();
 
         enemies = new ArrayList<Enemy>();
     }
@@ -102,10 +125,25 @@ public class RecordUsedPlace {
         if(isPlaceAviable(enemy.getEnemyPosition())){
             enemies.add(enemy);
             elementTakenPlace(false, enemy.getEnemyPosition());
+            //testing
+            // Remove enemy's position from enemyAvaliable_pos only if enemy is an Spider
+            if (enemy instanceof Spider) {
+            Iterator<Position> it = enemyAvaliable_pos.iterator();
+            while (it.hasNext()) {
+                Position p = it.next();
+                if (p.equal(enemy.getEnemyPosition())) {
+                    System.out.println("removing from enepos ");
+                    it.remove();
+                    break; // Stop the loop once the position is found and removed
+                }
+            }
+            }
             return true;
         }
-        else
+        else{
+            System.out.println("no did not add");
             return false;
+        }
     }
 
     public ArrayList<CharacterAvaliablePosition>  getElemet(){
@@ -124,7 +162,13 @@ public class RecordUsedPlace {
 
     public void removeReward(Reward reward){
         available.add(reward.getPosition());
-        rewards.remove(reward);
+        iterator_reward = rewards.iterator();
+        Reward rewardInList;
+        while (iterator_reward.hasNext()) {
+            rewardInList = iterator_reward.next();
+            if(rewardInList == reward)
+                iterator_reward.remove();
+        }
     }
 
     public Position getPlayerPosition(){
@@ -154,7 +198,7 @@ public class RecordUsedPlace {
             if(destination.equal(position))
                 return true;
         }
-        return false;
+         return false;
     }
 
     public boolean playerMovable(Position destination){
@@ -183,17 +227,18 @@ public class RecordUsedPlace {
 
     private void elementTakenPlace(boolean takenPlace, Position position){
         if(takenPlace){
-            //RemoveFromAviable(position);
+            RemoveFromAviable(position);
         }
     }
 
 
     private void RemoveFromAviable(Position takePosition){
-        iterator = available.iterator();
-        while (iterator.hasNext()) {
-            Position position = iterator.next();
+        iterator_pos = available.iterator();
+        Position position;
+        while (iterator_pos.hasNext()) {
+            position = iterator_pos.next();
             if(position.equal(takePosition)){
-                iterator.remove(); 
+                iterator_pos.remove(); 
                 break;
             }         
         }
@@ -202,4 +247,35 @@ public class RecordUsedPlace {
     public List<Enemy> getEnemyList(){
         return enemies;
     }
+
+    public boolean isNotSpiderPosition(Position pos){
+        for (Enemy enemy : enemies) {
+                if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    
+
+    public void addWall(Wall wall){
+        //if(isPlaceAviable(wall.getPosition())){
+        walls.add(wall);
+        //    elementTakenPlace(false, wall.getPosition());
+        //    return true;
+        // }
+        //else
+        //    return false;
+        
+    }
+
+    public ArrayList<Wall> getWalls() {
+        //for (Wall wall : walls) {
+        //    System.out.println("Wall Position: (" + wall.getPosition().getX_axis() + ", " + wall.getPosition().getY_axis() + ")");
+       // }
+        return walls;
+    }
+
+
+        
 }

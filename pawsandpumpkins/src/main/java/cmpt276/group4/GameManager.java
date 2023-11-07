@@ -20,6 +20,7 @@ import cmpt276.group4.Room.Room;
 import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.Room.Tile;
+import cmpt276.group4.Room.Wall;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.keyboardListener;
 
@@ -27,6 +28,8 @@ import cmpt276.group4.WindowAndInput.keyboardListener;
 
 public class GameManager {
     // typeOfRoom
+    //level: BASIC, MEDIUM, HARD
+    private gameLevel level = gameLevel.HARD;
     private int typeOfRoom;
     private static GameManager instance;
 
@@ -36,7 +39,6 @@ public class GameManager {
     private Room room;
 
     private EnemyFactory enemyFactory;
-
     private EnemyInitialization enemyInitialization;
 
     private RecordUsedPlace record;
@@ -68,7 +70,6 @@ public class GameManager {
         window.setVisible(true);
 
         listener = new keyboardListener();
-        //listener.addPlayer(PlayerGenerator.creatPlayer());
         window.addKeyListener(listener);
 
         gamePanel = new GamePanel();
@@ -84,16 +85,27 @@ public class GameManager {
 
         record = new RecordUsedPlace();
         enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(1); // Initializing 1 enemies
-        enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
+        enemyInitialization = new EnemyInitialization(level, enemyFactory); // Initializing 1 enemies
+        //enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
         
-         
+        Position wallPosition1 = new Position(10, 10);
+        wallPosition1.setX_axis(1000);
+        wallPosition1.setY_axis(1000);
+        Wall wall1 = new Wall(wallPosition1, 1);
+        RecordUsedPlace.getInstance().addWall(wall1);
+
+        Position wallPosition2 = new Position(10, 10);
+        Wall wall2 = new Wall(wallPosition2, 1);
+        RecordUsedPlace.getInstance().addWall(wall2);
+        
+
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
 
+        
         
     }
 
@@ -106,9 +118,10 @@ public class GameManager {
 
     private void creatPlayer(){
         Player player = PlayerGenerator.creatPlayer();
-        player.addKeyListener(listener);
-        player.addInGamePanel(gamePanel);
-        RecordUsedPlace.getInstance().setPlayer(PlayerGenerator.creatPlayer());
+        listener.addPlayer(player);
+        gamePanel.setPlayer(player);
+        RecordUsedPlace.getInstance().setPlayer(player);
+        gamePanel.createTimeLine();
     }
 
     public void enemyCatachPlayer(boolean moveable){
