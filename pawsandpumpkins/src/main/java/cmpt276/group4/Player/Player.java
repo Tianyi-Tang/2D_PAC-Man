@@ -7,6 +7,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 import cmpt276.group4.Position;
+import cmpt276.group4.Reward.BonusReward;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
@@ -22,6 +23,12 @@ public class Player implements KeyMovingObserver {
 
     private PlayerMovement movement;
     private int time_counter = 0;
+
+    private int deductScore = 0;
+
+    private int totalScore = 0;
+    private int bonusReward_num = 0;
+    private int generalReward_num =0;
 
    private  BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
    private  BufferedImage currentImage = null;
@@ -63,6 +70,40 @@ public class Player implements KeyMovingObserver {
 
     public void setPlayerMovement(PlayerMovement playerMovement){
         movement = playerMovement;
+    }
+
+    public void deductPoint(int deductScore){
+        this.deductScore += deductScore;
+        if(gameEnd()){
+            System.out.println("Game end");
+        }
+    }
+
+    private boolean gameEnd(){
+        if(deductScore > totalScore)
+            return true;
+        else 
+            return false;
+    }
+
+    public void addScoreToPlayer(int number, boolean isBonusReward){
+        totalScore += number;
+        if(isBonusReward)
+            bonusReward_num ++;
+        else
+            generalReward_num ++;
+    }
+
+    public int getTotalScore(){
+        return totalScore;
+    }
+
+    public int getBonusRewardNum(){
+        return bonusReward_num;
+    }
+
+    public int getGeneralRewardNum(){
+        return generalReward_num;
     }
 
     @Override
