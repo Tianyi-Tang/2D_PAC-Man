@@ -18,10 +18,6 @@ public class Tombstone extends Obstacle {
         return playerAvaliable;
     }
 
-    @Override
-    public boolean getEnemyAvaliable() {
-        return enemyAvaliable;
-    }
 
     @Override
     public Position getPosition() {

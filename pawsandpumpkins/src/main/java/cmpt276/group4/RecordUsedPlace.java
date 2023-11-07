@@ -14,8 +14,8 @@ public class RecordUsedPlace {
     private ArrayList<CharacterAvaliablePosition> elements;
     private ArrayList<Position> available;
 
-    private ArrayList<Position> playerAvaliable_pos;
-    private ArrayList<Position> enemyAvaliable_pos;
+    private ArrayList<Position> characterAvaliable_pos;
+    private ArrayList<Position> obstacle_pos;
 
     private ArrayList<Enemy> enemies;
     private ArrayList<Reward> rewards;
@@ -68,8 +68,8 @@ public class RecordUsedPlace {
     public RecordUsedPlace(){
         initalAvailableArray();
 
-        playerAvaliable_pos = new ArrayList<Position>();
-        enemyAvaliable_pos = new ArrayList<Position>();
+        characterAvaliable_pos = new ArrayList<Position>();
+        obstacle_pos = new ArrayList<Position>();
         elements = new ArrayList<CharacterAvaliablePosition>();
 
         enemies = new ArrayList<Enemy>();
@@ -101,11 +101,11 @@ public class RecordUsedPlace {
     }
 
     public boolean addElementToMap(CharacterAvaliablePosition object){
-        if(isPlaceAviable(object.getPosition())){
-            if(object.getEnemyAvaliable())
-                enemyAvaliable_pos.add(object.getPosition());
+        if(isPlaceAviable(object.getPosition())){             
             if(object.getPlayerAvaliable())
-                playerAvaliable_pos.add(object.getPosition());
+                characterAvaliable_pos.add(object.getPosition());
+            else
+                obstacle_pos.add(object.getPosition());
 
             elements.add(object);
             elementTakenPlace(object.getTakenPlace(), object.getPosition());
@@ -119,20 +119,20 @@ public class RecordUsedPlace {
         if(isPlaceAviable(enemy.getEnemyPosition())){
             enemies.add(enemy);
             elementTakenPlace(false, enemy.getEnemyPosition());
+            return true;
             //testing
             // Remove enemy's position from enemyAvaliable_pos only if enemy is an Spider
-            if (enemy instanceof Spider) {
-            Iterator<Position> it = enemyAvaliable_pos.iterator();
-            while (it.hasNext()) {
-                Position p = it.next();
-                if (p.equal(enemy.getEnemyPosition())) {
-                    System.out.println("removing from enepos ");
-                    it.remove();
-                    break; // Stop the loop once the position is found and removed
-                }
-            }
-            }
-            return true;
+            // if (enemy instanceof Spider) {
+            // Iterator<Position> it = enemyAvaliable_pos.iterator();
+            // while (it.hasNext()) {
+            //     Position p = it.next();
+            //     if (p.equal(enemy.getEnemyPosition())) {
+            //         System.out.println("removing from enepos ");
+            //         it.remove();
+            //         break; // Stop the loop once the position is found and removed
+            //     }
+            // }
+            //}
         }
         else{
             System.out.println("no did not add");
@@ -180,23 +180,8 @@ public class RecordUsedPlace {
         return available;
     }
 
-    public boolean enemyMovable(Position destination){
-        //Edit by rosemary: use this for testing ghost functions
-        // for (Position position : available) {
-        //     if(destination.equal(position))
-        //         return true;
-        // }
-
-        //This is the official one
-        for (Position position : enemyAvaliable_pos) {
-            if(destination.equal(position))
-                return true;
-        }
-         return false;
-    }
-
-    public boolean playerMovable(Position destination){
-        for (Position position : playerAvaliable_pos) {
+    public boolean characterMovable(Position destination){
+        for (Position position : characterAvaliable_pos) {
             if(destination.equal(position))
                 return true;
         }

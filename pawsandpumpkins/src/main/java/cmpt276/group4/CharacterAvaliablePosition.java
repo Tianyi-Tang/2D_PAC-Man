@@ -8,7 +8,6 @@ public interface CharacterAvaliablePosition {
     
     public Position getPosition();
     public boolean getPlayerAvaliable();
-    public boolean getEnemyAvaliable();
     public boolean getTakenPlace();
 
     public void draw(Graphics2D g2);

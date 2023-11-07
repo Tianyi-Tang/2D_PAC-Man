@@ -1,7 +1,5 @@
 package cmpt276.group4.Enemy;
 
-import java.util.List;
-
 import cmpt276.group4.gameLevel;
 
 public class EnemyInitialization {
