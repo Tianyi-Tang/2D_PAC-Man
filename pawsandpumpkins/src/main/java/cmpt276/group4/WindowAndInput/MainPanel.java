@@ -20,6 +20,7 @@ public class MainPanel extends JPanel implements Runnable {
 
     public MainPanel(){
         startButton = new JButton();
+        startButton.setText("Start");
         startButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -28,7 +29,6 @@ public class MainPanel extends JPanel implements Runnable {
             }
         });
         startButton.setBounds(2* GamePanel.tileSize,3* GamePanel.tileSize,GamePanel.tileSize,GamePanel.tileSize);
-
         this.setLayout(null);
 
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
