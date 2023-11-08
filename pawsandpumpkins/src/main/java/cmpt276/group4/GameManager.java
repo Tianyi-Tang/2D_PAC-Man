@@ -34,7 +34,7 @@ import cmpt276.group4.WindowAndInput.keyboardListener;
 public class GameManager {
     // typeOfRoom
     //level: BASIC, MEDIUM, HARD
-    private GameStatus status = GameStatus.gamePanel;
+    private GameStatus status;
 
     private gameLevel level = gameLevel.HARD;
     private int typeOfRoom;
@@ -62,14 +62,24 @@ public class GameManager {
     private boolean existPlayer = false;
 
     public GameManager(){
+        status = GameStatus.MainPanel;
         window = new JFrame();
-        cardContainer = new JPanel();
-
+        layout = new CardLayout();
+        cardContainer = new JPanel(layout);
+        
         gamePanel = new GamePanel(this);
         mainPanel = new MainPanel();
 
         cardContainer.add(gamePanel,"game");
         cardContainer.add(mainPanel,"main");
+
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.setTitle("paws and pumpkins");
+        window.setLocationRelativeTo(null);
+
+        window.getContentPane().add(cardContainer);
+        window.pack();
     }
 
     // getter
@@ -101,22 +111,16 @@ public class GameManager {
     }
 
     public void createWindows(){
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
+        status = GameStatus.GamePanel;
+        layout.show(cardContainer, "game");
 
-        window.setTitle("paws and pumpkins");
-        window.setLocationRelativeTo(null);
         window.setVisible(true);
+
+        
 
         listener = new keyboardListener();
         window.addKeyListener(listener);
-
-
-        window.getContentPane().add(cardContainer);
-        window.pack();
-
-        gamePanel.addMouseListener(listener);    
-        gamePanel.addMouseMotionListener(listener); 
+        
         RoomInitialization initialization_room = new RoomInitialization();
         initialization_room.setX(12);
         initialization_room.setY(12);

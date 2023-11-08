@@ -17,9 +17,6 @@ import cmpt276.group4.Player.Player;
 
 import cmpt276.group4.Reward.Reward;
 
-import cmpt276.group4.Room.Obstacle;
-import cmpt276.group4.Room.Wall;
-
 
 public class GamePanel extends JPanel implements Runnable {
 
