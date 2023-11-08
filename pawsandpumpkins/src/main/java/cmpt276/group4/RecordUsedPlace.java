@@ -127,20 +127,6 @@ public class RecordUsedPlace {
             return true;
             //testing
             // Remove enemy's position from enemyAvaliable_pos only if enemy is an Spider
-<<<<<<< HEAD
-            if (enemy instanceof Spider) {
-            Iterator<Position> it = enemyAvaliable_pos.iterator();
-            while (it.hasNext()) {
-                Position p = it.next();
-                if (p.equal(enemy.getEnemyPosition())) {
-                    System.out.println("removing from enepos");
-                    it.remove();
-                    break; // Stop the loop once the position is found and removed
-                }
-            }
-            }
-            return true;
-=======
             // if (enemy instanceof Spider) {
             // Iterator<Position> it = enemyAvaliable_pos.iterator();
             // while (it.hasNext()) {
@@ -152,7 +138,6 @@ public class RecordUsedPlace {
             //     }
             // }
             //}
->>>>>>> origin/main
         }
         else{
             System.out.println("no did not add");
