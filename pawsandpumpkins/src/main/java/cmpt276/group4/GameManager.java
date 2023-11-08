@@ -21,10 +21,7 @@ import cmpt276.group4.Player.PlayerGenerator;
 import cmpt276.group4.Reward.RewardFactory;
 import cmpt276.group4.Reward.RewardInitialization;
 
-import cmpt276.group4.Room.Obstacle;
-
 import cmpt276.group4.Room.Room;
-import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.Room.Tile;
 import cmpt276.group4.Room.Wall;
@@ -115,7 +112,7 @@ public class GameManager {
         window.addKeyListener(listener);
 
 
-        window.add(gamePanel);
+        window.getContentPane().add(cardContainer);
         window.pack();
 
         gamePanel.addMouseListener(listener);    
