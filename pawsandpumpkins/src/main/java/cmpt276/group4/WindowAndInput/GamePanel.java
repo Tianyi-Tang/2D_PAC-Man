@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
-import cmpt276.group4.Position;
+import cmpt276.group4.GameManager;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
@@ -41,13 +41,17 @@ public class GamePanel extends JPanel implements Runnable {
     
 
     private Thread gameThread;
+    private GameManager gameManager;
 
-    public GamePanel(){
 
+    public GamePanel(GameManager gameManager) {
+        this.gameManager = gameManager;
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
     }
+
+
 
     public void createTimeLine(){
         if(gameThread == null){
@@ -80,6 +84,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(){
+        gameManager.handleMouseInput(); 
         Player.getInstance().update();
 
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
@@ -88,11 +93,10 @@ public class GamePanel extends JPanel implements Runnable {
                     ((Ghost)enemy).ghostMoveNextPosition();
                 }
             }
-            enemyMoveCounter = 0; // Reset the counter
+            enemyMoveCounter = 0;
         } else {
             enemyMoveCounter++;
         }
-        
     }
 
     @Override
@@ -111,9 +115,9 @@ public class GamePanel extends JPanel implements Runnable {
         //Position wallPosition2 = new Position(10*tileSize, 10*tileSize);
         
       
-        for (Wall walls : record.getWalls()) {
-            walls.draw(g2);
-        }
+        //for (Wall walls : record.getWalls()) {
+        //    walls.draw(g2);
+        //}
       
 
         if(player != null)

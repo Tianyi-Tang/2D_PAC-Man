@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 public class Tile implements CharacterAvaliablePosition {
     private boolean playerAvaliable = true;
-    private boolean enemyAvaliable = true;
+    private boolean obstacle = false;
     private boolean takenPlace = false;
     private Position location;
     BufferedImage tileImage;
@@ -37,7 +37,7 @@ public class Tile implements CharacterAvaliablePosition {
     }
 
     public void setEnemyAccess(boolean enemyAvaliable){
-        this.enemyAvaliable = enemyAvaliable;
+        //this.enemyAvaliable = enemyAvaliable;
     }
 
 
@@ -52,11 +52,6 @@ public class Tile implements CharacterAvaliablePosition {
     }
 
     @Override
-    public boolean getEnemyAvaliable() {
-        return enemyAvaliable;
-    }
-
-    @Override
     public boolean getTakenPlace() {
         return takenPlace;
     }
@@ -65,7 +60,8 @@ public class Tile implements CharacterAvaliablePosition {
     public void draw(Graphics2D g2){
         if(tileImage != null)
             g2.drawImage(tileImage, location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
-        //g2.fillRect(location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize);
+        
+        
     }
     
 }

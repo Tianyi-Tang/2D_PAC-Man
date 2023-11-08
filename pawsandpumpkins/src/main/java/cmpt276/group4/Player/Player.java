@@ -23,6 +23,12 @@ public class Player implements KeyMovingObserver {
     private PlayerMovement movement;
     private int time_counter = 0;
 
+    private int deductScore = 0;
+
+    private int collectScore = 0;
+    private int bonusReward_num = 0;
+    private int generalReward_num =0;
+
    private  BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
    private  BufferedImage currentImage = null;
 
@@ -63,6 +69,44 @@ public class Player implements KeyMovingObserver {
 
     public void setPlayerMovement(PlayerMovement playerMovement){
         movement = playerMovement;
+    }
+
+    public int totalScore(){
+        return collectScore - deductScore;
+    }
+
+    public void deductPoint(int deductScore){
+        this.deductScore += deductScore;
+        if(gameEnd()){
+            System.out.println("Game end");
+        }
+    }
+
+    private boolean gameEnd(){
+        if(deductScore > collectScore)
+            return true;
+        else 
+            return false;
+    }
+
+    public void addScoreToPlayer(int number, boolean isBonusReward){
+        collectScore += number;
+        if(isBonusReward)
+            bonusReward_num ++;
+        else
+            generalReward_num ++;
+    }
+
+    public int getCollectScore(){
+        return collectScore;
+    }
+
+    public int getBonusRewardNum(){
+        return bonusReward_num;
+    }
+
+    public int getGeneralRewardNum(){
+        return generalReward_num;
     }
 
     @Override

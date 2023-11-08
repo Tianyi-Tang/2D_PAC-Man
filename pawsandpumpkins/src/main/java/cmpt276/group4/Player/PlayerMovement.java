@@ -18,7 +18,7 @@ public class PlayerMovement implements Movement {
 
     @Override
     public boolean isPositionAvailable(Position position) {
-        if(RecordUsedPlace.getInstance().playerMovable(position)){
+        if(RecordUsedPlace.getInstance().characterMovable(position)){
             if(position.getX_axis() < 0 || position.getY_axis() < 0)
                 return false;
             if(position.getX_axis() > GamePanel.screenWidth - GamePanel.tileSize || position.getY_axis() > GamePanel.screenHeight - GamePanel.tileSize)

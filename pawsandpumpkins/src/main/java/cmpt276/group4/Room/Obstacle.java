@@ -18,6 +18,34 @@ public class Obstacle extends Tile{
     }
 
     
+    @Override
+    public boolean getPlayerAvaliable() {
+        throw new UnsupportedOperationException("is player avaliable");
+    }
+
+    @Override
+    public Position getPosition() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
+    }
+
+    @Override
+    public boolean getTakenPlace() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTakenPlace'");
+    }
+
+    //@Override
+    //public void draw(Graphics2D g2) {
+    //    // TODO Auto-generated method stub
+    //    throw new UnsupportedOperationException("Unimplemented method 'draw'");
+    //}
+
+
+
+
+
+
 
 }
 

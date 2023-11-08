@@ -3,7 +3,6 @@ package cmpt276.group4.Enemy;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Movement;
-import cmpt276.group4.RecordUsedPlace;
 
 public class EnemyMovement implements Movement {
     @Override
@@ -17,7 +16,8 @@ public class EnemyMovement implements Movement {
     @Override
     public boolean isPositionAvailable(Position position) {
         RecordUsedPlace record = RecordUsedPlace.getInstance();
-        System.out.println("Enemymovement/isPositionAvaiale "+ record.enemyMovable(position));
-        return record.enemyMovable(position)&&record.isNotSpiderPosition(position);
+        System.out.println("Enemymovement/isPositionAvaiale "+ record.characterMovable(position));
+        return record.characterMovable(position);
+        //return record.enemyMovable(position)&&record.isNotSpiderPosition(position);
     }
 }

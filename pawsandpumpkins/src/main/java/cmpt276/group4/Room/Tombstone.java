@@ -12,11 +12,20 @@ public class Tombstone extends Obstacle {
         setEnemyAccess(true);
     }
 
+    //@Override
+    //public boolean getPlayerAvaliable() {
+        //return playerAvaliable;
+    //}
+
+
     @Override
-    public void draw(Graphics2D g2){
-        if(tileImage != null)
-            g2.drawImage(tileImage, position.getX_axis(), position.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
-        //g2.fillRect(location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize);
+    public Position getPosition() {
+        return position;
     }
+
+    //@Override
+    //public boolean getTakenPlace() {
+        //return takenPlace;
+    //}
 
 }

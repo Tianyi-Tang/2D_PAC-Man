@@ -5,6 +5,7 @@ cmpt276/group4/Room/RoomInitialization.class
 cmpt276/group4/Reward/RewardType.class
 cmpt276/group4/RecordUsedPlace.class
 cmpt276/group4/Room/Tile.class
+cmpt276/group4/WindowAndInput/MainPanel.class
 cmpt276/group4/Enemy/EnemyInitialization.class
 cmpt276/group4/Enemy/Ghost.class
 cmpt276/group4/Room/RoomFactory.class
