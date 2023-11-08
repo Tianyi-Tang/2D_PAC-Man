@@ -8,6 +8,8 @@ import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.Room.Obstacle;
+import cmpt276.group4.Room.Wall;
 
 public class RecordUsedPlace {
     // for reward to check 
@@ -71,8 +73,11 @@ public class RecordUsedPlace {
         characterAvaliable_pos = new ArrayList<Position>();
         obstacle_pos = new ArrayList<Position>();
         elements = new ArrayList<CharacterAvaliablePosition>();
+        //walls = new ArrayList<Wall>();
 
         enemies = new ArrayList<Enemy>();
+        rewards = new ArrayList<Reward>();
+
     }
 
     public void setPlayer(Player player){
@@ -146,13 +151,17 @@ public class RecordUsedPlace {
 
     public boolean addReward(Reward reward){
         if(isPlaceAviable(reward.getPosition())){
+            System.out.println("Adding reward at position: " + reward.getPosition());
             rewards.add(reward);
             elementTakenPlace(false, reward.getPosition());
             return true;
         }
-        else
+        else{
+            System.out.println("Failed to add reward at position: " + reward.getPosition());
             return false;
+        }
     }
+
 
     public void removeReward(Reward reward){
         available.add(reward.getPosition());
@@ -226,6 +235,12 @@ public class RecordUsedPlace {
     public List<Enemy> getEnemyList(){
         return enemies;
     }
+    public List<Reward> getRewardList(){
+        System.out.println("-----------------");
+        System.out.println("getRewardList called. Rewards count: " + rewards.size());
+        return rewards;
+    }
+
 
     public boolean isNotSpiderPosition(Position pos){
         for (Enemy enemy : enemies) {
@@ -235,5 +250,26 @@ public class RecordUsedPlace {
             }
             return true;
         }
+    
+
+    public void addWall(Wall wall){
+        //if(isPlaceAviable(wall.getPosition())){
+        //walls.add(wall);
+        //    elementTakenPlace(false, wall.getPosition());
+        //    return true;
+        // }
+        //else
+        //    return false;
+        
+    }
+
+    //public ArrayList<Wall> getWalls() {
+        //for (Wall wall : walls) {
+        //    System.out.println("Wall Position: (" + wall.getPosition().getX_axis() + ", " + wall.getPosition().getY_axis() + ")");
+       // }
+        //return walls;
+    //}
+
+
         
 }

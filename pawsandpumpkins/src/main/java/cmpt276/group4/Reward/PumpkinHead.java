@@ -35,6 +35,8 @@ public class PumpkinHead extends BonusReward {
         return ppkPosition;
     }
 
+
+
     @Override
     public void setPosition(Position position) {
         this.ppkPosition = position;
@@ -61,13 +63,13 @@ public class PumpkinHead extends BonusReward {
     @Override
     public void addScore(Player player, int score) {
     }
-    public void update() {
+    /*public void update() {
         stateCounter++;
         if (stateCounter >= 15) {
             org_State = !org_State;
             stateCounter = 0;
         }
-    }
+    }*/
     private void getPumpkinImage() {
         try {
             String directory = System.getProperty("user.dir");
@@ -77,14 +79,14 @@ public class PumpkinHead extends BonusReward {
             e.printStackTrace();
         }
     }
-
-    public void drawPumpkin(Graphics2D g1) {
-        if (org_State)
+@Override
+    public void draw(Graphics2D g1) {
+        /*if (org_State)
             currentImage = ppk1;
         else
             currentImage = ppk2;
-
-        g1.drawImage(currentImage, ppkPosition.getX_axis(), ppkPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize, null);
+*/
+        g1.drawImage(ppk1, ppkPosition.getX_axis(), ppkPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize, null);
 
     }
 }

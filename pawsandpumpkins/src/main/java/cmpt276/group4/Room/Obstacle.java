@@ -1,47 +1,22 @@
 package cmpt276.group4.Room;
 
-import java.awt.Graphics2D;
-
-import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
 
-public class Obstacle implements CharacterAvaliablePosition {
-
-    private boolean playerAccess;
-    private boolean enemyTraversability;
+public class Obstacle extends Tile{
     protected Position position;
-
     // Constructor to initialize an obstacle with player access, enemy traversability, and positions
-    public Obstacle(Position position) {
-        this.position = position;
+    public Obstacle(Position position, int type) {
+        super(position);
+        if (type == 1) {
+            Wall wall = new Wall(position, type);
+
+        }
+        else{
+            Tombstone tombstone = new Tombstone(position,type);
+        }
+
     }
 
-    // Getter and setter methods for playerAccess
-    public boolean isPlayerAccess() {
-        return playerAccess;
-    }
-
-    public void setPlayerAccess(boolean playerAccess) {
-        this.playerAccess = playerAccess;
-    }
-
-    // Getter and setter methods for enemyTraversability
-    public boolean isEnemyTraversability() {
-        return enemyTraversability;
-    }
-
-    public void setEnemyTraversability(boolean enemyTraversability) {
-        this.enemyTraversability = enemyTraversability;
-    }
-
-    // Getter and setter methods for positions
-    public Position getPositions() {
-        return position;
-    }
-
-    public void setPositions(Position position) {
-        this.position = position;
-    }
     
     @Override
     public boolean getPlayerAvaliable() {
@@ -60,11 +35,11 @@ public class Obstacle implements CharacterAvaliablePosition {
         throw new UnsupportedOperationException("Unimplemented method 'getTakenPlace'");
     }
 
-    @Override
-    public void draw(Graphics2D g2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'draw'");
-    }
+    //@Override
+    //public void draw(Graphics2D g2) {
+    //    // TODO Auto-generated method stub
+    //    throw new UnsupportedOperationException("Unimplemented method 'draw'");
+    //}
 
 
 

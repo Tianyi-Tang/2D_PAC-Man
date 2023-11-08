@@ -22,7 +22,7 @@ public class Tile implements CharacterAvaliablePosition {
         initalTileImage();
     }
 
-    private void initalTileImage(){
+    public void initalTileImage(){
         try {
             tileImage = ImageIO.read(new File(System.getProperty("user.dir") + "/res/Tiles/tile1.png"));
         } catch (Exception e) {
@@ -30,6 +30,16 @@ public class Tile implements CharacterAvaliablePosition {
         }
         
     }
+
+    // setters for wall and tombstone classes
+    public void setPlayerAccess(boolean playerAvaliable) {
+        this.playerAvaliable = playerAvaliable;
+    }
+
+    public void setEnemyAccess(boolean enemyAvaliable){
+        //this.enemyAvaliable = enemyAvaliable;
+    }
+
 
     @Override
     public Position getPosition() {

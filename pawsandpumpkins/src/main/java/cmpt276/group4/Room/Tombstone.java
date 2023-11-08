@@ -1,22 +1,21 @@
 package cmpt276.group4.Room;
+import java.awt.Graphics2D;
+import cmpt276.group4.WindowAndInput.GamePanel;
 
 import cmpt276.group4.Position;
 
-
 public class Tombstone extends Obstacle {
-    private boolean playerAvaliable = false;
-    private boolean enemyAvaliable = true;
-    private boolean takenPlace = true;
-    private Position position;
 
-    public Tombstone(Position location) {
-        super(location);
+    public Tombstone(Position position, int type) {
+        super(position, type);
+        setPlayerAccess(false);
+        setEnemyAccess(true);
     }
 
-    @Override
-    public boolean getPlayerAvaliable() {
-        return playerAvaliable;
-    }
+    //@Override
+    //public boolean getPlayerAvaliable() {
+        //return playerAvaliable;
+    //}
 
 
     @Override
@@ -24,9 +23,9 @@ public class Tombstone extends Obstacle {
         return position;
     }
 
-    @Override
-    public boolean getTakenPlace() {
-        return takenPlace;
-    }
+    //@Override
+    //public boolean getTakenPlace() {
+        //return takenPlace;
+    //}
 
 }

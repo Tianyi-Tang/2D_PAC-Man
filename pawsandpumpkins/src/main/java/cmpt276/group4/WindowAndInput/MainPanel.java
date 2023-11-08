@@ -27,10 +27,15 @@ public class MainPanel extends JPanel implements Runnable {
                 super.mouseClicked(e);
             }
         });
+        startButton.setBounds(2* GamePanel.tileSize,3* GamePanel.tileSize,GamePanel.tileSize,GamePanel.tileSize);
+
+        this.setLayout(null);
 
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+
+        this.add(startButton);
     }
 
     public void createTimeLine(){

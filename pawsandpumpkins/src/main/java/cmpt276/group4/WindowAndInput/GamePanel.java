@@ -15,6 +15,11 @@ import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
 import cmpt276.group4.Player.Player;
 
+import cmpt276.group4.Reward.Reward;
+
+import cmpt276.group4.Room.Obstacle;
+import cmpt276.group4.Room.Wall;
+
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -106,8 +111,24 @@ public class GamePanel extends JPanel implements Runnable {
             element.draw(g2);            
         }
 
+        for (Reward reward : record.getRewardList()) {
+            //System.out.println("Enemy List size: "+ record.getEnemyList().size());
+            reward.draw(g2);
+        }
 
+ 
+        //Position wallPosition1 = new Position(5, 5);
+        //Wall wall1 = new Wall(wallPosition1, 1);
+        //RecordUsedPlace.getInstance().addWall(wall1);
+
+        //Position wallPosition2 = new Position(10*tileSize, 10*tileSize);
         
+      
+        //for (Wall walls : record.getWalls()) {
+        //    walls.draw(g2);
+        //}
+      
+
 
         if(player != null)
             player.draw(g2);
@@ -117,6 +138,7 @@ public class GamePanel extends JPanel implements Runnable {
 
                 enemy.draw(g2);
         }
+
 
         g2.dispose();
     }
