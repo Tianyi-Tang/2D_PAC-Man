@@ -43,6 +43,8 @@ public class GameManager {
 
     private JFrame window;
     private GamePanel gamePanel;
+    private MainPanel mainPanel;
+
     private keyboardListener listener;
     private Room room;
 
@@ -56,6 +58,12 @@ public class GameManager {
 
     private RecordUsedPlace record;
     private boolean existPlayer = false;
+
+    public GameManager(){
+        window = new JFrame();
+        gamePanel = new GamePanel(this);
+        mainPanel = new MainPanel();
+    }
 
     // getter
     public int getTypeOfRoom() {
@@ -81,13 +89,11 @@ public class GameManager {
         mainWindow.setLocationRelativeTo(null);
         mainWindow.setVisible(true);
 
-        MainPanel mainPanel = new MainPanel();
         mainWindow.add(mainPanel);
         mainWindow.pack();
     }
 
     public void createWindows(){
-        window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
 
@@ -99,7 +105,6 @@ public class GameManager {
         window.addKeyListener(listener);
 
 
-        gamePanel = new GamePanel(this);
         window.add(gamePanel);
         window.pack();
 
