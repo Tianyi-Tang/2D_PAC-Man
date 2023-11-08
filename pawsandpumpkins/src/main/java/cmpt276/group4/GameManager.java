@@ -15,6 +15,8 @@ import cmpt276.group4.Enemy.EnemyInitialization;
 import cmpt276.group4.Enemy.EnemyType;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Player.PlayerGenerator;
+import cmpt276.group4.Reward.RewardFactory;
+import cmpt276.group4.Reward.RewardInitialization;
 import cmpt276.group4.Room.Room;
 import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.Room.Tile;
@@ -36,7 +38,12 @@ public class GameManager {
     private Room room;
 
     private EnemyFactory enemyFactory;
+
+
     private EnemyInitialization enemyInitialization;
+    private RewardFactory rewardFactory;
+
+    private RewardInitialization rewardInitialization;
 
     private RecordUsedPlace record;
     private boolean existPlayer = false;
@@ -87,12 +94,17 @@ public class GameManager {
         enemyInitialization = new EnemyInitialization(level, enemyFactory); // Initializing 1 enemies
         //enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
 
+        System.out.println("Pass");
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
-        
+
+        rewardFactory = new RewardFactory();
+        rewardInitialization = new RewardInitialization(level,rewardFactory);
+
+
     }
 
     public void RecordUsedPlaceAviable(){

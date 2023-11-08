@@ -49,16 +49,16 @@ public class Player implements KeyMovingObserver {
 
     private void getPlayerImage(){
         try {
-            String directory = System.getProperty("user.dir");
-            up1 = ImageIO.read(new File(directory +"/res/Player/up1.png"));
-            up2 = ImageIO.read(new File(directory +"/res/Player/up2.png"));
-            down1 = ImageIO.read(new File(directory +"/res/Player/down1.png"));
-            down2 = ImageIO.read(new File(directory +"/res/Player/down2.png"));
-            left1 = ImageIO.read(new File(directory +"/res/Player/left1.png"));
-            left2 = ImageIO.read(new File(directory +"/res/Player/left2.png"));
-            right1 = ImageIO.read(new File(directory +"/res/Player/right1.png"));
-            right2 = ImageIO.read(new File(directory +"/res/Player/right2.png"));
-            
+            //String directory = System.getProperty("user.dir");
+            up1 = ImageIO.read(new File("res/Player/up1.png"));
+            up2 = ImageIO.read(new File("res/Player/up2.png"));
+            down1 = ImageIO.read(new File("res/Player/down1.png"));
+            down2 = ImageIO.read(new File("res/Player/down2.png"));
+            left1 = ImageIO.read(new File("res/Player/left1.png"));
+            left2 = ImageIO.read(new File("res/Player/left2.png"));
+            right1 = ImageIO.read(new File("res/Player/right1.png"));
+            right2 = ImageIO.read(new File("res/Player/right2.png"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -73,6 +73,8 @@ public class RecordUsedPlace {
         elements = new ArrayList<CharacterAvaliablePosition>();
 
         enemies = new ArrayList<Enemy>();
+        rewards = new ArrayList<Reward>();
+
     }
 
     public void setPlayer(Player player){
@@ -126,7 +128,7 @@ public class RecordUsedPlace {
             while (it.hasNext()) {
                 Position p = it.next();
                 if (p.equal(enemy.getEnemyPosition())) {
-                    System.out.println("removing from enepos ");
+                    System.out.println("removing from enepos");
                     it.remove();
                     break; // Stop the loop once the position is found and removed
                 }
@@ -146,13 +148,17 @@ public class RecordUsedPlace {
 
     public boolean addReward(Reward reward){
         if(isPlaceAviable(reward.getPosition())){
+            System.out.println("Adding reward at position: " + reward.getPosition());
             rewards.add(reward);
             elementTakenPlace(false, reward.getPosition());
             return true;
         }
-        else
+        else{
+            System.out.println("Failed to add reward at position: " + reward.getPosition());
             return false;
+        }
     }
+
 
     public void removeReward(Reward reward){
         available.add(reward.getPosition());
@@ -241,6 +247,12 @@ public class RecordUsedPlace {
     public List<Enemy> getEnemyList(){
         return enemies;
     }
+    public List<Reward> getRewardList(){
+        System.out.println("-----------------");
+        System.out.println("getRewardList called. Rewards count: " + rewards.size());
+        return rewards;
+    }
+
 
     public boolean isNotSpiderPosition(Position pos){
         for (Enemy enemy : enemies) {

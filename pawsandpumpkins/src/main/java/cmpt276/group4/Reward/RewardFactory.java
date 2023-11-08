@@ -35,6 +35,7 @@ public class RewardFactory {
             default:
                 throw new IllegalArgumentException("Invalid Reward type");
         }
+
     }
 }
 

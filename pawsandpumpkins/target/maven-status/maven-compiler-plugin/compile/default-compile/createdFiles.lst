@@ -5,6 +5,7 @@ cmpt276/group4/Room/RoomInitialization.class
 cmpt276/group4/Reward/RewardType.class
 cmpt276/group4/RecordUsedPlace.class
 cmpt276/group4/Room/Tile.class
+cmpt276/group4/Reward/RewardInitialization$1.class
 cmpt276/group4/Enemy/EnemyInitialization.class
 cmpt276/group4/Enemy/Ghost.class
 cmpt276/group4/Room/RoomFactory.class
@@ -15,6 +16,7 @@ cmpt276/group4/GameManager.class
 cmpt276/group4/Reward/RewardFactory.class
 cmpt276/group4/Player/Player.class
 cmpt276/group4/Player/PlayerGenerator.class
+cmpt276/group4/Enemy/Spider$1.class
 cmpt276/group4/Enemy/EnemyType.class
 cmpt276/group4/Reward/MangeBonusReward.class
 cmpt276/group4/Room/Obstacle.class

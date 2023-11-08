@@ -14,6 +14,7 @@ import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
 import cmpt276.group4.Player.Player;
+import cmpt276.group4.Reward.Reward;
 
 
 public class GamePanel extends JPanel implements Runnable {
@@ -105,10 +106,10 @@ public class GamePanel extends JPanel implements Runnable {
         for (CharacterAvaliablePosition element : record.getElemet()) {
             element.draw(g2);            
         }
-
-
-        
-
+        for (Reward reward : record.getRewardList()) {
+            //System.out.println("Enemy List size: "+ record.getEnemyList().size());
+            reward.draw(g2);
+        }
         if(player != null)
             player.draw(g2);
 
@@ -117,6 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
 
                 enemy.draw(g2);
         }
+
 
         g2.dispose();
     }
