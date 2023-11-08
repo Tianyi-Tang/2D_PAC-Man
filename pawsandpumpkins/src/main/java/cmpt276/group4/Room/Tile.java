@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 public class Tile implements CharacterAvaliablePosition {
     private boolean playerAvaliable = true;
-    private boolean enemyAvialiable = true;
+    private boolean obstacle = false;
     private boolean takenPlace = false;
     private Position location;
     BufferedImage tileImage;
@@ -22,7 +22,7 @@ public class Tile implements CharacterAvaliablePosition {
         initalTileImage();
     }
 
-    private void initalTileImage(){
+    public void initalTileImage(){
         try {
             tileImage = ImageIO.read(new File(System.getProperty("user.dir") + "/res/Tiles/tile1.png"));
         } catch (Exception e) {
@@ -30,6 +30,16 @@ public class Tile implements CharacterAvaliablePosition {
         }
         
     }
+
+    // setters for wall and tombstone classes
+    public void setPlayerAccess(boolean playerAvaliable) {
+        this.playerAvaliable = playerAvaliable;
+    }
+
+    public void setEnemyAccess(boolean enemyAvaliable){
+        //this.enemyAvaliable = enemyAvaliable;
+    }
+
 
     @Override
     public Position getPosition() {
@@ -42,11 +52,6 @@ public class Tile implements CharacterAvaliablePosition {
     }
 
     @Override
-    public boolean getEnemyAvaliable() {
-        return enemyAvialiable;
-    }
-
-    @Override
     public boolean getTakenPlace() {
         return takenPlace;
     }
@@ -55,6 +60,8 @@ public class Tile implements CharacterAvaliablePosition {
     public void draw(Graphics2D g2){
         if(tileImage != null)
             g2.drawImage(tileImage, location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
+        
+        
     }
     
 }

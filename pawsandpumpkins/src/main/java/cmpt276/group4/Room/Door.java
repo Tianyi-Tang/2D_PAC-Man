@@ -33,10 +33,6 @@ public class Door implements CharacterAvaliablePosition{
     }
 
     @Override
-    public boolean getEnemyAvaliable() {
-        throw new UnsupportedOperationException("is enemy avaliable");
-    }
-    @Override
     public Position getPosition() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
