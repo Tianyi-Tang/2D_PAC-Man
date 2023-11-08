@@ -1,6 +1,7 @@
 package cmpt276.group4;
 
 
+import java.awt.CardLayout;
 import java.util.ArrayList;
 
 import java.util.Timer;
@@ -8,6 +9,7 @@ import java.util.List;
 
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.EnemyFactory;
@@ -42,6 +44,9 @@ public class GameManager {
     private static GameManager instance;
 
     private JFrame window;
+
+    private CardLayout layout;
+    private JPanel cardContainer;
     private GamePanel gamePanel;
     private MainPanel mainPanel;
 
@@ -61,8 +66,13 @@ public class GameManager {
 
     public GameManager(){
         window = new JFrame();
+        cardContainer = new JPanel();
+
         gamePanel = new GamePanel(this);
         mainPanel = new MainPanel();
+
+        cardContainer.add(gamePanel,"game");
+        cardContainer.add(mainPanel,"main");
     }
 
     // getter
