@@ -64,13 +64,7 @@ public class Candy extends GeneralReward {
     public void addScore(Player player, int score) {
         deleteImage();
     }
-    public void update() {
-        stateCounter++;
-        if (stateCounter >= 15) {
-            org_State = !org_State;
-            stateCounter = 0;
-        }
-    }
+
     private void getCandyImage(){
         try{
             String directory = System.getProperty("user.dir");
@@ -83,6 +77,11 @@ public class Candy extends GeneralReward {
     }
     @Override
     public void draw(Graphics2D g1){
+        stateCounter++;
+        if (stateCounter >= 15) {
+            org_State = !org_State;
+            stateCounter = 0;
+        }
        if (org_State)
             currentImage = cd1;
         else

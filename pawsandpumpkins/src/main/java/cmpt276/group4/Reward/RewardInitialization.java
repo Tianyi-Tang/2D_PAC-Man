@@ -16,11 +16,11 @@ public class RewardInitialization {
                 pumpkinHead = 3;
                 break;
             case MEDIUM:
-                candy = 10;
+                candy = 8;
                 pumpkinHead = 2;
                 break;
             case HARD:
-                candy = 10;
+                candy = 5;
                 pumpkinHead = 1;
                 break;
         }

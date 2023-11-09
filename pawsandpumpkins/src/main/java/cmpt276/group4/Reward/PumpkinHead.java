@@ -2,6 +2,7 @@ package cmpt276.group4.Reward;
 
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
+import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.Reward.BonusReward;
 
@@ -19,10 +20,12 @@ public class PumpkinHead extends BonusReward {
     private int stateCounter=0;
     private boolean org_State = true;
     private boolean available;
-
+    private RecordUsedPlace record;
     public PumpkinHead() {
+        record = RecordUsedPlace.getInstance();
         getPumpkinImage();
-        // Initialize ppkPosition here if necessary, or through a setPosition method
+        ppkPosition=record.getRandomSafePosition();
+        record.addReward(this);
     }
 
     @Override
@@ -63,13 +66,7 @@ public class PumpkinHead extends BonusReward {
     @Override
     public void addScore(Player player, int score) {
     }
-    /*public void update() {
-        stateCounter++;
-        if (stateCounter >= 15) {
-            org_State = !org_State;
-            stateCounter = 0;
-        }
-    }*/
+
     private void getPumpkinImage() {
         try {
             String directory = System.getProperty("user.dir");
@@ -81,12 +78,17 @@ public class PumpkinHead extends BonusReward {
     }
 @Override
     public void draw(Graphics2D g1) {
-        /*if (org_State)
+        stateCounter++;
+    if (stateCounter >= 15) {
+        org_State = !org_State;
+        stateCounter = 0;
+    }
+         if (org_State)
             currentImage = ppk1;
         else
             currentImage = ppk2;
-*/
-        g1.drawImage(ppk1, ppkPosition.getX_axis(), ppkPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize, null);
+
+        g1.drawImage(currentImage, ppkPosition.getX_axis(), ppkPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize, null);
 
     }
 }
