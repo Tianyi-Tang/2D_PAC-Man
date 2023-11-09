@@ -6,6 +6,8 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import cmpt276.group4.Logic.GameConfig;
+
 public class LoadingPanel extends JPanel implements Runnable {
 
     private final int screenWidth = 48 * 16;
@@ -16,7 +18,8 @@ public class LoadingPanel extends JPanel implements Runnable {
     final int FPS = 60;
     private double timeInterval = 1000000000/FPS;
 
-    private boolean generateRoom, generateAllTile, generateAllEnemies, generateAllRewards, generatePlayer =false;
+    private boolean generateRoom, generateAllTile, generateAllObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
+    private GameConfig config;
 
     public LoadingPanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -53,7 +56,27 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void update(){
-        System.out.println("run!");
+        if(!generateRoom){
+
+        }
+        else if(!generateAllTile){
+
+        }
+        else if(!generateAllObstacle){
+
+        }
+        else if(!generateAllEnemies){
+
+        }
+        else if(!generateAllRewards){
+
+        }
+        else{
+
+        }
+    }
+
+    private void checkTitle(){
     }
 
     @Override

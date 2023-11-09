@@ -3,9 +3,7 @@ package cmpt276.group4.Logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.gameLevel;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 public class GameConfig {
@@ -63,36 +61,33 @@ public class GameConfig {
         return numberOfRewards;
     }
 
-    public void GameConfig(gameLevel level) {
-        this.windowWidth = GamePanel.tileSize * 16;
-        this.windowHeight = GamePanel.tileSize * 16;
-        this.wallPositions = new ArrayList<>(); 
+    public String getImageNameForPosition(Position p,List<Position> wallPositions) {
+        boolean north = false, south = false, east = false, west = false;
 
-        switch (level) {
-            case BASIC:
-                this.numberOfObstacles = 5;
-                this.numberOfSpiders = 3;
-                this.numberOfBasicGhosts = 1;
-                this.numberOfAdvancedGhosts = 0;
-                this.numberOfRewards = 8;
-                break;
-            case MEDIUM:
-                this.numberOfObstacles = 7;
-                this.numberOfSpiders = 5;
-                this.numberOfBasicGhosts = 2;
-                this.numberOfAdvancedGhosts = 1;
-                this.numberOfRewards = 10;
-                break;
-            case HARD:
-                this.numberOfObstacles = 10; // Example value
-                this.numberOfSpiders = 7;
-                this.numberOfBasicGhosts = 3;
-                this.numberOfAdvancedGhosts = 2;
-                this.numberOfRewards = 12;
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown game level: " + level);
+        for (Position wallPosition : wallPositions) {
+            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() - GamePanel.tileSize))) {
+                north = true;
+            }
+            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() + GamePanel.tileSize))) {
+                south = true;
+            }
+            if (wallPosition.equals(new Position(p.getX_axis() + GamePanel.tileSize, p.getY_axis()))) {
+                east = true;
+            }
+            if (wallPosition.equals(new Position(p.getX_axis() - GamePanel.tileSize, p.getY_axis()))) {
+                west = true;
+            }
         }
+
+        String imageName = "";
+        if (north) imageName += "north_";
+        if (east) imageName += "east_";
+        if (south) imageName += "south_";
+        if (west) imageName += "west_";
+
+        imageName += ".png";
+
+        return imageName;
     }
 
 }
