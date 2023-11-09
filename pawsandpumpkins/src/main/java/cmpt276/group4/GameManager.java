@@ -180,6 +180,7 @@ public class GameManager {
     public void transformToLoadingScreen(){
         if(status == GameStatus.MainPanel){
             layout.show(cardContainer, "load");
+            loadPanel.createTimeLine();
             status = GameStatus.LoadingPanel;
         }
     }

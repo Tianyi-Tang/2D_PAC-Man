@@ -16,6 +16,8 @@ public class LoadingPanel extends JPanel implements Runnable {
     final int FPS = 60;
     private double timeInterval = 1000000000/FPS;
 
+    private boolean generateRoom, generateAllTile, generateAllEnemies, generateAllRewards, generatePlayer =false;
+
     public LoadingPanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
@@ -49,7 +51,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void update(){
-
+        System.out.println("run!");
     }
 
     @Override
@@ -57,6 +59,8 @@ public class LoadingPanel extends JPanel implements Runnable {
         // TODO Auto-generated method stub
         super.paintComponent(g);
     }
+
+    
 
 
     

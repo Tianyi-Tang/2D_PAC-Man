@@ -37,7 +37,6 @@ public class GamePanel extends JPanel implements Runnable {
     // Change the enemy's position every 30 frames (every half second at 60 FPS)
     private final int ENEMY_MOVE_INTERVAL = 30; 
     private Player player;
-    
 
     private Thread gameThread;
 
