@@ -140,8 +140,6 @@ public class GameManager {
         Wall wall2 = new Wall(wallPosition2, 1);
         RecordUsedPlace.getInstance().addWall(wall2);
         
-
-        System.out.println("Pass");
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {
@@ -184,6 +182,10 @@ public class GameManager {
             loadPanel.createTimeLine();
             status = GameStatus.LoadingPanel;
         }
+    }
+
+    public boolean roomAlreadyGenerate(){
+        return room != null;
     }
 
     public boolean isGameEnd(){

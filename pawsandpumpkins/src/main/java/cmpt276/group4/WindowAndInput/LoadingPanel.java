@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import cmpt276.group4.GameManager;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Logic.GameConfig;
 
@@ -44,6 +45,8 @@ public class LoadingPanel extends JPanel implements Runnable {
         double last_time = System.nanoTime();
         double currentTime;
 
+        //call the gameManager to generate room
+
         while (loadingThread != null) {
             currentTime = System.nanoTime();
             iteration += (currentTime - last_time) / timeInterval;
@@ -57,11 +60,12 @@ public class LoadingPanel extends JPanel implements Runnable {
                 iteration -= 1;
             }
         }
+        initialLoading();
     }
 
     private void update(){
         if(!generateRoom){
-
+            checkRoom();
         }
         else if(!generateAllTile){
             checkTitle();
@@ -76,7 +80,14 @@ public class LoadingPanel extends JPanel implements Runnable {
 
         }
         else{
+            
+        }
+    }
 
+    private void checkRoom(){
+        if(GameManager.getInstance().roomAlreadyGenerate()){
+            generateRoom = true;
+            // call to generate title
         }
     }
 
@@ -99,6 +110,11 @@ public class LoadingPanel extends JPanel implements Runnable {
             return false;
         else 
             return true;
+    }
+
+    private void initialLoading(){
+        generateRoom = generateAllTile = generateAllObstacle =generateAllEnemies = generateAllRewards = generatePlayer =false;
+        loadingThread = null;
     }
 
 
