@@ -72,13 +72,14 @@ public class GameManager {
         cardContainer.add(gamePanel,"game");
         cardContainer.add(mainPanel,"main");
 
-        window.setLocationRelativeTo(null);
+
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("paws and pumpkins");
 
         window.getContentPane().add(cardContainer);
         window.pack();
+        window.setLocationRelativeTo(null);
     }
 
     // getter

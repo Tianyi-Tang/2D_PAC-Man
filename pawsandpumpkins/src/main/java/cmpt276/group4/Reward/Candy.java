@@ -14,9 +14,11 @@ public class Candy extends GeneralReward {
     private Position cdposition,playerPosition;
     private boolean org_State = true;
     private int stateCounter = 0;
-    private final int score =1;
+    private int score =1;
     private BufferedImage cd1 , cd2, currentImage;
     private RecordUsedPlace record;
+
+    private boolean isBonusReward = false;
 
 
     GamePanel gp;
@@ -56,13 +58,16 @@ public class Candy extends GeneralReward {
     }
 
     @Override
-    public void addBenefit() {
+    public void addBenefit(Player player, int score) {
+
 
     }
 
-    @Override
-    public void addScore(Player player, int score) {
-        deleteImage();
+
+    private void addScore(Player player, int score) {
+        this.score=score;
+        player.addScoreToPlayer(score,isBonusReward);
+
     }
 
     private void getCandyImage(){
