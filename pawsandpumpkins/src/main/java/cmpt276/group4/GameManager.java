@@ -133,9 +133,7 @@ public class GameManager {
         Position wallPosition2 = new Position(10, 10);
         Wall wall2 = new Wall(wallPosition2, 1);
         RecordUsedPlace.getInstance().addWall(wall2);
-        
 
-        System.out.println("Pass");
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {

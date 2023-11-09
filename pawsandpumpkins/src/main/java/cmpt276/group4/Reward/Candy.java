@@ -64,13 +64,13 @@ public class Candy extends GeneralReward {
     public void addScore(Player player, int score) {
         deleteImage();
     }
-    /*public void update() {
+    public void update() {
         stateCounter++;
         if (stateCounter >= 15) {
             org_State = !org_State;
             stateCounter = 0;
         }
-    }*/
+    }
     private void getCandyImage(){
         try{
             String directory = System.getProperty("user.dir");
@@ -83,12 +83,12 @@ public class Candy extends GeneralReward {
     }
     @Override
     public void draw(Graphics2D g1){
-       /* if (org_State)
+       if (org_State)
             currentImage = cd1;
         else
             currentImage = cd2;
-*/
-        g1.drawImage(cd1,cdposition.getX_axis(),cdposition.getY_axis(), GamePanel.tileSize,GamePanel.tileSize,null);
+
+        g1.drawImage(currentImage,cdposition.getX_axis(),cdposition.getY_axis(), GamePanel.tileSize,GamePanel.tileSize,null);
     }
     private void getPlayerPosition() {
 
