@@ -95,7 +95,7 @@ public class gameConfig {
         }
     }
 
-    public String getImageNameForPosition(Position p) {
+    public String getImageNameForPosition(Position p,List<Position> wallPositions) {
         boolean north = false, south = false, east = false, west = false;
 
         for (Position wallPosition : wallPositions) {
