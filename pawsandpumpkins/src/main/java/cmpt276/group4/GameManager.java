@@ -26,6 +26,7 @@ import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.Room.Tile;
 import cmpt276.group4.Room.Wall;
 import cmpt276.group4.WindowAndInput.GamePanel;
+import cmpt276.group4.WindowAndInput.LoadingPanel;
 import cmpt276.group4.WindowAndInput.MainPanel;
 import cmpt276.group4.WindowAndInput.keyboardListener;
 
@@ -46,6 +47,8 @@ public class GameManager {
     private JPanel cardContainer;
     private GamePanel gamePanel;
     private MainPanel mainPanel;
+    private LoadingPanel loadPanel;
+
 
     private keyboardListener listener;
     private Room room;
@@ -68,9 +71,11 @@ public class GameManager {
         
         gamePanel = new GamePanel();
         mainPanel = new MainPanel();
+        loadPanel = new LoadingPanel();
 
         cardContainer.add(gamePanel,"game");
         cardContainer.add(mainPanel,"main");
+        cardContainer.add(loadPanel,"load");
 
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -146,7 +151,6 @@ public class GameManager {
         rewardInitialization = new RewardInitialization(level,rewardFactory);
 
 
-
     }
 
     public void RecordUsedPlaceAviable(){
@@ -175,7 +179,8 @@ public class GameManager {
 
     public void transformToLoadingScreen(){
         if(status == GameStatus.MainPanel){
-            System.out.println("success");
+            layout.show(cardContainer, "load");
+            status = GameStatus.LoadingPanel;
         }
     }
 

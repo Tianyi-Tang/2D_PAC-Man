@@ -15,6 +15,7 @@ cmpt276/group4/Enemy/EnemyInitialization$1.class
 cmpt276/group4/Enemy/Enemy.class
 cmpt276/group4/Enemy/Spider$SpiderType.class
 cmpt276/group4/Player/KeyMovingObserver.class
+cmpt276/group4/WindowAndInput/LoadingPanel.class
 cmpt276/group4/Room/Door.class
 cmpt276/group4/Enemy/Spider.class
 cmpt276/group4/Reward/PumpkinHead.class
