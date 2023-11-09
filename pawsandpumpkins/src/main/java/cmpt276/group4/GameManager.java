@@ -36,6 +36,7 @@ public class GameManager {
     // typeOfRoom
     //level: BASIC, MEDIUM, HARD
     private GameStatus status;
+    private boolean gameEnd = false;
 
     private gameLevel level = gameLevel.HARD;
     private int typeOfRoom;
@@ -183,6 +184,13 @@ public class GameManager {
             loadPanel.createTimeLine();
             status = GameStatus.LoadingPanel;
         }
+    }
+
+    public boolean isGameEnd(){
+        if(status == GameStatus.GamePanel && gameEnd == true)
+            return true;
+        else
+            return false;
     }
 
     // Call this method in game update loop to check for mouse input
