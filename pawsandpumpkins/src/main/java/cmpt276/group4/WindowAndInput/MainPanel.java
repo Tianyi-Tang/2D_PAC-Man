@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import cmpt276.group4.GameManager;
+
 public class MainPanel extends JPanel implements Runnable {
     
     private final int screenWidth = 48 * 16;
@@ -25,6 +27,7 @@ public class MainPanel extends JPanel implements Runnable {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Has been click");
+                GameManager.getInstance().transformToLoadingScreen();
                 super.mouseClicked(e);
             }
         });

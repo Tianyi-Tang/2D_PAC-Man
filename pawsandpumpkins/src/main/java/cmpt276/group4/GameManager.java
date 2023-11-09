@@ -62,21 +62,20 @@ public class GameManager {
     private boolean existPlayer = false;
 
     public GameManager(){
-        status = GameStatus.MainPanel;
         window = new JFrame();
         layout = new CardLayout();
         cardContainer = new JPanel(layout);
         
-        gamePanel = new GamePanel(this);
+        gamePanel = new GamePanel();
         mainPanel = new MainPanel();
 
         cardContainer.add(gamePanel,"game");
         cardContainer.add(mainPanel,"main");
 
+        window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("paws and pumpkins");
-        window.setLocationRelativeTo(null);
 
         window.getContentPane().add(cardContainer);
         window.pack();
@@ -99,15 +98,10 @@ public class GameManager {
     }
 
     public void createMainWindow(){
-        JFrame mainWindow = new JFrame();
-        mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainWindow.setResizable(false);
+        status = GameStatus.MainPanel;
+        layout.show(cardContainer, "main");
 
-        mainWindow.setLocationRelativeTo(null);
-        mainWindow.setVisible(true);
-
-        mainWindow.add(mainPanel);
-        mainWindow.pack();
+        window.setVisible(true);
     }
 
     public void createWindows(){
@@ -115,8 +109,6 @@ public class GameManager {
         layout.show(cardContainer, "game");
 
         window.setVisible(true);
-
-        
 
         listener = new keyboardListener();
         window.addKeyListener(listener);
@@ -181,15 +173,21 @@ public class GameManager {
         }
     }
 
-    // Call this method in game update loop to check for mouse input
-    public void handleMouseInput() {
-        if (listener.isMouseClicked()) {
-            // Handle mouse click using inputListener.getMousePosition()
-            System.out.println(String.format("MOUSE CLICKED AT POSITION x:%d y: %d", listener.getMousePosition().getX_axis(), listener.getMousePosition().getY_axis()));
-            listener.clearMouseClick(); // Clear the click once it's handled
+    public void transformToLoadingScreen(){
+        if(status == GameStatus.MainPanel){
+            System.out.println("success");
         }
-        //  Handle mouse position and pressed state
     }
+
+    // Call this method in game update loop to check for mouse input
+    // public void handleMouseInput() {
+    //     if (listener.isMouseClicked()) {
+    //         // Handle mouse click using inputListener.getMousePosition()
+    //         System.out.println(String.format("MOUSE CLICKED AT POSITION x:%d y: %d", listener.getMousePosition().getX_axis(), listener.getMousePosition().getY_axis()));
+    //         listener.clearMouseClick(); // Clear the click once it's handled
+    //     }
+    //     //  Handle mouse position and pressed state
+    // }
 
     //instance
 

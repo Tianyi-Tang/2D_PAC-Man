@@ -9,7 +9,6 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
-import cmpt276.group4.GameManager;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
@@ -41,11 +40,9 @@ public class GamePanel extends JPanel implements Runnable {
     
 
     private Thread gameThread;
-    private GameManager gameManager;
 
 
-    public GamePanel(GameManager gameManager) {
-        this.gameManager = gameManager;
+    public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -84,7 +81,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(){
-        gameManager.handleMouseInput(); 
         Player.getInstance().update();
 
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
