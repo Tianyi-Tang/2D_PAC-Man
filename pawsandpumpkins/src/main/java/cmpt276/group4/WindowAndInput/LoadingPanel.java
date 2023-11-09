@@ -43,6 +43,8 @@ public class LoadingPanel extends JPanel implements Runnable {
             last_time = currentTime;
 
             if(iteration >=1){
+                if(allResourceLoading())
+                    break;
                 update();
                 repaint();
                 iteration -= 1;
@@ -60,7 +62,12 @@ public class LoadingPanel extends JPanel implements Runnable {
         super.paintComponent(g);
     }
 
-    
+    private boolean allResourceLoading(){
+        if(generatePlayer)
+            return false;
+        else 
+            return true;
+    }
 
 
     

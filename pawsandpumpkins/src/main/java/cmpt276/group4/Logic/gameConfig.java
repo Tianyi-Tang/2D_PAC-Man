@@ -8,10 +8,10 @@ import cmpt276.group4.Position;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
-public class gameConfig {
+public class GameConfig {
     private int windowWidth;
     private int windowHeight;
-    public gameConfig(int windowWidth, int windowHeight, List<Position> wallPositions, int numberOfObstacles,
+    public GameConfig(int windowWidth, int windowHeight, List<Position> wallPositions, int numberOfObstacles,
             int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts, int numberOfRewards) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;

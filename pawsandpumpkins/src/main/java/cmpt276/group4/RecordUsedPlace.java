@@ -37,6 +37,17 @@ public class RecordUsedPlace {
         return available.get(random.nextInt(available.size()));
     }
 
+    public void emptyAllArray(){
+        if(GameManager.getInstance().isGameEnd()){
+            characterAvaliable_pos = new ArrayList<Position>();
+            obstacle_pos = new ArrayList<Position>();
+            elements = new ArrayList<CharacterAvaliablePosition>();
+
+            enemies = new ArrayList<Enemy>();
+            rewards = new ArrayList<Reward>();
+        }
+    }
+
 
     public Position getRandomSafePosition() {
         ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
