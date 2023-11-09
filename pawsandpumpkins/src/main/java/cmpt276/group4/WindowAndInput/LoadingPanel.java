@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Logic.GameConfig;
 
 public class LoadingPanel extends JPanel implements Runnable {
@@ -18,7 +19,9 @@ public class LoadingPanel extends JPanel implements Runnable {
     final int FPS = 60;
     private double timeInterval = 1000000000/FPS;
 
+    private RecordUsedPlace record;
     private boolean generateRoom, generateAllTile, generateAllObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
+
     private GameConfig config;
 
     public LoadingPanel(){
@@ -31,6 +34,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         if(loadingThread == null){
             loadingThread = new Thread(this);
             loadingThread.start();
+            record = RecordUsedPlace.getInstance();
         }
     }
 
@@ -60,7 +64,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
         }
         else if(!generateAllTile){
-
+            checkTitle();
         }
         else if(!generateAllObstacle){
 
@@ -77,6 +81,11 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void checkTitle(){
+        if(record.getTileNumber() == config.numberofTiles()){
+            generateAllTile = true;
+            // call to generate Obstacle
+        }
+            
     }
 
     @Override

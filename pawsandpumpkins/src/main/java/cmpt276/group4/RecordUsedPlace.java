@@ -26,6 +26,7 @@ public class RecordUsedPlace {
     private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;
     static int counter = 0;
+    private int numberofTiles = 0;
 
     public Position getRandomFromAvailablePosition(){
     //return a random position from variable available
@@ -37,7 +38,7 @@ public class RecordUsedPlace {
         return available.get(random.nextInt(available.size()));
     }
 
-    public void emptyAllArray(){
+    public void initalAllInfor(){
         if(GameManager.getInstance().isGameEnd()){
             characterAvaliable_pos = new ArrayList<Position>();
             obstacle_pos = new ArrayList<Position>();
@@ -45,9 +46,10 @@ public class RecordUsedPlace {
 
             enemies = new ArrayList<Enemy>();
             rewards = new ArrayList<Reward>();
+
+            numberofTiles = 0;
         }
     }
-
 
     public Position getRandomSafePosition() {
         ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
@@ -118,8 +120,10 @@ public class RecordUsedPlace {
 
     public boolean addElementToMap(CharacterAvaliablePosition object){
         if(isPlaceAviable(object.getPosition())){             
-            if(object.getPlayerAvaliable())
+            if(object.getPlayerAvaliable()){
                 characterAvaliable_pos.add(object.getPosition());
+                numberofTiles ++;
+            }
             else
                 obstacle_pos.add(object.getPosition());
 
@@ -194,6 +198,10 @@ public class RecordUsedPlace {
             return true;
         else
             return false;
+    }
+
+    public int getTileNumber(){
+        return numberofTiles;
     }
 
     public ArrayList<Position> getAviablePosition(){
