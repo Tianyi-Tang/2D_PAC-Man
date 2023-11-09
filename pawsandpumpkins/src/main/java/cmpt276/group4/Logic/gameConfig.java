@@ -1,14 +1,31 @@
 package cmpt276.group4.Logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
+import cmpt276.group4.gameLevel;
+import cmpt276.group4.WindowAndInput.GamePanel;
 
 public class gameConfig {
     private int windowWidth;
     private int windowHeight;
+    public gameConfig(int windowWidth, int windowHeight, List<Position> wallPositions, int numberOfObstacles,
+            int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts, int numberOfRewards) {
+        this.windowWidth = windowWidth;
+        this.windowHeight = windowHeight;
+        this.wallPositions = wallPositions;
+        this.numberOfObstacles = numberOfObstacles;
+        this.numberOfSpiders = numberOfSpiders;
+        this.numberOfBasicGhosts = numberOfBasicGhosts;
+        this.numberOfAdvancedGhosts = numberOfAdvancedGhosts;
+        this.numberOfRewards = numberOfRewards;
+    }
+
     private List<Position> wallPositions;
-    private List<Position> obstaclePositions;
+
+    private int numberOfObstacles;
     private int numberOfSpiders;
     private int numberOfBasicGhosts;
     private int numberOfAdvancedGhosts;
@@ -26,8 +43,8 @@ public class gameConfig {
         return wallPositions;
     }
 
-    public List<Position> getObstaclePositions() {
-        return obstaclePositions;
+    public int getNumberOfObstacles() {
+        return numberOfObstacles;
     }
 
     public int getNumberOfSpiders() {
@@ -46,17 +63,36 @@ public class gameConfig {
         return numberOfRewards;
     }
 
-    public void GameConfig(int windowWidth, int windowHeight, List<Position> wallPositions,
-                      List<Position> obstaclePositions, int numberOfSpiders,
-                      int numberOfBasicGhosts, int numberOfAdvancedGhosts, int numberOfRewards) {
-        this.windowWidth = windowWidth;
-        this.windowHeight = windowHeight;
-        this.wallPositions = wallPositions;
-        this.obstaclePositions = obstaclePositions;
-        this.numberOfSpiders = numberOfSpiders;
-        this.numberOfBasicGhosts = numberOfBasicGhosts;
-        this.numberOfAdvancedGhosts = numberOfAdvancedGhosts;
-        this.numberOfRewards = numberOfRewards;
+    public void GameConfig(gameLevel level) {
+        this.windowWidth = GamePanel.tileSize * 16;
+        this.windowHeight = GamePanel.tileSize * 16;
+        this.wallPositions = new ArrayList<>(); 
+
+        switch (level) {
+            case BASIC:
+                this.numberOfObstacles = 5;
+                this.numberOfSpiders = 3;
+                this.numberOfBasicGhosts = 1;
+                this.numberOfAdvancedGhosts = 0;
+                this.numberOfRewards = 8;
+                break;
+            case MEDIUM:
+                this.numberOfObstacles = 7;
+                this.numberOfSpiders = 5;
+                this.numberOfBasicGhosts = 2;
+                this.numberOfAdvancedGhosts = 1;
+                this.numberOfRewards = 10;
+                break;
+            case HARD:
+                this.numberOfObstacles = 10; // Example value
+                this.numberOfSpiders = 7;
+                this.numberOfBasicGhosts = 3;
+                this.numberOfAdvancedGhosts = 2;
+                this.numberOfRewards = 12;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown game level: " + level);
+        }
     }
 
 }
