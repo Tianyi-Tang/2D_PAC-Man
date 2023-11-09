@@ -17,7 +17,6 @@ public class Candy extends GeneralReward {
     private int score =1;
     private BufferedImage cd1 , cd2, currentImage;
     private RecordUsedPlace record;
-
     private boolean isBonusReward = false;
 
 
@@ -33,7 +32,11 @@ public class Candy extends GeneralReward {
     public int getScore() {
         return score;
     }
+    private void getPlayerPosition() {
 
+        RecordUsedPlace record = RecordUsedPlace.getInstance();
+        playerPosition = record.getPlayerPosition();
+    }
     @Override
     public Position getPosition() {
         return cdposition;
@@ -58,8 +61,12 @@ public class Candy extends GeneralReward {
     }
 
     @Override
-    public void addBenefit(Player player, int score) {
-
+    public void addBenefit(Player player,int score) {
+        getPlayerPosition();
+        if (playerPosition.equal(cdposition)) {
+            addScore(player,score);
+            record.removeReward(this);
+        }
 
     }
 
@@ -93,11 +100,6 @@ public class Candy extends GeneralReward {
             currentImage = cd2;
 
         g1.drawImage(currentImage,cdposition.getX_axis(),cdposition.getY_axis(), GamePanel.tileSize,GamePanel.tileSize,null);
-    }
-    private void getPlayerPosition() {
-
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        playerPosition = record.getPlayerPosition();
     }
 
 
