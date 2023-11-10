@@ -142,7 +142,8 @@ public class GameManager {
         }
 
         rewardFactory = new RewardFactory();
-        rewardInitialization = new RewardInitialization(level,rewardFactory);
+        rewardInitialization = new RewardInitialization();
+        rewardInitialization.GenerateReward(level,rewardFactory);
 
 
 
