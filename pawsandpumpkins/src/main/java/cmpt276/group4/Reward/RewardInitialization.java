@@ -8,25 +8,21 @@ public class RewardInitialization {
 
 
 
-    public RewardInitialization(gameLevel gameLevel, RewardFactory rFactory){
+    public void GenerateReward(gameLevel gameLevel, RewardFactory rFactory){
         this.gameLevel = gameLevel;
         switch (gameLevel) {
             case BASIC:
                 candy = 10;
-                pumpkinHead = 3;
                 break;
             case MEDIUM:
-                candy = 10;
-                pumpkinHead = 2;
+                candy = 8;
                 break;
             case HARD:
-                candy = 10;
-                pumpkinHead = 1;
+                candy = 5;
                 break;
         }
         rFactory.createReward(RewardType.Candy,candy);
-        rFactory.createReward(RewardType.PumpkinHead,pumpkinHead);
-        System.out.println("Rewards Initialization with " + (candy + pumpkinHead
+        System.out.println("Rewards Initialization with " + (candy
         ) + " rewards.");
 
 

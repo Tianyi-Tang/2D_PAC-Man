@@ -274,8 +274,6 @@ public class RecordUsedPlace {
         return enemies;
     }
     public List<Reward> getRewardList(){
-        System.out.println("-----------------");
-        System.out.println("getRewardList called. Rewards count: " + rewards.size());
         return rewards;
     }
 

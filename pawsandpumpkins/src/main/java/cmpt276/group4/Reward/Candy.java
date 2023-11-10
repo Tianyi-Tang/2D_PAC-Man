@@ -14,9 +14,10 @@ public class Candy extends GeneralReward {
     private Position cdposition,playerPosition;
     private boolean org_State = true;
     private int stateCounter = 0;
-    private final int score =1;
+    private int score =1;
     private BufferedImage cd1 , cd2, currentImage;
     private RecordUsedPlace record;
+    private boolean isBonusReward = false;
 
 
     GamePanel gp;
@@ -31,7 +32,11 @@ public class Candy extends GeneralReward {
     public int getScore() {
         return score;
     }
+    private void getPlayerPosition() {
 
+        RecordUsedPlace record = RecordUsedPlace.getInstance();
+        playerPosition = record.getPlayerPosition();
+    }
     @Override
     public Position getPosition() {
         return cdposition;
@@ -56,21 +61,22 @@ public class Candy extends GeneralReward {
     }
 
     @Override
-    public void addBenefit() {
-
-    }
-
-    @Override
-    public void addScore(Player player, int score) {
-        deleteImage();
-    }
-    /*public void update() {
-        stateCounter++;
-        if (stateCounter >= 15) {
-            org_State = !org_State;
-            stateCounter = 0;
+    public void addBenefit(Player player,int score) {
+        getPlayerPosition();
+        if (playerPosition.equal(cdposition)) {
+            addScore(player,score);
+            record.removeReward(this);
         }
-    }*/
+
+    }
+
+
+    private void addScore(Player player, int score) {
+        this.score=score;
+        player.addScoreToPlayer(score,isBonusReward);
+
+    }
+
     private void getCandyImage(){
         try{
             String directory = System.getProperty("user.dir");
@@ -83,17 +89,17 @@ public class Candy extends GeneralReward {
     }
     @Override
     public void draw(Graphics2D g1){
-       /* if (org_State)
+        stateCounter++;
+        if (stateCounter >= 15) {
+            org_State = !org_State;
+            stateCounter = 0;
+        }
+       if (org_State)
             currentImage = cd1;
         else
             currentImage = cd2;
-*/
-        g1.drawImage(cd1,cdposition.getX_axis(),cdposition.getY_axis(), GamePanel.tileSize,GamePanel.tileSize,null);
-    }
-    private void getPlayerPosition() {
 
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        playerPosition = record.getPlayerPosition();
+        g1.drawImage(currentImage,cdposition.getX_axis(),cdposition.getY_axis(), GamePanel.tileSize,GamePanel.tileSize,null);
     }
 
 

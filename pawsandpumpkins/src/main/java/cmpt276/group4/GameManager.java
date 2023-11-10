@@ -78,13 +78,14 @@ public class GameManager {
         cardContainer.add(mainPanel,"main");
         cardContainer.add(loadPanel,"load");
 
-        window.setLocationRelativeTo(null);
+
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("paws and pumpkins");
 
         window.getContentPane().add(cardContainer);
         window.pack();
+        window.setLocationRelativeTo(null);
     }
 
     // getter
@@ -136,6 +137,7 @@ public class GameManager {
         Wall wall1 = new Wall(wallPosition1, 1);
         RecordUsedPlace.getInstance().addWall(wall1);
 
+
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {
@@ -143,7 +145,8 @@ public class GameManager {
         }
 
         rewardFactory = new RewardFactory();
-        rewardInitialization = new RewardInitialization(level,rewardFactory);
+        rewardInitialization = new RewardInitialization();
+        rewardInitialization.GenerateReward(level,rewardFactory);
 
        
     }

@@ -11,9 +11,8 @@ public interface Reward {
     void setPosition(Position position);
     boolean isAvailable();
     void deleteImage();
-    void addBenefit();
+    void addBenefit(Player player,int score);
 
-    void addScore(Player player,int score);
 
 
 }
