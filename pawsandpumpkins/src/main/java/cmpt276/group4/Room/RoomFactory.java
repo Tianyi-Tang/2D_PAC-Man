@@ -10,8 +10,8 @@ public class RoomFactory {
         return new Room(max_X, max_Y);
     }
 
-    public Obstacle createObstacle(Position position, int type) {
-        return new Obstacle(position, type);
+    public Obstacle createObstacle(Position position) {
+        return new Obstacle(position);
     }
 
     public Door createDoor(Boolean IsOpen) {

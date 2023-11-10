@@ -12,8 +12,9 @@ import javax.imageio.ImageIO;
 
 public class Tile implements CharacterAvaliablePosition {
     private boolean playerAvaliable = true;
-    private boolean obstacle = false;
+    //private boolean obstacle = false;
     private boolean takenPlace = false;
+    private boolean enemyAvaliable = false;
     private Position location;
     BufferedImage tileImage;
 

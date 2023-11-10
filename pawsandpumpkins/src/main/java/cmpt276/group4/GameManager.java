@@ -24,6 +24,7 @@ import cmpt276.group4.Reward.RewardInitialization;
 import cmpt276.group4.Room.Room;
 import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.Room.Tile;
+import cmpt276.group4.Room.Tombstone;
 import cmpt276.group4.Room.Wall;
 import cmpt276.group4.Room.Obstacle;
 import cmpt276.group4.WindowAndInput.GamePanel;
@@ -155,18 +156,27 @@ public class GameManager {
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
 
+        //walls being created
         Position wallPosition1 = record.getRandomFromAvailablePosition();
-        Obstacle wall1 = new Wall(wallPosition1, 1);
+        Obstacle wall1 = new Wall(wallPosition1);
         RecordUsedPlace.getInstance().addElementToMap(wall1);
         Position wallPosition2 = record.getRandomFromAvailablePosition();
-        Obstacle wall2 = new Wall(wallPosition2, 1);
+        Obstacle wall2 = new Wall(wallPosition2);
         RecordUsedPlace.getInstance().addElementToMap(wall2);
         Position wallPosition3 = record.getRandomFromAvailablePosition();
-        Obstacle wall3 = new Wall(wallPosition3, 1);
+        Obstacle wall3 = new Wall(wallPosition3);
         RecordUsedPlace.getInstance().addElementToMap(wall3);
-        //System.out.println("testest" + RecordUsedPlace.getInstance().addElementToMap(wall2));
-        //System.out.println("avaliableSize "+record.getAviablePosition());
 
+        //Tombstones being created
+        Position tombPosition1 = record.getRandomFromAvailablePosition();
+        Obstacle tomb1 = new Tombstone(tombPosition1);
+        RecordUsedPlace.getInstance().addElementToMap(tomb1);
+        Position tombPosition2 = record.getRandomFromAvailablePosition();
+        Obstacle tomb2 = new Tombstone(tombPosition2);
+        RecordUsedPlace.getInstance().addElementToMap(tomb2);
+        Position tombPosition3 = record.getRandomFromAvailablePosition();
+        Obstacle tomb3 = new Tombstone(tombPosition3);
+        RecordUsedPlace.getInstance().addElementToMap(tomb3);
 
         rewardFactory = new RewardFactory();
         rewardInitialization = new RewardInitialization();

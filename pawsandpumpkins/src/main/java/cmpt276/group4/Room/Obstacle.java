@@ -13,26 +13,22 @@ import javax.imageio.ImageIO;
 
 public class Obstacle implements CharacterAvaliablePosition{
     public Position position;
-    public int type;
     private boolean playerAvaliable = false;
     private boolean takenPlace = true;
     BufferedImage wallImage;
     // Constructor to initialize an obstacle with player access, enemy traversability, and positions
-    public Obstacle(Position position, int type) {
+    public Obstacle(Position position) {
         this.position = position;
-        this.type = type;
         initialWallImage();
     }
 
-    public int getObstacleType(){
-        return type;
+    public void setObstaclePosition(){
+        position = RecordUsedPlace.getInstance().getRandomFromAvailablePosition();
     }
+
     public void setPlayerAccess(){
         playerAvaliable = false;
     }
-    //public void setEnemyAccess(){
-    //    playerEnemy = false;
-    //}
 
 
     @Override
