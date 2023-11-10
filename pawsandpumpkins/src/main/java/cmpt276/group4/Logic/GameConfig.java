@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmpt276.group4.Position;
+import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 public class GameConfig {
@@ -20,6 +21,7 @@ public class GameConfig {
     // rewards
     protected int numberOfRegularRewards;
     protected int numberOfBonusRewards;
+    public static GameConfig instance;
 
     public void setWallPositions(List<Position> wallPositions) {
         if (this.wallPositions == null) {
@@ -32,6 +34,11 @@ public class GameConfig {
             }
         }
     }
+    public static synchronized GameConfig getGameConfigInstance(){
+        if(instance ==null)
+            instance = new GameConfig();
+        return instance;
+    }
     
 
     public GameConfig(int numberOfObstacles, int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts,
@@ -42,10 +49,12 @@ public class GameConfig {
         this.numberOfAdvancedGhosts = numberOfAdvancedGhosts;
         this.numberOfRegularRewards = numberOfRegularRewards;
         this.numberOfBonusRewards = numberOfBonusRewards;
-        wallPositions = new ArrayList<Position>();
 
     }
 
+    public GameConfig() {
+         wallPositions = new ArrayList<Position>();
+    }
     public int getRoomColumn() {
         return roomColumn;
     }
