@@ -26,9 +26,10 @@ public class MainPanel extends JPanel implements Runnable {
         startButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Has been click");
-                GameManager.getInstance().transformToLoadingScreen();
+                //GameManager.getInstance().transformToLoadingScreen();
+                startButton.setVisible(false);
                 super.mouseClicked(e);
+
             }
         });
         startButton.setBounds(7* GamePanel.tileSize,7* GamePanel.tileSize,GamePanel.tileSize *2,GamePanel.tileSize);
@@ -40,6 +41,7 @@ public class MainPanel extends JPanel implements Runnable {
 
         this.add(startButton);
     }
+
 
     public void createTimeLine(){
         if(mainThread == null){

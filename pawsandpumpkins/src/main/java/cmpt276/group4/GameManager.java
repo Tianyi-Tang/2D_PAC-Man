@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.EnemyFactory;
@@ -88,6 +89,8 @@ public class GameManager {
         window.getContentPane().add(cardContainer);
         window.pack();
         window.setLocationRelativeTo(null);
+
+        
     }
 
     // getter

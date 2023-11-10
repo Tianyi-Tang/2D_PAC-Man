@@ -20,31 +20,31 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     final int FPS = 60;
     private double timeInterval = 1000000000/FPS;
-
     private JProgressBar progressBar;
+
 
     private RecordUsedPlace record;
     private boolean generateRoom, generateAllTile, generateAllObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
 
     private GameConfig config;
 
-    private int progressBarWidth;
-    private int progressWidth;
 
-    private int timerCounter = 0;
 
     public LoadingPanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
-        this.setBackground(Color.black);
+        this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.setLayout(null);
-
-        progressBar = new JProgressBar(1,6);
-        progressBar.setBounds(38, 50, 512, 48);
+        
+        progressBar = new JProgressBar(0,6);
+        progressBar.setBounds(50, 256, 512, 30);
         progressBar.setStringPainted(true);
+        progressBar.setOpaque(true);
         progressBar.setValue(0);
+        progressBar.setVisible(true);
 
         this.add(progressBar);
+
     }
 
     public void createTimeLine(){
@@ -81,7 +81,6 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void update(){
-        timerCounter ++;
         if(!generateRoom){
             checkRoom();
         }
@@ -116,16 +115,9 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
-    private void twoSecond(){
-        if(timerCounter >= 120){
-            timerCounter -= 120;
-        }
-    }
-
 
     @Override
     protected void paintComponent(Graphics g) {
-        // TODO Auto-generated method stub
         super.paintComponent(g);
     }
 
