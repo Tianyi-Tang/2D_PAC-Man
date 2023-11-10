@@ -1,6 +1,7 @@
 package cmpt276.group4.Room;
 
 import cmpt276.group4.GameManager;
+import cmpt276.group4.gameLevel;
 
 public class RoomInitialization {
     private int max_X;
