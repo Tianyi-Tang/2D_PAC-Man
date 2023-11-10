@@ -125,7 +125,7 @@ public class GameManager {
         room = initialization_room.createRoom();
 
 
-        record = new RecordUsedPlace();
+        record =  RecordUsedPlace.getInstance();
         enemyFactory = new EnemyFactory();
         enemyInitialization = new EnemyInitialization(level, enemyFactory); // Initializing 1 enemies
         //enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
@@ -136,10 +136,6 @@ public class GameManager {
         Wall wall1 = new Wall(wallPosition1, 1);
         RecordUsedPlace.getInstance().addWall(wall1);
 
-        Position wallPosition2 = new Position(10, 10);
-        Wall wall2 = new Wall(wallPosition2, 1);
-        RecordUsedPlace.getInstance().addWall(wall2);
-        
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {
@@ -149,7 +145,7 @@ public class GameManager {
         rewardFactory = new RewardFactory();
         rewardInitialization = new RewardInitialization(level,rewardFactory);
 
-
+       
     }
 
     public void RecordUsedPlaceAviable(){

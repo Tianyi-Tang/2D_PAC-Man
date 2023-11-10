@@ -116,7 +116,7 @@ public class RecordUsedPlace {
         }
     }
 
-    public static RecordUsedPlace getInstance(){
+    public static synchronized RecordUsedPlace getInstance(){
         if(instance ==null)
             instance = new RecordUsedPlace();
         return instance;
