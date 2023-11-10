@@ -35,6 +35,7 @@ cmpt276/group4/Reward/RewardInitialization$1.class
 cmpt276/group4/GameManager.class
 cmpt276/group4/Reward/RewardFactory.class
 cmpt276/group4/Player/PlayerGenerator.class
+cmpt276/group4/Enemy/Spider$1.class
 cmpt276/group4/Enemy/EnemyType.class
 cmpt276/group4/Reward/MangeBonusReward.class
 cmpt276/group4/Room/Obstacle.class
