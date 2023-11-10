@@ -112,6 +112,8 @@ public class GamePanel extends JPanel implements Runnable {
             reward.draw(g2);
         }
 
+        System.out.println("Obstacle:"+RecordUsedPlace.getInstance().getObstaclesNumber());
+
  
         //Position wallPosition1 = new Position(5, 5);
         //Wall wall1 = new Wall(wallPosition1, 1);

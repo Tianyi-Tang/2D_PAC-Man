@@ -210,7 +210,7 @@ public class Player implements KeyMovingObserver {
             playerPosition.setPosition(destination);
             Reward reward = RecordUsedPlace.getInstance().playerGetReward();
             if(reward != null)
-            reward.addBenefit(this);
+                reward.addBenefit(this);
         }
             
     }
