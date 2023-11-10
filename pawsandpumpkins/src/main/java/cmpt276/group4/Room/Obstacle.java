@@ -56,9 +56,7 @@ public class Obstacle implements CharacterAvaliablePosition{
 
     @Override
     public void draw(Graphics2D g2){
-        //if(getObstacleType() == 1){
-        //    g2.drawImage(wallImage, position.getX_axis(), position.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
-        //}
+    
     }
 
         

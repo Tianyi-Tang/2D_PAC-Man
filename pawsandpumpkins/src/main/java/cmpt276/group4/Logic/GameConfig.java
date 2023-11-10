@@ -7,29 +7,63 @@ import cmpt276.group4.Position;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 public class GameConfig {
-    private int windowColumn;
-    private int windowRow;
-    public GameConfig(int windowColumn, int windowRow, List<Position> wallPositions, int numberOfObstacles, int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts, int numberOfRewards) {
-        this.windowColumn = windowColumn;
-        this.windowRow = windowRow;
-        this.wallPositions = wallPositions;
+    private int roomColumn = 16;
+    private int roomRow = 16;
+    // obstacle
+    protected List<Position> wallPositions;
+
+    protected int numberOfObstacles;
+    // enemies
+    protected int numberOfSpiders;
+    protected int numberOfBasicGhosts;
+    protected int numberOfAdvancedGhosts;
+    // rewards
+    protected int numberOfRegularRewards;
+    protected int numberOfBonusRewards;
+
+    public void setWallPositions(List<Position> wallPositions) {
+        if (this.wallPositions == null) {
+            this.wallPositions = new ArrayList<>();
+        }
+        this.wallPositions.clear();
+            if (wallPositions != null && !wallPositions.isEmpty()) {
+            for (Position pos : wallPositions) {
+                this.wallPositions.add(new Position(pos.getX_axis(), pos.getY_axis()));
+            }
+        }
+    }
+    
+
+    public GameConfig(int numberOfObstacles, int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts,
+            int numberOfRegularRewards, int numberOfBonusRewards) {
         this.numberOfObstacles = numberOfObstacles;
         this.numberOfSpiders = numberOfSpiders;
         this.numberOfBasicGhosts = numberOfBasicGhosts;
         this.numberOfAdvancedGhosts = numberOfAdvancedGhosts;
-        this.numberOfRewards = numberOfRewards;
+        this.numberOfRegularRewards = numberOfRegularRewards;
+        this.numberOfBonusRewards = numberOfBonusRewards;
+        wallPositions = new ArrayList<Position>();
+
     }
 
-    private List<Position> wallPositions;
+    public int getRoomColumn() {
+        return roomColumn;
+    }
 
-    private int numberOfObstacles;
-    private int numberOfSpiders;
-    private int numberOfBasicGhosts;
-    private int numberOfAdvancedGhosts;
-    private int numberOfRewards;
+    public int getRoomRow() {
+        return roomRow;
+    }
 
-    public int numberofTiles(){
-        return windowColumn * windowRow;
+    public int getNumberOfRegularRewards() {
+        return numberOfRegularRewards;
+    }
+
+    public int getNumberOfBonusRewards() {
+        return numberOfBonusRewards;
+    }
+
+    public int numberofTiles() {
+        return roomColumn * roomRow;
     }
 
     public List<Position> getWallPositions() {
@@ -52,37 +86,16 @@ public class GameConfig {
         return numberOfAdvancedGhosts;
     }
 
-    public int getNumberOfRewards() {
-        return numberOfRewards;
-    }
+    public void initializeWallPosition(int[] arrayX, int[] arrayY, List<Position> currentWallPositions) {
 
-    public String getImageNameForPosition(Position p,List<Position> wallPositions) {
-        boolean north = false, south = false, east = false, west = false;
-
-        for (Position wallPosition : wallPositions) {
-            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() - GamePanel.tileSize))) {
-                north = true;
+        if (arrayX.length == arrayY.length) {
+            for (int i = 0; i < arrayX.length; i++) {
+                currentWallPositions.add(new Position(arrayX[i], arrayY[i]));
             }
-            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() + GamePanel.tileSize))) {
-                south = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis() + GamePanel.tileSize, p.getY_axis()))) {
-                east = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis() - GamePanel.tileSize, p.getY_axis()))) {
-                west = true;
-            }
+        } else {
+            // different lengths
+            System.out.println("Error: arrayX and arrayY have different lengths.");
         }
-
-        String imageName = "";
-        if (north) imageName += "north_";
-        if (east) imageName += "east_";
-        if (south) imageName += "south_";
-        if (west) imageName += "west_";
-
-        imageName += ".png";
-
-        return imageName;
     }
 
 }
