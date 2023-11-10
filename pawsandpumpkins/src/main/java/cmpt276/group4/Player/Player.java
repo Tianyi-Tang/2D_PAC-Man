@@ -7,6 +7,8 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 import cmpt276.group4.Position;
+import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
@@ -48,16 +50,16 @@ public class Player implements KeyMovingObserver {
 
     private void getPlayerImage(){
         try {
-            String directory = System.getProperty("user.dir");
-            up1 = ImageIO.read(new File(directory +"/res/Player/up1.png"));
-            up2 = ImageIO.read(new File(directory +"/res/Player/up2.png"));
-            down1 = ImageIO.read(new File(directory +"/res/Player/down1.png"));
-            down2 = ImageIO.read(new File(directory +"/res/Player/down2.png"));
-            left1 = ImageIO.read(new File(directory +"/res/Player/left1.png"));
-            left2 = ImageIO.read(new File(directory +"/res/Player/left2.png"));
-            right1 = ImageIO.read(new File(directory +"/res/Player/right1.png"));
-            right2 = ImageIO.read(new File(directory +"/res/Player/right2.png"));
-            
+            //String directory = System.getProperty("user.dir");
+            up1 = ImageIO.read(new File("res/Player/up1.png"));
+            up2 = ImageIO.read(new File("res/Player/up2.png"));
+            down1 = ImageIO.read(new File("res/Player/down1.png"));
+            down2 = ImageIO.read(new File("res/Player/down2.png"));
+            left1 = ImageIO.read(new File("res/Player/left1.png"));
+            left2 = ImageIO.read(new File("res/Player/left2.png"));
+            right1 = ImageIO.read(new File("res/Player/right1.png"));
+            right2 = ImageIO.read(new File("res/Player/right2.png"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -206,9 +208,9 @@ public class Player implements KeyMovingObserver {
     private void updatePosition(){
         if(movement.isPositionAvailable(destination)){
             playerPosition.setPosition(destination);
-            // Reward reward = RecordUsedPlace.getInstance().playerGetReward();
-            // if(reward != null)
-            //     reward.addBenefit();
+            Reward reward = RecordUsedPlace.getInstance().playerGetReward();
+            if(reward != null)
+            reward.addBenefit(this);
         }
             
     }

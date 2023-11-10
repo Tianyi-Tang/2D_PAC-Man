@@ -15,8 +15,8 @@ import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
 import cmpt276.group4.Player.Player;
-import cmpt276.group4.Room.Obstacle;
-import cmpt276.group4.Room.Wall;
+
+import cmpt276.group4.Reward.Reward;
 
 
 public class GamePanel extends JPanel implements Runnable {
@@ -39,14 +39,11 @@ public class GamePanel extends JPanel implements Runnable {
     // Change the enemy's position every 30 frames (every half second at 60 FPS)
     private final int ENEMY_MOVE_INTERVAL = 30; 
     private Player player;
-    
 
     private Thread gameThread;
-    private GameManager gameManager;
 
 
-    public GamePanel(GameManager gameManager) {
-        this.gameManager = gameManager;
+    public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -84,8 +81,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void update(){
-        gameManager.handleMouseInput(); 
+    private void update(){
         Player.getInstance().update();
 
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
@@ -109,7 +105,13 @@ public class GamePanel extends JPanel implements Runnable {
         for (CharacterAvaliablePosition element : record.getElemet()) {
             element.draw(g2);            
         }
-            
+
+        for (Reward reward : record.getRewardList()) {
+            //System.out.println("Enemy List size: "+ record.getEnemyList().size());
+            reward.draw(g2);
+        }
+
+ 
         //Position wallPosition1 = new Position(5, 5);
         //Wall wall1 = new Wall(wallPosition1, 1);
         //RecordUsedPlace.getInstance().addWall(wall1);
@@ -124,6 +126,7 @@ public class GamePanel extends JPanel implements Runnable {
         // }
       
 
+
         if(player != null)
             player.draw(g2);
 
@@ -132,6 +135,7 @@ public class GamePanel extends JPanel implements Runnable {
 
                 enemy.draw(g2);
         }
+
 
         g2.dispose();
     }

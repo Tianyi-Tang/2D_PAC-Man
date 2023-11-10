@@ -13,6 +13,7 @@
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CharacterAvaliablePosition.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Enemy/Ghost.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Player/PlayerMovement.java
+/Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Logic/GameConfig.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Position.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/RecordUsedPlace.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Reward/GeneralReward.java
@@ -33,9 +34,11 @@
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Enemy/EnemyMovement.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Enemy/Spider.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Room/Wall.java
+/Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/GameStatus.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Enemy/Enemy.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Player/PlayerGenerator.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Enemy/EnemyInitialization.java
+/Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/WindowAndInput/LoadingPanel.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Reward/RewardFactory.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Room/Floor.java
 /Users/nicksmart/Documents/GitHub/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/CMPT276F23_group4/pawsandpumpkins/src/main/java/cmpt276/group4/Movement.java

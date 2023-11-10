@@ -2,38 +2,45 @@ package cmpt276.group4.Reward;
 
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
+import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.Reward.BonusReward;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class PumpkinHead extends BonusReward {
-    private static final int SCORE = 5;
+    private int score = 5;
     private BufferedImage ppk1, ppk2, currentImage;
-    private Position ppkPosition;
+    private Position ppkPosition,playerPosition;
 
     private int stateCounter=0;
     private boolean org_State = true;
     private boolean available;
-
+    private RecordUsedPlace record;
+    private boolean isBonusReward = true;
     public PumpkinHead() {
+        record = RecordUsedPlace.getInstance();
         getPumpkinImage();
-        // Initialize ppkPosition here if necessary, or through a setPosition method
+        ppkPosition=record.getRandomSafePosition();
+        record.addReward(this);
     }
 
     @Override
     public int getScore() {
-        return SCORE;
+        return score;
     }
 
     @Override
     public Position getPosition() {
         return ppkPosition;
     }
+
+
 
     @Override
     public void setPosition(Position position) {
@@ -52,22 +59,26 @@ public class PumpkinHead extends BonusReward {
         this.ppk1 = null;
         this.ppk2 = null;
     }
+    private void getPlayerPosition() {
 
-    @Override
-    public void addBenefit() {
-
+        RecordUsedPlace record = RecordUsedPlace.getInstance();
+        playerPosition = record.getPlayerPosition();
     }
 
     @Override
-    public void addScore(Player player, int score) {
-    }
-    public void update() {
-        stateCounter++;
-        if (stateCounter >= 15) {
-            org_State = !org_State;
-            stateCounter = 0;
+    public void addBenefit(Player player) {
+            getPlayerPosition();
+        if (playerPosition.equal(ppkPosition)) {
+            addScore(player,score);
+            record.removeReward(this);
         }
     }
+
+    private void addScore(Player player, int score) {
+        this.score=score;
+        player.addScoreToPlayer(score,isBonusReward);
+    }
+
     private void getPumpkinImage() {
         try {
             String directory = System.getProperty("user.dir");
@@ -77,9 +88,14 @@ public class PumpkinHead extends BonusReward {
             e.printStackTrace();
         }
     }
-
-    public void drawPumpkin(Graphics2D g1) {
-        if (org_State)
+@Override
+    public void draw(Graphics2D g1) {
+        stateCounter++;
+    if (stateCounter >= 15) {
+        org_State = !org_State;
+        stateCounter = 0;
+    }
+         if (org_State)
             currentImage = ppk1;
         else
             currentImage = ppk2;

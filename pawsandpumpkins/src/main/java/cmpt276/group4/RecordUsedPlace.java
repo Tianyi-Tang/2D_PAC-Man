@@ -8,7 +8,6 @@ import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
-import cmpt276.group4.Room.Obstacle;
 import cmpt276.group4.Room.Wall;
 
 public class RecordUsedPlace {
@@ -18,7 +17,6 @@ public class RecordUsedPlace {
 
     private ArrayList<Position> characterAvaliable_pos;
     private ArrayList<Position> obstacle_pos;
-    private List<Obstacle> obstacles;
 
 
     private ArrayList<Enemy> enemies;
@@ -27,7 +25,11 @@ public class RecordUsedPlace {
     private Iterator<Position> iterator_pos;
     private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;
-    static int counter = 0;
+
+    private int numberofTiles = 0;
+    private int numberofWall = 0;
+    private int numberOfObstacles = 0;
+
 
     public Position getRandomFromAvailablePosition(){
     //return a random position from variable available
@@ -39,6 +41,20 @@ public class RecordUsedPlace {
         return available.get(random.nextInt(available.size()));
     }
 
+    public void initalAllInfor(){
+        if(GameManager.getInstance().isGameEnd()){
+            characterAvaliable_pos = new ArrayList<Position>();
+            obstacle_pos = new ArrayList<Position>();
+            elements = new ArrayList<CharacterAvaliablePosition>();
+
+            enemies = new ArrayList<Enemy>();
+            rewards = new ArrayList<Reward>();
+
+            numberofTiles = 0;
+            numberOfObstacles = 0;
+            numberofWall = 0;
+        }
+    }
 
     public Position getRandomSafePosition() {
         ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
@@ -75,9 +91,10 @@ public class RecordUsedPlace {
         characterAvaliable_pos = new ArrayList<Position>();
         obstacle_pos = new ArrayList<Position>();
         elements = new ArrayList<CharacterAvaliablePosition>();
-        obstacles = new ArrayList<>();
 
         enemies = new ArrayList<Enemy>();
+        rewards = new ArrayList<Reward>();
+
     }
 
     public void setPlayer(Player player){
@@ -99,7 +116,7 @@ public class RecordUsedPlace {
         }
     }
 
-    public static RecordUsedPlace getInstance(){
+    public static synchronized RecordUsedPlace getInstance(){
         if(instance ==null)
             instance = new RecordUsedPlace();
         return instance;
@@ -107,10 +124,18 @@ public class RecordUsedPlace {
 
     public boolean addElementToMap(CharacterAvaliablePosition object){
         if(isPlaceAviable(object.getPosition())){             
-            if(object.getPlayerAvaliable())
+            if(object.getPlayerAvaliable()){
                 characterAvaliable_pos.add(object.getPosition());
-            else
+                numberofTiles ++;
+            }
+            else{
                 obstacle_pos.add(object.getPosition());
+                if(object instanceof Wall)
+                    numberofWall ++;
+                else
+                    numberOfObstacles ++;
+            }
+                
 
             if(object instanceof Wall)
                 System.out.println("Enter the if");
@@ -154,13 +179,17 @@ public class RecordUsedPlace {
 
     public boolean addReward(Reward reward){
         if(isPlaceAviable(reward.getPosition())){
+            System.out.println("Adding reward at position: " + reward.getPosition());
             rewards.add(reward);
             elementTakenPlace(false, reward.getPosition());
             return true;
         }
-        else
+        else{
+            System.out.println("Failed to add reward at position: " + reward.getPosition());
             return false;
+        }
     }
+
 
     public void removeReward(Reward reward){
         available.add(reward.getPosition());
@@ -183,6 +212,19 @@ public class RecordUsedPlace {
         else
             return false;
     }
+
+    public int getTileNumber(){
+        return numberofTiles;
+    }
+
+    public int getWallNumber(){
+        return numberofWall;
+    }
+
+    public int getObstaclesNumber(){
+        return numberOfObstacles;
+    }
+
 
     public ArrayList<Position> getAviablePosition(){
         return available;
@@ -234,6 +276,10 @@ public class RecordUsedPlace {
     public List<Enemy> getEnemyList(){
         return enemies;
     }
+    public List<Reward> getRewardList(){
+        return rewards;
+    }
+
 
     public boolean isNotSpiderPosition(Position pos){
         for (Enemy enemy : enemies) {
@@ -245,11 +291,5 @@ public class RecordUsedPlace {
         }
     
 
-    public void addObstacle(Obstacle obstacle) {
-        obstacles.add(obstacle);
-    }
-    public List<Obstacle> getObstacles() {
-        return obstacles;
-    }
         
 }

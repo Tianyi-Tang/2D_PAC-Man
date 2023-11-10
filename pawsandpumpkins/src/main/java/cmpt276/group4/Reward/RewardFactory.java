@@ -10,7 +10,6 @@ public class RewardFactory {
 
     public List<Reward> createReward(RewardType type, int number) {
         RecordUsedPlace recordUsedPlace = RecordUsedPlace.getInstance();
-
         List<Reward> rewards = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             Position availablePosition = recordUsedPlace.getRandomFromAvailablePosition();
@@ -35,6 +34,8 @@ public class RewardFactory {
             default:
                 throw new IllegalArgumentException("Invalid Reward type");
         }
+
     }
+
 }
 
