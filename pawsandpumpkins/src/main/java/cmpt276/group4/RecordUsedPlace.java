@@ -8,7 +8,6 @@ import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
-import cmpt276.group4.Room.Obstacle;
 import cmpt276.group4.Room.Wall;
 
 public class RecordUsedPlace {
@@ -25,8 +24,11 @@ public class RecordUsedPlace {
     private Iterator<Position> iterator_pos;
     private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;
-    static int counter = 0;
+
     private int numberofTiles = 0;
+    private int numberofWall = 0;
+    private int numberOfObstacles = 0;
+
 
     public Position getRandomFromAvailablePosition(){
     //return a random position from variable available
@@ -48,6 +50,8 @@ public class RecordUsedPlace {
             rewards = new ArrayList<Reward>();
 
             numberofTiles = 0;
+            numberOfObstacles = 0;
+            numberofWall = 0;
         }
     }
 
@@ -124,8 +128,14 @@ public class RecordUsedPlace {
                 characterAvaliable_pos.add(object.getPosition());
                 numberofTiles ++;
             }
-            else
+            else{
                 obstacle_pos.add(object.getPosition());
+                if(object instanceof Wall)
+                    numberofWall ++;
+                else
+                    numberOfObstacles ++;
+            }
+                
 
             elements.add(object);
             elementTakenPlace(object.getTakenPlace(), object.getPosition());
