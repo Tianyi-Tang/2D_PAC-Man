@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.RecordUsedPlace;
@@ -20,15 +21,30 @@ public class LoadingPanel extends JPanel implements Runnable {
     final int FPS = 60;
     private double timeInterval = 1000000000/FPS;
 
+    private JProgressBar progressBar;
+
     private RecordUsedPlace record;
     private boolean generateRoom, generateAllTile, generateAllObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
 
     private GameConfig config;
 
+    private int progressBarWidth;
+    private int progressWidth;
+
+    private int timerCounter = 0;
+
     public LoadingPanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+        this.setLayout(null);
+
+        progressBar = new JProgressBar(1,6);
+        progressBar.setBounds(38, 50, 512, 48);
+        progressBar.setStringPainted(true);
+        progressBar.setValue(0);
+
+        this.add(progressBar);
     }
 
     public void createTimeLine(){
@@ -47,6 +63,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
         //call the gameManager to generate room
 
+        
         while (loadingThread != null) {
             currentTime = System.nanoTime();
             iteration += (currentTime - last_time) / timeInterval;
@@ -64,6 +81,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void update(){
+        timerCounter ++;
         if(!generateRoom){
             checkRoom();
         }
@@ -96,8 +114,14 @@ public class LoadingPanel extends JPanel implements Runnable {
             generateAllTile = true;
             // call to generate Obstacle
         }
-            
     }
+
+    private void twoSecond(){
+        if(timerCounter >= 120){
+            timerCounter -= 120;
+        }
+    }
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -106,10 +130,10 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private boolean allResourceLoading(){
-        if(generatePlayer)
+        if(!generatePlayer)
             return false;
-        else 
-            return true;
+        else
+            return true; 
     }
 
     private void initialLoading(){

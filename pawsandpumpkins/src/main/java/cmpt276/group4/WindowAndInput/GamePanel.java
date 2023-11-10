@@ -9,8 +9,6 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
-import cmpt276.group4.GameManager;
-import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;

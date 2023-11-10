@@ -182,7 +182,6 @@ public class GameManager {
         rewardInitialization = new RewardInitialization();
         rewardInitialization.GenerateReward(level,rewardFactory);
 
-       
     }
 
     public void RecordUsedPlaceAviable(){
