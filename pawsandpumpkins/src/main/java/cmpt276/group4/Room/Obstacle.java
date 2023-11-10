@@ -1,51 +1,82 @@
 package cmpt276.group4.Room;
 
+import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
+import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.WindowAndInput.GamePanel;
 
-public class Obstacle extends Tile{
-    protected Position position;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
+public class Obstacle implements CharacterAvaliablePosition{
+    public Position position;
+    public int type;
+    private boolean playerAvaliable = false;
+    //private boolean obstacle = false;
+    private boolean takenPlace = true;
+    private Position location;
+    BufferedImage wallImage;
     // Constructor to initialize an obstacle with player access, enemy traversability, and positions
     public Obstacle(Position position, int type) {
-        super(position);
-        if (type == 1) {
-            Wall wall = new Wall(position, type);
-
-        }
-        else{
-            Tombstone tombstone = new Tombstone(position,type);
-        }
-
+        this.position = position;
+        this.type = type;
     }
 
-    
-    @Override
-    public boolean getPlayerAvaliable() {
-        throw new UnsupportedOperationException("is player avaliable");
+    public int getObstacleType(){
+        return type;
     }
+    public void setPlayerAccess(){
+        playerAvaliable = false;
+    }
+    //public void setEnemyAccess(){
+    //    playerEnemy = false;
+    //}
+
 
     @Override
     public Position getPosition() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
+        return location;
+    }
+
+    @Override
+    public boolean getPlayerAvaliable() {
+        return playerAvaliable;
     }
 
     @Override
     public boolean getTakenPlace() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTakenPlace'");
+        return takenPlace;
     }
 
-    //@Override
-    //public void draw(Graphics2D g2) {
-    //    // TODO Auto-generated method stub
-    //    throw new UnsupportedOperationException("Unimplemented method 'draw'");
-    //}
+    public void initialWallImage(){
+        try {
+            wallImage = ImageIO.read(new File(System.getProperty("user.dir") + "/res/Walls/mid_wall2.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
 
+    @Override
+    public void draw(Graphics2D g2){
+        System.err.println("obstacle:" + wallImage);
+       if(getObstacleType() == 1){
+        g2.drawImage(wallImage, position.getX_axis(), position.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
+        }
+    }
 
-
-
-
-
-
+        
+    
+    
 }
+
+
+
+
+
+
+
+
 

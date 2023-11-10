@@ -72,7 +72,7 @@ public class GameManager {
         listener = new keyboardListener();
         window.addKeyListener(listener);
 
-        
+        System.out.println("Test");
 
         gamePanel = new GamePanel(this);
         window.add(gamePanel);
@@ -91,22 +91,34 @@ public class GameManager {
         enemyInitialization = new EnemyInitialization(level, enemyFactory); // Initializing 1 enemies
         //enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
         
-        Position wallPosition1 = new Position(10, 10);
-        wallPosition1.setX_axis(1000);
-        wallPosition1.setY_axis(1000);
-        Wall wall1 = new Wall(wallPosition1, 1);
-        RecordUsedPlace.getInstance().addWall(wall1);
+        //Position wallPosition1 = new Position(10, 10);
+        //Obstacle wall1 = new Obstacle(wallPosition1, 1);
+      
+        //RecordUsedPlace.getInstance().addObstacle(wall1);
 
-        Position wallPosition2 = new Position(10, 10);
-        Wall wall2 = new Wall(wallPosition2, 1);
-        RecordUsedPlace.getInstance().addWall(wall2);
-        
+
+        //for (Position obstaclePosition : record.getObstacles()) {
+        //    System.out.println("Obstacle Position - X: " + obstaclePosition.getX_axis() + ", Y: " + obstaclePosition.getY_axis());
+        //}
+
+        //Position wallPosition2 = record.getRandomFromAvailablePosition();
+        //Obstacle wall2 = new Wall(wallPosition2, 1);
+        //RecordUsedPlace.getInstance().addElementToMap(wall2);
 
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {
+            System.out.println("number of Aviable:");
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
+
+        
+
+        
+
+       
+
+       
 
         
         

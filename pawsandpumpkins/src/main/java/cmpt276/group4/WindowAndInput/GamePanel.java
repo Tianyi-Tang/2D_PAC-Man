@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.GameManager;
+import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
@@ -104,20 +105,23 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+        System.out.println(record.getElemet().size());
         for (CharacterAvaliablePosition element : record.getElemet()) {
             element.draw(g2);            
         }
- 
+            
         //Position wallPosition1 = new Position(5, 5);
         //Wall wall1 = new Wall(wallPosition1, 1);
         //RecordUsedPlace.getInstance().addWall(wall1);
 
         //Position wallPosition2 = new Position(10*tileSize, 10*tileSize);
+
+        // for (Obstacle obstacle : record.getObstacles()) {
+            // Create a new Wall object using the wall position
+            //obstacle.draw(g2);
+            // Draw the wall
         
-      
-        //for (Wall walls : record.getWalls()) {
-        //    walls.draw(g2);
-        //}
+        // }
       
 
         if(player != null)

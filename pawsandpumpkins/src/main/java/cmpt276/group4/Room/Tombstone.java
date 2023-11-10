@@ -8,8 +8,8 @@ public class Tombstone extends Obstacle {
 
     public Tombstone(Position position, int type) {
         super(position, type);
-        setPlayerAccess(false);
-        setEnemyAccess(true);
+        //setPlayerAccess(false);
+        //setEnemyAccess(true);
     }
 
     //@Override

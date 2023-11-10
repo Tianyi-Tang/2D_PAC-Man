@@ -18,6 +18,8 @@ public class RecordUsedPlace {
 
     private ArrayList<Position> characterAvaliable_pos;
     private ArrayList<Position> obstacle_pos;
+    private List<Obstacle> obstacles;
+
 
     private ArrayList<Enemy> enemies;
     private ArrayList<Reward> rewards;
@@ -73,7 +75,7 @@ public class RecordUsedPlace {
         characterAvaliable_pos = new ArrayList<Position>();
         obstacle_pos = new ArrayList<Position>();
         elements = new ArrayList<CharacterAvaliablePosition>();
-        //walls = new ArrayList<Wall>();
+        obstacles = new ArrayList<>();
 
         enemies = new ArrayList<Enemy>();
     }
@@ -109,6 +111,9 @@ public class RecordUsedPlace {
                 characterAvaliable_pos.add(object.getPosition());
             else
                 obstacle_pos.add(object.getPosition());
+
+            if(object instanceof Wall)
+                System.out.println("Enter the if");
 
             elements.add(object);
             elementTakenPlace(object.getTakenPlace(), object.getPosition());
@@ -199,7 +204,7 @@ public class RecordUsedPlace {
         return null;
     }
 
-    private boolean isPlaceAviable(Position planingPosition){
+   public boolean isPlaceAviable(Position planingPosition){
         for (Position position : available) {
             if(position.equal(planingPosition))
                 return true;
@@ -240,24 +245,11 @@ public class RecordUsedPlace {
         }
     
 
-    public void addWall(Wall wall){
-        //if(isPlaceAviable(wall.getPosition())){
-        //walls.add(wall);
-        //    elementTakenPlace(false, wall.getPosition());
-        //    return true;
-        // }
-        //else
-        //    return false;
-        
+    public void addObstacle(Obstacle obstacle) {
+        obstacles.add(obstacle);
     }
-
-    //public ArrayList<Wall> getWalls() {
-        //for (Wall wall : walls) {
-        //    System.out.println("Wall Position: (" + wall.getPosition().getX_axis() + ", " + wall.getPosition().getY_axis() + ")");
-       // }
-        //return walls;
-    //}
-
-
+    public List<Obstacle> getObstacles() {
+        return obstacles;
+    }
         
 }

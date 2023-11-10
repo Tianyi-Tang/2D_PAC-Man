@@ -12,19 +12,22 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 
-public class Wall extends Tile {
+public class Wall extends Obstacle {
     BufferedImage wallImage;
     public Wall(Position position, int type) {
-        super(position);
-        setPlayerAccess(false);
-        setEnemyAccess(false);
+        super(position, type);
         initialWallImage();
-        
+    }
+
+    public Wall CreateWall(Position position, int type) {
+         Wall wall = new Wall(position, type);
+         RecordUsedPlace.getInstance().addElementToMap(wall);
+         return wall;
     }
     
 
-
     public void initialWallImage(){
+        System.out.println("wall image seting");
         try {
             wallImage = ImageIO.read(new File(System.getProperty("user.dir") + "/res/Walls/mid_wall2.png"));
         } catch (Exception e) {
@@ -33,7 +36,8 @@ public class Wall extends Tile {
     }
     @Override
     public void draw(Graphics2D g2){
-        if(tileImage != null)
+        System.out.println("wallnImage:"+ wallImage);
+        if(wallImage != null)
             g2.drawImage(wallImage, position.getX_axis(), position.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
         //g2.fillRect(location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize);
     }

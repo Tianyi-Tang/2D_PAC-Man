@@ -31,16 +31,6 @@ public class Tile implements CharacterAvaliablePosition {
         
     }
 
-    // setters for wall and tombstone classes
-    public void setPlayerAccess(boolean playerAvaliable) {
-        this.playerAvaliable = playerAvaliable;
-    }
-
-    public void setEnemyAccess(boolean enemyAvaliable){
-        //this.enemyAvaliable = enemyAvaliable;
-    }
-
-
     @Override
     public Position getPosition() {
         return location;
