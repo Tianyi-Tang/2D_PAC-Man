@@ -22,6 +22,7 @@ public class RecordUsedPlace {
     private ArrayList<Enemy> enemies;
     private ArrayList<Reward> rewards;
     private Player player;
+    private Iterator<Position> iterator_avaliablePos;
     private Iterator<Position> iterator_pos;
     private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;
@@ -130,17 +131,12 @@ public class RecordUsedPlace {
             }
             else{
                 obstacle_pos.add(object.getPosition());
-                if(object instanceof Wall){
+                removeCharaterAviable(object.getPosition());
+                if(object instanceof Wall)
                     numberofWall ++;
-                    System.out.println("numberofWall1 " + numberofWall);
-                }
                 else
                     numberOfObstacles ++;
             }
-                
-
-            if(object instanceof Wall)
-                System.out.println("Enter the if");
 
             elements.add(object);
             elementTakenPlace(object.getTakenPlace(), object.getPosition());
@@ -259,6 +255,16 @@ public class RecordUsedPlace {
     private void elementTakenPlace(boolean takenPlace, Position position){
         if(takenPlace){
             RemoveFromAviable(position);
+        }
+    }
+
+    private void removeCharaterAviable(Position obstPos){
+        iterator_avaliablePos = characterAvaliable_pos.iterator();
+        while (iterator_avaliablePos.hasNext()) {
+            if(iterator_avaliablePos.next().equal(obstPos)){
+                iterator_avaliablePos.remove();
+                break;
+            }            
         }
     }
 
