@@ -81,8 +81,8 @@ public class MainPanel extends JPanel implements Runnable {
         });
 
         easyLevelButton.setBounds(7* GamePanel.tileSize,7* GamePanel.tileSize,GamePanel.tileSize *2,GamePanel.tileSize);
-        middleLevelButton.setBounds(7* GamePanel.tileSize, 8* GamePanel.tileSize + 20, GamePanel.tileSize *2, GamePanel.tileSize);
-        hardLevelButton.setBounds(7* GamePanel.tileSize, 9* GamePanel.tileSize + 20, GamePanel.tileSize *2, GamePanel.tileSize);
+        middleLevelButton.setBounds(7* GamePanel.tileSize, 8* GamePanel.tileSize , GamePanel.tileSize *2, GamePanel.tileSize);
+        hardLevelButton.setBounds(7* GamePanel.tileSize, 9* GamePanel.tileSize, GamePanel.tileSize *2, GamePanel.tileSize);
 
         this.add(easyLevelButton);
         this.add(middleLevelButton);
