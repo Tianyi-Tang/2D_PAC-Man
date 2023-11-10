@@ -15,14 +15,13 @@ public class Obstacle implements CharacterAvaliablePosition{
     public Position position;
     public int type;
     private boolean playerAvaliable = false;
-    //private boolean obstacle = false;
     private boolean takenPlace = true;
-    private Position location;
     BufferedImage wallImage;
     // Constructor to initialize an obstacle with player access, enemy traversability, and positions
     public Obstacle(Position position, int type) {
         this.position = position;
         this.type = type;
+        initialWallImage();
     }
 
     public int getObstacleType(){
@@ -38,7 +37,7 @@ public class Obstacle implements CharacterAvaliablePosition{
 
     @Override
     public Position getPosition() {
-        return location;
+        return position;
     }
 
     @Override
@@ -61,10 +60,9 @@ public class Obstacle implements CharacterAvaliablePosition{
 
     @Override
     public void draw(Graphics2D g2){
-        System.err.println("obstacle:" + wallImage);
-       if(getObstacleType() == 1){
-        g2.drawImage(wallImage, position.getX_axis(), position.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
-        }
+        //if(getObstacleType() == 1){
+        //    g2.drawImage(wallImage, position.getX_axis(), position.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
+        //}
     }
 
         

@@ -17,6 +17,7 @@ public class Wall extends Obstacle {
     public Wall(Position position, int type) {
         super(position, type);
         initialWallImage();
+        setPlayerAccess();
     }
 
     public Wall CreateWall(Position position, int type) {
@@ -27,7 +28,6 @@ public class Wall extends Obstacle {
     
 
     public void initialWallImage(){
-        System.out.println("wall image seting");
         try {
             wallImage = ImageIO.read(new File(System.getProperty("user.dir") + "/res/Walls/mid_wall2.png"));
         } catch (Exception e) {
@@ -36,10 +36,9 @@ public class Wall extends Obstacle {
     }
     @Override
     public void draw(Graphics2D g2){
-        System.out.println("wallnImage:"+ wallImage);
         if(wallImage != null)
             g2.drawImage(wallImage, position.getX_axis(), position.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
-        //g2.fillRect(location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize);
+
     }
 
 }

@@ -130,8 +130,10 @@ public class RecordUsedPlace {
             }
             else{
                 obstacle_pos.add(object.getPosition());
-                if(object instanceof Wall)
+                if(object instanceof Wall){
                     numberofWall ++;
+                    System.out.println("numberofWall1 " + numberofWall);
+                }
                 else
                     numberOfObstacles ++;
             }

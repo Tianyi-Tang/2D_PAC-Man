@@ -25,6 +25,7 @@ import cmpt276.group4.Room.Room;
 import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.Room.Tile;
 import cmpt276.group4.Room.Wall;
+import cmpt276.group4.Room.Obstacle;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.LoadingPanel;
 import cmpt276.group4.WindowAndInput.MainPanel;
@@ -142,15 +143,30 @@ public class GameManager {
         //}
 
         //Position wallPosition2 = record.getRandomFromAvailablePosition();
+        //System.out.println("wallposition " + wallPosition2);
         //Obstacle wall2 = new Wall(wallPosition2, 1);
+        //System.out.println("wallposition " + wallPosition2);
         //RecordUsedPlace.getInstance().addElementToMap(wall2);
 
         // put tile to all aviable position 
         ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
         for (Position position : tilesPosition) {
-            System.out.println("number of Aviable:");
+            //System.out.println("number of Aviable:");
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
+
+        Position wallPosition1 = record.getRandomFromAvailablePosition();
+        Obstacle wall1 = new Wall(wallPosition1, 1);
+        RecordUsedPlace.getInstance().addElementToMap(wall1);
+        Position wallPosition2 = record.getRandomFromAvailablePosition();
+        Obstacle wall2 = new Wall(wallPosition2, 1);
+        RecordUsedPlace.getInstance().addElementToMap(wall2);
+        Position wallPosition3 = record.getRandomFromAvailablePosition();
+        Obstacle wall3 = new Wall(wallPosition3, 1);
+        RecordUsedPlace.getInstance().addElementToMap(wall3);
+        //System.out.println("testest" + RecordUsedPlace.getInstance().addElementToMap(wall2));
+        //System.out.println("avaliableSize "+record.getAviablePosition());
+
 
         rewardFactory = new RewardFactory();
         rewardInitialization = new RewardInitialization();

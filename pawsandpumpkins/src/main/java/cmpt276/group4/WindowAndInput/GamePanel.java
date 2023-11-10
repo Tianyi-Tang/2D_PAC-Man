@@ -101,10 +101,11 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-        System.out.println(record.getElemet().size());
+        //System.out.println("avaliable "+record.getElemet().size());
         for (CharacterAvaliablePosition element : record.getElemet()) {
             element.draw(g2);            
         }
+        //System.out.println("avaliable "+record.getElemet().size());
 
         for (Reward reward : record.getRewardList()) {
             //System.out.println("Enemy List size: "+ record.getEnemyList().size());
