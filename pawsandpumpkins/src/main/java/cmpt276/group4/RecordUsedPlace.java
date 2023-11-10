@@ -214,6 +214,15 @@ public class RecordUsedPlace {
         return numberofTiles;
     }
 
+    public int getWallNumber(){
+        return numberofWall;
+    }
+
+    public int getObstaclesNumber(){
+        return numberOfObstacles;
+    }
+
+
     public ArrayList<Position> getAviablePosition(){
         return available;
     }
