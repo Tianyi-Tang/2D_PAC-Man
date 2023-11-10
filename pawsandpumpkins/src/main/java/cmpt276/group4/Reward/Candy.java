@@ -61,7 +61,7 @@ public class Candy extends GeneralReward {
     }
 
     @Override
-    public void addBenefit(Player player,int score) {
+    public void addBenefit(Player player) {
         getPlayerPosition();
         if (playerPosition.equal(cdposition)) {
             addScore(player,score);

@@ -13,10 +13,7 @@ cmpt276/group4/GameStatus.class
 cmpt276/group4/Reward/GeneralReward.class
 cmpt276/group4/Enemy/EnemyInitialization$1.class
 cmpt276/group4/Enemy/Enemy.class
-<<<<<<< HEAD
 cmpt276/group4/Logic/GameConfig.class
-=======
->>>>>>> 73e8dc8c2067ba47fc7c4193e4f0f0c8536ef4a0
 cmpt276/group4/Enemy/Spider$SpiderType.class
 cmpt276/group4/Player/KeyMovingObserver.class
 cmpt276/group4/WindowAndInput/LoadingPanel.class
@@ -35,22 +32,11 @@ cmpt276/group4/Reward/RewardType.class
 cmpt276/group4/Room/Tile.class
 cmpt276/group4/WindowAndInput/MainPanel.class
 cmpt276/group4/Reward/RewardInitialization$1.class
-<<<<<<< HEAD
 cmpt276/group4/GameManager.class
 cmpt276/group4/Reward/RewardFactory.class
 cmpt276/group4/Player/PlayerGenerator.class
 cmpt276/group4/Enemy/EnemyType.class
 cmpt276/group4/Reward/MangeBonusReward.class
-=======
-cmpt276/group4/Logic/gameConfig.class
-cmpt276/group4/GameManager.class
-cmpt276/group4/Reward/RewardFactory.class
-cmpt276/group4/Player/PlayerGenerator.class
-cmpt276/group4/Enemy/Spider$1.class
-cmpt276/group4/Enemy/EnemyType.class
-cmpt276/group4/Reward/MangeBonusReward.class
-cmpt276/group4/Logic/gameConfig$1.class
->>>>>>> 73e8dc8c2067ba47fc7c4193e4f0f0c8536ef4a0
 cmpt276/group4/Room/Obstacle.class
 cmpt276/group4/Position.class
 cmpt276/group4/Room/Tombstone.class

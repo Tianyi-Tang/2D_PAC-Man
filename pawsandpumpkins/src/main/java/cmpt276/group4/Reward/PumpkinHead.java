@@ -66,7 +66,7 @@ public class PumpkinHead extends BonusReward {
     }
 
     @Override
-    public void addBenefit(Player player,int score) {
+    public void addBenefit(Player player) {
             getPlayerPosition();
         if (playerPosition.equal(ppkPosition)) {
             addScore(player,score);
