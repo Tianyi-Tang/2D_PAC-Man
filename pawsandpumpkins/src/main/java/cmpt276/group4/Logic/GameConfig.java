@@ -55,34 +55,34 @@ public class GameConfig {
     public int getNumberOfRewards() {
         return numberOfRewards;
     }
+    //move it to tile class
+    // public String getImageNameForPosition(Position p,List<Position> wallPositions) {
+    //     boolean north = false, south = false, east = false, west = false;
 
-    public String getImageNameForPosition(Position p,List<Position> wallPositions) {
-        boolean north = false, south = false, east = false, west = false;
+    //     for (Position wallPosition : wallPositions) {
+    //         if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() - GamePanel.tileSize))) {
+    //             north = true;
+    //         }
+    //         if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() + GamePanel.tileSize))) {
+    //             south = true;
+    //         }
+    //         if (wallPosition.equals(new Position(p.getX_axis() + GamePanel.tileSize, p.getY_axis()))) {
+    //             east = true;
+    //         }
+    //         if (wallPosition.equals(new Position(p.getX_axis() - GamePanel.tileSize, p.getY_axis()))) {
+    //             west = true;
+    //         }
+    //     }
 
-        for (Position wallPosition : wallPositions) {
-            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() - GamePanel.tileSize))) {
-                north = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() + GamePanel.tileSize))) {
-                south = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis() + GamePanel.tileSize, p.getY_axis()))) {
-                east = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis() - GamePanel.tileSize, p.getY_axis()))) {
-                west = true;
-            }
-        }
+    //     String imageName = "";
+    //     if (north) imageName += "north_";
+    //     if (east) imageName += "east_";
+    //     if (south) imageName += "south_";
+    //     if (west) imageName += "west_";
 
-        String imageName = "";
-        if (north) imageName += "north_";
-        if (east) imageName += "east_";
-        if (south) imageName += "south_";
-        if (west) imageName += "west_";
+    //     imageName += ".png";
 
-        imageName += ".png";
-
-        return imageName;
-    }
+    //     return imageName;
+    // }
 
 }
