@@ -11,6 +11,8 @@ import cmpt276.group4.GameManager;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.Logic.GameConfig;
+import cmpt276.group4.Reward.RewardFactory;
+import cmpt276.group4.Reward.RewardInitialization;
 
 public class LoadingPanel extends JPanel implements Runnable {
 
@@ -95,7 +97,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
         }
         else if(!generateAllEnemies){
-
+            checkEnemy();
         }
         else if(!generateAllRewards){
 
@@ -126,8 +128,25 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    private void checkEnemy(){
+        if(true){
+            generateAllEnemies = true;
+            createReward();
+        }
+    }
+
+    private void checkeReward(){
+      
+    }
+
     private void createRoom(){
 
+    }
+
+
+    private void createReward(){
+        RewardInitialization reward_initialization = new RewardInitialization(new RewardFactory());
+        reward_initialization.generateReward();
     }
 
 

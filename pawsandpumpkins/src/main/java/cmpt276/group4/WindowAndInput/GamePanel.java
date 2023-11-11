@@ -113,7 +113,7 @@ public class GamePanel extends JPanel implements Runnable {
         //System.out.println("avaliable "+record.getElemet().size());
 
         for (Reward reward : record.getRewardList()) {
-            //System.out.println("Enemy List size: "+ record.getEnemyList().size());
+            System.out.println("reward:"+ record.getRewardList().size());
             reward.draw(g2);
         }
 
