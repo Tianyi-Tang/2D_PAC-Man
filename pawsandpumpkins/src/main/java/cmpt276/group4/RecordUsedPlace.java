@@ -7,6 +7,7 @@ import java.util.Random;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
+import cmpt276.group4.Reward.Candy;
 import cmpt276.group4.Reward.GeneralReward;
 import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.Room.Wall;
@@ -41,6 +42,15 @@ public class RecordUsedPlace {
         }
         Random random = new Random();
         return available.get(random.nextInt(available.size()));
+    }
+
+    public boolean containsCandyAtPosition(Position position) {
+        for (Reward candy : generalRewards) {
+            if (candy instanceof Candy && candy.getPosition().equal(position)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void initalAllInfor(){

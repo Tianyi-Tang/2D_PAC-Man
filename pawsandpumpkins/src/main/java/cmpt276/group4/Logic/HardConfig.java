@@ -22,7 +22,7 @@ public class HardConfig extends GameDifficultyConfig {
     public HardConfig() {
         super();
         numberOfObstacles = 6;
-        numberOfSpiders = 13;
+        numberOfSpiders = 8;
         numberOfBasicGhosts = 3;
         numberOfAdvancedGhosts = 0;
         numberOfRegularRewards = 10;

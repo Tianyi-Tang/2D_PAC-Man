@@ -54,6 +54,19 @@ public abstract class GameDifficultyConfig {
         wallPositions = new ArrayList<>();
     }
 
+    public GameDifficultyConfig( int numberOfObstacles, int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts, 
+        int numberOfRegularRewards, int numberOfBonusRewards) {
+            this.numberOfObstacles = numberOfObstacles;
+            this.numberOfSpiders = numberOfSpiders;
+            this.numberOfBasicGhosts = numberOfBasicGhosts;
+            this.numberOfAdvancedGhosts = numberOfAdvancedGhosts;
+            this.numberOfRegularRewards = numberOfRegularRewards;
+            this.numberOfBonusRewards = numberOfBonusRewards;
+
+            
+        wallPositions = new ArrayList<>();
+    }
+
     
 
     public List<Position> getWallPositions() {

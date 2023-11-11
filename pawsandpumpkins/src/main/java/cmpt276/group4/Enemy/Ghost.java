@@ -86,7 +86,7 @@ public class Ghost implements Enemy {
     private void setToClosestPlayerPosition() {
 
         if (enemyPosition.equal(playerPosition)) {
-            System.out.println("IN gHOST:Overlapp: trying to set ghost on player");
+
             enemyPosition.setPosition(playerPosition);
             return;
         }
@@ -101,12 +101,9 @@ public class Ghost implements Enemy {
         }
 
         if (highestPriorityAvailablePosition != null) {
-            // System.out.println("Highest priority available position: (" +
-            // highestPriorityAvailablePosition.getX_axis()
-            // + ", " + highestPriorityAvailablePosition.getY_axis() + ")");
             enemyPosition.setPosition(highestPriorityAvailablePosition);
         } else {
-            System.out.println("No available position found.");
+
         }
     }
 
@@ -203,8 +200,8 @@ public class Ghost implements Enemy {
             Position newPosition = new Position(newX, newY);
 
             // Check if the new position is movable
-            System.out.println("try new position newX: " + newX);
-            System.out.println("newY: " + newY);
+            // System.out.println("try new position newX: " + newX);
+            // System.out.println("newY: " + newY);
 
             if (enemyMovement.isPositionAvailable(newPosition)) {
                 enemyPosition.setX_axis(newX);
@@ -214,8 +211,7 @@ public class Ghost implements Enemy {
                 availableDirections.remove(randomIndex);
             }
         }
-        System.out.println("newX: " + enemyPosition.getX_axis());
-        System.out.println("newY: " + enemyPosition.getY_axis());
+
 
     }
 
@@ -234,6 +230,8 @@ public class Ghost implements Enemy {
         }
 
     }
+
+
 
     @Override
     public Position getEnemyPosition() {
