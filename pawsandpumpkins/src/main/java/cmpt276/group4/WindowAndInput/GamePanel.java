@@ -143,11 +143,11 @@ public class GamePanel extends JPanel implements Runnable {
 
                 enemy.draw(g2);
         }
-
-        
-
-
         g2.dispose();
+    }
+
+    public void restartGamePanel(){
+        gameThread = null;
     }
 
 }

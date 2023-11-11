@@ -5,9 +5,6 @@ import java.awt.CardLayout;
 
 import java.util.ArrayList;
 
-import java.util.Timer;
-import java.util.List;
-
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -144,8 +141,7 @@ public class GameManager {
 
 
         record =  RecordUsedPlace.getInstance();
-        enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(level, enemyFactory); 
+       
         
         
         //Position wallPosition1 = new Position(10, 10);
@@ -179,9 +175,24 @@ public class GameManager {
     
 
         GameConfig gameConfig=new GameConfig();
+        gameConfig.passGameLevel(gameLevel.HARD);
+
         rewardFactory = new RewardFactory();
         rewardInitialization = new RewardInitialization(rewardFactory);
         rewardInitialization.generateReward();
+        
+        enemyFactory = new EnemyFactory();
+        enemyInitialization = new EnemyInitialization(enemyFactory); 
+
+        
+
+        
+
+
+
+
+
+
     }
 
     public void createNumberPanel(){
@@ -208,6 +219,8 @@ public class GameManager {
 
     public void enemyCatachPlayer(boolean moveable){
         if(moveable == true){
+            status = GameStatus.GameOver;
+            endOfGame();
             // end game
         }
         else{
@@ -224,10 +237,17 @@ public class GameManager {
         }
     }
 
-    
+    private void endOfGame(){
+        if(status == GameStatus.GamePanel.GameOver){
+
+        }
+        else{
+
+        }
+    }
 
     public boolean isGameEnd(){
-        if(status == GameStatus.GamePanel && gameEnd == true)
+        if(status == GameStatus.GameOver || status == GameStatus.Win)
             return true;
         else
             return false;
