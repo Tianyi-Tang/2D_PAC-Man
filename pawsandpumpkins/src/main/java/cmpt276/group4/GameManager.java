@@ -194,6 +194,7 @@ public class GameManager {
         }
     }
 
+
     private void creatPlayer(){
         Player player = PlayerGenerator.creatPlayer();
         listener.addPlayer(player);
@@ -211,7 +212,7 @@ public class GameManager {
         }
     }
 
-    public void transformToLoadingScreen(){
+    public void transformToLoadingScreen(gameLevel level){
         if(status == GameStatus.MainPanel){
             layout.show(cardContainer, "load");
             loadPanel.createTimeLine();

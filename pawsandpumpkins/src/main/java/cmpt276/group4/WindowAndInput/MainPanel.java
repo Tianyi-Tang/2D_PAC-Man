@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import cmpt276.group4.GameManager;
+import cmpt276.group4.gameLevel;
 
 public class MainPanel extends JPanel implements Runnable {
     
@@ -29,7 +30,6 @@ public class MainPanel extends JPanel implements Runnable {
             @Override
             public void mouseClicked(MouseEvent e) {
                 VisibleDifficultButton();
-                //GameManager.getInstance().transformToLoadingScreen();
                 startButton.setVisible(false);
                 super.mouseClicked(e);
 
@@ -53,7 +53,7 @@ public class MainPanel extends JPanel implements Runnable {
         easyLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("easy Level");
+                GameManager.getInstance().transformToLoadingScreen(gameLevel.BASIC);
                 super.mouseClicked(e);
             }
         });
@@ -64,7 +64,7 @@ public class MainPanel extends JPanel implements Runnable {
         middleLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("middle Level");
+                GameManager.getInstance().transformToLoadingScreen(gameLevel.MEDIUM);
                 super.mouseClicked(e);
             }
         });
@@ -75,7 +75,7 @@ public class MainPanel extends JPanel implements Runnable {
         hardLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("middle Level");
+                 GameManager.getInstance().transformToLoadingScreen(gameLevel.HARD);
                 super.mouseClicked(e);
             }
         });
