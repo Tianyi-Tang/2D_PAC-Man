@@ -15,11 +15,13 @@ import cmpt276.group4.Enemy.Ghost;
 import cmpt276.group4.Player.Player;
 
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.UI.NumberPanel;
 
 
 public class GamePanel extends JPanel implements Runnable {
 
     RecordUsedPlace record = RecordUsedPlace.getInstance();
+    private NumberPanel numberPanel;
     
     //Screen Sitting 
     private static final int original_tileSize = 16;
@@ -45,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+
     }
 
 
@@ -136,6 +139,8 @@ public class GamePanel extends JPanel implements Runnable {
 
                 enemy.draw(g2);
         }
+
+        
 
 
         g2.dispose();
