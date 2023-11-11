@@ -30,7 +30,7 @@ public class GameConfig {
         return instance;
     }
 
-    GameConfig(gameLevel level) {
+    public void passGameLevel(gameLevel level) {
         switch (level) {
             case BASIC:
                 gameLevelConfig = new BasicConfig();

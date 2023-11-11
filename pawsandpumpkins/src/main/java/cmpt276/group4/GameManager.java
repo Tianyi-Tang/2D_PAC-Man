@@ -16,6 +16,7 @@ import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
 import cmpt276.group4.Enemy.EnemyType;
+import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Player.PlayerGenerator;
 
@@ -103,7 +104,7 @@ public class GameManager {
         this.typeOfRoom = i;
     }
 
-    public static GameManager getInstance(){
+    public static synchronized GameManager getInstance(){
         if(instance == null)
             instance = new GameManager();
         return instance;
@@ -215,6 +216,7 @@ public class GameManager {
     public void transformToLoadingScreen(gameLevel level){
         if(status == GameStatus.MainPanel){
             this.level = level;
+            GameConfig.getGameConfigInstance().passGameLevel(level);
             layout.show(cardContainer, "load");
             loadPanel.createTimeLine();
             status = GameStatus.LoadingPanel;
