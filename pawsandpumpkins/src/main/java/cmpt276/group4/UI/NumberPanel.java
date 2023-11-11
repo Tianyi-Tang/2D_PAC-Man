@@ -29,10 +29,10 @@ public class NumberPanel extends JPanel {
         directory = System.getProperty("user.dir");
         for (int i = 0; i < NUM_IMAGES; i++) {
             try {
-                System.out.println(directory+"/res/num/" + i + ".png");
+                //System.out.println(directory+"/res/num/" + i + ".png");
                 //digitImages[i] = ImageIO.read(new File(directory+"/pawsandpumpkins/res/num/" + "one.png"));
 
-                digitImages[i] = ImageIO.read(new File(directory+"/pawsandpumpkins/res/num/" + i + ".png"));
+                digitImages[i] = ImageIO.read(new File(directory+"/res/num/" + i + ".png"));
             } catch (IOException e) {
                 e.printStackTrace(); // Or handle the exception as needed
             }
