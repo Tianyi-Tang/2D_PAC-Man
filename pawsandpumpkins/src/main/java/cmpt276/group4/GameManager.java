@@ -11,12 +11,9 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 
-import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
-import cmpt276.group4.Enemy.EnemyType;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Player.PlayerGenerator;
@@ -121,10 +118,6 @@ public class GameManager {
         layout.show(cardContainer, "main");
 
         window.setVisible(true);
-
-
-
-
     }
 
     public void createWindows(){
@@ -227,19 +220,13 @@ public class GameManager {
     public void transformToLoadingScreen(gameLevel level){
         if(status == GameStatus.MainPanel){
             this.level = level;
-            GameConfig.getGameConfigInstance().passGameLevel(level);
             layout.show(cardContainer, "load");
-            loadPanel.createTimeLine();
+            loadPanel.gameLevelSending(level);
             status = GameStatus.LoadingPanel;
-
-
         }
     }
 
     
-    public boolean roomAlreadyGenerate(){
-        return room != null;
-    }
 
     public boolean isGameEnd(){
         if(status == GameStatus.GamePanel && gameEnd == true)

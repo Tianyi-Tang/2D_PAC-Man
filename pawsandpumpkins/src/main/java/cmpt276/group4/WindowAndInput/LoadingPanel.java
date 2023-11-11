@@ -9,6 +9,7 @@ import javax.swing.JProgressBar;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.gameLevel;
 import cmpt276.group4.Logic.GameConfig;
 
 public class LoadingPanel extends JPanel implements Runnable {
@@ -24,10 +25,8 @@ public class LoadingPanel extends JPanel implements Runnable {
 
 
     private RecordUsedPlace record;
-    private boolean generateRoom, generateAllTile, generateAllObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
-
     private GameConfig config;
-
+    private boolean generateconfi,generateRoom, generateAllTile, generateAllObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
 
 
     public LoadingPanel(){
@@ -44,10 +43,15 @@ public class LoadingPanel extends JPanel implements Runnable {
         progressBar.setVisible(true);
 
         this.add(progressBar);
-
     }
 
-    public void createTimeLine(){
+    public void gameLevelSending(gameLevel level){
+        config = GameConfig.getGameConfigInstance();
+        config.passGameLevel(level);
+        createTimeLine();
+    }
+
+    private void createTimeLine(){
         if(loadingThread == null){
             loadingThread = new Thread(this);
             loadingThread.start();
@@ -101,8 +105,12 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    private void checkConfig(){
+        
+    }
+
     private void checkRoom(){
-        if(GameManager.getInstance().roomAlreadyGenerate()){
+        if(true){
             generateRoom = true;
             // call to generate title
         }
