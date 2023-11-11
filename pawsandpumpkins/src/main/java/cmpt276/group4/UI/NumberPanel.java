@@ -61,7 +61,8 @@ public class NumberPanel extends JPanel {
 
         for (int i = 0; i < NUM_IMAGES; i++) {
             try {
-                digitImages[i] = ImageIO.read(new File(directory + "/pawsandpumpkins/res/num/" + i + ".png"));
+                //digitImages[i] = ImageIO.read(new File(directory + "/pawsandpumpkins/res/num/" + i + ".png"));
+                digitImages[i] = ImageIO.read(new File(directory + "/res/num/" + i + ".png"));
             } catch (IOException e) {
                 e.printStackTrace(); // Or handle the exception as needed
             }
@@ -70,8 +71,10 @@ public class NumberPanel extends JPanel {
 
     private void loadBackgroundImage(String filename) {
         try {
-            backgroundImage = ImageIO.read(new File(directory + "/pawsandpumpkins/res/pop_up/" + filename));
-            greyOut = ImageIO.read(new File(directory + "/pawsandpumpkins/res/pop_up/" + "grey.png"));
+            // backgroundImage = ImageIO.read(new File(directory + "/pawsandpumpkins/res/pop_up/" + filename));
+            // greyOut = ImageIO.read(new File(directory + "/pawsandpumpkins/res/pop_up/" + "grey.png"));
+            backgroundImage = ImageIO.read(new File(directory + "/res/pop_up/" + filename));
+            greyOut = ImageIO.read(new File(directory + "/res/pop_up/" + "grey.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

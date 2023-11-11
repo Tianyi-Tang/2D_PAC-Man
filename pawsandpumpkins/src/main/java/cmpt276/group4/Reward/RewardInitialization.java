@@ -1,30 +1,39 @@
 package cmpt276.group4.Reward;
 import java.util.ArrayList;
 import java.util.List;
+import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.gameLevel;
+
 public class RewardInitialization {
-    private gameLevel gameLevel;
-    private int candy,pumpkinHead;
+    private GameConfig gameConfig;
+    private List<Reward> generalRewards = new ArrayList<>();
+    private List<Reward> bonusRewards = new ArrayList<>();
+    private RewardFactory rFactory; // Assume this is initialized somewhere
 
+    // Constructor takes GameConfig instance
+    public RewardInitialization(RewardFactory rFactory) {
+        this.gameConfig = GameConfig.getGameConfigInstance();
+        this.rFactory = rFactory;
+    }
 
+    public void generateReward(){
+        generateRegularReward();
+        generateBonusRewards();
+    }
 
-    public void GenerateReward(gameLevel gameLevel, RewardFactory rFactory){
-        this.gameLevel = gameLevel;
-        switch (gameLevel) {
-            case BASIC:
-                candy = 10;
-                break;
-            case MEDIUM:
-                candy = 8;
-                break;
-            case HARD:
-                candy = 5;
-                break;
-        }
-        rFactory.createReward(RewardType.Candy,candy);
-        System.out.println("Rewards Initialization with " + (candy
-        ) + " rewards.");
+    private void generateRegularReward(){
+        int numberOfRegularRewards = gameConfig.getNumberOfRegularRewards();
+        System.out.println(numberOfRegularRewards);
+        System.out.println("+ Get number of reward!");
+        List<Reward> newRewards = rFactory.createReward(RewardType.Candy, numberOfRegularRewards);
+        generalRewards.addAll(newRewards);
+    }
 
-
+    private void generateBonusRewards(){
+        int numberOfBonusRewards = gameConfig.getNumberOfBonusRewards();
+        System.out.println(numberOfBonusRewards);
+        System.out.println("+ Get number of bonusReward!");
+        List<Reward> newRewards = rFactory.createReward(RewardType.PumpkinHead, numberOfBonusRewards);
+        bonusRewards.addAll(newRewards);
     }
 }

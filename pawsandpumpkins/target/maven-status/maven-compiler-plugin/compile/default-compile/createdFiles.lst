@@ -12,6 +12,7 @@ cmpt276\group4\UI\NumberPanel.class
 cmpt276\group4\WindowAndInput\MoveDirection.class
 cmpt276\group4\Reward\RewardInitialization$1.class
 cmpt276\group4\Reward\BonusReward.class
+cmpt276\group4\Difficulty.class
 cmpt276\group4\Room\Wall.class
 cmpt276\group4\Logic\HardConfig.class
 cmpt276\group4\Enemy\Ghost.class

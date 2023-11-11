@@ -189,10 +189,10 @@ public class GameManager {
         Obstacle tomb3 = new Tombstone(tombPosition3);
         RecordUsedPlace.getInstance().addElementToMap(tomb3);
 
+        GameConfig gameConfig=new GameConfig();
         rewardFactory = new RewardFactory();
-        rewardInitialization = new RewardInitialization();
-        rewardInitialization.GenerateReward(level,rewardFactory);
-
+        rewardInitialization = new RewardInitialization(rewardFactory);
+        rewardInitialization.generateReward();
     }
 
     public void createNumberPanel(){

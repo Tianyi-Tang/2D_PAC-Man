@@ -88,6 +88,10 @@ public class Candy extends GeneralReward {
         }
     }
     @Override
+    public boolean shouldDraw(long gametime){
+        return true;
+    }
+    @Override
     public void draw(Graphics2D g1){
         stateCounter++;
         if (stateCounter >= 15) {

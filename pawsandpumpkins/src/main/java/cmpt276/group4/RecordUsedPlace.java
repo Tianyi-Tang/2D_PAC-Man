@@ -7,6 +7,7 @@ import java.util.Random;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
+import cmpt276.group4.Reward.GeneralReward;
 import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.Room.Wall;
 
@@ -20,7 +21,7 @@ public class RecordUsedPlace {
 
 
     private ArrayList<Enemy> enemies;
-    private ArrayList<Reward> rewards;
+    private ArrayList<Reward> generalRewards,bonusRewards;
     private Player player;
     private Iterator<Position> iterator_avaliablePos;
     private Iterator<Position> iterator_pos;
@@ -49,7 +50,8 @@ public class RecordUsedPlace {
             elements = new ArrayList<CharacterAvaliablePosition>();
 
             enemies = new ArrayList<Enemy>();
-            rewards = new ArrayList<Reward>();
+            generalRewards = new ArrayList<Reward>();
+            bonusRewards = new ArrayList<Reward>();
 
             numberofTiles = 0;
             numberOfObstacles = 0;
@@ -94,7 +96,8 @@ public class RecordUsedPlace {
         elements = new ArrayList<CharacterAvaliablePosition>();
 
         enemies = new ArrayList<Enemy>();
-        rewards = new ArrayList<Reward>();
+        generalRewards = new ArrayList<Reward>();
+        bonusRewards = new ArrayList<Reward>();
 
     }
 
@@ -178,7 +181,7 @@ public class RecordUsedPlace {
     public boolean addReward(Reward reward){
         if(isPlaceAviable(reward.getPosition())){
             System.out.println("Adding reward at position: " + reward.getPosition());
-            rewards.add(reward);
+            generalRewards.add(reward);
             elementTakenPlace(false, reward.getPosition());
             return true;
         }
@@ -191,7 +194,7 @@ public class RecordUsedPlace {
 
     public void removeReward(Reward reward){
         available.add(reward.getPosition());
-        iterator_reward = rewards.iterator();
+        iterator_reward = generalRewards.iterator();
         Reward rewardInList;
         while (iterator_reward.hasNext()) {
             rewardInList = iterator_reward.next();
@@ -237,7 +240,7 @@ public class RecordUsedPlace {
     }
 
     public Reward playerGetReward(){
-        for (Reward reward : rewards) {
+        for (Reward reward : generalRewards) {
             if(player.getPosition().equal(reward.getPosition()))
                 return reward;
         }
@@ -285,7 +288,10 @@ public class RecordUsedPlace {
         return enemies;
     }
     public List<Reward> getRewardList(){
-        return rewards;
+        return generalRewards;
+    }
+    public List<Reward> getBonusReward(){
+        return bonusRewards;
     }
 
 

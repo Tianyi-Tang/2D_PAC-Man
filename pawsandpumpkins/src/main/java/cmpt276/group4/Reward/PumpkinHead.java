@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class PumpkinHead extends BonusReward {
+    private long displayStartTime =1000000000;
+    private long displayDuration = 100000;
     private int score = 5;
     private BufferedImage ppk1, ppk2, currentImage;
     private Position ppkPosition,playerPosition;
@@ -24,6 +26,7 @@ public class PumpkinHead extends BonusReward {
     private RecordUsedPlace record;
     private boolean isBonusReward = true;
     public PumpkinHead() {
+
         record = RecordUsedPlace.getInstance();
         getPumpkinImage();
         ppkPosition=record.getRandomSafePosition();
@@ -88,6 +91,11 @@ public class PumpkinHead extends BonusReward {
             e.printStackTrace();
         }
     }
+    @Override
+    public boolean shouldDraw(long currentTime) {
+        return currentTime >= displayStartTime &&
+                currentTime < displayStartTime + displayDuration;
+    }
 @Override
     public void draw(Graphics2D g1) {
         stateCounter++;
@@ -104,3 +112,4 @@ public class PumpkinHead extends BonusReward {
 
     }
 }
+
