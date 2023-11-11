@@ -17,9 +17,12 @@ public class Obstacle implements CharacterAvaliablePosition{
     private boolean takenPlace = true;
     BufferedImage wallImage;
     // Constructor to initialize an obstacle with player access, enemy traversability, and positions
-    public Obstacle(Position position) {
-        this.position = position;
+    public Obstacle(Obstacletype type, int amount, Position position) {
+        //this.position = position;
+        System.out.print("testest" + position);
         initialWallImage();
+        setObstaclePosition();
+        System.out.print("testest" + position);
     }
 
     public void setObstaclePosition(){
@@ -28,6 +31,10 @@ public class Obstacle implements CharacterAvaliablePosition{
 
     public void setPlayerAccess(){
         playerAvaliable = false;
+    }
+
+    public void setPosition(){
+        position = RecordUsedPlace.getInstance().getRandomFromAvailablePosition();
     }
 
 
