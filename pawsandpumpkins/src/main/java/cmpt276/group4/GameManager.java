@@ -52,6 +52,7 @@ public class GameManager {
     private GamePanel gamePanel;
     private MainPanel mainPanel;
     private LoadingPanel loadPanel;
+    private NumberPanel numberPanel;
 
 
     private keyboardListener listener;
@@ -68,7 +69,7 @@ public class GameManager {
     private RecordUsedPlace record;
     private boolean existPlayer = false;
 
-    private NumberPanel numberPanel;
+
 
 
     public GameManager(){
@@ -79,6 +80,7 @@ public class GameManager {
         gamePanel = new GamePanel();
         mainPanel = new MainPanel();
         loadPanel = new LoadingPanel();
+        numberPanel = new NumberPanel();
 
         cardContainer.add(gamePanel,"game");
         cardContainer.add(mainPanel,"main");
@@ -190,6 +192,10 @@ public class GameManager {
         rewardInitialization = new RewardInitialization();
         rewardInitialization.GenerateReward(level,rewardFactory);
 
+    }
+
+    public void createNumberPanel(){
+        
     }
 
     public void RecordUsedPlaceAviable(){
