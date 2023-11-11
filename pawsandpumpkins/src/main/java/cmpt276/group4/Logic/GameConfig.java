@@ -53,6 +53,16 @@ public class GameConfig {
 
     }
 
+    public boolean alreayInitialize(){
+        if(wallPositions != null && numberOfRegularRewards != 0)
+            return true;
+        else {
+            return false;
+        }
+            
+    }
+
+
     public GameConfig() {
         wallPositions = new ArrayList<Position>();
     }

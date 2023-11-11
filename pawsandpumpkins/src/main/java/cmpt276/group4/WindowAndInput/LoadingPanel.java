@@ -65,9 +65,6 @@ public class LoadingPanel extends JPanel implements Runnable {
         double last_time = System.nanoTime();
         double currentTime;
 
-        //call the gameManager to generate room
-
-        
         while (loadingThread != null) {
             currentTime = System.nanoTime();
             iteration += (currentTime - last_time) / timeInterval;
@@ -85,7 +82,10 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void update(){
-        if(!generateRoom){
+        if(!generateconfi){
+            checkConfig();
+        }
+        else if(!generateRoom){
             checkRoom();
         }
         else if(!generateAllTile){
@@ -106,7 +106,10 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void checkConfig(){
-        
+        if(config.alreayInitialize()){
+            generateconfi = true;
+            createRoom();
+        }
     }
 
     private void checkRoom(){
@@ -121,6 +124,10 @@ public class LoadingPanel extends JPanel implements Runnable {
             generateAllTile = true;
             // call to generate Obstacle
         }
+    }
+
+    private void createRoom(){
+
     }
 
 
