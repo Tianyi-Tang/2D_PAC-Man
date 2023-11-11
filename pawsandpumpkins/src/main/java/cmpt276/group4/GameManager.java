@@ -2,6 +2,7 @@ package cmpt276.group4;
 
 
 import java.awt.CardLayout;
+
 import java.util.ArrayList;
 
 import java.util.Timer;
@@ -28,6 +29,7 @@ import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.Room.Tile;
 import cmpt276.group4.Room.Tombstone;
 import cmpt276.group4.Room.Wall;
+import cmpt276.group4.UI.NumberPanel;
 import cmpt276.group4.Room.Obstacle;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.LoadingPanel;
@@ -69,6 +71,9 @@ public class GameManager {
     private RecordUsedPlace record;
     private boolean existPlayer = false;
 
+    private NumberPanel numberPanel;
+
+
     public GameManager(){
         window = new JFrame();
         layout = new CardLayout();
@@ -90,6 +95,7 @@ public class GameManager {
         window.getContentPane().add(cardContainer);
         window.pack();
         window.setLocationRelativeTo(null);
+
 
         
     }
@@ -115,9 +121,14 @@ public class GameManager {
         layout.show(cardContainer, "main");
 
         window.setVisible(true);
+
+
+
+
     }
 
     public void createWindows(){
+        
         status = GameStatus.GamePanel;
         layout.show(cardContainer, "game");
 
@@ -134,8 +145,8 @@ public class GameManager {
 
         record =  RecordUsedPlace.getInstance();
         enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(level, enemyFactory); // Initializing 1 enemies
-        //enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
+        enemyInitialization = new EnemyInitialization(level, enemyFactory); 
+        
         
         //Position wallPosition1 = new Position(10, 10);
         //Obstacle wall1 = new Obstacle(wallPosition1, 1);
@@ -220,6 +231,8 @@ public class GameManager {
             layout.show(cardContainer, "load");
             loadPanel.createTimeLine();
             status = GameStatus.LoadingPanel;
+
+
         }
     }
 

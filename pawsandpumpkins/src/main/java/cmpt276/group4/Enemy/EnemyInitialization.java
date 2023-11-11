@@ -1,11 +1,13 @@
 package cmpt276.group4.Enemy;
 
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.Logic.GameConfig;
 
 public class EnemyInitialization {
 
     private gameLevel gameLevel;
     private int spider,basicGhost,advancedGhost;
+    private GameConfig gc;
 
     public EnemyInitialization(int enemyNum) {
         // this.enemyNum = enemyNum;
@@ -31,6 +33,21 @@ public class EnemyInitialization {
                 advancedGhost = 0 ;
                 break;
         }
+        // GHOST_AVDANCED,
+        // GHOST_BASIC,
+        // SPIDER
+        eFactory.createEnemies(EnemyType.SPIDER, spider);
+        eFactory.createEnemies(EnemyType.GHOST_BASIC, basicGhost);
+        eFactory.createEnemies(EnemyType.GHOST_ADVANCED, advancedGhost);
+        System.out.println("Enemy Initialization with " + (spider + basicGhost
+        + advancedGhost) + " enemies.");
+    }
+
+    public EnemyInitialization(EnemyFactory eFactory) {
+        gc = GameConfig.getGameConfigInstance();
+        spider = gc.getNumberOfSpiders();
+        basicGhost = gc.getNumberOfBasicGhosts(); 
+        advancedGhost = gc.getNumberOfAdvancedGhosts() ;
         // GHOST_AVDANCED,
         // GHOST_BASIC,
         // SPIDER
