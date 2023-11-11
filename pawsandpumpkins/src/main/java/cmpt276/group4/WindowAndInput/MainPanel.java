@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import cmpt276.group4.GameManager;
+import cmpt276.group4.gameLevel;
 
 public class MainPanel extends JPanel implements Runnable {
     
@@ -17,7 +18,9 @@ public class MainPanel extends JPanel implements Runnable {
 
     private Thread mainThread;
     private JButton startButton;
-
+    private JButton easyLevelButton;
+    private JButton middleLevelButton;
+    private JButton hardLevelButton;
 
 
     public MainPanel(){
@@ -26,9 +29,10 @@ public class MainPanel extends JPanel implements Runnable {
         startButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Has been click");
-                GameManager.getInstance().transformToLoadingScreen();
+                VisibleDifficultButton();
+                startButton.setVisible(false);
                 super.mouseClicked(e);
+
             }
         });
         startButton.setBounds(7* GamePanel.tileSize,7* GamePanel.tileSize,GamePanel.tileSize *2,GamePanel.tileSize);
@@ -39,7 +43,52 @@ public class MainPanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
 
         this.add(startButton);
+        createButton();
     }
+
+    private void createButton(){
+        easyLevelButton = new JButton();
+        easyLevelButton.setText("Easy");
+        easyLevelButton.setVisible(false);
+        easyLevelButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                GameManager.getInstance().transformToLoadingScreen(gameLevel.BASIC);
+                super.mouseClicked(e);
+            }
+        });
+
+        middleLevelButton = new JButton();
+        middleLevelButton.setText("Middle");
+        middleLevelButton.setVisible(false);
+        middleLevelButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                GameManager.getInstance().transformToLoadingScreen(gameLevel.MEDIUM);
+                super.mouseClicked(e);
+            }
+        });
+
+        hardLevelButton = new JButton();
+        hardLevelButton.setText("Hard");
+        hardLevelButton.setVisible(false);
+        hardLevelButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                 GameManager.getInstance().transformToLoadingScreen(gameLevel.HARD);
+                super.mouseClicked(e);
+            }
+        });
+
+        easyLevelButton.setBounds(7* GamePanel.tileSize,7* GamePanel.tileSize,GamePanel.tileSize *2,GamePanel.tileSize);
+        middleLevelButton.setBounds(7* GamePanel.tileSize, 8* GamePanel.tileSize , GamePanel.tileSize *2, GamePanel.tileSize);
+        hardLevelButton.setBounds(7* GamePanel.tileSize, 9* GamePanel.tileSize, GamePanel.tileSize *2, GamePanel.tileSize);
+
+        this.add(easyLevelButton);
+        this.add(middleLevelButton);
+        this.add(hardLevelButton);
+    }
+
 
     public void createTimeLine(){
         if(mainThread == null){
@@ -55,6 +104,12 @@ public class MainPanel extends JPanel implements Runnable {
             
         }
         
+    }
+
+    private void VisibleDifficultButton(){
+        easyLevelButton.setVisible(true);
+        middleLevelButton.setVisible(true);
+        hardLevelButton.setVisible(true);
     }
     
 }

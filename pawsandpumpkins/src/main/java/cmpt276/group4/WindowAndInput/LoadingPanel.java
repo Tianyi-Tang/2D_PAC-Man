@@ -5,9 +5,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.gameLevel;
 import cmpt276.group4.Logic.GameConfig;
 
 public class LoadingPanel extends JPanel implements Runnable {
@@ -19,19 +21,37 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     final int FPS = 60;
     private double timeInterval = 1000000000/FPS;
+    private JProgressBar progressBar;
+
 
     private RecordUsedPlace record;
-    private boolean generateRoom, generateAllTile, generateAllObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
-
     private GameConfig config;
+    private boolean generateconfi,generateRoom, generateAllTile, generateAllObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
+
 
     public LoadingPanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
-        this.setBackground(Color.black);
+        this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
+        this.setLayout(null);
+        
+        progressBar = new JProgressBar(0,6);
+        progressBar.setBounds(50, 256, 512, 30);
+        progressBar.setStringPainted(true);
+        progressBar.setOpaque(true);
+        progressBar.setValue(0);
+        progressBar.setVisible(true);
+
+        this.add(progressBar);
     }
 
-    public void createTimeLine(){
+    public void gameLevelSending(gameLevel level){
+        config = GameConfig.getGameConfigInstance();
+        config.passGameLevel(level);
+        createTimeLine();
+    }
+
+    private void createTimeLine(){
         if(loadingThread == null){
             loadingThread = new Thread(this);
             loadingThread.start();
@@ -44,8 +64,6 @@ public class LoadingPanel extends JPanel implements Runnable {
         double iteration = 0;
         double last_time = System.nanoTime();
         double currentTime;
-
-        //call the gameManager to generate room
 
         while (loadingThread != null) {
             currentTime = System.nanoTime();
@@ -64,7 +82,10 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void update(){
-        if(!generateRoom){
+        if(!generateconfi){
+            checkConfig();
+        }
+        else if(!generateRoom){
             checkRoom();
         }
         else if(!generateAllTile){
@@ -84,8 +105,15 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    private void checkConfig(){
+        if(config.alreayInitialize()){
+            generateconfi = true;
+            createRoom();
+        }
+    }
+
     private void checkRoom(){
-        if(GameManager.getInstance().roomAlreadyGenerate()){
+        if(true){
             generateRoom = true;
             // call to generate title
         }
@@ -96,20 +124,23 @@ public class LoadingPanel extends JPanel implements Runnable {
             generateAllTile = true;
             // call to generate Obstacle
         }
-            
     }
+
+    private void createRoom(){
+
+    }
+
 
     @Override
     protected void paintComponent(Graphics g) {
-        // TODO Auto-generated method stub
         super.paintComponent(g);
     }
 
     private boolean allResourceLoading(){
-        if(generatePlayer)
+        if(!generatePlayer)
             return false;
-        else 
-            return true;
+        else
+            return true; 
     }
 
     private void initialLoading(){

@@ -2,6 +2,7 @@ package cmpt276.group4;
 
 
 import java.awt.CardLayout;
+
 import java.util.ArrayList;
 
 import java.util.Timer;
@@ -11,10 +12,9 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
-import cmpt276.group4.Enemy.EnemyType;
+import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Player.PlayerGenerator;
 
@@ -27,6 +27,7 @@ import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.Room.Tile;
 import cmpt276.group4.Room.Tombstone;
 import cmpt276.group4.Room.Wall;
+import cmpt276.group4.UI.NumberPanel;
 import cmpt276.group4.Room.Obstacle;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.LoadingPanel;
@@ -52,6 +53,7 @@ public class GameManager {
     private GamePanel gamePanel;
     private MainPanel mainPanel;
     private LoadingPanel loadPanel;
+    private NumberPanel numberPanel;
 
 
     private keyboardListener listener;
@@ -68,6 +70,9 @@ public class GameManager {
     private RecordUsedPlace record;
     private boolean existPlayer = false;
 
+
+
+
     public GameManager(){
         window = new JFrame();
         layout = new CardLayout();
@@ -76,10 +81,12 @@ public class GameManager {
         gamePanel = new GamePanel();
         mainPanel = new MainPanel();
         loadPanel = new LoadingPanel();
+        numberPanel = new NumberPanel();
 
         cardContainer.add(gamePanel,"game");
         cardContainer.add(mainPanel,"main");
         cardContainer.add(loadPanel,"load");
+        cardContainer.add(numberPanel, "gameEnd");
 
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,6 +96,9 @@ public class GameManager {
         window.getContentPane().add(cardContainer);
         window.pack();
         window.setLocationRelativeTo(null);
+
+
+        
     }
 
     // getter
@@ -101,7 +111,7 @@ public class GameManager {
         this.typeOfRoom = i;
     }
 
-    public static GameManager getInstance(){
+    public static synchronized GameManager getInstance(){
         if(instance == null)
             instance = new GameManager();
         return instance;
@@ -115,6 +125,7 @@ public class GameManager {
     }
 
     public void createWindows(){
+        
         status = GameStatus.GamePanel;
         layout.show(cardContainer, "game");
 
@@ -134,8 +145,8 @@ public class GameManager {
 
         record =  RecordUsedPlace.getInstance();
         enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(level, enemyFactory); // Initializing 1 enemies
-        //enemyFactory.createEnemies(EnemyType.GHOST_BASIC, enemyInitialization.getEnemyNum());
+        enemyInitialization = new EnemyInitialization(level, enemyFactory); 
+        
         
         //Position wallPosition1 = new Position(10, 10);
         //Obstacle wall1 = new Obstacle(wallPosition1, 1);
@@ -167,11 +178,16 @@ public class GameManager {
       
     
 
+        GameConfig gameConfig=new GameConfig();
         rewardFactory = new RewardFactory();
-        rewardInitialization = new RewardInitialization();
-        rewardInitialization.GenerateReward(level,rewardFactory);
+        rewardInitialization = new RewardInitialization(rewardFactory);
+        rewardInitialization.generateReward();
+    }
 
-       
+    public void createNumberPanel(){
+        status = GameStatus.Win;
+        layout.show(cardContainer, "gameEnd");
+        window.setVisible(true);
     }
 
     public void RecordUsedPlaceAviable(){
@@ -180,6 +196,7 @@ public class GameManager {
             creatPlayer();
         }
     }
+
 
     private void creatPlayer(){
         Player player = PlayerGenerator.creatPlayer();
@@ -198,17 +215,16 @@ public class GameManager {
         }
     }
 
-    public void transformToLoadingScreen(){
+    public void transformToLoadingScreen(gameLevel level){
         if(status == GameStatus.MainPanel){
+            this.level = level;
             layout.show(cardContainer, "load");
-            loadPanel.createTimeLine();
+            loadPanel.gameLevelSending(level);
             status = GameStatus.LoadingPanel;
         }
     }
 
-    public boolean roomAlreadyGenerate(){
-        return room != null;
-    }
+    
 
     public boolean isGameEnd(){
         if(status == GameStatus.GamePanel && gameEnd == true)

@@ -4,24 +4,25 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import java.sql.Time;
 
 import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
-import cmpt276.group4.GameManager;
-import cmpt276.group4.Position;
+import cmpt276.group4.GameTime;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
 import cmpt276.group4.Player.Player;
 
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.UI.NumberPanel;
 
 
 public class GamePanel extends JPanel implements Runnable {
 
     RecordUsedPlace record = RecordUsedPlace.getInstance();
+    private NumberPanel numberPanel;
     
     //Screen Sitting 
     private static final int original_tileSize = 16;
@@ -41,12 +42,14 @@ public class GamePanel extends JPanel implements Runnable {
     private Player player;
 
     private Thread gameThread;
+    private GameTime time;
 
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+
     }
 
 
@@ -67,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
         double iteration = 0;
         double last_time = System.nanoTime();
         double currentTime;
+        time = new GameTime();
 
         while (gameThread != null) {
             currentTime = System.nanoTime();
@@ -94,6 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
         } else {
             enemyMoveCounter++;
         }
+        time.countTime();
     }
 
     @Override
@@ -138,6 +143,8 @@ public class GamePanel extends JPanel implements Runnable {
 
                 enemy.draw(g2);
         }
+
+        
 
 
         g2.dispose();

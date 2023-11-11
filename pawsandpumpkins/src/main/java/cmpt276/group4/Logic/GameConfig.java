@@ -4,32 +4,87 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmpt276.group4.Position;
+import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.gameLevel;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 public class GameConfig {
-    private int windowColumn;
-    private int windowRow;
-    public GameConfig(int windowColumn, int windowRow, List<Position> wallPositions, int numberOfObstacles, int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts, int numberOfRewards) {
-        this.windowColumn = windowColumn;
-        this.windowRow = windowRow;
-        this.wallPositions = wallPositions;
-        this.numberOfObstacles = numberOfObstacles;
-        this.numberOfSpiders = numberOfSpiders;
-        this.numberOfBasicGhosts = numberOfBasicGhosts;
-        this.numberOfAdvancedGhosts = numberOfAdvancedGhosts;
-        this.numberOfRewards = numberOfRewards;
+    private int roomColumn = 16;
+    private int roomRow = 16;
+    // obstacle
+    protected List<Position> wallPositions;
+    protected int numberOfObstacles;
+    // enemies
+    protected int numberOfSpiders;
+    protected int numberOfBasicGhosts;
+    protected int numberOfAdvancedGhosts;
+    // rewards
+    protected int numberOfRegularRewards;
+    protected int numberOfBonusRewards;
+    public static GameConfig instance;
+    private GameDifficultyConfig gameLevelConfig;
+
+    public static synchronized GameConfig getGameConfigInstance() {
+        if (instance == null)
+            instance = new GameConfig();
+        return instance;
     }
 
-    private List<Position> wallPositions;
+    public void passGameLevel(gameLevel level) {
+        switch (level) {
+            case BASIC:
+                gameLevelConfig = new BasicConfig();
+                break;
+            case MEDIUM:
+                gameLevelConfig = new MediumConfig();
+                break;
+            case HARD:
+            default:
+                gameLevelConfig = new HardConfig();
+                break;
+        }
+        numberOfObstacles = gameLevelConfig.getNumberOfObstacles();
+        numberOfSpiders = gameLevelConfig.getNumberOfSpiders();
+        numberOfBasicGhosts = gameLevelConfig.getNumberOfBasicGhosts();
+        numberOfAdvancedGhosts = gameLevelConfig.getNumberOfAdvancedGhosts();
+        numberOfRegularRewards = gameLevelConfig.getNumberOfRegularRewards();
+        numberOfBonusRewards = gameLevelConfig.getNumberOfBonusRewards();
+        wallPositions = gameLevelConfig.getWallPositions();
 
-    private int numberOfObstacles;
-    private int numberOfSpiders;
-    private int numberOfBasicGhosts;
-    private int numberOfAdvancedGhosts;
-    private int numberOfRewards;
+    }
 
-    public int numberofTiles(){
-        return windowColumn * windowRow;
+    public boolean alreayInitialize(){
+        if(wallPositions != null && numberOfRegularRewards != 0)
+            return true;
+        else {
+            return false;
+        }
+            
+    }
+
+
+    public GameConfig() {
+        wallPositions = new ArrayList<Position>();
+    }
+
+    public int getRoomColumn() {
+        return roomColumn;
+    }
+
+    public int getRoomRow() {
+        return roomRow;
+    }
+
+    public int getNumberOfRegularRewards() {
+        return numberOfRegularRewards;
+    }
+
+    public int getNumberOfBonusRewards() {
+        return numberOfBonusRewards;
+    }
+
+    public int numberofTiles() {
+        return roomColumn * roomRow;
     }
 
     public List<Position> getWallPositions() {
@@ -52,37 +107,14 @@ public class GameConfig {
         return numberOfAdvancedGhosts;
     }
 
-    public int getNumberOfRewards() {
-        return numberOfRewards;
-    }
+    // public GameConfig(int numberOfObstacles, int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts,
+    //         int numberOfRegularRewards, int numberOfBonusRewards) {
+    //     this.numberOfObstacles = numberOfObstacles;
+    //     this.numberOfSpiders = numberOfSpiders;
+    //     this.numberOfBasicGhosts = numberOfBasicGhosts;
+    //     this.numberOfAdvancedGhosts = numberOfAdvancedGhosts;
+    //     this.numberOfRegularRewards = numberOfRegularRewards;
+    //     this.numberOfBonusRewards = numberOfBonusRewards;
 
-    public String getImageNameForPosition(Position p,List<Position> wallPositions) {
-        boolean north = false, south = false, east = false, west = false;
-
-        for (Position wallPosition : wallPositions) {
-            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() - GamePanel.tileSize))) {
-                north = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() + GamePanel.tileSize))) {
-                south = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis() + GamePanel.tileSize, p.getY_axis()))) {
-                east = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis() - GamePanel.tileSize, p.getY_axis()))) {
-                west = true;
-            }
-        }
-
-        String imageName = "";
-        if (north) imageName += "north_";
-        if (east) imageName += "east_";
-        if (south) imageName += "south_";
-        if (west) imageName += "west_";
-
-        imageName += ".png";
-
-        return imageName;
-    }
-
+    // }
 }
