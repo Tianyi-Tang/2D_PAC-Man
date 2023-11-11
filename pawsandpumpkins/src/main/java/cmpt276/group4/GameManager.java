@@ -22,6 +22,7 @@ import cmpt276.group4.Reward.RewardFactory;
 import cmpt276.group4.Reward.RewardInitialization;
 
 import cmpt276.group4.Room.Room;
+import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.Room.RoomInitialization;
 import cmpt276.group4.Room.Tile;
 import cmpt276.group4.Room.Tombstone;
@@ -136,7 +137,10 @@ public class GameManager {
         RoomInitialization initialization_room = new RoomInitialization();
         initialization_room.setX(12);
         initialization_room.setY(12);
-        room = initialization_room.createRoom();
+
+        RoomFactory roomfactory = new RoomFactory();
+        initialization_room.initializeRoom(gameLevel.BASIC, roomfactory);
+        room = initialization_room.initializeRoom(gameLevel.BASIC, roomfactory);
 
 
         record =  RecordUsedPlace.getInstance();
@@ -168,26 +172,11 @@ public class GameManager {
         }
 
         //walls being created
-        Position wallPosition1 = record.getRandomFromAvailablePosition();
-        Obstacle wall1 = new Wall(wallPosition1);
-        RecordUsedPlace.getInstance().addElementToMap(wall1);
-        Position wallPosition2 = record.getRandomFromAvailablePosition();
-        Obstacle wall2 = new Wall(wallPosition2);
-        RecordUsedPlace.getInstance().addElementToMap(wall2);
-        Position wallPosition3 = record.getRandomFromAvailablePosition();
-        Obstacle wall3 = new Wall(wallPosition3);
-        RecordUsedPlace.getInstance().addElementToMap(wall3);
-
-        //Tombstones being created
-        Position tombPosition1 = record.getRandomFromAvailablePosition();
-        Obstacle tomb1 = new Tombstone(tombPosition1);
-        RecordUsedPlace.getInstance().addElementToMap(tomb1);
-        Position tombPosition2 = record.getRandomFromAvailablePosition();
-        Obstacle tomb2 = new Tombstone(tombPosition2);
-        RecordUsedPlace.getInstance().addElementToMap(tomb2);
-        Position tombPosition3 = record.getRandomFromAvailablePosition();
-        Obstacle tomb3 = new Tombstone(tombPosition3);
-        RecordUsedPlace.getInstance().addElementToMap(tomb3);
+        //Position wallPosition1 = record.getRandomFromAvailablePosition();
+        //Obstacle wall1 = new Wall(wallPosition1);
+        //RecordUsedPlace.getInstance().addElementToMap(wall1);
+      
+    
 
         GameConfig gameConfig=new GameConfig();
         rewardFactory = new RewardFactory();
