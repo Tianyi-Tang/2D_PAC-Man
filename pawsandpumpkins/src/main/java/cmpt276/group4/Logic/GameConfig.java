@@ -5,6 +5,7 @@ import java.util.List;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.gameLevel;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 public class GameConfig {
@@ -12,7 +13,6 @@ public class GameConfig {
     private int roomRow = 16;
     // obstacle
     protected List<Position> wallPositions;
-
     protected int numberOfObstacles;
     // enemies
     protected int numberOfSpiders;
@@ -22,39 +22,41 @@ public class GameConfig {
     protected int numberOfRegularRewards;
     protected int numberOfBonusRewards;
     public static GameConfig instance;
+    private GameDifficultyConfig gameLevelConfig;
 
-    public void setWallPositions(List<Position> wallPositions) {
-        if (this.wallPositions == null) {
-            this.wallPositions = new ArrayList<>();
-        }
-        this.wallPositions.clear();
-            if (wallPositions != null && !wallPositions.isEmpty()) {
-            for (Position pos : wallPositions) {
-                this.wallPositions.add(new Position(pos.getX_axis(), pos.getY_axis()));
-            }
-        }
-    }
-    public static synchronized GameConfig getGameConfigInstance(){
-        if(instance ==null)
+    public static synchronized GameConfig getGameConfigInstance() {
+        if (instance == null)
             instance = new GameConfig();
         return instance;
     }
-    
 
-    public GameConfig(int numberOfObstacles, int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts,
-            int numberOfRegularRewards, int numberOfBonusRewards) {
-        this.numberOfObstacles = numberOfObstacles;
-        this.numberOfSpiders = numberOfSpiders;
-        this.numberOfBasicGhosts = numberOfBasicGhosts;
-        this.numberOfAdvancedGhosts = numberOfAdvancedGhosts;
-        this.numberOfRegularRewards = numberOfRegularRewards;
-        this.numberOfBonusRewards = numberOfBonusRewards;
+    GameConfig(gameLevel level) {
+        switch (level) {
+            case BASIC:
+                gameLevelConfig = new BasicConfig();
+                break;
+            case MEDIUM:
+                gameLevelConfig = new MediumConfig();
+                break;
+            case HARD:
+            default:
+                gameLevelConfig = new HardConfig();
+                break;
+        }
+        numberOfObstacles = gameLevelConfig.getNumberOfObstacles();
+        numberOfSpiders = gameLevelConfig.getNumberOfSpiders();
+        numberOfBasicGhosts = gameLevelConfig.getNumberOfBasicGhosts();
+        numberOfAdvancedGhosts = gameLevelConfig.getNumberOfAdvancedGhosts();
+        numberOfRegularRewards = gameLevelConfig.getNumberOfRegularRewards();
+        numberOfBonusRewards = gameLevelConfig.getNumberOfBonusRewards();
+        wallPositions = gameLevelConfig.getWallPositions();
 
     }
 
     public GameConfig() {
-         wallPositions = new ArrayList<Position>();
+        wallPositions = new ArrayList<Position>();
     }
+
     public int getRoomColumn() {
         return roomColumn;
     }
@@ -95,16 +97,14 @@ public class GameConfig {
         return numberOfAdvancedGhosts;
     }
 
-    public void initializeWallPosition(int[] arrayX, int[] arrayY, List<Position> currentWallPositions) {
+    // public GameConfig(int numberOfObstacles, int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts,
+    //         int numberOfRegularRewards, int numberOfBonusRewards) {
+    //     this.numberOfObstacles = numberOfObstacles;
+    //     this.numberOfSpiders = numberOfSpiders;
+    //     this.numberOfBasicGhosts = numberOfBasicGhosts;
+    //     this.numberOfAdvancedGhosts = numberOfAdvancedGhosts;
+    //     this.numberOfRegularRewards = numberOfRegularRewards;
+    //     this.numberOfBonusRewards = numberOfBonusRewards;
 
-        if (arrayX.length == arrayY.length) {
-            for (int i = 0; i < arrayX.length; i++) {
-                currentWallPositions.add(new Position(arrayX[i], arrayY[i]));
-            }
-        } else {
-            // different lengths
-            System.out.println("Error: arrayX and arrayY have different lengths.");
-        }
-    }
-
+    // }
 }
