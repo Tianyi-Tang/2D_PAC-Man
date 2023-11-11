@@ -214,12 +214,14 @@ public class GameManager {
 
     public void transformToLoadingScreen(gameLevel level){
         if(status == GameStatus.MainPanel){
+            this.level = level;
             layout.show(cardContainer, "load");
             loadPanel.createTimeLine();
             status = GameStatus.LoadingPanel;
         }
     }
 
+    
     public boolean roomAlreadyGenerate(){
         return room != null;
     }
