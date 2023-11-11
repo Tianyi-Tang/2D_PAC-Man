@@ -5,7 +5,6 @@ import cmpt276.group4.Reward.BonusReward;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 import java.util.List;
-import cmpt276.group4.Time;
 import java.awt.*;
 
 public class MangeBonusReward {
@@ -51,14 +50,14 @@ public class MangeBonusReward {
 
 
             Reward reward = bonusRewards.get(bonusRewardIndex);
-            Time time = new Time();
-            int gameTime= time.time;
-            if(reward.shouldDraw(gameTime)){
-                reward.draw(g2);
-                bonusRewardIndex++;
+            // Time time = new Time();
+            // int gameTime= time.time;
+            // if(reward.shouldDraw(gameTime)){
+            //     reward.draw(g2);
+            //     bonusRewardIndex++;
 
         }
 
     }
 }
-}
+

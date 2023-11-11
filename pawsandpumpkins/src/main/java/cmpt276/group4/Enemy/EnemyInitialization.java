@@ -58,6 +58,7 @@ public class EnemyInitialization {
         + advancedGhost) + " enemies.");
     }
 
+
     public gameLevel getGameLevel() {
         return gameLevel;
     }

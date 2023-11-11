@@ -4,11 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import java.sql.Time;
 
 import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
+import cmpt276.group4.GameTime;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Player player;
 
     private Thread gameThread;
+    private GameTime time;
 
 
     public GamePanel() {
@@ -68,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
         double iteration = 0;
         double last_time = System.nanoTime();
         double currentTime;
+        time = new GameTime();
 
         while (gameThread != null) {
             currentTime = System.nanoTime();
@@ -95,6 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
         } else {
             enemyMoveCounter++;
         }
+        time.countTime();
     }
 
     @Override

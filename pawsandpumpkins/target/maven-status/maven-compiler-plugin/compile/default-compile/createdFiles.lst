@@ -37,11 +37,11 @@ cmpt276/group4/Room/Tile.class
 cmpt276/group4/Logic/BasicConfig.class
 cmpt276/group4/WindowAndInput/MainPanel.class
 cmpt276/group4/GameManager.class
+cmpt276/group4/GameTime.class
 cmpt276/group4/Logic/GameConfig$1.class
 cmpt276/group4/Logic/MediumConfig.class
 cmpt276/group4/Reward/RewardFactory.class
 cmpt276/group4/Player/PlayerGenerator.class
-cmpt276/group4/Enemy/Spider$1.class
 cmpt276/group4/Enemy/EnemyType.class
 cmpt276/group4/Reward/MangeBonusReward.class
 cmpt276/group4/UI/drawNum.class
@@ -57,7 +57,6 @@ cmpt276/group4/Enemy/Ghost$1.class
 cmpt276/group4/Player/PlayerMovement.class
 cmpt276/group4/Reward/Reward.class
 cmpt276/group4/Reward/Candy.class
-cmpt276/group4/Time.class
 cmpt276/group4/Enemy/EnemyMovement.class
 cmpt276/group4/Reward/RewardFactory$1.class
 cmpt276/group4/WindowAndInput/MainPanel$4.class
