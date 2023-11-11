@@ -28,7 +28,7 @@ public class MediumConfig extends GameDifficultyConfig {
         numberOfRegularRewards = 6;
         numberOfBonusRewards = 3;
 
-        switchMap(count, wallPositions, mediumMaze1_arrayX, mediumMaze1_arrayY, mediumMaze2_arrayX, easyMaze2_arrayY);
+        switchMap(count, wallPositions, mediumMaze1_arrayX, mediumMaze1_arrayY, mediumMaze2_arrayX, mediumMaze2_arrayY);
         count++;
     }
 
