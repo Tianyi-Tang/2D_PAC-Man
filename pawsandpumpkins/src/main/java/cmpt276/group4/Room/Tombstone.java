@@ -13,8 +13,8 @@ import javax.imageio.ImageIO;
 
 public class Tombstone extends Obstacle {
     BufferedImage tombImage;
-    public Tombstone(Position position) {
-        super(position);
+    public Tombstone(Obstacletype type, int amount, Position position ) {
+        super(type, amount, position);
         initialWallImage();
         setPlayerAccess();
     }

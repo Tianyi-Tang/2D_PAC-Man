@@ -1,6 +1,7 @@
 cmpt276/group4/Enemy/EnemyFactory$1.class
 cmpt276/group4/Movement.class
 cmpt276/group4/Room/RoomInitialization.class
+cmpt276/group4/UI/NumberPanel$Status.class
 cmpt276/group4/RecordUsedPlace.class
 cmpt276/group4/Enemy/EnemyInitialization.class
 cmpt276/group4/Enemy/Ghost.class
@@ -11,6 +12,7 @@ cmpt276/group4/Main.class
 cmpt276/group4/CharacterAvaliablePosition.class
 cmpt276/group4/Player/Player.class
 cmpt276/group4/GameStatus.class
+cmpt276/group4/Room/RoomInitialization$1.class
 cmpt276/group4/Reward/GeneralReward.class
 cmpt276/group4/WindowAndInput/MainPanel$2.class
 cmpt276/group4/Enemy/EnemyInitialization$1.class
@@ -58,5 +60,6 @@ cmpt276/group4/Player/PlayerMovement.class
 cmpt276/group4/Reward/Reward.class
 cmpt276/group4/Reward/Candy.class
 cmpt276/group4/Enemy/EnemyMovement.class
+cmpt276/group4/Room/Obstacletype.class
 cmpt276/group4/Reward/RewardFactory$1.class
 cmpt276/group4/WindowAndInput/MainPanel$4.class

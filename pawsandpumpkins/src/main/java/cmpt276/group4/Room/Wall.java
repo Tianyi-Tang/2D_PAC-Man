@@ -14,17 +14,12 @@ import javax.imageio.ImageIO;
 
 public class Wall extends Obstacle {
     BufferedImage wallImage;
-    public Wall(Position position) {
-        super(position);
+    public Wall(Obstacletype type, int amount, Position position) {
+        super(type, amount, position);
+        System.out.print("testest" + position);
         initialWallImage();
         setPlayerAccess();
         System.out.println("t/f " + getPlayerAvaliable());
-    }
-
-    public Wall CreateWall(Position position) {
-         Wall wall = new Wall(position);
-         RecordUsedPlace.getInstance().addElementToMap(wall);
-         return wall;
     }
     
 

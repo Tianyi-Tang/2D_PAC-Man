@@ -20,7 +20,6 @@ public class Room {
     
     //room size is it avaliable 
     public Room(int max_X, int max_Y) {
-
         if (GamePanel.maxScreenRow < max_X || GamePanel.maxScreenCol < max_Y){
             System.out.println("Screen too small");
         }
