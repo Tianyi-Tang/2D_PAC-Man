@@ -191,10 +191,8 @@ public class GameManager {
 
         GameConfig gameConfig=new GameConfig();
         rewardFactory = new RewardFactory();
-        rewardInitialization = new RewardInitialization(gameConfig,rewardFactory);
-        rewardInitialization.GenerateReward();
-        rewardInitialization.GenerateBonusRewards();
-
+        rewardInitialization = new RewardInitialization(rewardFactory);
+        rewardInitialization.generateReward();
     }
 
     public void createNumberPanel(){

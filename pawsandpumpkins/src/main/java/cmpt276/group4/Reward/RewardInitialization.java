@@ -11,12 +11,17 @@ public class RewardInitialization {
     private RewardFactory rFactory; // Assume this is initialized somewhere
 
     // Constructor takes GameConfig instance
-    public RewardInitialization(GameConfig gameConfig, RewardFactory rFactory) {
-        this.gameConfig = gameConfig;
+    public RewardInitialization(RewardFactory rFactory) {
+        this.gameConfig = GameConfig.getGameConfigInstance();
         this.rFactory = rFactory;
     }
 
-    public void GenerateReward(){
+    public void generateReward(){
+        generateRegularReward();
+        generateBonusRewards();
+    }
+
+    private void generateRegularReward(){
         int numberOfRegularRewards = gameConfig.getNumberOfRegularRewards();
         System.out.println(numberOfRegularRewards);
         System.out.println("+ Get number of reward!");
@@ -24,7 +29,7 @@ public class RewardInitialization {
         generalRewards.addAll(newRewards);
     }
 
-    public void GenerateBonusRewards(){
+    private void generateBonusRewards(){
         int numberOfBonusRewards = gameConfig.getNumberOfBonusRewards();
         System.out.println(numberOfBonusRewards);
         System.out.println("+ Get number of bonusReward!");
