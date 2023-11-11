@@ -8,6 +8,7 @@ import cmpt276.group4.RecordUsedPlace;
 
 public class RewardFactory {
 
+
     public List<Reward> createReward(RewardType type, int number) {
         RecordUsedPlace recordUsedPlace = RecordUsedPlace.getInstance();
         List<Reward> rewards = new ArrayList<>();

@@ -12,6 +12,7 @@ public interface Reward {
     boolean isAvailable();
     void deleteImage();
     void addBenefit(Player player);
+    boolean shouldDraw(long time);
 
 
 
