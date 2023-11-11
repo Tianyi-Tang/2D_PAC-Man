@@ -16,11 +16,10 @@ public class NumberPanel extends JPanel {
     private int startX, startY;
     String directory;
 
-
     public NumberPanel() {
-        // loadNumberImages(); // Load images when an instance is created
-        this.imageWidth = 10; // default width
-        this.imageHeight = 10; // default height
+        loadNumberImages(); // Load images when an instance is created
+        this.imageWidth = 8; // default width
+        this.imageHeight = 8; // default height
         this.startX = 50; // default start X
         this.startY = 50; // default start Y
     }
@@ -29,15 +28,19 @@ public class NumberPanel extends JPanel {
         directory = System.getProperty("user.dir");
         for (int i = 0; i < NUM_IMAGES; i++) {
             try {
-                //System.out.println(directory+"/res/num/" + i + ".png");
-                //digitImages[i] = ImageIO.read(new File(directory+"/pawsandpumpkins/res/num/" + "one.png"));
+                System.out.println(directory + "\\pawsandpumpkins\\res\\n" + //
+                        "um" + i + ".png");
+                // digitImages[i] = ImageIO.read(new File(directory+"/pawsandpumpkins/res/num/"
+                // + "one.png"));
 
-                digitImages[i] = ImageIO.read(new File(directory+"/res/num/" + i + ".png"));
+                // digitImages[i] = ImageIO.read(new File(directory+"/res/num/" + i + ".png"));
+                digitImages[i] = ImageIO.read(new File(directory + "/pawsandpumpkins/res/num/" + i + ".png"));
             } catch (IOException e) {
                 e.printStackTrace(); // Or handle the exception as needed
             }
         }
     }
+
     public void initialize() {
         loadNumberImages();
     }
@@ -55,40 +58,66 @@ public class NumberPanel extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawNumber(g, numberToDisplay);
     }
 
     // private void drawNumber(Graphics g, int number) {
-    //     String numberStr = String.valueOf(number);
-    //     int x = startX;
+    // String numberStr = String.valueOf(number);
+    // int x = startX;
 
-    //     for (char c : numberStr.toCharArray()) {
-    //         int digit = Character.getNumericValue(c);
-    //         if (digit >= 0 && digit < digitImages.length) {
-    //             g.drawImage(digitImages[digit], x, startY, imageWidth, imageHeight, this);
-    //             x += imageWidth; // Move to the right for the next digit
-    //         }
-    //     }
+    // for (char c : numberStr.toCharArray()) {
+    // int digit = Character.getNumericValue(c);
+    // if (digit >= 0 && digit < digitImages.length) {
+    // g.drawImage(digitImages[digit], x, startY, imageWidth, imageHeight, this);
+    // x += imageWidth; // Move to the right for the next digit
+    // }
+    // }
+    // }
+    // private void drawNumber(Graphics g, int number) {
+    // System.out.println("in drae number: "+ number);
+    // String numberStr = String.valueOf(number);
+    // int x = startX;
+
+    // for (char c : numberStr.toCharArray()) {
+    // int digit = Character.getNumericValue(c);
+    // System.out.println("for loop");
+    // if (digit >= 0 && digit < digitImages.length) {
+    // System.out.println("first if loop");
+    // BufferedImage img = digitImages[digit];
+    // System.out.println("truing to read digit img: "+ digit);
+    // if (img != null) {
+    // System.out.println("there's image read");
+    // // Print the size of each image for debugging
+    // System.out.println("Digit: " + digit + ", Width: " + img.getWidth() + ",
+    // Height: " + img.getHeight());
+
+    // g.drawImage(img, x, startY, imageWidth, imageHeight, this);
+    // x += imageWidth; // Move to the right for the next digit
+    // }
+    // }
+    // }
     // }
     private void drawNumber(Graphics g, int number) {
         String numberStr = String.valueOf(number);
         int x = startX;
-    
+
         for (char c : numberStr.toCharArray()) {
             int digit = Character.getNumericValue(c);
             if (digit >= 0 && digit < digitImages.length) {
                 BufferedImage img = digitImages[digit];
                 if (img != null) {
-                    // Print the size of each image for debugging
-                    System.out.println("Digit: " + digit + ", Width: " + img.getWidth() + ", Height: " + img.getHeight());
-    
-                    g.drawImage(img, x, startY, imageWidth, imageHeight, this);
-                    x += imageWidth; // Move to the right for the next digit
+                    // int drawWidth = img.getWidth(); // Use natural image width
+                    // int drawHeight = img.getHeight(); // Use natural image height
+                    int drawWidth = 60; // Use natural image width
+                    int drawHeight = 60; // Use natural image height
+
+                    g.drawImage(img, x, startY, drawWidth, drawHeight, this);
+                    x += drawWidth; // Move right by the width of the image
                 }
             }
         }
     }
-    
+
 }

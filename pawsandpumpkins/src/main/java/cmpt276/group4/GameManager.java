@@ -2,6 +2,7 @@ package cmpt276.group4;
 
 
 import java.awt.CardLayout;
+
 import java.util.ArrayList;
 
 import java.util.Timer;
@@ -94,9 +95,6 @@ public class GameManager {
         window.pack();
         window.setLocationRelativeTo(null);
 
-        numberPanel = new NumberPanel();
-        numberPanel.initialize();
-        numberPanel.setNumber(20);
 
         
     }
@@ -122,6 +120,10 @@ public class GameManager {
         layout.show(cardContainer, "main");
 
         window.setVisible(true);
+
+
+
+
     }
 
     public void createWindows(){
@@ -225,6 +227,8 @@ public class GameManager {
             layout.show(cardContainer, "load");
             loadPanel.createTimeLine();
             status = GameStatus.LoadingPanel;
+
+
         }
     }
 

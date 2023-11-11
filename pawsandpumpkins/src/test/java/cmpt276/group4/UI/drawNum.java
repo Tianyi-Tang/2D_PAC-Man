@@ -10,15 +10,17 @@ public class drawNum {
         JFrame frame = new JFrame("Number Display");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        int size = 48*16; // Size for a square window
+        int size = 16*48; // Size for a square window
         frame.setSize(new Dimension(size, size)); // Set the frame to be a square
         frame.getContentPane().setBackground(Color.BLACK); // Set background color to black
 
         NumberPanel numberPanel = new NumberPanel();
-        numberPanel.setNumber(12); // Example number
-        numberPanel.setPositionAndSize(50, 50, 50, 50); // Example position and size
+        //numberPanel.initialize();
+        numberPanel.setNumber(7485); // Example number
+        numberPanel.setPositionAndSize(10, 10, 100, 100); // Example position and size
 
         frame.add(numberPanel);
         frame.setVisible(true);
+        System.out.println("DONE");
     }
 }
