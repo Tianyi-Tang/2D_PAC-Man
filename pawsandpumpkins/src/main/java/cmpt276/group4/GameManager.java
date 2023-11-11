@@ -85,6 +85,7 @@ public class GameManager {
         cardContainer.add(gamePanel,"game");
         cardContainer.add(mainPanel,"main");
         cardContainer.add(loadPanel,"load");
+        cardContainer.add(numberPanel, "gameEnd");
 
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -195,7 +196,9 @@ public class GameManager {
     }
 
     public void createNumberPanel(){
-        
+        status = GameStatus.Win;
+        layout.show(cardContainer, "gameEnd");
+        window.setVisible(true);
     }
 
     public void RecordUsedPlaceAviable(){
