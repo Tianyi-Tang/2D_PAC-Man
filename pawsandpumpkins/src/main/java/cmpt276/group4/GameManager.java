@@ -236,11 +236,11 @@ public class GameManager {
         }
     }
 
-
-    private void endOfGame(){
-        layout.show(cardContainer, "gameEnd");
-        numberPanel.init(status);
-        numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum(), player.getDeductScore(), player.totalScore());
+    public void leaveDoor(){
+        if(player.playerWin()){
+            status = GameStatus.Win;
+            endOfGame();
+        }
     }
 
     public boolean isGameEnd(){
@@ -248,6 +248,12 @@ public class GameManager {
             return true;
         else
             return false;
+    }
+
+    private void endOfGame(){
+        layout.show(cardContainer, "gameEnd");
+        numberPanel.init(status);
+        numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum(), player.getDeductScore(), player.totalScore());
     }
 
     // Call this method in game update loop to check for mouse input

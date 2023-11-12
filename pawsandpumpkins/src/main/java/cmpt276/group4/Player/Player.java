@@ -25,6 +25,7 @@ public class Player implements KeyMovingObserver {
     private Door[] doors;
     private int generalReward_require;
     private boolean checkDoor = false;
+    private boolean wining = false;
 
     private boolean move_up, move_down, move_left, move_right = false;
     private MoveDirection direction = MoveDirection.Down;
@@ -76,6 +77,10 @@ public class Player implements KeyMovingObserver {
 
     public Position getPosition(){
         return playerPosition;
+    }
+
+    public boolean playerWin(){
+        return wining;
     }
 
     public void setPlayerMovement(PlayerMovement playerMovement){
@@ -225,6 +230,7 @@ public class Player implements KeyMovingObserver {
     private void updatePosition(){
         if(movement.isPositionAvailable(destination)){
             playerPosition.setPosition(destination);
+            outOfDoor();
             Reward reward = RecordUsedPlace.getInstance().playerGetReward();
             if(reward != null)
                 reward.addBenefit(this);
@@ -232,7 +238,6 @@ public class Player implements KeyMovingObserver {
             if(enemy != null){
                 GameManager.getInstance().enemyCatachPlayer(enemy.getMovable());
             }
-                
         }
             
     }
@@ -241,7 +246,8 @@ public class Player implements KeyMovingObserver {
         if(checkDoor){
             for (Door door : doors) {
                 if(playerPosition.equal(door.getPosition())){
-                    
+                    wining = true;
+                    GameManager.getInstance().leaveDoor();
                 }
                     
             }
