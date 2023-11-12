@@ -24,10 +24,8 @@ public class Obstacle implements CharacterAvaliablePosition {
     public Obstacle(Obstacletype type, int amount, Position position) {
         // this.position = position;
         record = RecordUsedPlace.getInstance();
-        System.out.print("testest: " + position);
         initialWallImage();
         setObstaclePosition();
-        System.out.print("testest: " + position);
     }
 
     /**

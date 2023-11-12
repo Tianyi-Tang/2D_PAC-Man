@@ -36,7 +36,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     private RecordUsedPlace record;
     private GameConfig config;
-    private boolean generateconfi,generateRoom, generateAllTile, generateAllObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
+    private boolean generateconfi,generateRoom, generateAllTile, generateWall,generateObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
 
 
     public LoadingPanel(){
@@ -99,10 +99,12 @@ public class LoadingPanel extends JPanel implements Runnable {
             checkRoom();
         }
         else if(!generateAllTile){
-            System.out.println("tile");
             checkTitle();
         }
-        else if(!generateAllObstacle){
+        else if(!generateWall){
+
+        }
+        else if(!generateObstacle){
              System.out.println("obstacle");
             checkObstacle();
         }
@@ -143,7 +145,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     private void checkObstacle (){
         if(record.getObstaclesNumber() == config.getNumberOfObstacles()){
-            generateAllObstacle = true;
+            generateObstacle = true;
             createEnemy();
         }
     }
@@ -181,6 +183,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     private void  createObstacle(){
         room_initialization.iWalls(factory);
+        room_initialization.iTiles(factory);
     }
 
     private void createEnemy(){
@@ -211,7 +214,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void initialLoading(){
-        generateRoom = generateAllTile = generateAllObstacle =generateAllEnemies = generateAllRewards = generatePlayer =false;
+        generateRoom = generateAllTile = generateObstacle = generateObstacle =generateAllEnemies = generateAllRewards = generatePlayer =false;
         loadingThread = null;
         System.out.println("Success!!");
     }
