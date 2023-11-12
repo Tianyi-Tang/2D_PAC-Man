@@ -1,6 +1,9 @@
 package cmpt276.group4.Room;
 
 import cmpt276.group4.Room.RoomInitialization;
+
+import java.util.List;
+
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 public class RoomFactory {
@@ -13,12 +16,23 @@ public class RoomFactory {
     }
 
     public void createObstacle(Obstacletype type, Position position, int amount) {
-        if(amount > 0){
-            System.out.println("Enter If loop");
-            Obstacle obstacle = new Obstacle(type,amount,position);
-            RecordUsedPlace.getInstance().addElementToMap(obstacle);
-            amount--;
+        if (type == Obstacletype.WALL){
+            while(amount > 0){
+                System.out.println("Enter If loop");
+                Obstacle obstacle = new Wall(type,amount,position);
+                RecordUsedPlace.getInstance().addElementToMap(obstacle);
+                amount--;
+            }
         }
+        else{
+            while(amount > 0){
+                System.out.println("Enter If loop");
+                Obstacle obstacle = new Tombstone(type,amount,position);
+                RecordUsedPlace.getInstance().addElementToMap(obstacle);
+                amount--;
+            }
+        }
+
         //return obstacle;
     }
 
@@ -26,8 +40,10 @@ public class RoomFactory {
         return new Door(IsOpen);
     }
 
-    public Tile creaTile(Position position){
-        return new Tile(position);
+    public void createTile(List<Position> positions){
+        for (Position position : positions) {
+            RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
+        };
     }
 }
 

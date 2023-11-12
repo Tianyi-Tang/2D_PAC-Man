@@ -10,9 +10,15 @@ import javax.swing.JProgressBar;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.Enemy.EnemyFactory;
+import cmpt276.group4.Enemy.EnemyInitialization;
 import cmpt276.group4.Logic.GameConfig;
+import cmpt276.group4.Player.Player;
+import cmpt276.group4.Player.PlayerGenerator;
 import cmpt276.group4.Reward.RewardFactory;
 import cmpt276.group4.Reward.RewardInitialization;
+import cmpt276.group4.Room.RoomFactory;
+import cmpt276.group4.Room.RoomInitialization;
 
 public class LoadingPanel extends JPanel implements Runnable {
 
@@ -25,6 +31,8 @@ public class LoadingPanel extends JPanel implements Runnable {
     private double timeInterval = 1000000000/FPS;
     private JProgressBar progressBar;
 
+    private RoomInitialization room_initialization;
+    private RoomFactory factory;
 
     private RecordUsedPlace record;
     private GameConfig config;
@@ -91,19 +99,23 @@ public class LoadingPanel extends JPanel implements Runnable {
             checkRoom();
         }
         else if(!generateAllTile){
+            System.out.println("tile");
             checkTitle();
         }
         else if(!generateAllObstacle){
-
+             System.out.println("obstacle");
+            checkObstacle();
         }
         else if(!generateAllEnemies){
+            System.out.println("enemies");
             checkEnemy();
         }
         else if(!generateAllRewards){
-
+            System.out.println("reward");
+            checkRewards();
         }
         else{
-            
+            checkPlayer();
         }
     }
 
@@ -115,38 +127,74 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void checkRoom(){
-        if(true){
+        System.out.println("avibale:"+ record.getLengthOfAviable());
+        if(record.getLengthOfAviable() == config.areaofRoom()){
             generateRoom = true;
-            // call to generate title
+            createTitle();
         }
     }
 
     private void checkTitle(){
-        if(record.getTileNumber() == config.numberofTiles()){
+        if(record.getTileNumber() == config.areaofRoom()){
             generateAllTile = true;
-            // call to generate Obstacle
+            createObstacle();
+        }
+    }
+
+    private void checkObstacle (){
+        if(record.getObstaclesNumber() == config.getNumberOfObstacles()){
+            generateAllObstacle = true;
+            createEnemy();
         }
     }
 
     private void checkEnemy(){
-        if(true){
+        if(record.getLengthOfEnemies() == config.getTotalGhosts()){
             generateAllEnemies = true;
             createReward();
         }
     }
 
-    private void checkeReward(){
-      
+    private void checkRewards(){
+        if(record.getLengthOfRewards() == config.getAllRewardNum()){
+            generateAllRewards = true;
+            createPlayer();
+        }
+    }
+
+    private void checkPlayer(){
+        if(record.getPlayerPosition() != null){
+            generatePlayer = true;
+        }
     }
 
     private void createRoom(){
+        room_initialization = new RoomInitialization();
+        factory = new RoomFactory();
+        room_initialization.initializeRoom(config.getGameLevel(), factory);
+        room_initialization.iRoom(factory);
+    }
 
+    private void createTitle(){
+        room_initialization.iTiles(factory);
+    }
+
+    private void  createObstacle(){
+        room_initialization.iWalls(factory);
+    }
+
+    private void createEnemy(){
+        new EnemyInitialization(new EnemyFactory());
     }
 
 
     private void createReward(){
         RewardInitialization reward_initialization = new RewardInitialization(new RewardFactory());
         reward_initialization.generateReward();
+    }
+
+    private void createPlayer(){
+        record.setPlayer(PlayerGenerator.creatPlayer());
     }
 
 
@@ -165,6 +213,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void initialLoading(){
         generateRoom = generateAllTile = generateAllObstacle =generateAllEnemies = generateAllRewards = generatePlayer =false;
         loadingThread = null;
+        System.out.println("Success!!");
     }
 
 

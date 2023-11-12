@@ -1,17 +1,17 @@
 package cmpt276.group4.Enemy;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.imageio.ImageIO;
-
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
-import cmpt276.group4.Player.Player;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
+/**
+ * Represents a Spider enemy in the game which is a fixed enemy.
+ * This class handles the behavior and rendering of a spider-type enemy.
+ */
 public class Spider implements Enemy {
 
     private boolean movable = false;
@@ -20,16 +20,25 @@ public class Spider implements Enemy {
     private BufferedImage currentImage;
     private RecordUsedPlace record;
     private Position playerPosition;
+    static boolean isPlayerOnGhost;
 
+    /**
+     * Enum for different spider imgage
+     */
     public enum SpiderType {
         type_spider_1,
         type_spider_2;
     }
 
+    /**
+     * Constructs a Spider enemy, choosing its type based on the number of enemies
+     * already present.
+     * The spider is positioned at a random position after checking vacancy.
+     */
     Spider() {
         getPlayerPosition();
         record = RecordUsedPlace.getInstance();
-        //get the list of enemy from recordUsedPlace and randomly picked one.
+        // get the list of enemy from recordUsedPlace and randomly picked one.
         switch ((record.getEnemyList().size()) % 2) {
             case 1:
                 spideType = SpiderType.type_spider_1;
@@ -39,67 +48,98 @@ public class Spider implements Enemy {
                 spideType = SpiderType.type_spider_2;
                 break;
         }
-        //System.out.println("Spider.java: Creating spider");
+        // System.out.println("Spider.java: Creating spider");
         getEnemyImage();
         Position potentialPosition = new Position(0, 0);
         potentialPosition.equal(playerPosition);
 
         do {
             potentialPosition = record.getRandomSafePosition();
-        } while (potentialPosition.equal(playerPosition) && !record.containsCandyAtPosition(potentialPosition));
-
-
+        } while (potentialPosition.equal(playerPosition) || record.containsCandyAtPosition(potentialPosition));
 
         enemyPosition.setPosition(potentialPosition);
         record.addEnemy(this);
 
     }
 
+    /**
+     * Retrieves the current position of the player.
+     */
     private void getPlayerPosition() {
 
         RecordUsedPlace record = RecordUsedPlace.getInstance();
         playerPosition = record.getPlayerPosition();
     }
 
-    void deleteImage() {
-        // not done yet
-    }
-    
+    /**
+     * Gets the current position of the spider.
+     * 
+     * @return The current position of the spider.
+     */
     @Override
-    public Position getPosition(){
+    public Position getPosition() {
         return enemyPosition;
     }
 
+    /**
+     * Checks if the spider has caught the player and updates the corresponding
+     * flag.
+     */
     @Override
     public void catchPlayer() {
         Position playerPosition = record.getPlayerPosition();
         if (playerPosition.equals(enemyPosition)) {
-            //tell RecordUsedPlace to remove spider
-            System.out.println("Bagel stepped on spider!");
+            isPlayerOnGhost = true;
+        } else {
+            isPlayerOnGhost = false;
         }
     }
 
+    /**
+     * Gets the current enemy position.
+     * 
+     * @return The current enemy position.
+     */
     @Override
     public Position getEnemyPosition() {
         return enemyPosition;
     }
 
+    /**
+     * Sets a new position for this spider.
+     * 
+     * @param newPosition The new position to set.
+     */
     @Override
     public void setEnemyPosition(Position newPosition) {
         enemyPosition = newPosition;
     }
 
+    /**
+     * Checks if the spider is movable.
+     * 
+     * @return false.
+     */
     @Override
     public boolean isMovable() {
         return movable;
     }
 
+    /**
+     * Draws the spider on the game panel.
+     * 
+     * @param g2 The Graphics2D object used for drawing.
+     */
     @Override
+
     public void draw(Graphics2D g2) {
         g2.drawImage(currentImage, enemyPosition.getX_axis(), enemyPosition.getY_axis(), GamePanel.tileSize,
                 GamePanel.tileSize, null);
     }
 
+    /**
+     * Loads the image for this spider based on its type.
+     */
     private void getEnemyImage() {
         try {
             String directory = System.getProperty("user.dir");

@@ -23,16 +23,12 @@ public class RewardInitialization {
 
     private void generateRegularReward(){
         int numberOfRegularRewards = gameConfig.getNumberOfRegularRewards();
-        System.out.println(numberOfRegularRewards);
-        System.out.println("+ Get number of reward!");
         List<Reward> newRewards = rFactory.createReward(RewardType.Candy, numberOfRegularRewards);
         generalRewards.addAll(newRewards);
     }
 
     private void generateBonusRewards(){
         int numberOfBonusRewards = gameConfig.getNumberOfBonusRewards();
-        System.out.println(numberOfBonusRewards);
-        System.out.println("+ Get number of bonusReward!");
         List<Reward> newRewards = rFactory.createReward(RewardType.PumpkinHead, numberOfBonusRewards);
         bonusRewards.addAll(newRewards);
     }

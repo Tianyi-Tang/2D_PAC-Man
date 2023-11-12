@@ -5,6 +5,10 @@ import java.awt.CardLayout;
 
 import java.util.ArrayList;
 
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
+import java.util.List;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -130,18 +134,23 @@ public class GameManager {
 
         listener = new keyboardListener();
         window.addKeyListener(listener);
+
+         GameConfig gameConfig=new GameConfig();
+        gameConfig.passGameLevel(gameLevel.HARD);
+       
         
         RoomInitialization initialization_room = new RoomInitialization();
-        initialization_room.setX(12);
-        initialization_room.setY(12);
-
         RoomFactory roomfactory = new RoomFactory();
-        initialization_room.initializeRoom(gameLevel.BASIC, roomfactory);
-        room = initialization_room.initializeRoom(gameLevel.BASIC, roomfactory);
+        initialization_room.iRoom(roomfactory);
+
+        //RoomFactory roomfactory = new RoomFactory();
+        initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
+        
+        //room = initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
 
 
         record =  RecordUsedPlace.getInstance();
-       
+        
         
         
         //Position wallPosition1 = new Position(10, 10);
@@ -167,36 +176,29 @@ public class GameManager {
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
 
+        initialization_room.iWalls(roomfactory);
+        System.out.println("game manager, crete room");
+        initialization_room.iTombs(roomfactory);
+
         //walls being created
         //Position wallPosition1 = record.getRandomFromAvailablePosition();
         //Obstacle wall1 = new Wall(wallPosition1);
         //RecordUsedPlace.getInstance().addElementToMap(wall1);
       
-    
-
-        GameConfig gameConfig=new GameConfig();
-        gameConfig.passGameLevel(gameLevel.HARD);
+        enemyFactory = new EnemyFactory();
+        enemyInitialization = new EnemyInitialization(enemyFactory); 
 
         rewardFactory = new RewardFactory();
         rewardInitialization = new RewardInitialization(rewardFactory);
         rewardInitialization.generateReward();
-        
-        enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(enemyFactory); 
-
-        
-
-        
-
-
-
-
-
 
     }
 
     public void createNumberPanel(){
         status = GameStatus.Win;
+
+
+        
         layout.show(cardContainer, "gameEnd");
         window.setVisible(true);
     }

@@ -2,6 +2,8 @@ package cmpt276.group4.UI;
 
 import javax.swing.JFrame;
 
+import cmpt276.group4.GameStatus;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -15,15 +17,13 @@ public class NumberPanelTest {
 
         
         NumberPanel numberPanel = new NumberPanel();
-        numberPanel.init(true);
-      
-
+        numberPanel.init(GameStatus.GameOver);
         numberPanel.setNumbers(123,3435,12412,12542,23432);
 
       
 
         frame.add(numberPanel);
         frame.setVisible(true);
-        System.out.println("DONE");
+
     }
 }

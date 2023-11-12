@@ -17,7 +17,7 @@ public class Candy extends GeneralReward {
     private int score =1;
     private BufferedImage cd1 , cd2, currentImage;
     private RecordUsedPlace record;
-    private boolean isBonusReward = false;
+    public boolean isBonusReward = false;
 
 
     GamePanel gp;
@@ -52,6 +52,10 @@ public class Candy extends GeneralReward {
     @Override
     public boolean isAvailable() {
         return false;
+    }
+    @Override
+    public boolean isBonusReward(){
+        return isBonusReward;
     }
 
     @Override
@@ -88,7 +92,7 @@ public class Candy extends GeneralReward {
         }
     }
     @Override
-    public boolean shouldDraw(long gametime){
+    public boolean shouldDraw(long time){
         return true;
     }
     @Override
