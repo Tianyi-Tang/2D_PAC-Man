@@ -44,8 +44,11 @@ public class Player implements KeyMovingObserver {
    private  BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
    private  BufferedImage currentImage = null;
 
+   /**
+    * constructor for the player 
+    */
     Player(){
-        playerPosition = new Position(2 * GamePanel.tileSize, 2 * GamePanel.tileSize);
+        playerPosition = new Position(1 * GamePanel.tileSize, 1 * GamePanel.tileSize);
         movement = new PlayerMovement();
         getPlayerImage();
         destination = new Position(0, 0);
