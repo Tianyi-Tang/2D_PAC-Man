@@ -255,13 +255,6 @@ public class RecordUsedPlace {
         return deltaX <= range && deltaY <= range;
     }
 
-    public boolean catchPlayer(Position enemy_pos) {
-        if (enemy_pos.equal(player.getPosition()))
-            return true;
-        else
-            return false;
-    }
-
     public int getLengthOfAviable(){
         return available.size();
     }
@@ -302,6 +295,14 @@ public class RecordUsedPlace {
         for (Reward reward : generalRewards) {
             if (player.getPosition().equal(reward.getPosition()))
                 return reward;
+        }
+        return null;
+    }
+
+    public Enemy playerMeetEnemy(){
+        for(Enemy enemy : enemies){
+            if(player.getPosition().equal(enemy.getPosition()))
+                return enemy;
         }
         return null;
     }
