@@ -45,7 +45,7 @@ public class Player implements KeyMovingObserver {
    private  BufferedImage currentImage = null;
 
    /**
-    * constructor for the player 
+    * constructor for the player initlization
     */
     Player(){
         playerPosition = new Position(1 * GamePanel.tileSize, 1 * GamePanel.tileSize);
@@ -54,6 +54,10 @@ public class Player implements KeyMovingObserver {
         destination = new Position(0, 0);
     }
 
+    /**
+     * a static function to get player instance 
+     * @return the instance of Player
+     */
     public static synchronized Player getInstance(){
         if(_instance == null){
             _instance = new Player();
@@ -61,6 +65,9 @@ public class Player implements KeyMovingObserver {
         return _instance;
     }
 
+    /**
+     * try to load the player image from resource
+     */
     private void getPlayerImage(){
         try {
             //String directory = System.getProperty("user.dir");
