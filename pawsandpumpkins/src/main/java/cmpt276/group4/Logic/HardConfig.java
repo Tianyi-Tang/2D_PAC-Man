@@ -14,6 +14,10 @@ public class HardConfig extends GameDifficultyConfig {
             15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
      private static final int[] hardMaze1_arrayY = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 13, 2, 2, 2, 6, 6, 10, 10, 10, 11,
             11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+
+
+            
+
      private static final int[] hardMaze2_arrayX = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14,
             15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
      private static final int[] hardMaze2_arrayY = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 7, 7, 7, 7, 3, 3, 12, 12, 12, 12,

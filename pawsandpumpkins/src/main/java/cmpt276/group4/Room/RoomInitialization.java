@@ -1,9 +1,13 @@
 package cmpt276.group4.Room;
 
+import java.util.List;
+
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.Logic.GameConfig;
+
 
 //import cmpt276.group4.;
 
@@ -13,6 +17,8 @@ public class RoomInitialization {
     private int wall,tombstone;
     private Obstacletype obstacletype;
     private Position position;
+    private GameConfig gc;
+    private List<Position> wallPositionList;
     
     // Dont know if this is correct? should i be entering type of room?
 
@@ -20,35 +26,42 @@ public class RoomInitialization {
     // A function once called it will generate all tiles in the room
 
     // And for walls
-    public Room initializeRoom(gameLevel gameLevel, RoomFactory rmFactory) {
+    public void initializeRoom(gameLevel gameLevel, RoomFactory rmFactory) {
         //this.gameLevel = gameLevel;
         System.out.println("Creating obstacle");
-        switch (gameLevel) {
-            case BASIC:
-                wall = 3;
-                tombstone = 3;
-                break;
-            case MEDIUM:
-                wall = 6;
-                tombstone = 6;
-                break;
-            case HARD:
-                wall = 9;
-                tombstone = 9;
-                break;
-        }      
-        System.out.println("Creating obstacle");
+        // switch (gameLevel) {
+        //     case BASIC:
+        //         wall = 3;
+        //         tombstone = 3;
+        //         break;
+        //     case MEDIUM:
+        //         wall = 6;
+        //         tombstone = 6;
+        //         break;
+        //     case HARD:
+        //         wall = 9;
+        //         tombstone = 9;
+        //         break;
+        // }      
+        gc = GameConfig.getGameConfigInstance();
+        wallPositionList = gc.getWallPositions();     
+        wall = wallPositionList.size();
+        tombstone = gc.getNumberOfObstacles();
+
+        System.out.println("wall: " + wall);
+        System.out.println("tombstone: " + tombstone);
+        
+    }
+
+    public void iRoom(RoomFactory rmFactory) {
+        rmFactory.createRoom(max_X, max_Y);
+    }
+
+    public void iWalls(RoomFactory rmFactory){
         rmFactory.createObstacle(Obstacletype.WALL, position, wall);
+    }
+    public void iTombs(RoomFactory rmFactory){
         rmFactory.createObstacle(Obstacletype.TOMBSTONE, position, tombstone);
-
-        
-
-        //create obstcles
-        
-        //This shouldnt be here but when i remove it i get error
-        //RoomFactory factory = new RoomFactory(); 
-  
-        return rmFactory.createRoom(max_X, max_Y);
     }
 
 

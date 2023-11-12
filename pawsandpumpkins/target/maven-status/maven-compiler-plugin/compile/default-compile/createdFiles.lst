@@ -27,7 +27,6 @@ cmpt276\group4\UI\NumberPanel$Status.class
 cmpt276\group4\Enemy\Ghost$1.class
 cmpt276\group4\Logic\GameConfig.class
 cmpt276\group4\Reward\RewardInitialization.class
-cmpt276\group4\Room\RoomInitialization$1.class
 cmpt276\group4\Room\RoomInitialization.class
 cmpt276\group4\Player\PlayerMovement.class
 cmpt276\group4\WindowAndInput\MainPanel.class

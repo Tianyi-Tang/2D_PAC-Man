@@ -334,7 +334,21 @@ public class RecordUsedPlace {
             }
             return true;
         }
+    // public void printTileAndObstacleCounts() {
+    //     int tileCount = 0;
+    //     int obstacleCount = 0;
     
+    //         for (CharacterAvaliablePosition element : elements) {
+    //             if (element instanceof Tile) {
+    //                 tileCount++;
+    //             } else if (element instanceof Obstacle) {
+    //                 obstacleCount++;
+    //             }
+    //         }
+    
+    //         System.out.println("Number of Tiles: " + tileCount);
+    //         System.out.println("Number of Obstacles: " + obstacleCount);
+    //     }
 
         
 }
