@@ -3,6 +3,8 @@ package cmpt276.group4.Room;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.lang.model.type.NullType;
+
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
