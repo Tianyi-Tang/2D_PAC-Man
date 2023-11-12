@@ -33,7 +33,7 @@ public class Spider implements Enemy {
     /**
      * Constructs a Spider enemy, choosing its type based on the number of enemies
      * already present.
-     * The spider is positioned at a random safe position.
+     * The spider is positioned at a random position after checking vacancy.
      */
     Spider() {
         getPlayerPosition();

@@ -3,68 +3,71 @@ package cmpt276.group4.Enemy;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.Logic.GameConfig;
 
+/**
+ * This class is responsible for initializing enemies in the game.
+ * It retrieves enemy configuration from {@link GameConfig} and creates the
+ * specified number and types of enemies using an {@link EnemyFactory}.
+ */
 public class EnemyInitialization {
 
     private gameLevel gameLevel;
-    private int spider,basicGhost,advancedGhost;
+    private int spider, basicGhost, advancedGhost;
     private GameConfig gc;
 
-
-
-    public EnemyInitialization(gameLevel gameLevel, EnemyFactory eFactory) {
-        this.gameLevel = gameLevel;
-        switch (gameLevel) {
-            case BASIC:
-                spider = 3;
-                basicGhost = 1; 
-                advancedGhost = 0 ;
-                break;
-            case MEDIUM:
-                spider = 9;
-                basicGhost = 2; 
-                advancedGhost = 0 ;
-                break;
-            case HARD:
-                spider = 13;
-                basicGhost = 3; 
-                advancedGhost = 0 ;
-                break;
-        }
-
-        eFactory.createEnemies(EnemyType.SPIDER, spider);
-        eFactory.createEnemies(EnemyType.GHOST_BASIC, basicGhost);
-        eFactory.createEnemies(EnemyType.GHOST_ADVANCED, advancedGhost);
-        
-
-    }
-
+    /**
+     * Constructs an EnemyInitialization object using specified
+     * {@link EnemyFactory}.
+     * It initializes the enemy count based on the configuration provided by
+     * {@link GameConfig}.
+     * 
+     * @param eFactory The factory used to create enemy instances.
+     */
     public EnemyInitialization(EnemyFactory eFactory) {
         gc = GameConfig.getGameConfigInstance();
         spider = gc.getNumberOfSpiders();
-        basicGhost = gc.getNumberOfBasicGhosts(); 
-        advancedGhost = gc.getNumberOfAdvancedGhosts() ;
-        System.out.println("num of spider, ghost "+ spider + " "+ basicGhost);
+        basicGhost = gc.getNumberOfBasicGhosts();
+        advancedGhost = gc.getNumberOfAdvancedGhosts();
+        //Uncomment for testing
+        //System.out.println("num of spider, ghost: " + spider + ", " + basicGhost);
 
         eFactory.createEnemies(EnemyType.SPIDER, spider);
         eFactory.createEnemies(EnemyType.GHOST_BASIC, basicGhost);
         eFactory.createEnemies(EnemyType.GHOST_ADVANCED, advancedGhost);
-
     }
 
-   
-
-
+    /**
+     * Returns the game level configuration.
+     * 
+     * @return The current game level.
+     */
     public gameLevel getGameLevel() {
         return gameLevel;
     }
+
+    /**
+     * Returns the number of spiders initialized.
+     * 
+     * @return The number of spiders.
+     */
     public int getSpider() {
         return spider;
     }
+
+    /**
+     * Returns the number of basic ghosts initialized.
+     * 
+     * @return The number of basic ghosts.
+     */
     public int getBasicGhost() {
         return basicGhost;
     }
+
+    /**
+     * Returns the number of advanced ghosts initialized.
+     * 
+     * @return The number of advanced ghosts.
+     */
     public int getAdvancedGhost() {
         return advancedGhost;
     }
-
 }
