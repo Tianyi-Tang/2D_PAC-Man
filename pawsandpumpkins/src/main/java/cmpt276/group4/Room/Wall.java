@@ -16,13 +16,10 @@ public class Wall extends Obstacle {
     BufferedImage wallImage;
     public Wall(Obstacletype type, int amount, Position position) {
         super(type, amount, position);
-        System.out.print("testest" + position);
+        this.position = position;
         initialWallImage();
-        setPlayerAccess();
-        System.out.println("t/f " + getPlayerAvaliable());
     }
     
-
     public void initialWallImage(){
         try {
             wallImage = ImageIO.read(new File(System.getProperty("user.dir") + "/res/Walls/mid_wall2.png"));

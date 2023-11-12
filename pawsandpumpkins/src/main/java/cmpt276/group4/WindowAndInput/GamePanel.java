@@ -113,36 +113,19 @@ public class GamePanel extends JPanel implements Runnable {
 
         record.printTileAndObstacleCounts();
         Graphics2D g2 = (Graphics2D) g;
-        //System.out.println("avaliable "+record.getElemet().size());
 
         record.printTileAndObstacleCounts();
 
-        for (CharacterAvaliablePosition element : record.getElemet()) {
-            element.draw(g2);
+        synchronized (record.getElemet()) {
+            for (CharacterAvaliablePosition element : record.getElemet()) {
+                element.draw(g2);
+            }
         }
-        //System.out.println("avaliable "+record.getElemet().size());
 
         for (Reward reward : record.getRewardList()) {
             reward.draw(g2);
 
         }
-
-
-
-    //Position wallPosition1 = new Position(5, 5);
-    //Wall wall1 = new Wall(wallPosition1, 1);
-    //RecordUsedPlace.getInstance().addWall(wall1);
-
-    //Position wallPosition2 = new Position(10*tileSize, 10*tileSize);
-
-    // for (Obstacle obstacle : record.getObstacles()) {
-    // Create a new Wall object using the wall position
-    //obstacle.draw(g2);
-    // Draw the wall
-
-    // }
-
-
 
         if(player != null)
             player.draw(g2);
