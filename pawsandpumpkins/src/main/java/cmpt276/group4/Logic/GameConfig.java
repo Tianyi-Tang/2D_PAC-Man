@@ -50,6 +50,8 @@ public class GameConfig {
         numberOfRegularRewards = gameLevelConfig.getNumberOfRegularRewards();
         numberOfBonusRewards = gameLevelConfig.getNumberOfBonusRewards();
         wallPositions = gameLevelConfig.getWallPositions();
+         System.out.println("number of spiders are: "+ numberOfSpiders);
+
 
     }
 
@@ -65,6 +67,7 @@ public class GameConfig {
 
     public GameConfig() {
         wallPositions = new ArrayList<Position>();
+        instance = this;
     }
 
     public int getRoomColumn() {

@@ -9,10 +9,7 @@ public class EnemyInitialization {
     private int spider,basicGhost,advancedGhost;
     private GameConfig gc;
 
-    public EnemyInitialization(int enemyNum) {
-        // this.enemyNum = enemyNum;
-        System.out.println("Enemy Initialization with " + enemyNum + " enemies.");
-    }
+
 
     public EnemyInitialization(gameLevel gameLevel, EnemyFactory eFactory) {
         this.gameLevel = gameLevel;
@@ -33,14 +30,11 @@ public class EnemyInitialization {
                 advancedGhost = 0 ;
                 break;
         }
-        // GHOST_AVDANCED,
-        // GHOST_BASIC,
-        // SPIDER
+
         eFactory.createEnemies(EnemyType.SPIDER, spider);
         eFactory.createEnemies(EnemyType.GHOST_BASIC, basicGhost);
         eFactory.createEnemies(EnemyType.GHOST_ADVANCED, advancedGhost);
-        System.out.println("Enemy Initialization with " + (spider + basicGhost
-        + advancedGhost) + " enemies.");
+
     }
 
     public EnemyInitialization(EnemyFactory eFactory) {
@@ -48,14 +42,12 @@ public class EnemyInitialization {
         spider = gc.getNumberOfSpiders();
         basicGhost = gc.getNumberOfBasicGhosts(); 
         advancedGhost = gc.getNumberOfAdvancedGhosts() ;
-        // GHOST_AVDANCED,
-        // GHOST_BASIC,
-        // SPIDER
+        System.out.println("num of spider, ghost "+ spider + " "+ basicGhost);
+
         eFactory.createEnemies(EnemyType.SPIDER, spider);
         eFactory.createEnemies(EnemyType.GHOST_BASIC, basicGhost);
         eFactory.createEnemies(EnemyType.GHOST_ADVANCED, advancedGhost);
-        System.out.println("Enemy Initialization with " + (spider + basicGhost
-        + advancedGhost) + " enemies.");
+
     }
 
 

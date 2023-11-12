@@ -39,14 +39,14 @@ public class Spider implements Enemy {
                 spideType = SpiderType.type_spider_2;
                 break;
         }
-        System.out.println("Spider.java: Creating spider");
+        //System.out.println("Spider.java: Creating spider");
         getEnemyImage();
         Position potentialPosition = new Position(0, 0);
         potentialPosition.equal(playerPosition);
 
         do {
             potentialPosition = record.getRandomSafePosition();
-        } while (potentialPosition.equal(playerPosition));
+        } while (potentialPosition.equal(playerPosition) && !record.containsCandyAtPosition(potentialPosition));
 
 
 

@@ -147,8 +147,7 @@ public class GameManager {
 
 
         record =  RecordUsedPlace.getInstance();
-        enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(level, enemyFactory); 
+       
         
         
         //Position wallPosition1 = new Position(10, 10);
@@ -185,9 +184,24 @@ public class GameManager {
     
 
         GameConfig gameConfig=new GameConfig();
+        gameConfig.passGameLevel(gameLevel.HARD);
+
         rewardFactory = new RewardFactory();
         rewardInitialization = new RewardInitialization(rewardFactory);
         rewardInitialization.generateReward();
+        
+        enemyFactory = new EnemyFactory();
+        enemyInitialization = new EnemyInitialization(enemyFactory); 
+
+        
+
+        
+
+
+
+
+
+
     }
 
     public void createNumberPanel(){
