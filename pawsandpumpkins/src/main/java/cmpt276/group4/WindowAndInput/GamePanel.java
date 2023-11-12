@@ -65,6 +65,9 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int maxScreenRow = 16;
     public static final int screenWidth = maxScreenCol * tileSize;
     public static final int screenHeight = maxScreenRow * tileSize;
+    // Define the desired width and height for the pause button
+    private static final int PAUSE_BUTTON_WIDTH = 50; // example width
+    private static final int PAUSE_BUTTON_HEIGHT = 50; // example height
 
     final int FPS = 60;
     private double timeInterval = 1000000000 / FPS;
@@ -74,12 +77,13 @@ public class GamePanel extends JPanel implements Runnable {
     private Player player;
     private Thread gameThread;
     private GameTime gameTime;
-    private MangeBonusReward manageBonusReward;
+    private BufferedImage pauseButtonImage;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+        loadPauseButtonImage();
     }
 
     public void createTimeLine() {
@@ -182,6 +186,14 @@ public class GamePanel extends JPanel implements Runnable {
 
             enemy.draw(g2);
         }
+        if (pauseButtonImage != null) {
+            System.out.println("pause image found");
+            int buttonX = screenWidth - PAUSE_BUTTON_WIDTH - 10;
+            int buttonY = 10;
+
+            g.drawImage(pauseButtonImage, buttonX, buttonY, PAUSE_BUTTON_WIDTH, PAUSE_BUTTON_HEIGHT, this);
+
+        }
         g2.dispose();
     }
 
@@ -192,6 +204,15 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void restartGamePanel() {
         gameThread = null;
+    }
+
+    private void loadPauseButtonImage() {
+        try {
+            String directory = System.getProperty("user.dir");
+            pauseButtonImage = ImageIO.read(new File(directory + "/res/pop_up/pause_button.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
