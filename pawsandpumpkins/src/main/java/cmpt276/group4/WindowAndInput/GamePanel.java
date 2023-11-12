@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Font; 
+import java.awt.Font;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -26,6 +26,31 @@ import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.UI.NumberPanel;
 import cmpt276.group4.Reward.MangeBonusReward;
 
+/**
+ * GamePanel is a custom JPanel class that serves as the main game area for a
+ * tile-based game.
+ * It handles the rendering of the game elements, including the player, enemies,
+ * rewards, and the game environment.
+ * This class is responsible for the game loop and updating the game state.
+ * It uses double buffering for smooth rendering.
+ *
+ * <p>
+ * The game area is defined by a grid of tiles with configurable dimensions.
+ * The class includes functionality for updating the positions and states of
+ * various game entities,
+ * such as the player character, enemies, and collectible rewards.
+ * It also keeps track of and displays the player's score.
+ * </p>
+ *
+ * <p>
+ * Instances of this class should be created to initialize and display the main
+ * game area.
+ * The class also includes methods for starting the game thread and updating the
+ * game elements.
+ * </p>
+ * </pre>
+ *
+ */
 public class GamePanel extends JPanel implements Runnable {
 
     RecordUsedPlace record = RecordUsedPlace.getInstance();
@@ -47,10 +72,8 @@ public class GamePanel extends JPanel implements Runnable {
     // Change the enemy's position every 30 frames (every half second at 60 FPS)
     private final int ENEMY_MOVE_INTERVAL = 30;
     private Player player;
-
     private Thread gameThread;
     private GameTime gameTime;
-
     private MangeBonusReward manageBonusReward;
 
     public GamePanel() {
@@ -70,6 +93,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.player = player;
     }
 
+    /**
+     * The main game loop. This method is run continuously by the game thread and
+     * controls the timing of game updates and rendering.
+     */
     @Override
     public void run() {
         double iteration = 0;
@@ -90,6 +117,13 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Updates the state of the game. This method is called at each iteration of the
+     * game loop and is responsible for
+     * updating the positions and states of all game elements, including the player,
+     * enemies, and rewards.
+     * It also manages the timing of enemy movements and game time counting.
+     */
     private void update() {
         Player.getInstance().update();
 
@@ -107,6 +141,14 @@ public class GamePanel extends JPanel implements Runnable {
         gameTime.countTime();
     }
 
+    /**
+     * Renders the game elements onto the panel. This method is responsible for
+     * drawing all the visual components of the game,
+     * including the player, enemies, rewards, and other game environment elements.
+     * It is called every time the panel needs to be repainted.
+     *
+     * @param g The Graphics object used for drawing.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -128,33 +170,26 @@ public class GamePanel extends JPanel implements Runnable {
 
         }
 
-        // if(player != null)
-        // player.draw(g2);
-        // Drawing the player's score
         if (player != null) {
             player.draw(g2); // Existing player drawing code
 
-            // Set the color for the score text
-            g2.setColor(Color.WHITE); // You can choose a different color
-
-            // Set the font for the score text
-            g2.setFont(new Font("Arial", Font.BOLD, 20)); // You can choose a different font and size
-
-            // Get the player's score
+            g2.setColor(Color.WHITE);
+            g2.setFont(new Font("Arial", Font.BOLD, 20));
             int score = player.totalScore();
-
-            // Draw the score text at a specific position on the screen
-            g2.drawString("Score: " + score, 10, 30); // You can change the position (10, 30) as needed
+            g2.drawString("Score: " + score, 10, 30);
         }
-
         for (Enemy enemy : record.getEnemyList()) {
-            // System.out.println("Enemy List size: "+ record.getEnemyList().size());
 
             enemy.draw(g2);
         }
         g2.dispose();
     }
 
+    /**
+     * Restarts the game by stopping the current game thread. This method can be
+     * used to reset the game state
+     * and prepare the panel for a new game session.
+     */
     public void restartGamePanel() {
         gameThread = null;
     }
