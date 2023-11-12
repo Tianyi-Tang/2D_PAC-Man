@@ -31,7 +31,6 @@ public class RoomInitialization {
         wallPositionList = gc.getWallPositions();     
         wall = wallPositionList.size();
         tombstone = gc.getNumberOfObstacles();
-        
     }
 
     //public void iRoom(RoomFactory rmFactory) {
