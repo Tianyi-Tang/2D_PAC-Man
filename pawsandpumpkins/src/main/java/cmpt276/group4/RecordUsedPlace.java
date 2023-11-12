@@ -67,7 +67,8 @@ public class RecordUsedPlace {
 
     public boolean containsCandyAtPosition(Position position) {
         for (Reward candy : generalRewards) {
-            if (candy instanceof Candy && candy.getPosition().equal(position)) {
+            if (candy.getPosition().equals(position)) {
+            //if (candy instanceof Candy && candy.getPosition().equals(position)) {
                 return true;
             }
         }
@@ -89,33 +90,38 @@ public class RecordUsedPlace {
         }
     }
 
-    public Position getRandomSafePosition() {
-        ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
-    
-        Iterator<Position> positionIterator = availableWithoutSpiders.iterator();
-    
-        while (positionIterator.hasNext()) {
-            Position pos = positionIterator.next();
-            for (Enemy enemy : enemies) {
-                //if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
-                    if (enemy.getEnemyPosition().equals(pos)) {
-                    // Remove the position if there is a spider on it
-                    positionIterator.remove();
-                    break; // No need to check the other spiders for this position
-                }
+   /**
+ * Retrieves a random position that is not currently occupied by any enemies.
+ * This method ensures that the position selected is free from enemies, providing a 'safe' spot.
+ *
+ * @return A random safe {@link Position} not occupied by enemies. Returns {@code null} if no such positions are available.
+ */
+public Position getRandomSafePosition() {
+    ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
+
+    // Iterate through available positions and remove those occupied by enemies
+    Iterator<Position> positionIterator = availableWithoutSpiders.iterator();
+    while (positionIterator.hasNext()) {
+        Position pos = positionIterator.next();
+        for (Enemy enemy : enemies) {
+            // Check if any enemy occupies the position
+            if (enemy.getEnemyPosition().equals(pos)) {
+                // Remove the position if occupied by an enemy
+                positionIterator.remove();
+                break; // No need to check other enemies for this position
             }
         }
-    
-        // Now 'availableWithoutSpiders' contains positions not occupied by spiders.
-        if (availableWithoutSpiders.isEmpty()) {
-            System.out.println("No available positions without spiders");
-            return null;
-        }
-    
-        // Return a random position from the list of positions without spiders.
-        Random random = new Random();
-        return availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
     }
+    if (availableWithoutSpiders.isEmpty()) {
+        System.out.println("No available positions without enemies");
+        return null;
+    }
+
+    // Return a random position from the list of available positions
+    Random random = new Random();
+    return availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
+}
+
     
 
     public RecordUsedPlace(){
