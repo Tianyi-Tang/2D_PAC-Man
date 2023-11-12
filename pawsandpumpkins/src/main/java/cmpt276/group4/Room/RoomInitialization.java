@@ -3,6 +3,8 @@ package cmpt276.group4.Room;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.lang.model.type.NullType;
+
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
@@ -46,13 +48,14 @@ public class RoomInitialization {
     public void iRoom(RoomFactory rmFactory) {
         rmFactory.createRoom(max_X, max_Y);
     }
-    
-    public void iTombs(RoomFactory rmFactory){
-        rmFactory.createObstacle(Obstacletype.TOMBSTONE, position, tombstone);
-    }
+
 
     public void iWalls(RoomFactory rmFactory){
-        rmFactory.createObstacle(Obstacletype.WALL,position, wall);
+        rmFactory.createObstacle(Obstacletype.WALL, wallPositionList, wallPositionList.size());
+    }
+
+    public void iTombs(RoomFactory rmFactory){
+        rmFactory.createObstacle(Obstacletype.TOMBSTONE, wallPositionList, tombstone);
     }
 
     public void iTiles(RoomFactory rmFactory){

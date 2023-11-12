@@ -127,7 +127,6 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void checkRoom(){
-        System.out.println("avibale:"+ record.getLengthOfAviable());
         if(record.getLengthOfAviable() == config.areaofRoom()){
             generateRoom = true;
             createTitle();
@@ -135,6 +134,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private void checkTitle(){
+        System.out.println(config.areaofRoom());
         if(record.getTileNumber() == config.areaofRoom()){
             generateAllTile = true;
             createObstacle();
