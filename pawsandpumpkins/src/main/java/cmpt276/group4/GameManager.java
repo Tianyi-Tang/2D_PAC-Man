@@ -137,7 +137,7 @@ public class GameManager {
         window.addKeyListener(listener);
 
         GameConfig gameConfig=new GameConfig();
-        gameConfig.passGameLevel(gameLevel.MEDIUM);
+        gameConfig.passGameLevel(gameLevel.HARD);
        
         
         initialization_room = new RoomInitialization();
