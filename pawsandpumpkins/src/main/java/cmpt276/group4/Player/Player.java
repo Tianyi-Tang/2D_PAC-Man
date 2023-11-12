@@ -111,6 +111,10 @@ public class Player implements KeyMovingObserver {
         return generalReward_num;
     }
 
+    public int totaltScore(){
+        return collectScore - deductScore;
+    }
+
     @Override
     public void observerUpdate(MoveDirection direction, boolean turnOn) {
         switch (direction) {

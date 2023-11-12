@@ -56,6 +56,8 @@ public class GameManager {
     private LoadingPanel loadPanel;
     private NumberPanel numberPanel;
 
+    private Player player;
+
 
     private keyboardListener listener;
     private Room room;
@@ -170,8 +172,6 @@ public class GameManager {
     public void createNumberPanel(){
         status = GameStatus.Win;
 
-
-        
         layout.show(cardContainer, "gameEnd");
         window.setVisible(true);
     }
@@ -193,14 +193,12 @@ public class GameManager {
     }
 
     public void enemyCatachPlayer(boolean moveable){
-        System.out.println("catach");
         if(moveable == true){
             status = GameStatus.GameOver;
             endOfGame();
-            // end game
         }
         else{
-            // game continues
+            player.deductPoint(5);
         }
     }
 
@@ -217,7 +215,8 @@ public class GameManager {
         if(status == GameStatus.LoadingPanel){
             layout.show(cardContainer, "game");
             gamePanel.createTimeLine();
-            gamePanel.setPlayer(Player.getInstance());
+            player = Player.getInstance();
+            gamePanel.setPlayer(player);
             addKeyboardListener();
             status = GameStatus.GamePanel;
         }
@@ -230,8 +229,13 @@ public class GameManager {
         listener.addPlayer(Player.getInstance());
     }
 
+    public void negativePoint(){
+        if(player.get)
+    }
+
+
     private void endOfGame(){
-        if(status == GameStatus.GamePanel.GameOver){
+        if(status == GameStatus.GameOver){
 
         }
         else{
