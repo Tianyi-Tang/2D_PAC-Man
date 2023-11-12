@@ -51,8 +51,6 @@ cmpt276\group4\GameStatus.class
 cmpt276\group4\Position.class
 cmpt276\group4\Enemy\EnemyFactory.class
 cmpt276\group4\Player\Player$1.class
-cmpt276\group4\UI\drawNum.class
-cmpt276\group4\Enemy\EnemyInitialization$1.class
 cmpt276\group4\Logic\GameConfig$1.class
 cmpt276\group4\gameLevel.class
 cmpt276\group4\Main.class

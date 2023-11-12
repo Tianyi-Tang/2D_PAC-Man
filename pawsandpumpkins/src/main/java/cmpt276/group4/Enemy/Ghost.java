@@ -46,7 +46,7 @@ public class Ghost implements Enemy {
         potentialPosition.equal(playerPosition);
         do {
             potentialPosition = record.getRandomSafePosition();
-        } while (isPlayerNearBy(8 * GamePanel.tileSize, potentialPosition));
+        } while (record.isPlayerNearBy(8 * GamePanel.tileSize, potentialPosition));
 
         this.enemyPosition.setPosition(potentialPosition);
         record.addEnemy(this);
@@ -63,7 +63,7 @@ public class Ghost implements Enemy {
         getPlayerPosition();
 
         // Check if the player is around
-        if (isPlayerNearBy(4 * GamePanel.tileSize, enemyPosition)) {
+        if (record.isPlayerNearBy(4 * GamePanel.tileSize, enemyPosition)) {
             // If the player is around, move towards the player
             setToClosestPlayerPosition();
         } else {
@@ -99,19 +99,6 @@ public class Ghost implements Enemy {
 
     public EnemyMovement getPlayerMovement() {
         return enemyMovement;
-    }
-
-    /**
-     * Determines if the player is within a specified range from a given position.
-     *
-     * @param range The range to check around the position.
-     * @param p     The position to check from.
-     * @return true if the player is within the specified range, false otherwise.
-     */
-    private boolean isPlayerNearBy(int range, Position p) {
-        int deltaX = Math.abs(playerPosition.getX_axis() - p.getX_axis());
-        int deltaY = Math.abs(playerPosition.getY_axis() - p.getY_axis());
-        return deltaX <= range && deltaY <= range;
     }
 
     /**

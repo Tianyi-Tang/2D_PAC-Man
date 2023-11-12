@@ -11,32 +11,48 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-public class Obstacle implements CharacterAvaliablePosition{
+public class Obstacle implements CharacterAvaliablePosition {
     public Position position;
     private boolean playerAvaliable = false;
     private boolean takenPlace = true;
+    private Position playerPosition;
     BufferedImage wallImage;
-    // Constructor to initialize an obstacle with player access, enemy traversability, and positions
+    RecordUsedPlace record;
+
+    // Constructor to initialize an obstacle with player access, enemy
+    // traversability, and positions
     public Obstacle(Obstacletype type, int amount, Position position) {
-        //this.position = position;
-        System.out.print("testest" + position);
+        // this.position = position;
+        record = RecordUsedPlace.getInstance();
+        System.out.print("testest: " + position);
         initialWallImage();
         setObstaclePosition();
-        System.out.print("testest" + position);
+        System.out.print("testest: " + position);
     }
 
-    public void setObstaclePosition(){
-        position = RecordUsedPlace.getInstance().getRandomFromAvailablePosition();
+    /**
+     * Sets the position for an tombstone in the game.This method selects a random position from available positions and ensures it
+     * is not too close to the player.
+     */
+    public void setObstaclePosition() {
+        Position potentialPosition;
+        do {
+            // Get a random position from available positions
+            potentialPosition = RecordUsedPlace.getInstance().getRandomFromAvailablePosition();
+            // Repeat until the position is not too close to the player
+        } while (record.isPlayerNearBy(2 * GamePanel.tileSize, potentialPosition));
+
+        // Set the chosen position for the obstacle
+        position = potentialPosition;
     }
 
-    public void setPlayerAccess(){
+    public void setPlayerAccess() {
         playerAvaliable = false;
     }
 
-    public void setPosition(){
+    public void setPosition() {
         position = RecordUsedPlace.getInstance().getRandomFromAvailablePosition();
     }
-
 
     @Override
     public Position getPosition() {
@@ -53,29 +69,17 @@ public class Obstacle implements CharacterAvaliablePosition{
         return takenPlace;
     }
 
-    public void initialWallImage(){
+    public void initialWallImage() {
         try {
             wallImage = ImageIO.read(new File(System.getProperty("user.dir") + "/res/Walls/mid_wall2.png"));
         } catch (Exception e) {
             e.printStackTrace();
-        } 
+        }
     }
 
     @Override
-    public void draw(Graphics2D g2){
-    
+    public void draw(Graphics2D g2) {
+
     }
 
-        
-    
-    
 }
-
-
-
-
-
-
-
-
-
