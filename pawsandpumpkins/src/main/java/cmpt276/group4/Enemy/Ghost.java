@@ -264,10 +264,7 @@ public class Ghost implements Enemy {
         getPlayerPosition();
         if (playerPosition.equal(enemyPosition)) {
             GameManager.getInstance().enemyCatachPlayer(movable);
-        } else {
-            System.out.println("Ghost fail to catch the player!");
-        }
-
+        } 
     }
 
     @Override

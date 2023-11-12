@@ -80,7 +80,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         try {
             background_img = ImageIO.read(new File("res/pop_up/game_welcome_page2.png"));
         } catch (Exception e) {
-            // TODO: handle exception
+            
         }
     }
 

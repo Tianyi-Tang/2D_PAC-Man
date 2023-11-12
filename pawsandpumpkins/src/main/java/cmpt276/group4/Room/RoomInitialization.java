@@ -43,8 +43,8 @@ public class RoomInitialization {
         
     }
 
-    public void iRoom(RoomFactory rmFactory) {
-        rmFactory.createRoom(max_X, max_Y);
+    public Room iRoom(RoomFactory rmFactory) {
+        return rmFactory.createRoom(max_X, max_Y);
     }
     
     public void iTombs(RoomFactory rmFactory){
