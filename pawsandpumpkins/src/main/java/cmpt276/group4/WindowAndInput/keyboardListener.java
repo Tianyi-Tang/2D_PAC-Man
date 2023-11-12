@@ -54,7 +54,6 @@ public class keyboardListener implements KeyListener, MouseListener, MouseMotion
         switch (code) {
             case KeyEvent.VK_W:
             case KeyEvent.VK_UP:
-                System.out.println("Yes");
                 notify(MoveDirection.Up,true);
                 break;
             case KeyEvent.VK_S:

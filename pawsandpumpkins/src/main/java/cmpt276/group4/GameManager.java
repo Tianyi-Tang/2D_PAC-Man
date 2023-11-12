@@ -96,8 +96,6 @@ public class GameManager {
         window.getContentPane().add(cardContainer);
         window.pack();
         window.setLocationRelativeTo(null);
-
-
         
     }
 
@@ -195,6 +193,7 @@ public class GameManager {
     }
 
     public void enemyCatachPlayer(boolean moveable){
+        System.out.println("catach");
         if(moveable == true){
             status = GameStatus.GameOver;
             endOfGame();
@@ -226,8 +225,8 @@ public class GameManager {
 
     private void addKeyboardListener(){
         listener = new keyboardListener();
-        window.addKeyListener(listener);
-        System.out.println("sounds good");
+        gamePanel.addKeyListener(listener);
+        gamePanel.requestFocusInWindow();
         listener.addPlayer(Player.getInstance());
     }
 
