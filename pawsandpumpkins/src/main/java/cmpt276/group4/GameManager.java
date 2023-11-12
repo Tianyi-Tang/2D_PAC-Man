@@ -6,6 +6,7 @@ import java.awt.CardLayout;
 import java.util.ArrayList;
 
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 import java.util.List;
 
 
@@ -186,16 +187,14 @@ public class GameManager {
         //Obstacle wall1 = new Wall(wallPosition1);
         //RecordUsedPlace.getInstance().addElementToMap(wall1);
       
-    
-
-       
+        enemyFactory = new EnemyFactory();
+        enemyInitialization = new EnemyInitialization(enemyFactory); 
 
         rewardFactory = new RewardFactory();
         rewardInitialization = new RewardInitialization(rewardFactory);
         rewardInitialization.generateReward();
 
-        enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(enemyFactory); 
+        
 
         
 

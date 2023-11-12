@@ -9,37 +9,41 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import cmpt276.group4.GameStatus;
+
 /**
  * The NumberPanel class is responsible for displaying a panel of numbers
- * with a pop up window (Win/ Gameover), typically used for showing game statistics.
+ * with a pop up window (Win/ Gameover), typically used for showing game
+ * rewards.
  */
 
 public class NumberPanel extends JPanel {
-    private static final int NUM_IMAGES = 10;
+    private static final int NUM_IMAGES = 10; // Number of digit images to display digits 0-9
     private BufferedImage[] digitImages = new BufferedImage[NUM_IMAGES];
-    private BufferedImage backgroundImage;
-    private BufferedImage greyOut; // Background image
-    private int[][] numbersToDisplay; // Array of number lines
-    private int imageWidth;
-    private int[][] positions; // Positions for each line of numbers
-    private String directory;
-    private int[] yAxisLineUp;
-    private String backgroundImgName;
-    private int xAxisLineUp;
-    private int digitXSize, digitYSize;
-    private double popUpScale;
+    private BufferedImage backgroundImage; // Image for the pop up window
+    private BufferedImage greyOut; // Image used for grey out effect
+    private int[][] numbersToDisplay; // Array of numbers for each line to display
+    private int imageWidth; // Width of each digit image
+    private String directory; // Directory of images
+    private int[] yAxisLineUp; // Y-axis positions for each line
+    private String backgroundImgName; // Filename of the pop up winndow image
+    private int xAxisLineUp; // X-axis position for the number
+    private int digitXSize, digitYSize; // Size of the digit images
+    private double popUpScale; // Scale factor for the pop-up window
 
     public enum Status {
-        Win, GameOver
+        Win, GameOver // Game status types
     }
 
+    /**
+     * Constructor for NumberPanel.
+     * Initializes the panel with default settings and loads number images.
+     */
     public NumberPanel() {
         directory = System.getProperty("user.dir");
         loadNumberImages();
 
         this.imageWidth = 8;
-        this.numbersToDisplay = new int[5][]; 
-        this.positions = new int[5][2]; 
+        this.numbersToDisplay = new int[5][];
         digitXSize = 11;
         digitYSize = 11;
         xAxisLineUp = 420;
@@ -48,7 +52,12 @@ public class NumberPanel extends JPanel {
 
     }
 
-    // Need to change to gaatestatus
+    /**
+     * Initializes the panel with a specific background image based on the game's
+     * win status.
+     * 
+     * @param isWin A boolean indicating if the game was won.
+     */
     public void init(boolean isWin) {
 
         if (isWin) {
@@ -59,9 +68,14 @@ public class NumberPanel extends JPanel {
 
         loadBackgroundImage(backgroundImgName);
 
-        
     }
 
+    /**
+     * Initializes the panel with a specific background image based on the game's
+     * status.
+     * 
+     * @param status The status of the game (Win or Game Over).
+     */
     public void init(GameStatus status) {
 
         if (status == GameStatus.Win) {
@@ -74,11 +88,16 @@ public class NumberPanel extends JPanel {
 
     }
 
+    /**
+     * Loads the digit images from the specified directory into the digitImages
+     * array.
+     * This method is responsible for reading the image files corresponding to each
+     * digit (0-9) and storing them in an array for later use.
+     */
     private void loadNumberImages() {
 
         for (int i = 0; i < NUM_IMAGES; i++) {
             try {
-                //digitImages[i] = ImageIO.read(new File(directory + "/pawsandpumpkins/res/num/" + i + ".png"));
                 digitImages[i] = ImageIO.read(new File(directory + "/res/num/" + i + ".png"));
             } catch (IOException e) {
                 e.printStackTrace(); // Or handle the exception as needed
@@ -86,10 +105,15 @@ public class NumberPanel extends JPanel {
         }
     }
 
+    /**
+     * Loads the background image and the grey-out image from the specified
+     * directory.
+     *
+     * @param filename The filename of the background image to be loaded.
+     */
     private void loadBackgroundImage(String filename) {
         try {
-            // backgroundImage = ImageIO.read(new File(directory + "/pawsandpumpkins/res/pop_up/" + filename));
-            // greyOut = ImageIO.read(new File(directory + "/pawsandpumpkins/res/pop_up/" + "grey.png"));
+
             backgroundImage = ImageIO.read(new File(directory + "/res/pop_up/" + filename));
             greyOut = ImageIO.read(new File(directory + "/res/pop_up/" + "grey.png"));
         } catch (IOException e) {
@@ -97,7 +121,17 @@ public class NumberPanel extends JPanel {
         }
     }
 
-
+    /**
+     * Sets the numbers to be displayed on the panel.
+     * This method is used to specify the numerical values for each line in the
+     * panel.
+     *
+     * @param totalRewards The total number of rewards.
+     * @param regular      The number of regular rewards.
+     * @param bonus        The number of bonus rewards.
+     * @param punishments  The number of punishments.
+     * @param overall      The overall score or number.
+     */
     public void setNumbers(int totalRewards, int regular, int bonus, int punishments, int overall) {
         int[] nums = { totalRewards, regular, bonus, punishments, overall };
         for (int i = 0; i < nums.length; i++) {
@@ -125,6 +159,16 @@ public class NumberPanel extends JPanel {
         }
     }
 
+    /**
+     * Draws a line of numbers on the panel.
+     * This method takes an array of integers and draws each corresponding image at
+     * a specific position.
+     *
+     * @param g          The Graphics object used for drawing.
+     * @param numberLine The array of numbers to be drawn.
+     * @param startX     The starting X position for drawing the line.
+     * @param startY     The starting Y position for drawing the line.
+     */
     private void drawNumberLine(Graphics g, int[] numberLine, int startX, int startY) {
         int x = startX;
         for (int number : numberLine) {
@@ -140,6 +184,13 @@ public class NumberPanel extends JPanel {
 
     }
 
+    /**
+     * Converts an integer to an array of its digits.
+     * This method is used to prepare numerical values for graphical representation.
+     *
+     * @param number The number to be converted to an array of digits.
+     * @return An array of integers representing each digit of the number.
+     */
     private int[] intToArray(int number) {
         String numberStr = Integer.toString(number);
 

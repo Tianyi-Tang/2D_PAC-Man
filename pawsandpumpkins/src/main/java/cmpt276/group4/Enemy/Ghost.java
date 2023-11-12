@@ -16,19 +16,24 @@ import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Player.PlayerMovement;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
+/**
+ * Represents a Ghost enemy in the game.
+ * This class handles the movement and behavior of a ghost-type enemy.
+ */
 public class Ghost implements Enemy {
     private EnemyMovement enemyMovement;
-
     private Position playerPosition;
     private Position enemyPosition;
-    // private boolean org_State = true;
-    private
-    // private boolean findPlayer;
-    EnemyType enemyType;
+    private EnemyType enemyType;
     private BufferedImage ghost_basic, ghost_advanced;
     private BufferedImage currentImage = null;
     private RecordUsedPlace record;
 
+    /**
+     * Constructs a Ghost enemy with specified type.
+     * 
+     * @param type The type of the ghost (BASIC or ADVANCED).
+     */
     public Ghost(EnemyType type) {
         getPlayerPosition();
         record = RecordUsedPlace.getInstance();
@@ -41,19 +46,24 @@ public class Ghost implements Enemy {
         potentialPosition.equal(playerPosition);
         do {
             potentialPosition = record.getRandomSafePosition();
-        } while (isPlayerNearBy(8 * GamePanel.tileSize, potentialPosition));
+        } while (record.isPlayerNearBy(8 * GamePanel.tileSize, potentialPosition));
 
         this.enemyPosition.setPosition(potentialPosition);
         record.addEnemy(this);
     }
 
+    /**
+     * Moves the ghost to its next position based on the player's location.
+     * If the player is nearby, the ghost moves towards the player.
+     * Otherwise, it moves to a random position.
+     */
     public void ghostMoveNextPosition() {
         // Get player's current position
         catchPlayer();
         getPlayerPosition();
 
         // Check if the player is around
-        if (isPlayerNearBy(4 * GamePanel.tileSize, enemyPosition)) {
+        if (record.isPlayerNearBy(4 * GamePanel.tileSize, enemyPosition)) {
             // If the player is around, move towards the player
             setToClosestPlayerPosition();
         } else {
@@ -63,25 +73,39 @@ public class Ghost implements Enemy {
         enemyMovement.moveTo(enemyPosition);
     }
 
+    /**
+     * Retrieves and updates the player's current position from the record of used
+     * places.
+     */
     private void getPlayerPosition() {
-
         RecordUsedPlace record = RecordUsedPlace.getInstance();
         playerPosition = record.getPlayerPosition();
     }
 
+    /**
+     * Sets the movement behavior for this enemy.
+     *
+     * @param eMovement The enemy movement behavior to be set.
+     */
     public void setPlayerMovement(EnemyMovement eMovement) {
         enemyMovement = eMovement;
     }
+
+    /**
+     * Gets the current movement behavior of this enemy.
+     *
+     * @return The current EnemyMovement behavior.
+     */
 
     public EnemyMovement getPlayerMovement() {
         return enemyMovement;
     }
 
-    private boolean isPlayerNearBy(int range, Position p) {
-        int deltaX = Math.abs(playerPosition.getX_axis() - p.getX_axis());
-        int deltaY = Math.abs(playerPosition.getY_axis() - p.getY_axis());
-        return deltaX <= range && deltaY <= range;
-    }
+    /**
+     * Moves the enemy to the closest position towards the player, based on
+     * priority.
+     * If the enemy is already at the player's position, it remains there.
+     */
 
     private void setToClosestPlayerPosition() {
 
@@ -106,6 +130,13 @@ public class Ghost implements Enemy {
 
         }
     }
+
+    /**
+     * Generates a list of potential positions to move to, prioritized by proximity
+     * to the player.
+     *
+     * @return A list of prioritized positions for movement.
+     */
 
     private List<Position> getPriorityPositions() {
         int deltaX = playerPosition.getX_axis() - enemyPosition.getX_axis();
@@ -195,13 +226,7 @@ public class Ghost implements Enemy {
                     newX = newX + GamePanel.tileSize;
                     break;
             }
-
-            // Create a new position object for the intended movement
             Position newPosition = new Position(newX, newY);
-
-            // Check if the new position is movable
-            // System.out.println("try new position newX: " + newX);
-            // System.out.println("newY: " + newY);
 
             if (enemyMovement.isPositionAvailable(newPosition)) {
                 enemyPosition.setX_axis(newX);
@@ -212,7 +237,20 @@ public class Ghost implements Enemy {
             }
         }
 
+    }
 
+    /**
+     * Loads images for different types of ghosts.
+     */
+    private void getEnemyImage() {
+        try {
+            String directory = System.getProperty("user.dir");
+            ghost_basic = ImageIO.read(new File(directory + "/res/Enemy/ghost_basic.png"));
+            ghost_advanced = ImageIO.read(new File(directory + "/res/Enemy/ghost_advanced.png"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -231,8 +269,6 @@ public class Ghost implements Enemy {
 
     }
 
-
-
     @Override
     public Position getEnemyPosition() {
         return enemyPosition;
@@ -248,9 +284,13 @@ public class Ghost implements Enemy {
         return movable;
     }
 
+    /**
+     * Draws the ghost on the game panel.
+     * 
+     * @param g2 The Graphics2D object used for drawing.
+     */
+    @Override
     public void draw(Graphics2D g2) {
-        // g2.setColor(Color.white);
-        // g2.fillRect(enemyPosition.getX_axis(), enemyPosition.getY_axis(), 48, 48);
         switch (enemyType) {
             case GHOST_BASIC:
                 currentImage = ghost_basic;
@@ -262,18 +302,6 @@ public class Ghost implements Enemy {
         }
         g2.drawImage(currentImage, enemyPosition.getX_axis(), enemyPosition.getY_axis(), GamePanel.tileSize,
                 GamePanel.tileSize, null);
-    }
-
-    // get enemy image
-    private void getEnemyImage() {
-        try {
-            String directory = System.getProperty("user.dir");
-            ghost_basic = ImageIO.read(new File(directory + "/res/Enemy/ghost_basic.png"));
-            ghost_advanced = ImageIO.read(new File(directory + "/res/Enemy/ghost_advanced.png"));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }

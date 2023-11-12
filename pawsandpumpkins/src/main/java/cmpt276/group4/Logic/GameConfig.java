@@ -8,6 +8,13 @@ import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
+/**
+ * Configures and stores game settings including room dimensions, obstacles,
+ * enemies, and rewards.
+ * This class is designed to adjust game settings based on the selected game
+ * level.
+ */
+
 public class GameConfig {
     private int roomColumn = 16;
     private int roomRow = 16;
@@ -24,12 +31,22 @@ public class GameConfig {
     public static GameConfig instance;
     private GameDifficultyConfig gameLevelConfig;
 
+    /**
+     * Singleton pattern to ensure only one instance of GameConfig is created.
+     * 
+     * @return The single instance of GameConfig.
+     */
     public static synchronized GameConfig getGameConfigInstance() {
         if (instance == null)
             instance = new GameConfig();
         return instance;
     }
 
+    /**
+     * Configures game settings based on the given game level.
+     * 
+     * @param level The game level to configure settings for.
+     */
     public void passGameLevel(gameLevel level) {
         switch (level) {
             case BASIC:
@@ -50,21 +67,28 @@ public class GameConfig {
         numberOfRegularRewards = gameLevelConfig.getNumberOfRegularRewards();
         numberOfBonusRewards = gameLevelConfig.getNumberOfBonusRewards();
         wallPositions = gameLevelConfig.getWallPositions();
-         System.out.println("number of spiders are: "+ numberOfSpiders);
-
+        // Uncomment for testing:
+        // System.out.println("number of spiders are: "+ numberOfSpiders);
 
     }
 
-    public boolean alreayInitialize(){
-        if(wallPositions != null && numberOfRegularRewards != 0)
+    /**
+     * Checks if the game configuration has already been initialized.
+     * 
+     * @return true if the game configuration is initialized, false otherwise.
+     */
+    public boolean alreayInitialize() {
+        if (wallPositions != null && numberOfRegularRewards != 0)
             return true;
         else {
             return false;
         }
-            
+
     }
 
-
+    /**
+     * Constructs a new GameConfig instance with default settings.
+     */
     public GameConfig() {
         wallPositions = new ArrayList<Position>();
         instance = this;
@@ -110,14 +134,4 @@ public class GameConfig {
         return numberOfAdvancedGhosts;
     }
 
-    // public GameConfig(int numberOfObstacles, int numberOfSpiders, int numberOfBasicGhosts, int numberOfAdvancedGhosts,
-    //         int numberOfRegularRewards, int numberOfBonusRewards) {
-    //     this.numberOfObstacles = numberOfObstacles;
-    //     this.numberOfSpiders = numberOfSpiders;
-    //     this.numberOfBasicGhosts = numberOfBasicGhosts;
-    //     this.numberOfAdvancedGhosts = numberOfAdvancedGhosts;
-    //     this.numberOfRegularRewards = numberOfRegularRewards;
-    //     this.numberOfBonusRewards = numberOfBonusRewards;
-
-    // }
 }
