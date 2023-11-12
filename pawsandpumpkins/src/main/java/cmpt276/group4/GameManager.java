@@ -137,7 +137,7 @@ public class GameManager {
         window.addKeyListener(listener);
 
         GameConfig gameConfig=new GameConfig();
-        gameConfig.passGameLevel(gameLevel.BASIC);
+        gameConfig.passGameLevel(gameLevel.MEDIUM);
        
         
         initialization_room = new RoomInitialization();
@@ -156,7 +156,7 @@ public class GameManager {
         initialization_room.iTiles(roomfactory);
         initialization_room.iWalls(roomfactory);
         initialization_room.iTombs(roomfactory);
-        
+
       
         enemyFactory = new EnemyFactory();
         enemyInitialization = new EnemyInitialization(enemyFactory); 
