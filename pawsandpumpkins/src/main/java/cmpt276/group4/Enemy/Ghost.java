@@ -305,4 +305,9 @@ public class Ghost implements Enemy {
                 GamePanel.tileSize, null);
     }
 
+    @Override
+    public boolean getMovable() {
+        return movable;
+    }
+
 }

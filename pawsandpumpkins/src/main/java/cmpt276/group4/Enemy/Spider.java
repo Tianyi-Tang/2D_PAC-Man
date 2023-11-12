@@ -156,4 +156,9 @@ public class Spider implements Enemy {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean getMovable() {
+        return movable;
+    }
 }
