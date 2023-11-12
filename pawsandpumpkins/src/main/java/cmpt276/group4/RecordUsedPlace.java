@@ -165,13 +165,17 @@ public class RecordUsedPlace {
                 characterAvaliable_pos.add(object.getPosition());
                 numberofTiles++;
             } else {
+                System.out.println("numberOfwall " + numberofWall);
                 obstacle_pos.add(object.getPosition());
                 removeCharaterAviable(object.getPosition());
-                if (object instanceof Wall)
+                if (object instanceof Wall){
                     numberofWall++;
+                    //System.out.println("numberOfwall " + numberofWall);
+                }
                 else
                     numberOfObstacles++;
             }
+
 
             elements.add(object);
             elementTakenPlace(object.getTakenPlace(), object.getPosition());
@@ -183,7 +187,7 @@ public class RecordUsedPlace {
     public boolean addEnemy(Enemy enemy) {
         if (isPlaceAviable(enemy.getEnemyPosition())) {
             enemies.add(enemy);
-            elementTakenPlace(false, enemy.getEnemyPosition());
+            elementTakenPlace(true, enemy.getEnemyPosition());
             return true;
             // testing
             // Remove enemy's position from enemyAvaliable_pos only if enemy is an Spider
@@ -232,7 +236,10 @@ public class RecordUsedPlace {
     }
 
     public Position getPlayerPosition() {
-        return player.getPosition();
+        if(player != null)
+            return player.getPosition();
+        else 
+            return null;
     }
 
     /**
@@ -248,11 +255,12 @@ public class RecordUsedPlace {
         return deltaX <= range && deltaY <= range;
     }
 
-    public boolean catchPlayer(Position enemy_pos) {
-        if (enemy_pos.equal(player.getPosition()))
-            return true;
-        else
-            return false;
+    public int getLengthOfAviable(){
+        return available.size();
+    }
+
+    public int getLengthOfEnemies(){
+        return enemies.size();
     }
 
     public int getTileNumber() {
@@ -265,6 +273,10 @@ public class RecordUsedPlace {
 
     public int getObstaclesNumber() {
         return numberOfObstacles;
+    }
+
+    public int getLengthOfRewards(){
+        return generalRewards.size();
     }
 
     public ArrayList<Position> getAviablePosition() {
@@ -283,6 +295,14 @@ public class RecordUsedPlace {
         for (Reward reward : generalRewards) {
             if (player.getPosition().equal(reward.getPosition()))
                 return reward;
+        }
+        return null;
+    }
+
+    public Enemy playerMeetEnemy(){
+        for(Enemy enemy : enemies){
+            if(player.getPosition().equal(enemy.getPosition()))
+                return enemy;
         }
         return null;
     }

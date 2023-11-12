@@ -11,6 +11,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Player.PlayerMovement;
@@ -262,11 +263,8 @@ public class Ghost implements Enemy {
     public void catchPlayer() {
         getPlayerPosition();
         if (playerPosition.equal(enemyPosition)) {
-            System.out.println("Ghost caught the player!");
-        } else {
-            System.out.println("Ghost fail to catch the player!");
-        }
-
+            GameManager.getInstance().enemyCatachPlayer(movable);
+        } 
     }
 
     @Override
@@ -302,6 +300,11 @@ public class Ghost implements Enemy {
         }
         g2.drawImage(currentImage, enemyPosition.getX_axis(), enemyPosition.getY_axis(), GamePanel.tileSize,
                 GamePanel.tileSize, null);
+    }
+
+    @Override
+    public boolean getMovable() {
+        return movable;
     }
 
 }

@@ -2,9 +2,14 @@ package cmpt276.group4.WindowAndInput;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -21,9 +26,11 @@ public class MainPanel extends JPanel implements Runnable {
     private JButton easyLevelButton;
     private JButton middleLevelButton;
     private JButton hardLevelButton;
+    private BufferedImage mainPanel_img;
 
 
     public MainPanel(){
+        loadingImage();
         startButton = new JButton();
         startButton.setText("Start Game");
         startButton.addMouseListener(new MouseAdapter() {
@@ -89,6 +96,14 @@ public class MainPanel extends JPanel implements Runnable {
         this.add(hardLevelButton);
     }
 
+    private void loadingImage(){
+        try {
+            mainPanel_img = ImageIO.read(new File("res/pop_up/game_welcome_page2.png"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void createTimeLine(){
         if(mainThread == null){
@@ -104,6 +119,14 @@ public class MainPanel extends JPanel implements Runnable {
             
         }
         
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        if(mainPanel_img != null)
+            g.drawImage(mainPanel_img,0,0,GamePanel.screenWidth,GamePanel.screenHeight,this);
     }
 
     private void VisibleDifficultButton(){

@@ -3,6 +3,7 @@ package cmpt276.group4.Logic;
 import java.util.ArrayList;
 import java.util.List;
 import cmpt276.group4.Position;
+import cmpt276.group4.WindowAndInput.GamePanel;
 
 /**
  * Represents the configuration of game difficulty.
@@ -156,7 +157,7 @@ public abstract class GameDifficultyConfig {
 
         if (arrayX.length == arrayY.length) {
             for (int i = 0; i < arrayX.length; i++) {
-                currentWallPositions.add(new Position(arrayX[i], arrayY[i]));
+                currentWallPositions.add(new Position(arrayX[i]*GamePanel.tileSize, arrayY[i]*GamePanel.tileSize));
             }
         }
     }

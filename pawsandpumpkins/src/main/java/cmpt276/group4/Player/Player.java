@@ -3,12 +3,17 @@ package cmpt276.group4.Player;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.Room.Door;
+import cmpt276.group4.Room.Room;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
@@ -16,6 +21,11 @@ public class Player implements KeyMovingObserver {
     private Position playerPosition;
     private Position destination;
     private static Player _instance = null;
+
+    private Door[] doors;
+    private int generalReward_require;
+    private boolean checkDoor = false;
+    private boolean wining = false;
 
     private boolean move_up, move_down, move_left, move_right = false;
     private MoveDirection direction = MoveDirection.Down;
@@ -34,13 +44,20 @@ public class Player implements KeyMovingObserver {
    private  BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
    private  BufferedImage currentImage = null;
 
+   /**
+    * constructor for the player initlization
+    */
     Player(){
-        playerPosition = new Position(2 * GamePanel.tileSize, 2 * GamePanel.tileSize);
+        playerPosition = new Position(1 * GamePanel.tileSize, 1 * GamePanel.tileSize);
         movement = new PlayerMovement();
         getPlayerImage();
         destination = new Position(0, 0);
     }
 
+    /**
+     * a static function to get player instance 
+     * @return the instance of Player
+     */
     public static synchronized Player getInstance(){
         if(_instance == null){
             _instance = new Player();
@@ -48,6 +65,9 @@ public class Player implements KeyMovingObserver {
         return _instance;
     }
 
+    /**
+     * try to load the player image from resource
+     */
     private void getPlayerImage(){
         try {
             //String directory = System.getProperty("user.dir");
@@ -69,34 +89,38 @@ public class Player implements KeyMovingObserver {
         return playerPosition;
     }
 
+    public boolean playerWin(){
+        return wining;
+    }
+
     public void setPlayerMovement(PlayerMovement playerMovement){
         movement = playerMovement;
     }
 
-    public int totalScore(){
-        return collectScore - deductScore;
+    public void setRoom(Room room){
+        doors = room.getDoors();
+    }
+
+    public void setWinRequire(int require){
+        generalReward_require = require;
     }
 
     public void deductPoint(int deductScore){
         this.deductScore += deductScore;
-        if(gameEnd()){
-            System.out.println("Game end");
+        if(deductScore > collectScore){
+            GameManager.getInstance().negativePoint();
         }
-    }
-
-    private boolean gameEnd(){
-        if(deductScore > collectScore)
-            return true;
-        else 
-            return false;
     }
 
     public void addScoreToPlayer(int number, boolean isBonusReward){
         collectScore += number;
         if(isBonusReward)
             bonusReward_num ++;
-        else
+        else{
             generalReward_num ++;
+            meetWiningRequirement();
+        }
+            
     }
 
     public int getCollectScore(){
@@ -109,6 +133,14 @@ public class Player implements KeyMovingObserver {
 
     public int getGeneralRewardNum(){
         return generalReward_num;
+    }
+
+    public int totalScore(){
+        return collectScore - deductScore;
+    }
+
+    public int getDeductScore(){
+        return deductScore;
     }
 
     @Override
@@ -208,13 +240,34 @@ public class Player implements KeyMovingObserver {
     private void updatePosition(){
         if(movement.isPositionAvailable(destination)){
             playerPosition.setPosition(destination);
+            outOfDoor();
             Reward reward = RecordUsedPlace.getInstance().playerGetReward();
             if(reward != null)
                 reward.addBenefit(this);
+            Enemy enemy = RecordUsedPlace.getInstance().playerMeetEnemy();
+            if(enemy != null){
+                GameManager.getInstance().enemyCatachPlayer(enemy.getMovable());
+            }
         }
             
     }
 
+    private void outOfDoor(){
+        if(checkDoor){
+            for (Door door : doors) {
+                if(playerPosition.equal(door.getPosition())){
+                    wining = true;
+                    GameManager.getInstance().leaveDoor();
+                }
+                    
+            }
+        }
+    }
+
+    private void meetWiningRequirement(){
+        if(generalReward_num == generalReward_require)
+            checkDoor = true;
+    }
 
 
 

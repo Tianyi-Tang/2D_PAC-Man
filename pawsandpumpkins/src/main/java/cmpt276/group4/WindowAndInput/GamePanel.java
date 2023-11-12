@@ -4,10 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
@@ -53,7 +57,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
-
     }
 
 
@@ -67,8 +70,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
-
 
 
     @Override
@@ -96,6 +97,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
             for (Enemy enemy : record.getEnemyList()) {
+                enemy.catchPlayer();
                 if (enemy instanceof Ghost) {
                     ((Ghost) enemy).ghostMoveNextPosition();
                 }
@@ -113,36 +115,20 @@ public class GamePanel extends JPanel implements Runnable {
 
         record.printTileAndObstacleCounts();
         Graphics2D g2 = (Graphics2D) g;
-        //System.out.println("avaliable "+record.getElemet().size());
 
         record.printTileAndObstacleCounts();
 
-        for (CharacterAvaliablePosition element : record.getElemet()) {
-            element.draw(g2);
+        synchronized (record.getElemet()) {
+            for (CharacterAvaliablePosition element : record.getElemet()) {
+                element.draw(g2);
+            }
         }
-        //System.out.println("avaliable "+record.getElemet().size());
 
         for (Reward reward : record.getRewardList()) {
+            System.out.println("reward:"+ record.getRewardList().size());
             reward.draw(g2);
 
         }
-
-
-
-    //Position wallPosition1 = new Position(5, 5);
-    //Wall wall1 = new Wall(wallPosition1, 1);
-    //RecordUsedPlace.getInstance().addWall(wall1);
-
-    //Position wallPosition2 = new Position(10*tileSize, 10*tileSize);
-
-    // for (Obstacle obstacle : record.getObstacles()) {
-    // Create a new Wall object using the wall position
-    //obstacle.draw(g2);
-    // Draw the wall
-
-    // }
-
-
 
         if(player != null)
             player.draw(g2);
@@ -152,11 +138,11 @@ public class GamePanel extends JPanel implements Runnable {
 
                 enemy.draw(g2);
         }
-
-        
-
-
         g2.dispose();
+    }
+
+    public void restartGamePanel(){
+        gameThread = null;
     }
 
 }

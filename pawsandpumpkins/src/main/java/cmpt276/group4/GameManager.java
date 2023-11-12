@@ -56,12 +56,14 @@ public class GameManager {
     private LoadingPanel loadPanel;
     private NumberPanel numberPanel;
 
+    private Player player;
+
 
     private keyboardListener listener;
-    private Room room;
 
     private EnemyFactory enemyFactory;
 
+    private RoomInitialization initialization_room;
 
     private EnemyInitialization enemyInitialization;
     private RewardFactory rewardFactory;
@@ -70,8 +72,6 @@ public class GameManager {
 
     private RecordUsedPlace record;
     private boolean existPlayer = false;
-
-
 
 
     public GameManager(){
@@ -97,8 +97,6 @@ public class GameManager {
         window.getContentPane().add(cardContainer);
         window.pack();
         window.setLocationRelativeTo(null);
-
-
         
     }
 
@@ -125,119 +123,21 @@ public class GameManager {
         window.setVisible(true);
     }
 
-    public void createWindows(){
-        
-        status = GameStatus.GamePanel;
-        layout.show(cardContainer, "game");
-
-        window.setVisible(true);
-
-        listener = new keyboardListener();
-        window.addKeyListener(listener);
-
-         GameConfig gameConfig=new GameConfig();
-        gameConfig.passGameLevel(gameLevel.HARD);
-       
-        
-        RoomInitialization initialization_room = new RoomInitialization();
-        RoomFactory roomfactory = new RoomFactory();
-        initialization_room.setX(16);
-        initialization_room.setY(16);
-        initialization_room.iRoom(roomfactory);
-
-        //RoomFactory roomfactory = new RoomFactory();
-        initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
-        
-        //room = initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
-
-
-        record =  RecordUsedPlace.getInstance();
-        
-        
-        
-        //Position wallPosition1 = new Position(10, 10);
-        //Obstacle wall1 = new Obstacle(wallPosition1, 1);
-      
-        //RecordUsedPlace.getInstance().addObstacle(wall1);
-
-
-        //for (Position obstaclePosition : record.getObstacles()) {
-        //    System.out.println("Obstacle Position - X: " + obstaclePosition.getX_axis() + ", Y: " + obstaclePosition.getY_axis());
-        //}
-
-        //Position wallPosition2 = record.getRandomFromAvailablePosition();
-        //System.out.println("wallposition " + wallPosition2);
-        //Obstacle wall2 = new Wall(wallPosition2, 1);
-        //System.out.println("wallposition " + wallPosition2);
-        //RecordUsedPlace.getInstance().addElementToMap(wall2);
-
-        // put tile to all aviable position 
-        ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
-        for (Position position : tilesPosition) {
-            //System.out.println("number of Aviable:");
-            RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
-        }
-
-        initialization_room.iWalls(roomfactory);
-        System.out.println("game manager, crete room");
-        initialization_room.iTombs(roomfactory);
-
-        //walls being created
-        //Position wallPosition1 = record.getRandomFromAvailablePosition();
-        //Obstacle wall1 = new Wall(wallPosition1);
-        //RecordUsedPlace.getInstance().addElementToMap(wall1);
-      
-        enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(enemyFactory); 
-
-        rewardFactory = new RewardFactory();
-        rewardInitialization = new RewardInitialization(rewardFactory);
-        rewardInitialization.generateReward();
-
-        
-
-        
-
-        
-
-
-
-
-
-
-    }
-
+    
     public void createNumberPanel(){
         status = GameStatus.Win;
 
-
-        
         layout.show(cardContainer, "gameEnd");
         window.setVisible(true);
     }
 
-    public void RecordUsedPlaceAviable(){
-        if(existPlayer ==false){
-            existPlayer = true;
-            creatPlayer();
-        }
-    }
-
-
-    private void creatPlayer(){
-        Player player = PlayerGenerator.creatPlayer();
-        listener.addPlayer(player);
-        gamePanel.setPlayer(player);
-        RecordUsedPlace.getInstance().setPlayer(player);
-        gamePanel.createTimeLine();
-    }
-
     public void enemyCatachPlayer(boolean moveable){
         if(moveable == true){
-            // end game
+            status = GameStatus.GameOver;
+            endOfGame();
         }
         else{
-            // game continues
+            player.deductPoint(5);
         }
     }
 
@@ -250,13 +150,49 @@ public class GameManager {
         }
     }
 
-    
+    public void transformToGameScreen(){
+        if(status == GameStatus.LoadingPanel){
+            layout.show(cardContainer, "game");
+            gamePanel.createTimeLine();
+            player = Player.getInstance();
+            gamePanel.setPlayer(player);
+            addKeyboardListener();
+            status = GameStatus.GamePanel;
+        }
+    }
+
+    private void addKeyboardListener(){
+        listener = new keyboardListener();
+        gamePanel.addKeyListener(listener);
+        gamePanel.requestFocusInWindow();
+        listener.addPlayer(Player.getInstance());
+    }
+
+    public void negativePoint(){
+        if(player.totalScore() < 0){
+            status = GameStatus.GameOver;
+            endOfGame();
+        }
+    }
+
+    public void leaveDoor(){
+        if(player.playerWin()){
+            status = GameStatus.Win;
+            endOfGame();
+        }
+    }
 
     public boolean isGameEnd(){
-        if(status == GameStatus.GamePanel && gameEnd == true)
+        if(status == GameStatus.GameOver || status == GameStatus.Win)
             return true;
         else
             return false;
+    }
+
+    private void endOfGame(){
+        layout.show(cardContainer, "gameEnd");
+        numberPanel.init(status);
+        numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum(), player.getDeductScore(), player.totalScore());
     }
 
     // Call this method in game update loop to check for mouse input

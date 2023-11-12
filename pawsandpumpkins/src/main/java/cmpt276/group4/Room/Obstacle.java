@@ -15,35 +15,13 @@ public class Obstacle implements CharacterAvaliablePosition {
     protected Position position;
     private boolean playerAvaliable = false;
     private boolean takenPlace = true;
-    private Position playerPosition;
     BufferedImage wallImage;
     RecordUsedPlace record;
 
     // Constructor to initialize an obstacle with player access, enemy
     // traversability, and positions
     public Obstacle(Obstacletype type, int amount, Position position) {
-        // this.position = position;
         record = RecordUsedPlace.getInstance();
-        System.out.print("testest: " + position);
-        initialWallImage();
-        setObstaclePosition();
-        System.out.print("testest: " + position);
-    }
-
-    /**
-     * Sets the position for an tombstone in the game.This method selects a random position from available positions and ensures it
-     * is not too close to the player.
-     */
-    public void setObstaclePosition() {
-        Position potentialPosition;
-        do {
-            // Get a random position from available positions
-            potentialPosition = RecordUsedPlace.getInstance().getRandomFromAvailablePosition();
-            // Repeat until the position is not too close to the player
-        } while (record.isPlayerNearBy(2 * GamePanel.tileSize, potentialPosition));
-
-        // Set the chosen position for the obstacle
-        position = potentialPosition;
     }
 
     public void setPlayerAccess() {
@@ -67,14 +45,6 @@ public class Obstacle implements CharacterAvaliablePosition {
     @Override
     public boolean getTakenPlace() {
         return takenPlace;
-    }
-
-    public void initialWallImage() {
-        try {
-            wallImage = ImageIO.read(new File(System.getProperty("user.dir") + "/res/Walls/mid_wall2.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

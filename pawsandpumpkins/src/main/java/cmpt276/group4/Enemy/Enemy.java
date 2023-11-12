@@ -51,4 +51,11 @@ public interface Enemy {
      * @return The position of the enemy.
      */
     Position getPosition();
+
+    /**
+     * Get whether the enemy can move or not
+     * 
+     * @return
+     */
+    boolean getMovable();
 }

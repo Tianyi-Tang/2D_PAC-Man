@@ -1,11 +1,14 @@
 package cmpt276.group4.Room;
 
 import cmpt276.group4.Room.RoomInitialization;
+import cmpt276.group4.WindowAndInput.GamePanel;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.gameLevel;
 public class RoomFactory {
 
     //creating actual object of obstacle and door and room in factory 
@@ -15,46 +18,26 @@ public class RoomFactory {
         return new Room(max_X, max_Y);
     }
 
-    public void createObstacle(Obstacletype type, List<Position> position, int amount) {
-        //if (type == Obstacletype.WALL){
-            for(int i=0; i<amount; i++){
-                System.out.println("Enter If loop");
-                Obstacle obstacle = new Wall(type,1,position.get(i));
-                RecordUsedPlace.getInstance().addElementToMap(obstacle);
-                //amount--;
-            }
-        // }
-        // else{
-        //     while(amount > 0){
-        //         System.out.println("Enter If loop");
-        //         Obstacle obstacle = new Tombstone(type,amount,position);
-        //         RecordUsedPlace.getInstance().addElementToMap(obstacle);
-        //         amount--;
-        //     }
-        // }
 
-        //return obstacle;
+    public void createTombstones(Obstacletype type, Position position, int amount){
+        while(amount > 0){
+            Obstacle obstacle = new Tombstone(type,amount,position);
+            RecordUsedPlace.getInstance().addElementToMap(obstacle);
+            amount--;
+        }
     }
 
-       public void createObstacle(Obstacletype type, Position position, int amount) {
-        
-            while(amount > 0){
-                System.out.println("Enter If loop");
-                Obstacle obstacle = new Tombstone(type,amount,position);
-                RecordUsedPlace.getInstance().addElementToMap(obstacle);
-                amount--;
-            }
-        
+    public void createWall(Obstacletype type, List<Position> positions, int amount){
+        for (int i=0; i < amount && i < positions.size(); i++){
+            RecordUsedPlace.getInstance().addElementToMap(new Wall(type,amount,positions.get(i)));
+        }
 
-        //return obstacle;
     }
 
-    public Door createDoor(Boolean IsOpen) {
-        return new Door(IsOpen);
-    }
-
-    public Tile creatTile(Position position){
-        return new Tile(position);
+    public void createTile(List<Position> positions){
+        for (Position position : positions) {
+            RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
+        };
     }
 }
 

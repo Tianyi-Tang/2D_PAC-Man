@@ -1,5 +1,6 @@
 package cmpt276.group4.Room;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.lang.model.type.NullType;
@@ -16,46 +17,47 @@ import cmpt276.group4.Logic.GameConfig;
 public class RoomInitialization {
     private int max_X;
     private int max_Y;
-    private int wall,tombstone;
+    public int wall,tombstone;
     private Obstacletype obstacletype;
     private Position position;
     private GameConfig gc;
-    private List<Position> wallPositionList;
+    public List<Position> wallPositionList;
+    public List<Position> tilesPosition;
     
+
     // Dont know if this is correct? should i be entering type of room?
 
 
     // A function once called it will generate all tiles in the room
 
     // And for walls
-    public void initializeRoom(gameLevel gameLevel, RoomFactory rmFactory) {     
+    public void initializeRoom(gameLevel gameLevel, RoomFactory rmFactory) {
+        GameConfig config = GameConfig.getGameConfigInstance();
+        max_X = config.getRoomColumn();
+        max_Y = config.getRoomRow();
+        tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();     
         gc = GameConfig.getGameConfigInstance();
         wallPositionList = gc.getWallPositions();     
         wall = wallPositionList.size();
         tombstone = gc.getNumberOfObstacles();
-
-        System.out.println("wall: " + wall);
-        System.out.println("tombstone: " + tombstone);
-        
     }
 
-    public void iRoom(RoomFactory rmFactory) {
-        rmFactory.createRoom(max_X, max_Y);
+    public Room iRoom(RoomFactory rmFactory) {
+        return rmFactory.createRoom(max_X, max_Y);
     }
+    
+    public void iTombs(RoomFactory rmFactory){
+        rmFactory.createTombstones(Obstacletype.TOMBSTONE, position, tombstone);
+    }
+
 
     public void iWalls(RoomFactory rmFactory){
-        rmFactory.createObstacle(Obstacletype.WALL, wallPositionList, wallPositionList.size());
-    }
-    public void iTombs(RoomFactory rmFactory){
-        rmFactory.createObstacle(Obstacletype.TOMBSTONE, wallPositionList, tombstone);
+        rmFactory.createWall(Obstacletype.WALL, wallPositionList, wall);
     }
 
 
-    public void setX(int x){
-        max_X = x;
+    public void iTiles(RoomFactory rmFactory){
+        rmFactory.createTile(tilesPosition);
     }
 
-    public void setY(int y){
-        max_Y = y;
-    }
 }
