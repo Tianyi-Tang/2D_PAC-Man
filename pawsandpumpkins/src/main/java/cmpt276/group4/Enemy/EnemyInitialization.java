@@ -34,6 +34,7 @@ public class EnemyInitialization {
         eFactory.createEnemies(EnemyType.SPIDER, spider);
         eFactory.createEnemies(EnemyType.GHOST_BASIC, basicGhost);
         eFactory.createEnemies(EnemyType.GHOST_ADVANCED, advancedGhost);
+        
 
     }
 
@@ -49,6 +50,8 @@ public class EnemyInitialization {
         eFactory.createEnemies(EnemyType.GHOST_ADVANCED, advancedGhost);
 
     }
+
+   
 
 
     public gameLevel getGameLevel() {

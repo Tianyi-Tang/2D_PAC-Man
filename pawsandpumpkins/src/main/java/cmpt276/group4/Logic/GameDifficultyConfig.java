@@ -94,6 +94,8 @@ public abstract class GameDifficultyConfig {
         }
     }
 
+
+
         //deep copy of wall positions
     // public void setWallPositions(List<Position> wallPositions) {
     //     if (this.wallPositions == null) {

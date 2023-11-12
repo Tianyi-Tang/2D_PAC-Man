@@ -183,7 +183,7 @@ public class GameManager {
         rewardFactory = new RewardFactory();
         rewardInitialization = new RewardInitialization(rewardFactory);
         rewardInitialization.generateReward();
-        
+
         enemyFactory = new EnemyFactory();
         enemyInitialization = new EnemyInitialization(enemyFactory); 
 
@@ -200,6 +200,9 @@ public class GameManager {
 
     public void createNumberPanel(){
         status = GameStatus.Win;
+
+
+        
         layout.show(cardContainer, "gameEnd");
         window.setVisible(true);
     }

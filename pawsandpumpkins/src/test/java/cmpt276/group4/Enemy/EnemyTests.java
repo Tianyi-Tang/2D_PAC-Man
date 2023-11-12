@@ -12,11 +12,11 @@ public class EnemyTests {
     private EnemyFactory enemyFactory;
     private EnemyInitialization enemyInitialization;
 
-    @BeforeEach
-    public void setUp() {
-        enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(5); // Initializing 5 enemies
-    }
+    // @BeforeEach
+    // public void setUp() {
+    //     enemyFactory = new EnemyFactory();
+    //     enemyInitialization = new EnemyInitialization(5); // Initializing 5 enemies
+    // }
 
     // @Test
     // public void testCreateGhostEnemies() {

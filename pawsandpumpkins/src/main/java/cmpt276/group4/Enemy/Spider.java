@@ -20,6 +20,7 @@ public class Spider implements Enemy {
     private BufferedImage currentImage;
     private RecordUsedPlace record;
     private Position playerPosition;
+    static boolean isPlayerOnGhost;
 
     public enum SpiderType {
         type_spider_1,
@@ -74,8 +75,9 @@ public class Spider implements Enemy {
     public void catchPlayer() {
         Position playerPosition = record.getPlayerPosition();
         if (playerPosition.equals(enemyPosition)) {
-            //tell RecordUsedPlace to remove spider
-            System.out.println("Bagel stepped on spider!");
+            isPlayerOnGhost = true;
+        }else{
+            isPlayerOnGhost = false;
         }
     }
 

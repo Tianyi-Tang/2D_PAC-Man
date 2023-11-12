@@ -9,6 +9,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import cmpt276.group4.GameStatus;
+/**
+ * The NumberPanel class is responsible for displaying a panel of numbers
+ * with a pop up window (Win/ Gameover), typically used for showing game statistics.
+ */
 
 public class NumberPanel extends JPanel {
     private static final int NUM_IMAGES = 10;
@@ -48,6 +52,19 @@ public class NumberPanel extends JPanel {
     public void init(boolean isWin) {
 
         if (isWin) {
+            backgroundImgName = "win.png";
+        } else {
+            backgroundImgName = "game_over.png";
+        }
+
+        loadBackgroundImage(backgroundImgName);
+
+        
+    }
+
+    public void init(GameStatus status) {
+
+        if (status == GameStatus.Win) {
             backgroundImgName = "win.png";
         } else {
             backgroundImgName = "game_over.png";
