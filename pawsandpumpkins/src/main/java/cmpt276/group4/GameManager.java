@@ -238,12 +238,9 @@ public class GameManager {
 
 
     private void endOfGame(){
-        if(status == GameStatus.GameOver){
-            
-        }
-        else{
-
-        }
+        layout.show(cardContainer, "gameEnd");
+        numberPanel.init(status);
+        numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum(), player.getDeductScore(), player.totalScore());
     }
 
     public boolean isGameEnd(){

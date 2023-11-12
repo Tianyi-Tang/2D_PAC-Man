@@ -73,10 +73,6 @@ public class Player implements KeyMovingObserver {
         movement = playerMovement;
     }
 
-    public int totalScore(){
-        return collectScore - deductScore;
-    }
-
     public void deductPoint(int deductScore){
         this.deductScore += deductScore;
         if(gameEnd()){
@@ -111,8 +107,12 @@ public class Player implements KeyMovingObserver {
         return generalReward_num;
     }
 
-    public int totaltScore(){
+    public int totalScore(){
         return collectScore - deductScore;
+    }
+
+    public int getDeductScore(){
+        return deductScore;
     }
 
     @Override
