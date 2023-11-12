@@ -9,6 +9,8 @@ import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.GeneralReward;
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.Room.Obstacle;
+import cmpt276.group4.Room.Tile;
 import cmpt276.group4.Room.Wall;
 
 public class RecordUsedPlace {
@@ -303,7 +305,21 @@ public class RecordUsedPlace {
             }
             return true;
         }
+    public void printTileAndObstacleCounts() {
+        int tileCount = 0;
+        int obstacleCount = 0;
     
+            for (CharacterAvaliablePosition element : elements) {
+                if (element instanceof Tile) {
+                    tileCount++;
+                } else if (element instanceof Obstacle) {
+                    obstacleCount++;
+                }
+            }
+    
+            System.out.println("Number of Tiles: " + tileCount);
+            System.out.println("Number of Obstacles: " + obstacleCount);
+        }
 
         
 }

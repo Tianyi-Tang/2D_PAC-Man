@@ -135,12 +135,15 @@ public class GameManager {
         window.addKeyListener(listener);
         
         RoomInitialization initialization_room = new RoomInitialization();
+        RoomFactory roomfactory = new RoomFactory();
         initialization_room.setX(12);
         initialization_room.setY(12);
+        initialization_room.iRoom(roomfactory);
 
-        RoomFactory roomfactory = new RoomFactory();
-        initialization_room.initializeRoom(gameLevel.BASIC, roomfactory);
-        room = initialization_room.initializeRoom(gameLevel.BASIC, roomfactory);
+        //RoomFactory roomfactory = new RoomFactory();
+        initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
+        
+        //room = initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
 
 
         record =  RecordUsedPlace.getInstance();
@@ -170,6 +173,9 @@ public class GameManager {
             //System.out.println("number of Aviable:");
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
         }
+
+        initialization_room.iWalls(roomfactory);
+        initialization_room.iTombs(roomfactory);
 
         //walls being created
         //Position wallPosition1 = record.getRandomFromAvailablePosition();

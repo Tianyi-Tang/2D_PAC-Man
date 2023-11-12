@@ -13,12 +13,23 @@ public class RoomFactory {
     }
 
     public void createObstacle(Obstacletype type, Position position, int amount) {
-        if(amount > 0){
-            System.out.println("Enter If loop");
-            Obstacle obstacle = new Obstacle(type,amount,position);
-            RecordUsedPlace.getInstance().addElementToMap(obstacle);
-            amount--;
+        if (type == Obstacletype.WALL){
+            while(amount > 0){
+                System.out.println("Enter If loop");
+                Obstacle obstacle = new Wall(type,amount,position);
+                RecordUsedPlace.getInstance().addElementToMap(obstacle);
+                amount--;
+            }
         }
+        else{
+            while(amount > 0){
+                System.out.println("Enter If loop");
+                Obstacle obstacle = new Tombstone(type,amount,position);
+                RecordUsedPlace.getInstance().addElementToMap(obstacle);
+                amount--;
+            }
+        }
+
         //return obstacle;
     }
 
@@ -26,7 +37,7 @@ public class RoomFactory {
         return new Door(IsOpen);
     }
 
-    public Tile creaTile(Position position){
+    public Tile creatTile(Position position){
         return new Tile(position);
     }
 }
