@@ -20,6 +20,7 @@ import cmpt276.group4.Player.Player;
 import cmpt276.group4.Player.PlayerGenerator;
 import cmpt276.group4.Reward.RewardFactory;
 import cmpt276.group4.Reward.RewardInitialization;
+import cmpt276.group4.Room.Room;
 import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.Room.RoomInitialization;
 
@@ -37,6 +38,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     private RoomInitialization room_initialization;
     private RoomFactory factory;
+    private Room room;
 
     private RecordUsedPlace record;
     private GameConfig config;
@@ -170,6 +172,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     private void checkPlayer(){
         if(record.getPlayerPosition() != null){
+            Player.getInstance().setRoom(room);
             generatePlayer = true;
             createObstacle();
             progress ++;
@@ -205,7 +208,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         room_initialization = new RoomInitialization();
         factory = new RoomFactory();
         room_initialization.initializeRoom(config.getGameLevel(), factory);
-        room_initialization.iRoom(factory);
+        room =room_initialization.iRoom(factory);
     }
 
     private void createTitle(){

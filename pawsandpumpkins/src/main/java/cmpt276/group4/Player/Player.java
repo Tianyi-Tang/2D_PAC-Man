@@ -11,6 +11,7 @@ import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.Room.Room;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
@@ -18,6 +19,9 @@ public class Player implements KeyMovingObserver {
     private Position playerPosition;
     private Position destination;
     private static Player _instance = null;
+
+    private Room room;
+    private int generalReward_require;
 
     private boolean move_up, move_down, move_left, move_right = false;
     private MoveDirection direction = MoveDirection.Down;
@@ -73,6 +77,14 @@ public class Player implements KeyMovingObserver {
 
     public void setPlayerMovement(PlayerMovement playerMovement){
         movement = playerMovement;
+    }
+
+    public void setRoom(Room room){
+        this.room = room;
+    }
+
+    public void setWinRequire(int require){
+        generalReward_require = require;
     }
 
     public void deductPoint(int deductScore){
