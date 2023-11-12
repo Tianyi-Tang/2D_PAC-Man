@@ -3,7 +3,10 @@ package cmpt276.group4.WindowAndInput;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
@@ -30,6 +33,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     final int FPS = 60;
     private double timeInterval = 1000000000/FPS;
     private JProgressBar progressBar;
+    private int progress;
 
     private RoomInitialization room_initialization;
     private RoomFactory factory;
@@ -37,6 +41,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private RecordUsedPlace record;
     private GameConfig config;
     private boolean generateconfi,generateRoom, generateAllTile, generateWall, generatePlayer,generateObstacle,generateAllEnemies, generateAllRewards =false;
+    private BufferedImage background_img;
 
 
     public LoadingPanel(){
@@ -44,13 +49,15 @@ public class LoadingPanel extends JPanel implements Runnable {
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.setLayout(null);
+        loadingImage();
         
         progressBar = new JProgressBar(0,6);
-        progressBar.setBounds(50, 256, 512, 30);
+        progressBar.setBounds(128, 512, 512, 30);
         progressBar.setStringPainted(true);
         progressBar.setOpaque(true);
         progressBar.setValue(0);
         progressBar.setVisible(true);
+        progress = 0;
 
         this.add(progressBar);
     }
@@ -66,6 +73,14 @@ public class LoadingPanel extends JPanel implements Runnable {
             loadingThread = new Thread(this);
             loadingThread.start();
             record = RecordUsedPlace.getInstance();
+        }
+    }
+
+    private void loadingImage(){
+        try {
+            background_img = ImageIO.read(new File("res/pop_up/game_welcome_page2.png"));
+        } catch (Exception e) {
+            // TODO: handle exception
         }
     }
 
@@ -88,39 +103,35 @@ public class LoadingPanel extends JPanel implements Runnable {
                 iteration -= 1;
             }
         }
+        
         initialLoading();
+        startGame();
     }
 
     private void update(){
+        progressBar.setValue(progress);
         if(!generateconfi){
             checkConfig();
         }
         else if(!generateRoom){
-            System.out.println("room");
             checkRoom();
         }
         else if(!generateAllTile){
-            System.out.println("tile");
             checkTitle();
         }
         else if(!generateWall){
-            System.out.println("wall");
             checkWall();
         }
         else if(!generatePlayer){
-            System.out.println("player");
             checkPlayer();
         }
         else if(!generateObstacle){
-            System.out.println("obstacle");
             checkObstacle();
         }
         else if(!generateAllEnemies){
-            System.out.println("enemies");
             checkEnemy();
         }
         else{
-            System.out.println("reward");
             checkRewards();
         }
     }
@@ -136,6 +147,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         if(record.getLengthOfAviable() == config.areaofRoom()){
             generateRoom = true;
             createTitle();
+            progress ++;
         }
     }
 
@@ -144,6 +156,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         if(record.getTileNumber() == config.areaofRoom()){
             generateAllTile = true;
             createWall();
+            progress ++;
         }
     }
 
@@ -151,6 +164,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         if(record.getWallNumber() == config.getNumberOfWall()){
             generateWall = true;
             createPlayer();
+            progress ++;
         }
     }
 
@@ -158,6 +172,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         if(record.getPlayerPosition() != null){
             generatePlayer = true;
             createObstacle();
+            progress ++;
         }
     }
 
@@ -166,6 +181,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         if(record.getObstaclesNumber() == config.getNumberOfObstacles()){
             generateObstacle = true;
             createEnemy();
+            progress ++;
         }
     }
 
@@ -173,6 +189,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         if(record.getLengthOfEnemies() == config.getTotalGhosts()){
             generateAllEnemies = true;
             createReward();
+            progress ++;
         }
     }
 
@@ -180,6 +197,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         if(record.getLengthOfRewards() == config.getAllRewardNum()){
             generateAllRewards = true;
             createPlayer();
+            progress ++;
         }
     }
 
@@ -221,6 +239,11 @@ public class LoadingPanel extends JPanel implements Runnable {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        if(background_img != null)
+            g.drawImage(background_img,0,0,GamePanel.screenWidth, GamePanel.screenHeight,this);
+        else
+            System.out.println("error");
     }
 
     private boolean allResourceLoading(){
@@ -234,6 +257,10 @@ public class LoadingPanel extends JPanel implements Runnable {
         generateRoom = generateAllTile = generateObstacle = generateObstacle =generateAllEnemies = generateAllRewards = generatePlayer =false;
         loadingThread = null;
         System.out.println("Success!!");
+    }
+
+    private void startGame(){
+        GameManager.getInstance().transformToGameScreen();
     }
 
 

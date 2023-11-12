@@ -4,10 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
@@ -53,7 +57,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
-
     }
 
 
@@ -67,8 +70,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
-
 
 
     @Override

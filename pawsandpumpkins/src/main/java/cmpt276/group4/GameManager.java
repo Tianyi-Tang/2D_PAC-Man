@@ -73,8 +73,6 @@ public class GameManager {
     private boolean existPlayer = false;
 
 
-
-
     public GameManager(){
         window = new JFrame();
         layout = new CardLayout();
@@ -214,6 +212,23 @@ public class GameManager {
             loadPanel.gameLevelSending(level);
             status = GameStatus.LoadingPanel;
         }
+    }
+
+    public void transformToGameScreen(){
+        if(status == GameStatus.LoadingPanel){
+            layout.show(cardContainer, "game");
+            gamePanel.createTimeLine();
+            gamePanel.setPlayer(Player.getInstance());
+            addKeyboardListener();
+            status = GameStatus.GamePanel;
+        }
+    }
+
+    private void addKeyboardListener(){
+        listener = new keyboardListener();
+        window.addKeyListener(listener);
+        System.out.println("sounds good");
+        listener.addPlayer(Player.getInstance());
     }
 
     private void endOfGame(){

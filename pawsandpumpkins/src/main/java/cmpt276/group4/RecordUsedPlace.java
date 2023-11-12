@@ -250,10 +250,9 @@ public class RecordUsedPlace {
      * @return true if the player is within the specified range, false otherwise.
      */
     public boolean isPlayerNearBy(int range, Position p) {
-        // int deltaX = Math.abs(getPlayerPosition().getX_axis() - p.getX_axis());
-        // int deltaY = Math.abs(getPlayerPosition().getY_axis() - p.getY_axis());
-        // return deltaX <= range && deltaY <= range;
-        return false;
+        int deltaX = Math.abs(getPlayerPosition().getX_axis() - p.getX_axis());
+        int deltaY = Math.abs(getPlayerPosition().getY_axis() - p.getY_axis());
+        return deltaX <= range && deltaY <= range;
     }
 
     public boolean catchPlayer(Position enemy_pos) {
