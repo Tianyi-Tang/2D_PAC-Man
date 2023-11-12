@@ -102,10 +102,11 @@ public class LoadingPanel extends JPanel implements Runnable {
             checkTitle();
         }
         else if(!generateWall){
-
+            System.out.println("wall");
+            checkWall();
         }
         else if(!generateObstacle){
-             System.out.println("obstacle");
+            System.out.println("obstacle");
             checkObstacle();
         }
         else if(!generateAllEnemies){
@@ -139,6 +140,13 @@ public class LoadingPanel extends JPanel implements Runnable {
         System.out.println(config.areaofRoom());
         if(record.getTileNumber() == config.areaofRoom()){
             generateAllTile = true;
+            createWall();
+        }
+    }
+
+    private void checkWall(){
+        if(record.getWallNumber() == config.getNumberOfWall()){
+            generateWall = true;
             createObstacle();
         }
     }
@@ -181,8 +189,11 @@ public class LoadingPanel extends JPanel implements Runnable {
         room_initialization.iTiles(factory);
     }
 
-    private void  createObstacle(){
+    private void createWall(){
         room_initialization.iWalls(factory);
+    }
+
+    private void  createObstacle(){
         room_initialization.iTiles(factory);
     }
 
