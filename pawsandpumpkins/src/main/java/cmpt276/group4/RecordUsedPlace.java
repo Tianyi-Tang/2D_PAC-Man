@@ -187,7 +187,7 @@ public class RecordUsedPlace {
     public boolean addEnemy(Enemy enemy) {
         if (isPlaceAviable(enemy.getEnemyPosition())) {
             enemies.add(enemy);
-            elementTakenPlace(false, enemy.getEnemyPosition());
+            elementTakenPlace(true, enemy.getEnemyPosition());
             return true;
             // testing
             // Remove enemy's position from enemyAvaliable_pos only if enemy is an Spider
