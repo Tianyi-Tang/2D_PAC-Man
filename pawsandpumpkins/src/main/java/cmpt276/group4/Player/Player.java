@@ -6,6 +6,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
@@ -217,7 +218,8 @@ public class Player implements KeyMovingObserver {
             if(reward != null)
                 reward.addBenefit(this);
             Enemy enemy = RecordUsedPlace.getInstance().playerMeetEnemy();
-            if()
+            if(enemy != null)
+                GameManager.getInstance().enemyCatachPlayer(enemy.getMovable());
         }
             
     }
