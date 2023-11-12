@@ -2,6 +2,8 @@ package cmpt276.group4.Room;
 
 import java.util.List;
 
+import javax.lang.model.type.NullType;
+
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
@@ -42,10 +44,10 @@ public class RoomInitialization {
     }
 
     public void iWalls(RoomFactory rmFactory){
-        rmFactory.createObstacle(Obstacletype.WALL, wallPositionList, wall);
+        rmFactory.createObstacle(Obstacletype.WALL, wallPositionList, wallPositionList.size());
     }
     public void iTombs(RoomFactory rmFactory){
-        rmFactory.createObstacle(Obstacletype.TOMBSTONE, position, tombstone);
+        rmFactory.createObstacle(Obstacletype.TOMBSTONE, wallPositionList, tombstone);
     }
 
 

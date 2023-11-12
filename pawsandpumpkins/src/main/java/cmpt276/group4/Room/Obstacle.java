@@ -12,7 +12,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Obstacle implements CharacterAvaliablePosition {
-    public Position position;
+    protected Position position;
     private boolean playerAvaliable = false;
     private boolean takenPlace = true;
     private Position playerPosition;

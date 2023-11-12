@@ -16,6 +16,7 @@ public class Wall extends Obstacle {
     BufferedImage wallImage;
     public Wall(Obstacletype type, int amount, Position position) {
         super(type, amount, position);
+        //this.position = position;
         System.out.print("testest" + position);
         initialWallImage();
         setPlayerAccess();
