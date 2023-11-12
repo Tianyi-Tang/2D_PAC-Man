@@ -17,13 +17,14 @@ import cmpt276.group4.Logic.GameConfig;
 public class RoomInitialization {
     private int max_X;
     private int max_Y;
-    private int wall,tombstone;
+    public int wall,tombstone;
     private Obstacletype obstacletype;
     private Position position;
     private GameConfig gc;
     public List<Position> wallPositionList;
     public List<Position> tilesPosition;
     
+
     // Dont know if this is correct? should i be entering type of room?
 
 
@@ -39,28 +40,28 @@ public class RoomInitialization {
         wallPositionList = gc.getWallPositions();     
         wall = wallPositionList.size();
         tombstone = gc.getNumberOfObstacles();
-
-        System.out.println("wall: " + wall);
-        System.out.println("tombstone: " + tombstone);
         
     }
 
-    public void iRoom(RoomFactory rmFactory) {
-        rmFactory.createRoom(max_X, max_Y);
+    //public void iRoom(RoomFactory rmFactory) {
+        //rmFactory.createRoom(max_X, max_Y);
+    //}
+    
+    public void iTombs(RoomFactory rmFactory){
+        rmFactory.createTombstones(Obstacletype.TOMBSTONE, position, tombstone);
     }
 
 
     public void iWalls(RoomFactory rmFactory){
-        rmFactory.createObstacle(Obstacletype.WALL, wallPositionList, wallPositionList.size());
-    }
-
-    public void iTombs(RoomFactory rmFactory){
-        rmFactory.createObstacle(Obstacletype.TOMBSTONE, wallPositionList, tombstone);
+        rmFactory.createWall(Obstacletype.WALL, wallPositionList, wall);
     }
 
 
     public void iTiles(RoomFactory rmFactory){
         rmFactory.createTile(tilesPosition);
     }
-   
+
+    public void iRoom(RoomFactory roomfactory) {
+    }
+
 }

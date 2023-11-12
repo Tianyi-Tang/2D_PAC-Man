@@ -62,6 +62,7 @@ public class GameManager {
 
     private EnemyFactory enemyFactory;
 
+    private RoomInitialization initialization_room;
 
     private EnemyInitialization enemyInitialization;
     private RewardFactory rewardFactory;
@@ -135,55 +136,31 @@ public class GameManager {
         listener = new keyboardListener();
         window.addKeyListener(listener);
 
-         GameConfig gameConfig=new GameConfig();
-        gameConfig.passGameLevel(gameLevel.HARD);
+        GameConfig gameConfig=new GameConfig();
+        gameConfig.passGameLevel(gameLevel.BASIC);
        
         
-        RoomInitialization initialization_room = new RoomInitialization();
+        initialization_room = new RoomInitialization();
         RoomFactory roomfactory = new RoomFactory();
+
         initialization_room.iRoom(roomfactory);
 
         //RoomFactory roomfactory = new RoomFactory();
         initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
+
         
-        //room = initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
+        initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
 
 
         record =  RecordUsedPlace.getInstance();
         
-        
-        
-        //Position wallPosition1 = new Position(10, 10);
-        //Obstacle wall1 = new Obstacle(wallPosition1, 1);
-      
-        //RecordUsedPlace.getInstance().addObstacle(wall1);
+    
 
 
-        //for (Position obstaclePosition : record.getObstacles()) {
-        //    System.out.println("Obstacle Position - X: " + obstaclePosition.getX_axis() + ", Y: " + obstaclePosition.getY_axis());
-        //}
-
-        //Position wallPosition2 = record.getRandomFromAvailablePosition();
-        //System.out.println("wallposition " + wallPosition2);
-        //Obstacle wall2 = new Wall(wallPosition2, 1);
-        //System.out.println("wallposition " + wallPosition2);
-        //RecordUsedPlace.getInstance().addElementToMap(wall2);
-
-        // put tile to all aviable position 
-        ArrayList<Position> tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();
-        for (Position position : tilesPosition) {
-            //System.out.println("number of Aviable:");
-            RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
-        }
-
+        initialization_room.iTiles(roomfactory);
         initialization_room.iWalls(roomfactory);
-        System.out.println("game manager, crete room");
         initialization_room.iTombs(roomfactory);
-
-        //walls being created
-        //Position wallPosition1 = record.getRandomFromAvailablePosition();
-        //Obstacle wall1 = new Wall(wallPosition1);
-        //RecordUsedPlace.getInstance().addElementToMap(wall1);
+        
       
         enemyFactory = new EnemyFactory();
         enemyInitialization = new EnemyInitialization(enemyFactory); 

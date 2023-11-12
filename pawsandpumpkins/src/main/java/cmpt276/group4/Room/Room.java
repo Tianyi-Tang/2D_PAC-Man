@@ -1,5 +1,8 @@
 package cmpt276.group4.Room;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import cmpt276.group4.GameManager;
 //import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
@@ -36,8 +39,6 @@ public class Room {
             RoomY2 = roomCenterY +  (max_Y/2);
             generateAllPosition();
         } 
-            
-            
     }
 
     private void generateAllPosition(){
@@ -50,6 +51,7 @@ public class Room {
         }
         // GameManager.getInstance().RecordUsedPlaceAviable();
     }
+        
 
     // Getter methods for attributes
     public Position getDoorPosition() {

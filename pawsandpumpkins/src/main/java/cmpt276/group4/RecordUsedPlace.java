@@ -165,13 +165,17 @@ public class RecordUsedPlace {
                 characterAvaliable_pos.add(object.getPosition());
                 numberofTiles++;
             } else {
+                System.out.println("numberOfwall " + numberofWall);
                 obstacle_pos.add(object.getPosition());
                 removeCharaterAviable(object.getPosition());
-                if (object instanceof Wall)
+                if (object instanceof Wall){
                     numberofWall++;
+                    //System.out.println("numberOfwall " + numberofWall);
+                }
                 else
                     numberOfObstacles++;
             }
+
 
             elements.add(object);
             elementTakenPlace(object.getTakenPlace(), object.getPosition());

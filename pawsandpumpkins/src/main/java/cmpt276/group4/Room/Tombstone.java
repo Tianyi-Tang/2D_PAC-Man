@@ -15,6 +15,7 @@ public class Tombstone extends Obstacle {
     BufferedImage tombImage;
     public Tombstone(Obstacletype type, int amount, Position position ) {
         super(type, amount, position);
+        setObstaclePosition();
         initialWallImage();
         setPlayerAccess();
     }
@@ -23,6 +24,23 @@ public class Tombstone extends Obstacle {
     public Position getPosition() {
         return position;
     }
+
+     /**
+     * Sets the position for an tombstone in the game.This method selects a random position from available positions and ensures it
+     * is not too close to the player.
+     */
+    public void setObstaclePosition() {
+        Position potentialPosition;
+        do {
+            // Get a random position from available positions
+            potentialPosition = RecordUsedPlace.getInstance().getRandomFromAvailablePosition();
+            // Repeat until the position is not too close to the player
+        } while (record.isPlayerNearBy(2 * GamePanel.tileSize, potentialPosition));
+
+        // Set the chosen position for the obstacle
+        position = potentialPosition;
+    }
+    
 
     public void initialWallImage(){
         try {
