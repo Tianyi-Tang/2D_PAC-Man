@@ -173,6 +173,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkPlayer(){
         if(record.getPlayerPosition() != null){
             Player.getInstance().setRoom(room);
+            Player.getInstance().setWinRequire(config.getNumberOfRegularRewards());
             generatePlayer = true;
             createObstacle();
             progress ++;

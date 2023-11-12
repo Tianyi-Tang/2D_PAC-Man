@@ -3,6 +3,7 @@ package cmpt276.group4.Player;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -11,6 +12,7 @@ import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.Room.Door;
 import cmpt276.group4.Room.Room;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
@@ -20,8 +22,9 @@ public class Player implements KeyMovingObserver {
     private Position destination;
     private static Player _instance = null;
 
-    private Room room;
+    private Door[] doors;
     private int generalReward_require;
+    private boolean checkDoor = false;
 
     private boolean move_up, move_down, move_left, move_right = false;
     private MoveDirection direction = MoveDirection.Down;
@@ -80,7 +83,7 @@ public class Player implements KeyMovingObserver {
     }
 
     public void setRoom(Room room){
-        this.room = room;
+        doors = room.getDoors();
     }
 
     public void setWinRequire(int require){
@@ -98,8 +101,11 @@ public class Player implements KeyMovingObserver {
         collectScore += number;
         if(isBonusReward)
             bonusReward_num ++;
-        else
+        else{
             generalReward_num ++;
+            meetWiningRequirement();
+        }
+            
     }
 
     public int getCollectScore(){
@@ -231,6 +237,21 @@ public class Player implements KeyMovingObserver {
             
     }
 
+    private void outOfDoor(){
+        if(checkDoor){
+            for (Door door : doors) {
+                if(playerPosition.equal(door.getPosition())){
+                    
+                }
+                    
+            }
+        }
+    }
+
+    private void meetWiningRequirement(){
+        if(generalReward_num == generalReward_require)
+            checkDoor = true;
+    }
 
 
 
