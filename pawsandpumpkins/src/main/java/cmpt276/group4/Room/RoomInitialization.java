@@ -26,23 +26,7 @@ public class RoomInitialization {
     // A function once called it will generate all tiles in the room
 
     // And for walls
-    public void initializeRoom(gameLevel gameLevel, RoomFactory rmFactory) {
-        //this.gameLevel = gameLevel;
-        System.out.println("Creating obstacle");
-        // switch (gameLevel) {
-        //     case BASIC:
-        //         wall = 3;
-        //         tombstone = 3;
-        //         break;
-        //     case MEDIUM:
-        //         wall = 6;
-        //         tombstone = 6;
-        //         break;
-        //     case HARD:
-        //         wall = 9;
-        //         tombstone = 9;
-        //         break;
-        // }      
+    public void initializeRoom(gameLevel gameLevel, RoomFactory rmFactory) {     
         gc = GameConfig.getGameConfigInstance();
         wallPositionList = gc.getWallPositions();     
         wall = wallPositionList.size();
@@ -58,7 +42,7 @@ public class RoomInitialization {
     }
 
     public void iWalls(RoomFactory rmFactory){
-        rmFactory.createObstacle(Obstacletype.WALL, position, wall);
+        rmFactory.createObstacle(Obstacletype.WALL, wallPositionList, wall);
     }
     public void iTombs(RoomFactory rmFactory){
         rmFactory.createObstacle(Obstacletype.TOMBSTONE, position, tombstone);

@@ -140,8 +140,8 @@ public class GameManager {
         
         RoomInitialization initialization_room = new RoomInitialization();
         RoomFactory roomfactory = new RoomFactory();
-        initialization_room.setX(12);
-        initialization_room.setY(12);
+        initialization_room.setX(16);
+        initialization_room.setY(16);
         initialization_room.iRoom(roomfactory);
 
         //RoomFactory roomfactory = new RoomFactory();
