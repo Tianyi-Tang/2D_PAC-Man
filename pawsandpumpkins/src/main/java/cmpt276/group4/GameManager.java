@@ -231,7 +231,7 @@ public class GameManager {
 
     public void negativePoint(){
         if(player.totalScore() < 0){
-            status = GameStatus.GamePanel.GameOver;
+            status = GameStatus.GameOver;
             endOfGame();
         }
     }
