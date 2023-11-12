@@ -8,7 +8,6 @@ public class Main {
     {
         GameManager manager = GameManager.getInstance();
         manager.createMainWindow();
-        //manager.createWindows();
         System.out.println("Hello World" );
 
     }

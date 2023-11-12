@@ -60,7 +60,6 @@ public class GameManager {
 
 
     private keyboardListener listener;
-    private Room room;
 
     private EnemyFactory enemyFactory;
 
@@ -124,72 +123,12 @@ public class GameManager {
         window.setVisible(true);
     }
 
-    public void createWindows(){
-        
-        status = GameStatus.GamePanel;
-        layout.show(cardContainer, "game");
-
-        window.setVisible(true);
-
-        listener = new keyboardListener();
-        window.addKeyListener(listener);
-
-        GameConfig gameConfig=new GameConfig();
-        gameConfig.passGameLevel(gameLevel.HARD);
-       
-        
-        initialization_room = new RoomInitialization();
-        RoomFactory roomfactory = new RoomFactory();
-
-        initialization_room.iRoom(roomfactory);
-
-        //RoomFactory roomfactory = new RoomFactory();
-        initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
-
-        
-        initialization_room.initializeRoom(gameLevel.MEDIUM, roomfactory);
-
-
-        record =  RecordUsedPlace.getInstance();
-        
     
-
-
-        initialization_room.iTiles(roomfactory);
-        initialization_room.iWalls(roomfactory);
-        initialization_room.iTombs(roomfactory);
-
-      
-        enemyFactory = new EnemyFactory();
-        enemyInitialization = new EnemyInitialization(enemyFactory); 
-
-        rewardFactory = new RewardFactory();
-        rewardInitialization = new RewardInitialization(rewardFactory);
-        rewardInitialization.generateReward();
-
-    }
-
     public void createNumberPanel(){
         status = GameStatus.Win;
 
         layout.show(cardContainer, "gameEnd");
         window.setVisible(true);
-    }
-
-    public void RecordUsedPlaceAviable(){
-        if(existPlayer ==false){
-            existPlayer = true;
-            creatPlayer();
-        }
-    }
-
-
-    private void creatPlayer(){
-        Player player = PlayerGenerator.creatPlayer();
-        listener.addPlayer(player);
-        gamePanel.setPlayer(player);
-        RecordUsedPlace.getInstance().setPlayer(player);
-        gamePanel.createTimeLine();
     }
 
     public void enemyCatachPlayer(boolean moveable){
