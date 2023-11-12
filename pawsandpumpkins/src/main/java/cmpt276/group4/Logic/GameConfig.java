@@ -124,6 +124,10 @@ public class GameConfig {
         return wallPositions;
     }
 
+    public int getNumberOfWall(){
+        return wallPositions.size();
+    }
+
     public int getNumberOfObstacles() {
         return numberOfObstacles;
     }
