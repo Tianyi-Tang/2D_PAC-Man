@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Font; 
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -25,13 +26,12 @@ import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.UI.NumberPanel;
 import cmpt276.group4.Reward.MangeBonusReward;
 
-
 public class GamePanel extends JPanel implements Runnable {
 
     RecordUsedPlace record = RecordUsedPlace.getInstance();
     private NumberPanel numberPanel;
 
-    //Screen Sitting 
+    // Screen Sitting
     private static final int original_tileSize = 16;
     private static final int scale = 3;
     public static final int tileSize = original_tileSize * scale;
@@ -59,7 +59,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
     }
 
-
     public void createTimeLine() {
         if (gameThread == null) {
             gameThread = new Thread(this);
@@ -70,7 +69,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
 
     @Override
     public void run() {
@@ -125,23 +123,39 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         for (Reward reward : record.getRewardList()) {
-            System.out.println("reward:"+ record.getRewardList().size());
+            System.out.println("reward:" + record.getRewardList().size());
             reward.draw(g2);
 
         }
 
-        if(player != null)
-            player.draw(g2);
+        // if(player != null)
+        // player.draw(g2);
+        // Drawing the player's score
+        if (player != null) {
+            player.draw(g2); // Existing player drawing code
+
+            // Set the color for the score text
+            g2.setColor(Color.WHITE); // You can choose a different color
+
+            // Set the font for the score text
+            g2.setFont(new Font("Arial", Font.BOLD, 20)); // You can choose a different font and size
+
+            // Get the player's score
+            int score = player.totalScore();
+
+            // Draw the score text at a specific position on the screen
+            g2.drawString("Score: " + score, 10, 30); // You can change the position (10, 30) as needed
+        }
 
         for (Enemy enemy : record.getEnemyList()) {
-             //System.out.println("Enemy List size: "+ record.getEnemyList().size());
+            // System.out.println("Enemy List size: "+ record.getEnemyList().size());
 
-                enemy.draw(g2);
+            enemy.draw(g2);
         }
         g2.dispose();
     }
 
-    public void restartGamePanel(){
+    public void restartGamePanel() {
         gameThread = null;
     }
 
