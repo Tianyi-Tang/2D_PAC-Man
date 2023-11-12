@@ -56,7 +56,7 @@ public class Room {
     private void createDoors(){
         doors = new Door[2];
         doors[0] = new Door(false, new Position(1 * GamePanel.tileSize, 0));
-        doors[1] = new Door(false, new Position(15 * GamePanel.tileSize, 16 * GamePanel.tileSize));
+        doors[1] = new Door(false, new Position(14 * GamePanel.tileSize, 15 * GamePanel.tileSize));
     }
         
 
