@@ -58,6 +58,7 @@ public class RoomInitialization {
         rmFactory.createObstacle(Obstacletype.TOMBSTONE, wallPositionList, tombstone);
     }
 
+
     public void iTiles(RoomFactory rmFactory){
         rmFactory.createTile(tilesPosition);
     }

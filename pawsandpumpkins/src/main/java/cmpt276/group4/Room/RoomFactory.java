@@ -15,36 +15,23 @@ public class RoomFactory {
         return new Room(max_X, max_Y);
     }
 
-    public void createObstacle(Obstacletype type, List<Position> position, int amount) {
-        //if (type == Obstacletype.WALL){
-            for(int i=0; i<amount; i++){
+    public void createObstacle(Obstacletype type, Position position, int amount) {
+        if (type == Obstacletype.WALL){
+            while(amount > 0){
                 System.out.println("Enter If loop");
-                Obstacle obstacle = new Wall(type,1,position.get(i));
+                Obstacle obstacle = new Wall(type,amount,position);
                 RecordUsedPlace.getInstance().addElementToMap(obstacle);
-                //amount--;
+                amount--;
             }
-        // }
-        // else{
-        //     while(amount > 0){
-        //         System.out.println("Enter If loop");
-        //         Obstacle obstacle = new Tombstone(type,amount,position);
-        //         RecordUsedPlace.getInstance().addElementToMap(obstacle);
-        //         amount--;
-        //     }
-        // }
-
-        //return obstacle;
-    }
-
-       public void createObstacle(Obstacletype type, Position position, int amount) {
-        
+        }
+        else{
             while(amount > 0){
                 System.out.println("Enter If loop");
                 Obstacle obstacle = new Tombstone(type,amount,position);
                 RecordUsedPlace.getInstance().addElementToMap(obstacle);
                 amount--;
             }
-        
+        }
 
         //return obstacle;
     }
