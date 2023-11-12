@@ -77,16 +77,9 @@ public class Player implements KeyMovingObserver {
 
     public void deductPoint(int deductScore){
         this.deductScore += deductScore;
-        if(gameEnd()){
-            System.out.println("Game end");
+        if(deductScore > collectScore){
+            GameManager.getInstance().negativePoint();
         }
-    }
-
-    private boolean gameEnd(){
-        if(deductScore > collectScore)
-            return true;
-        else 
-            return false;
     }
 
     public void addScoreToPlayer(int number, boolean isBonusReward){
@@ -218,8 +211,10 @@ public class Player implements KeyMovingObserver {
             if(reward != null)
                 reward.addBenefit(this);
             Enemy enemy = RecordUsedPlace.getInstance().playerMeetEnemy();
-            if(enemy != null)
+            if(enemy != null){
                 GameManager.getInstance().enemyCatachPlayer(enemy.getMovable());
+            }
+                
         }
             
     }
