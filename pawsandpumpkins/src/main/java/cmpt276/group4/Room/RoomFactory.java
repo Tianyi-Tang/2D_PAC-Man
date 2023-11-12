@@ -1,12 +1,14 @@
 package cmpt276.group4.Room;
 
 import cmpt276.group4.Room.RoomInitialization;
+import cmpt276.group4.WindowAndInput.GamePanel;
 
 import java.lang.reflect.Array;
 import java.util.List;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.gameLevel;
 public class RoomFactory {
 
     //creating actual object of obstacle and door and room in factory 
@@ -32,8 +34,11 @@ public class RoomFactory {
 
     }
 
-    public Door createDoor(Boolean IsOpen) {
-        return new Door(IsOpen);
+    public void createDoor(Boolean IsOpen, Position position) {
+        Position entrancePosition = new Position(2*GamePanel.tileSize,0);
+        Position exitPosition = new Position(2*GamePanel.tileSize,0);
+        Door entrance = new Door(IsOpen,entrancePosition );
+        Door exit = new Door(IsOpen, exitPosition);
     }
 
     public void createTile(List<Position> positions){

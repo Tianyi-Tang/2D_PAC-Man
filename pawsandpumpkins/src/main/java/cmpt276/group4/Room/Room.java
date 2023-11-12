@@ -12,7 +12,7 @@ import cmpt276.group4.WindowAndInput.GamePanel;
 public class Room {
     private Position doorPosition;
     private Obstacle[] obstacle;
-    private Door[] door;
+    private Door[] doors;
     public int RoomSize;
     public int max_X;
     public int max_Y;
@@ -38,6 +38,7 @@ public class Room {
             RoomY1 = roomCenterY -  (max_Y/2);
             RoomY2 = roomCenterY +  (max_Y/2);
             generateAllPosition();
+            createDoors();
         } 
     }
 
@@ -51,6 +52,12 @@ public class Room {
         }
         // GameManager.getInstance().RecordUsedPlaceAviable();
     }
+
+    private void createDoors(){
+        doors = new Door[2];
+        doors[0] = new Door(false, new Position(1 * GamePanel.tileSize, 0));
+        doors[1] = new Door(false, new Position(15 * GamePanel.tileSize, 16 * GamePanel.tileSize));
+    }
         
 
     // Getter methods for attributes
@@ -63,7 +70,7 @@ public class Room {
     }
 
     public Door[] getDoors() {
-        return door;
+        return doors;
     }
 
     // Setter methods for attributes if needed
@@ -75,8 +82,5 @@ public class Room {
         this.obstacle = obstacles;
     }
 
-    public void setDoors(Door[] doors) {
-        this.door = doors;
-    }
 }
 
