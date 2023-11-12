@@ -34,13 +34,6 @@ public class RoomFactory {
 
     }
 
-    public void createDoor(Boolean IsOpen, Position position) {
-        Position entrancePosition = new Position(2*GamePanel.tileSize,0);
-        Position exitPosition = new Position(2*GamePanel.tileSize,0);
-        Door entrance = new Door(IsOpen,entrancePosition );
-        Door exit = new Door(IsOpen, exitPosition);
-    }
-
     public void createTile(List<Position> positions){
         for (Position position : positions) {
             RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
