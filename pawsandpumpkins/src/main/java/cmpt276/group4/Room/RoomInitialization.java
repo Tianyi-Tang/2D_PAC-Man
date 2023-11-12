@@ -43,9 +43,9 @@ public class RoomInitialization {
         
     }
 
-    //public void iRoom(RoomFactory rmFactory) {
-        //rmFactory.createRoom(max_X, max_Y);
-    //}
+    public void iRoom(RoomFactory rmFactory) {
+        rmFactory.createRoom(max_X, max_Y);
+    }
     
     public void iTombs(RoomFactory rmFactory){
         rmFactory.createTombstones(Obstacletype.TOMBSTONE, position, tombstone);
@@ -59,9 +59,6 @@ public class RoomInitialization {
 
     public void iTiles(RoomFactory rmFactory){
         rmFactory.createTile(tilesPosition);
-    }
-
-    public void iRoom(RoomFactory roomfactory) {
     }
 
 }

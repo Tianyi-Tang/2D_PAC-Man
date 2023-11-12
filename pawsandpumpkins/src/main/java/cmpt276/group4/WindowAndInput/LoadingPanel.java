@@ -36,7 +36,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     private RecordUsedPlace record;
     private GameConfig config;
-    private boolean generateconfi,generateRoom, generateAllTile, generateWall,generateObstacle,generateAllEnemies, generateAllRewards, generatePlayer =false;
+    private boolean generateconfi,generateRoom, generateAllTile, generateWall, generatePlayer,generateObstacle,generateAllEnemies, generateAllRewards =false;
 
 
     public LoadingPanel(){
@@ -96,13 +96,20 @@ public class LoadingPanel extends JPanel implements Runnable {
             checkConfig();
         }
         else if(!generateRoom){
+            System.out.println("room");
             checkRoom();
         }
         else if(!generateAllTile){
+            System.out.println("tile");
             checkTitle();
         }
         else if(!generateWall){
+            System.out.println("wall");
             checkWall();
+        }
+        else if(!generatePlayer){
+            System.out.println("player");
+            checkPlayer();
         }
         else if(!generateObstacle){
             System.out.println("obstacle");
@@ -112,12 +119,9 @@ public class LoadingPanel extends JPanel implements Runnable {
             System.out.println("enemies");
             checkEnemy();
         }
-        else if(!generateAllRewards){
+        else{
             System.out.println("reward");
             checkRewards();
-        }
-        else{
-            checkPlayer();
         }
     }
 
@@ -146,6 +150,13 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkWall(){
         if(record.getWallNumber() == config.getNumberOfWall()){
             generateWall = true;
+            createPlayer();
+        }
+    }
+
+    private void checkPlayer(){
+        if(record.getPlayerPosition() != null){
+            generatePlayer = true;
             createObstacle();
         }
     }
@@ -172,12 +183,6 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
-    private void checkPlayer(){
-        if(record.getPlayerPosition() != null){
-            generatePlayer = true;
-        }
-    }
-
     private void createRoom(){
         room_initialization = new RoomInitialization();
         factory = new RoomFactory();
@@ -191,6 +196,10 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     private void createWall(){
         room_initialization.iWalls(factory);
+    }
+
+    private void createPlayer(){
+        record.setPlayer(PlayerGenerator.creatPlayer());
     }
 
     private void  createObstacle(){
@@ -207,9 +216,6 @@ public class LoadingPanel extends JPanel implements Runnable {
         reward_initialization.generateReward();
     }
 
-    private void createPlayer(){
-        record.setPlayer(PlayerGenerator.creatPlayer());
-    }
 
 
     @Override
@@ -218,7 +224,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     private boolean allResourceLoading(){
-        if(!generatePlayer)
+        if(!generateAllRewards)
             return false;
         else
             return true; 
