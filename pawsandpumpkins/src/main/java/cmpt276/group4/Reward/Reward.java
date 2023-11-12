@@ -10,6 +10,7 @@ public interface Reward {
     void draw(Graphics2D g2);
     void setPosition(Position position);
     boolean isAvailable();
+    boolean isBonusReward();
     void deleteImage();
     void addBenefit(Player player);
     boolean shouldDraw(long time);

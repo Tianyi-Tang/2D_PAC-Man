@@ -12,10 +12,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import cmpt276.group4.GameTime;
 public class PumpkinHead extends BonusReward {
-    private long displayStartTime =1000000000;
-    private long displayDuration = 100000;
+    private long displayStartTime =10;
+    private long displayDuration = 20;
     private int score = 5;
     private BufferedImage ppk1, ppk2, currentImage;
     private Position ppkPosition,playerPosition;
@@ -24,7 +24,7 @@ public class PumpkinHead extends BonusReward {
     private boolean org_State = true;
     private boolean available;
     private RecordUsedPlace record;
-    private boolean isBonusReward = true;
+    public boolean isBonusReward = true;
     public PumpkinHead() {
 
         record = RecordUsedPlace.getInstance();
@@ -55,8 +55,10 @@ public class PumpkinHead extends BonusReward {
         return available;
     }
 
-
-
+    @Override
+    public boolean isBonusReward(){
+        return isBonusReward;
+    }
     @Override
     public void deleteImage() {
         this.ppk1 = null;
@@ -96,6 +98,9 @@ public class PumpkinHead extends BonusReward {
         return currentTime >= displayStartTime &&
                 currentTime < displayStartTime + displayDuration;
     }
+
+    GameTime gameTime = GameTime.getInstance();
+
 @Override
     public void draw(Graphics2D g1) {
         stateCounter++;
@@ -107,9 +112,13 @@ public class PumpkinHead extends BonusReward {
             currentImage = ppk1;
         else
             currentImage = ppk2;
+        if(displayStartTime<=gameTime.getTime() && gameTime.getTime()-displayStartTime<=displayDuration) {
 
-        g1.drawImage(currentImage, ppkPosition.getX_axis(), ppkPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize, null);
+    g1.drawImage(currentImage, ppkPosition.getX_axis(), ppkPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize, null);
+
+        }
 
     }
+
 }
 

@@ -24,7 +24,7 @@ public class RecordUsedPlace {
 
 
     private ArrayList<Enemy> enemies;
-    private ArrayList<Reward> generalRewards,bonusRewards;
+    private ArrayList<Reward> generalRewards;
     private Player player;
     private Iterator<Position> iterator_avaliablePos;
     private Iterator<Position> iterator_pos;
@@ -82,7 +82,6 @@ public class RecordUsedPlace {
 
             enemies = new ArrayList<Enemy>();
             generalRewards = new ArrayList<Reward>();
-            bonusRewards = new ArrayList<Reward>();
 
             numberofTiles = 0;
             numberOfObstacles = 0;
@@ -128,7 +127,7 @@ public class RecordUsedPlace {
 
         enemies = new ArrayList<Enemy>();
         generalRewards = new ArrayList<Reward>();
-        bonusRewards = new ArrayList<Reward>();
+
 
     }
 
@@ -221,6 +220,7 @@ public class RecordUsedPlace {
             return false;
         }
     }
+
 
 
     public void removeReward(Reward reward){
@@ -321,9 +321,7 @@ public class RecordUsedPlace {
     public List<Reward> getRewardList(){
         return generalRewards;
     }
-    public List<Reward> getBonusReward(){
-        return bonusRewards;
-    }
+
 
 
     public boolean isNotSpiderPosition(Position pos){
