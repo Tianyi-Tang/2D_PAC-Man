@@ -79,6 +79,9 @@ public class GamePanel extends JPanel implements Runnable {
     private GameTime gameTime;
     private BufferedImage pauseButtonImage;
 
+    /**
+     * constructor for GamePanel to build up defualt seting
+     */
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -86,6 +89,9 @@ public class GamePanel extends JPanel implements Runnable {
         loadPauseButtonImage();
     }
 
+    /**
+     * Create the game loop for GamePanel
+     */
     public void createTimeLine() {
         if (gameThread == null) {
             gameThread = new Thread(this);
@@ -93,6 +99,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Set the player in the GamePanel
+     * @param player
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }

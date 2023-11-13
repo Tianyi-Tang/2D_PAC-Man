@@ -24,6 +24,9 @@ import cmpt276.group4.Room.Room;
 import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.Room.RoomInitialization;
 
+/**
+ * Panel that laoding all resources in the game 
+ */
 public class LoadingPanel extends JPanel implements Runnable {
 
     private final int screenWidth = 48 * 16;
@@ -31,21 +34,25 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     private Thread loadingThread;
 
-    final int FPS = 60;
-    private double timeInterval = 1000000000/FPS;
+    final int FPS = 60;// how many update within one sconde
+    private double timeInterval = 1000000000/FPS;//timer interval for each update
     private JProgressBar progressBar;
     private int progress;
 
     private RoomInitialization room_initialization;
     private RoomFactory factory;
-    private Room room;
+    private Room room;// room for this game
 
     private RecordUsedPlace record;
-    private GameConfig config;
+    private GameConfig config;//object contain the information about game 
     private boolean generateconfi,generateRoom, generateAllTile, generateWall, generatePlayer,generateObstacle,generateAllEnemies, generateAllRewards =false;
+    //boolean value to check each resource is generate
+
     private BufferedImage background_img;
 
-
+    /**
+     * constructor for loading panel to sthe the process bar and background
+     */
     public LoadingPanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.BLACK);
@@ -64,12 +71,19 @@ public class LoadingPanel extends JPanel implements Runnable {
         this.add(progressBar);
     }
 
+    /**
+     * Set that difficulty is the game and initlize game config
+     * @param level difficulty of this game
+     */
     public void gameLevelSending(gameLevel level){
         config = GameConfig.getGameConfigInstance();
         config.passGameLevel(level);
         createTimeLine();
     }
 
+    /**
+     * Create the gamme loop for the laoding panel
+    */
     private void createTimeLine(){
         if(loadingThread == null){
             loadingThread = new Thread(this);
@@ -78,6 +92,9 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Loading the background image
+     */
     private void loadingImage(){
         try {
             background_img = ImageIO.read(new File("res/pop_up/game_welcome_page2.png"));
@@ -86,6 +103,10 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Continues check all resource is loading
+     * after all resource loading finished the loop and switch the game panel
+     */
     @Override
     public void run() {
         double iteration = 0;
@@ -110,6 +131,9 @@ public class LoadingPanel extends JPanel implements Runnable {
         startGame();
     }
 
+    /**
+     * Check and laod resource by dependcy order
+     */
     private void update(){
         progressBar.setValue(progress);
         if(!generateconfi){
@@ -138,6 +162,9 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Check the game config is successful build
+     */
     private void checkConfig(){
         if(config.alreayInitialize()){
             generateconfi = true;
@@ -145,14 +172,22 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Check the room is generate and send position in this room to record use place 
+     * Once it success loadin, loading the tile in room
+     */
     private void checkRoom(){
         if(record.getLengthOfAviable() == config.areaofRoom()){
             generateRoom = true;
-            createTitle();
+            createTile();
             progress ++;
         }
     }
 
+    /**
+     * Check tile in the room is all loading
+     * Once it success loadin, loading the wall in room
+     */
     private void checkTitle(){
         System.out.println(config.areaofRoom());
         if(record.getTileNumber() == config.areaofRoom()){
@@ -162,6 +197,10 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Check the wall in the room is all loading
+     * Once it success loadin, loading the player 
+     */
     private void checkWall(){
         if(record.getWallNumber() == config.getNumberOfWall()){
             generateWall = true;
@@ -170,6 +209,10 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * checking the player is aviable and 
+     * Once it success loadin,set wining requirement to player and loading the obstacle
+     */
     private void checkPlayer(){
         if(record.getPlayerPosition() != null){
             Player.getInstance().setRoom(room);
@@ -180,6 +223,10 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * checkning all obstacle is appear in the room
+     * Once meet the requirement, loading the enemy
+     */
     private void checkObstacle (){
         System.out.println("number of obstacle:" + record.getObstaclesNumber() +"; should be:" +config.getNumberOfObstacles());
         if(record.getObstaclesNumber() == config.getNumberOfObstacles()){
@@ -189,6 +236,10 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * check all enemy is generate in the room
+     * Once meet the requirement, loading the rewards
+     */
     private void checkEnemy(){
         if(record.getLengthOfEnemies() == config.getTotalGhosts()){
             generateAllEnemies = true;
@@ -197,6 +248,9 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * check all reward load to the room
+     */
     private void checkRewards(){
         if(record.getLengthOfRewards() == config.getAllRewardNum()){
             generateAllRewards = true;
@@ -205,6 +259,9 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * generate the room for the game
+     */
     private void createRoom(){
         room_initialization = new RoomInitialization();
         factory = new RoomFactory();
@@ -212,34 +269,53 @@ public class LoadingPanel extends JPanel implements Runnable {
         room =room_initialization.iRoom(factory);
     }
 
-    private void createTitle(){
+    /**
+     * loading all tiles in the game
+     */
+    private void createTile(){
         room_initialization.iTiles(factory);
     }
 
+    /**
+     * loading all walls in the game
+     */
     private void createWall(){
         room_initialization.iWalls(factory);
     }
 
+     /**
+     * loading all walls in the game
+     */
     private void createPlayer(){
         record.setPlayer(PlayerGenerator.creatPlayer());
     }
 
+     /**
+     * loading all obstacles in the game
+     */
     private void  createObstacle(){
         room_initialization.iTombs(factory);
     }
 
+     /**
+     * loading all enemies in the game
+     */
     private void createEnemy(){
         new EnemyInitialization(new EnemyFactory());
     }
 
-
+     /**
+     * loading all rewards in the game
+     */
     private void createReward(){
         RewardInitialization reward_initialization = new RewardInitialization(new RewardFactory());
         reward_initialization.generateReward();
     }
 
-
-
+    /**
+     * Draw the background to the panel
+     *@param Graphics draw on the panel
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -250,6 +326,10 @@ public class LoadingPanel extends JPanel implements Runnable {
             System.out.println("error");
     }
 
+    /**
+     * check whether the loading panel finished the tast
+     * @return if all resoucres is laoding, return true; else return false
+     */
     private boolean allResourceLoading(){
         if(!generateAllRewards)
             return false;
@@ -257,12 +337,18 @@ public class LoadingPanel extends JPanel implements Runnable {
             return true; 
     }
 
+    /**
+     * inital the loading panel
+     */
     private void initialLoading(){
-        generateRoom = generateAllTile = generateObstacle = generateObstacle =generateAllEnemies = generateAllRewards = generatePlayer =false;
+        generateRoom = generateAllTile =generateAllEnemies = generateObstacle  = generateAllRewards = generatePlayer =false;
         loadingThread = null;
         System.out.println("Success!!");
     }
 
+    /**
+     * swtich to game panel
+     */
     private void startGame(){
         GameManager.getInstance().transformToGameScreen();
     }

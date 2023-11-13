@@ -3,7 +3,6 @@ package cmpt276.group4.Player;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -17,6 +16,9 @@ import cmpt276.group4.Room.Room;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
+/**
+ * Class tha represent character that control by people
+ */
 public class Player implements KeyMovingObserver {
     private Position playerPosition;
     private Position destination;
@@ -27,12 +29,12 @@ public class Player implements KeyMovingObserver {
     private boolean checkDoor = false;
     private boolean wining = false;
 
-    private boolean move_up, move_down, move_left, move_right = false;
-    private MoveDirection direction = MoveDirection.Down;
+    private boolean move_up, move_down, move_left, move_right = false;//directions player can move
+    private MoveDirection direction = MoveDirection.Down; //the current direction playe move
     private boolean org_State = true;
     private int stateCounter = 0;
 
-    private PlayerMovement movement;
+    private PlayerMovement movement;//check player move to avalibale position
     private int time_counter = 0;
 
     private int deductScore = 0;
@@ -41,8 +43,8 @@ public class Player implements KeyMovingObserver {
     private int bonusReward_num = 0;
     private int generalReward_num =0;
 
-   private  BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-   private  BufferedImage currentImage = null;
+   private  BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;//images for player moving 
+   private  BufferedImage currentImage = null;// The image will draw on the window
 
    /**
     * constructor for the player initlization
@@ -85,26 +87,42 @@ public class Player implements KeyMovingObserver {
         }
     }
 
+    /**
+     * get the player position
+     * @return player position
+     */
     public Position getPosition(){
         return playerPosition;
     }
 
+    /**
+     * return a boolean value to represent player wining the game
+     * @return is player wining game
+     */
     public boolean playerWin(){
         return wining;
     }
 
-    public void setPlayerMovement(PlayerMovement playerMovement){
-        movement = playerMovement;
-    }
-
+    /**
+     * Set the door position base on current room 
+     * @param room current room player in
+     */
     public void setRoom(Room room){
         doors = room.getDoors();
     }
 
+    /**
+     * Set the wining requirement for player
+     * @param require how many generalReward need player collect
+     */
     public void setWinRequire(int require){
         generalReward_require = require;
     }
 
+    /**
+     * When player catach by enemy, give punishment to player
+     * @param deductScore how many socre need to be deduct
+     */
     public void deductPoint(int deductScore){
         this.deductScore += deductScore;
         if(deductScore > collectScore){
@@ -112,6 +130,11 @@ public class Player implements KeyMovingObserver {
         }
     }
 
+    /**
+     * When player get reward, add score to player and check player collect all general rewards or not
+     * @param number how many score add to player
+     * @param isBonusReward is this reward a bonus reward
+     */
     public void addScoreToPlayer(int number, boolean isBonusReward){
         collectScore += number;
         if(isBonusReward)
@@ -123,26 +146,51 @@ public class Player implements KeyMovingObserver {
             
     }
 
+    /**
+     * Get the totoal score player gain without count the deduct point for punishment
+     * @return total score of player
+     */
     public int getCollectScore(){
         return collectScore;
     }
 
+    /**
+     * Get the number of bonuse rewards dose player collect
+     * @return number of bonuse rewards 
+     */
     public int getBonusRewardNum(){
         return bonusReward_num;
     }
 
+    /**
+     * Get number of bonuse general rewards dose player collect
+     * @return number of general rewards
+     */
     public int getGeneralRewardNum(){
         return generalReward_num;
     }
-
-    public int totalScore(){
-        return collectScore - deductScore;
-    }
-
+    
+    /**
+     * How many point people deduct for punishment
+     * @return deduct point
+     */
     public int getDeductScore(){
         return deductScore;
     }
 
+    /**
+     * The total scores of player which count the deduct point for punishment
+     * @return total scores
+     */
+    public int totalScore(){
+        return collectScore - deductScore;
+    }
+
+    /**
+     * Get information send from KeybaordListener and change player moving direction 
+     * @param direction the direction player move to 
+     * @param turnOn is people press or release keyboard
+     */
     @Override
     public void observerUpdate(MoveDirection direction, boolean turnOn) {
         switch (direction) {
@@ -161,6 +209,9 @@ public class Player implements KeyMovingObserver {
         }
     }
 
+    /**
+     * Logical update for player to change position base on keyboard input
+     */
     public void update(){
         stateCounter++;
         time_counter ++;
@@ -198,6 +249,10 @@ public class Player implements KeyMovingObserver {
         
     }
 
+    /**
+     * Draw the player position on the map
+     * @param g2 a Graphics2D that represent game window
+     */
     public void draw(Graphics2D g2){
         switch (direction) {
             case Up:
@@ -230,13 +285,22 @@ public class Player implements KeyMovingObserver {
         
     }
 
-
+    /**
+     * Change the destination base on the keyboard input
+     * @param x_increment the different of x-axis between player current position and  destination position
+     * @param y_increment the different of y-axis between player current position and  destination position
+     */
     private void updateDestination(int x_increment,int y_increment){
         destination.setPosition(playerPosition);
         destination.addOnX_axis(x_increment);
         destination.addOnY_axis(y_increment);
     }
 
+    /**
+     * If the destination is aviable position for player, then change the
+     * destination position to player position and check the destination has
+     * reward or enemy
+     */
     private void updatePosition(){
         if(movement.isPositionAvailable(destination)){
             playerPosition.setPosition(destination);
@@ -252,6 +316,10 @@ public class Player implements KeyMovingObserver {
             
     }
 
+    /**
+     * Check whether player position is same as door position after
+     * player meet the wining requirement
+     */
     private void outOfDoor(){
         if(checkDoor){
             for (Door door : doors) {
@@ -264,6 +332,9 @@ public class Player implements KeyMovingObserver {
         }
     }
 
+    /**
+     * Check whether player meeting the requirement of wining
+     */
     private void meetWiningRequirement(){
         if(generalReward_num == generalReward_require)
             checkDoor = true;

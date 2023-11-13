@@ -3,54 +3,41 @@ package cmpt276.group4;
 
 import java.awt.CardLayout;
 
-import java.util.ArrayList;
-
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
-import java.util.List;
 
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cmpt276.group4.Enemy.EnemyFactory;
-import cmpt276.group4.Enemy.EnemyInitialization;
-import cmpt276.group4.Logic.GameConfig;
+
+
 import cmpt276.group4.Player.Player;
-import cmpt276.group4.Player.PlayerGenerator;
 
-import cmpt276.group4.Reward.RewardFactory;
-import cmpt276.group4.Reward.RewardInitialization;
 
-import cmpt276.group4.Room.Room;
-import cmpt276.group4.Room.RoomFactory;
-import cmpt276.group4.Room.RoomInitialization;
-import cmpt276.group4.Room.Tile;
-import cmpt276.group4.Room.Tombstone;
-import cmpt276.group4.Room.Wall;
+
 import cmpt276.group4.UI.NumberPanel;
-import cmpt276.group4.Room.Obstacle;
+
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.LoadingPanel;
 import cmpt276.group4.WindowAndInput.MainPanel;
 import cmpt276.group4.WindowAndInput.keyboardListener;
 
 
-
-public class GameManager {
-    // typeOfRoom
-    //level: BASIC, MEDIUM, HARD
+/**
+ * Class that controll the switch of different panel and end of game
+ */
+public class GameManager {    
     private GameStatus status;
-    private boolean gameEnd = false;
+    private boolean gameEnd = false;// end of game 
 
-    private gameLevel level = gameLevel.HARD;
-    private int typeOfRoom;
-    private static GameManager instance;
+    //level: BASIC, MEDIUM, HARD
+    private static GameManager instance;// singleton
 
     private JFrame window;
 
-    private CardLayout layout;
+    private CardLayout layout;//manager to the different panel
     private JPanel cardContainer;
+
+    //panels in the game
     private GamePanel gamePanel;
     private MainPanel mainPanel;
     private LoadingPanel loadPanel;
@@ -58,22 +45,11 @@ public class GameManager {
 
     private Player player;
 
-
     private keyboardListener listener;
 
-    private EnemyFactory enemyFactory;
-
-    private RoomInitialization initialization_room;
-
-    private EnemyInitialization enemyInitialization;
-    private RewardFactory rewardFactory;
-
-    private RewardInitialization rewardInitialization;
-
-    private RecordUsedPlace record;
-    private boolean existPlayer = false;
-
-
+    /**
+     * constructor to set the defualt setting fot JFrame and laoding all panel
+     */
     public GameManager(){
         window = new JFrame();
         layout = new CardLayout();
@@ -100,22 +76,15 @@ public class GameManager {
         
     }
 
-    // getter
-    public int getTypeOfRoom() {
-        return typeOfRoom;
-    }
-
-    // setter
-    public void setTypeOfRoom(int i) {
-        this.typeOfRoom = i;
-    }
-
     public static synchronized GameManager getInstance(){
         if(instance == null)
             instance = new GameManager();
         return instance;
     }
 
+    /**
+     * laoding the main menu to window and start of game
+     */
     public void createMainWindow(){
         status = GameStatus.MainPanel;
         layout.show(cardContainer, "main");
@@ -123,7 +92,9 @@ public class GameManager {
         window.setVisible(true);
     }
 
-    
+    /**
+     * lading the result panel to window and it is end of game
+     */
     public void createNumberPanel(){
         status = GameStatus.Win;
 
@@ -131,6 +102,10 @@ public class GameManager {
         window.setVisible(true);
     }
 
+    /**
+     * Enemy catch player and base on the type of enemy give different result
+     * @param moveable is enemy moveable
+     */
     public void enemyCatachPlayer(boolean moveable){
         if(moveable == true){
             status = GameStatus.GameOver;
@@ -141,15 +116,21 @@ public class GameManager {
         }
     }
 
+    /**
+     * Switch the main panel to laoding panel
+     * @param level the difficulty of game 
+     */
     public void transformToLoadingScreen(gameLevel level){
         if(status == GameStatus.MainPanel){
-            this.level = level;
             layout.show(cardContainer, "load");
             loadPanel.gameLevelSending(level);
             status = GameStatus.LoadingPanel;
         }
     }
 
+    /**
+     * Switch the loading panel to game panel
+     */
     public void transformToGameScreen(){
         if(status == GameStatus.LoadingPanel){
             layout.show(cardContainer, "game");
@@ -161,6 +142,7 @@ public class GameManager {
         }
     }
 
+
     private void addKeyboardListener(){
         listener = new keyboardListener();
         gamePanel.addKeyListener(listener);
@@ -168,6 +150,9 @@ public class GameManager {
         listener.addPlayer(Player.getInstance());
     }
 
+    /**
+     * Play have negative point and end the game 
+     */
     public void negativePoint(){
         if(player.totalScore() < 0){
             status = GameStatus.GameOver;
@@ -175,6 +160,9 @@ public class GameManager {
         }
     }
 
+    /**
+     * Player succesful go out of door and he win
+     */
     public void leaveDoor(){
         if(player.playerWin()){
             status = GameStatus.Win;
@@ -182,6 +170,10 @@ public class GameManager {
         }
     }
 
+    /**
+     * Chcek the game is end or not
+     * @return If true, it mean the game end; else the game still contius
+     */
     public boolean isGameEnd(){
         if(status == GameStatus.GameOver || status == GameStatus.Win)
             return true;
@@ -189,43 +181,13 @@ public class GameManager {
             return false;
     }
 
+    /**
+     * laoding the result panel to end of gmae
+     */
     private void endOfGame(){
         layout.show(cardContainer, "gameEnd");
         numberPanel.init(status);
-        numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum(), player.getDeductScore(), player.totalScore());
+        numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum() * 5, player.getDeductScore(), player.totalScore());
     }
 
-    // Call this method in game update loop to check for mouse input
-    // public void handleMouseInput() {
-    //     if (listener.isMouseClicked()) {
-    //         // Handle mouse click using inputListener.getMousePosition()
-    //         System.out.println(String.format("MOUSE CLICKED AT POSITION x:%d y: %d", listener.getMousePosition().getX_axis(), listener.getMousePosition().getY_axis()));
-    //         listener.clearMouseClick(); // Clear the click once it's handled
-    //     }
-    //     //  Handle mouse position and pressed state
-    // }
-
-    //instance
-
-    //enemyNum
-
-    //gameRoom
-
-    //totalRewardNum
-
-    //initialgame
-
-    //postGame
-
-    //openDoor
-
-    //endGame
-
-    //EndGame
-
-    //getAllReward
-
-    //catchyByEnemy
-
-    //getInstance
 }
