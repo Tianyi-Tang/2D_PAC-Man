@@ -187,7 +187,7 @@ public class GameManager {
     private void endOfGame(){
         layout.show(cardContainer, "gameEnd");
         numberPanel.init(status);
-        numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum(), player.getDeductScore(), player.totalScore());
+        numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum() * 5, player.getDeductScore(), player.totalScore());
     }
 
 }
