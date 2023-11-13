@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
+
+import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
@@ -20,7 +22,6 @@ public class Spider implements Enemy {
     private BufferedImage currentImage;
     private RecordUsedPlace record;
     private Position playerPosition;
-    static boolean isPlayerOnGhost;
 
     /**
      * Enum for different spider imgage
@@ -89,10 +90,8 @@ public class Spider implements Enemy {
     public void catchPlayer() {
         Position playerPosition = record.getPlayerPosition();
         if (playerPosition.equals(enemyPosition)) {
-            isPlayerOnGhost = true;
-        } else {
-            isPlayerOnGhost = false;
-        }
+            GameManager.getInstance().enemyCatachPlayer(movable);
+        } 
     }
 
     /**
@@ -156,5 +155,10 @@ public class Spider implements Enemy {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean getMovable() {
+        return movable;
     }
 }

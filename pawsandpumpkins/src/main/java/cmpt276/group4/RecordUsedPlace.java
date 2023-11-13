@@ -8,23 +8,24 @@ import java.util.Random;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
-import cmpt276.group4.Reward.Candy;
-import cmpt276.group4.Reward.GeneralReward;
 import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.Room.Obstacle;
 import cmpt276.group4.Room.Tile;
 import cmpt276.group4.Room.Wall;
 
+/**
+ * Class record the position for every resoucre in game
+ */
 public class RecordUsedPlace {
     // for reward to check
-    private ArrayList<CharacterAvaliablePosition> elements;
+    private ArrayList<CharacterAvaliablePosition> elements;//contain wall, obstcale for drawing
     private ArrayList<Position> available;
 
     private ArrayList<Position> characterAvaliable_pos;
     private ArrayList<Position> obstacle_pos;
 
     private ArrayList<Enemy> enemies;
-    private ArrayList<Reward> generalRewards;
+    private ArrayList<Reward> rewards;// all rewards 
     private Player player;
     private Iterator<Position> iterator_avaliablePos;
     private Iterator<Position> iterator_pos;
@@ -64,7 +65,7 @@ public class RecordUsedPlace {
     }
 
     public boolean containsCandyAtPosition(Position position) {
-        for (Reward candy : generalRewards) {
+        for (Reward candy : rewards) {
             if (candy.getPosition().equals(position)) {
                 // if (candy instanceof Candy && candy.getPosition().equals(position)) {
                 return true;
@@ -80,7 +81,7 @@ public class RecordUsedPlace {
             elements = new ArrayList<CharacterAvaliablePosition>();
 
             enemies = new ArrayList<Enemy>();
-            generalRewards = new ArrayList<Reward>();
+            rewards  = new ArrayList<Reward>();
 
             numberofTiles = 0;
             numberOfObstacles = 0;
@@ -130,7 +131,7 @@ public class RecordUsedPlace {
         elements = new ArrayList<CharacterAvaliablePosition>();
 
         enemies = new ArrayList<Enemy>();
-        generalRewards = new ArrayList<Reward>();
+        rewards = new ArrayList<Reward>();
 
     }
 
@@ -159,6 +160,12 @@ public class RecordUsedPlace {
         return instance;
     }
 
+    /**
+     * Add haracterAvaliablePosition elements in the map
+     * Element can be tile, wall, obstacles 
+     * @param object the element add to the room
+     * @return If ture, then the element is successful be adding; else the positon is already taken by other
+     */
     public boolean addElementToMap(CharacterAvaliablePosition object) {
         if (isPlaceAviable(object.getPosition())) {
             if (object.getPlayerAvaliable()) {
@@ -170,7 +177,6 @@ public class RecordUsedPlace {
                 removeCharaterAviable(object.getPosition());
                 if (object instanceof Wall){
                     numberofWall++;
-                    //System.out.println("numberOfwall " + numberofWall);
                 }
                 else
                     numberOfObstacles++;
@@ -184,24 +190,12 @@ public class RecordUsedPlace {
             return false;
     }
 
+
     public boolean addEnemy(Enemy enemy) {
         if (isPlaceAviable(enemy.getEnemyPosition())) {
             enemies.add(enemy);
-            elementTakenPlace(false, enemy.getEnemyPosition());
+            elementTakenPlace(true, enemy.getEnemyPosition());
             return true;
-            // testing
-            // Remove enemy's position from enemyAvaliable_pos only if enemy is an Spider
-            // if (enemy instanceof Spider) {
-            // Iterator<Position> it = enemyAvaliable_pos.iterator();
-            // while (it.hasNext()) {
-            // Position p = it.next();
-            // if (p.equal(enemy.getEnemyPosition())) {
-            // System.out.println("removing from enepos ");
-            // it.remove();
-            // break; // Stop the loop once the position is found and removed
-            // }
-            // }
-            // }
         } else {
             System.out.println("no did not add");
             return false;
@@ -215,7 +209,7 @@ public class RecordUsedPlace {
     public boolean addReward(Reward reward) {
         if (isPlaceAviable(reward.getPosition())) {
             System.out.println("Adding reward at position: " + reward.getPosition());
-            generalRewards.add(reward);
+            rewards.add(reward);
             elementTakenPlace(false, reward.getPosition());
             return true;
         } else {
@@ -226,7 +220,7 @@ public class RecordUsedPlace {
 
     public void removeReward(Reward reward) {
         available.add(reward.getPosition());
-        iterator_reward = generalRewards.iterator();
+        iterator_reward = rewards.iterator();
         Reward rewardInList;
         while (iterator_reward.hasNext()) {
             rewardInList = iterator_reward.next();
@@ -236,7 +230,10 @@ public class RecordUsedPlace {
     }
 
     public Position getPlayerPosition() {
-        return player.getPosition();
+        if(player != null)
+            return player.getPosition();
+        else 
+            return null;
     }
 
     /**
@@ -252,11 +249,12 @@ public class RecordUsedPlace {
         return deltaX <= range && deltaY <= range;
     }
 
-    public boolean catchPlayer(Position enemy_pos) {
-        if (enemy_pos.equal(player.getPosition()))
-            return true;
-        else
-            return false;
+    public int getLengthOfAviable(){
+        return available.size();
+    }
+
+    public int getLengthOfEnemies(){
+        return enemies.size();
     }
 
     public int getTileNumber() {
@@ -269,6 +267,10 @@ public class RecordUsedPlace {
 
     public int getObstaclesNumber() {
         return numberOfObstacles;
+    }
+
+    public int getLengthOfRewards(){
+        return rewards.size();
     }
 
     public ArrayList<Position> getAviablePosition() {
@@ -284,9 +286,17 @@ public class RecordUsedPlace {
     }
 
     public Reward playerGetReward() {
-        for (Reward reward : generalRewards) {
+        for (Reward reward : rewards) {
             if (player.getPosition().equal(reward.getPosition()))
                 return reward;
+        }
+        return null;
+    }
+
+    public Enemy playerMeetEnemy(){
+        for(Enemy enemy : enemies){
+            if(player.getPosition().equal(enemy.getPosition()))
+                return enemy;
         }
         return null;
     }
@@ -304,7 +314,10 @@ public class RecordUsedPlace {
             RemoveFromAviable(position);
         }
     }
-
+    /**
+     * Check if the position is be taken and remove the takne place 
+     * @param obstPos
+     */
     private void removeCharaterAviable(Position obstPos) {
         iterator_avaliablePos = characterAvaliable_pos.iterator();
         while (iterator_avaliablePos.hasNext()) {
@@ -332,7 +345,7 @@ public class RecordUsedPlace {
     }
 
     public List<Reward> getRewardList() {
-        return generalRewards;
+        return rewards;
     }
 
     public boolean isNotSpiderPosition(Position pos) {

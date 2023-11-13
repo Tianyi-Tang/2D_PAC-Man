@@ -47,7 +47,7 @@ public class NumberPanel extends JPanel {
         digitXSize = 11;
         digitYSize = 11;
         xAxisLineUp = 420;
-        yAxisLineUp = new int[] { 335, 351, 365, 397, 427 };
+        yAxisLineUp = new int[] { 348, 365, 378, 412, 444 };
         popUpScale = 0.75;
 
     }

@@ -18,6 +18,7 @@ public class RoomFactory {
         return new Room(max_X, max_Y);
     }
 
+
     public void createTombstones(Obstacletype type, Position position, int amount){
         while(amount > 0){
             Obstacle obstacle = new Tombstone(type,amount,position);
@@ -31,13 +32,6 @@ public class RoomFactory {
             RecordUsedPlace.getInstance().addElementToMap(new Wall(type,amount,positions.get(i)));
         }
 
-    }
-
-    public void createDoor(Boolean IsOpen, Position position) {
-        Position entrancePosition = new Position(2*GamePanel.tileSize,0);
-        Position exitPosition = new Position(2*GamePanel.tileSize,0);
-        Door entrance = new Door(IsOpen,entrancePosition );
-        Door exit = new Door(IsOpen, exitPosition);
     }
 
     public void createTile(List<Position> positions){

@@ -15,14 +15,13 @@ public class Obstacle implements CharacterAvaliablePosition {
     protected Position position;
     private boolean playerAvaliable = false;
     private boolean takenPlace = true;
-    private Position playerPosition;
     BufferedImage wallImage;
     RecordUsedPlace record;
 
     // Constructor to initialize an obstacle with player access, enemy
     // traversability, and positions
     public Obstacle(Obstacletype type, int amount, Position position) {
-        record = RecordUsedPlace.getInstance();;
+        record = RecordUsedPlace.getInstance();
     }
 
     public void setPlayerAccess() {

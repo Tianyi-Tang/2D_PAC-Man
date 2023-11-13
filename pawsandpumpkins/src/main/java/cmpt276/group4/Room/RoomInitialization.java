@@ -24,8 +24,17 @@ public class RoomInitialization {
     public List<Position> wallPositionList;
     public List<Position> tilesPosition;
     
+
+    // Dont know if this is correct? should i be entering type of room?
+
+
+    // A function once called it will generate all tiles in the room
+
+    // And for walls
     public void initializeRoom(gameLevel gameLevel, RoomFactory rmFactory) {
-        rmFactory.createRoom(max_X, max_Y);
+        GameConfig config = GameConfig.getGameConfigInstance();
+        max_X = config.getRoomColumn();
+        max_Y = config.getRoomRow();
         tilesPosition = RecordUsedPlace.getInstance().getAviablePosition();     
         gc = GameConfig.getGameConfigInstance();
         wallPositionList = gc.getWallPositions();     
@@ -33,29 +42,22 @@ public class RoomInitialization {
         tombstone = gc.getNumberOfObstacles();
     }
 
-    //public void iRoom(RoomFactory rmFactory) {
-        //rmFactory.createRoom(max_X, max_Y);
-    //}
+    public Room iRoom(RoomFactory rmFactory) {
+        return rmFactory.createRoom(max_X, max_Y);
+    }
     
     public void iTombs(RoomFactory rmFactory){
         rmFactory.createTombstones(Obstacletype.TOMBSTONE, position, tombstone);
     }
 
+
     public void iWalls(RoomFactory rmFactory){
         rmFactory.createWall(Obstacletype.WALL, wallPositionList, wall);
     }
 
+
     public void iTiles(RoomFactory rmFactory){
         rmFactory.createTile(tilesPosition);
     }
-    
 
-
-    public void setX(int x){
-        max_X = x;
-    }
-
-    public void setY(int y){
-        max_Y = y;
-    }
 }

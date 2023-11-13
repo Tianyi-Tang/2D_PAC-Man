@@ -16,6 +16,7 @@ import cmpt276.group4.WindowAndInput.GamePanel;
  */
 
 public class GameConfig {
+    private gameLevel level;
     private int roomColumn = 16;
     private int roomRow = 16;
     // obstacle
@@ -48,6 +49,7 @@ public class GameConfig {
      * @param level The game level to configure settings for.
      */
     public void passGameLevel(gameLevel level) {
+        this.level = level;
         switch (level) {
             case BASIC:
                 gameLevelConfig = new BasicConfig();
@@ -102,6 +104,10 @@ public class GameConfig {
         return roomRow;
     }
 
+    public int areaofRoom(){
+        return roomRow * roomColumn;
+    }
+
     public int getNumberOfRegularRewards() {
         return numberOfRegularRewards;
     }
@@ -110,12 +116,16 @@ public class GameConfig {
         return numberOfBonusRewards;
     }
 
-    public int numberofTiles() {
-        return roomColumn * roomRow;
+    public int getAllRewardNum(){
+        return numberOfRegularRewards + numberOfBonusRewards;
     }
 
     public List<Position> getWallPositions() {
         return wallPositions;
+    }
+
+    public int getNumberOfWall(){
+        return wallPositions.size();
     }
 
     public int getNumberOfObstacles() {
@@ -132,6 +142,14 @@ public class GameConfig {
 
     public int getNumberOfAdvancedGhosts() {
         return numberOfAdvancedGhosts;
+    }
+
+    public int getTotalGhosts(){
+        return numberOfBasicGhosts + numberOfAdvancedGhosts + numberOfSpiders;
+    }
+
+    public gameLevel getGameLevel(){
+        return level;
     }
 
 }

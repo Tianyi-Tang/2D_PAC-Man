@@ -12,7 +12,7 @@ import cmpt276.group4.WindowAndInput.GamePanel;
 public class Room {
     private Position doorPosition;
     private Obstacle[] obstacle;
-    private Door[] door;
+    private Door[] doors;
     public int RoomSize;
     public int max_X;
     public int max_Y;
@@ -23,7 +23,6 @@ public class Room {
     
     //room size is it avaliable 
     public Room(int max_X, int max_Y) {
-
         if (GamePanel.maxScreenRow < max_X || GamePanel.maxScreenCol < max_Y){
             System.out.println("Screen too small");
         }
@@ -39,17 +38,25 @@ public class Room {
             RoomY1 = roomCenterY -  (max_Y/2);
             RoomY2 = roomCenterY +  (max_Y/2);
             generateAllPosition();
+            createDoors();
         } 
     }
 
     private void generateAllPosition(){
+        
         for (int x = RoomX1; x < RoomX2; x++){
             for(int y = RoomY1; y <RoomY2; y++){
                 Position position = new Position(x *GamePanel.tileSize, y * GamePanel.tileSize);
                 RecordUsedPlace.getInstance().addAviable(position);
             }
         }
-        GameManager.getInstance().RecordUsedPlaceAviable();
+        // GameManager.getInstance().RecordUsedPlaceAviable();
+    }
+
+    private void createDoors(){
+        doors = new Door[2];
+        doors[0] = new Door(false, new Position(1 * GamePanel.tileSize, 0));
+        doors[1] = new Door(false, new Position(14 * GamePanel.tileSize, 15 * GamePanel.tileSize));
     }
         
 
@@ -63,7 +70,7 @@ public class Room {
     }
 
     public Door[] getDoors() {
-        return door;
+        return doors;
     }
 
     // Setter methods for attributes if needed
@@ -75,8 +82,5 @@ public class Room {
         this.obstacle = obstacles;
     }
 
-    public void setDoors(Door[] doors) {
-        this.door = doors;
-    }
 }
 
