@@ -36,24 +36,8 @@ public class RecordUsedPlace {
     private int numberofWall = 0;
     private int numberOfObstacles = 0;
 
-    public void printTileAndObstacleCounts() {
-        int tileCount = 0;
-        int obstacleCount = 0;
-
-        for (CharacterAvaliablePosition element : elements) {
-            if (element instanceof Tile) {
-                tileCount++;
-            } else if (element instanceof Obstacle) {
-                obstacleCount++;
-            }
-        }
-
-        System.out.println("Number of Tiles: " + tileCount);
-        System.out.println("Number of Obstacles: " + obstacleCount);
-    }
-
+    
     public Position getRandomFromAvailablePosition() {
-
         // return a random position from variable available
         if (available == null || available.isEmpty()) {
             System.out.println("No available used place to choose from");

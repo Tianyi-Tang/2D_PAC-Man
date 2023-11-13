@@ -19,11 +19,19 @@ public class Tile implements CharacterAvaliablePosition {
     private Position location;
     BufferedImage tileImage;
 
+    /**
+     * Constructor to initialize a tile with the specified position.
+     *
+     * @param position The position of the tile.
+     */
     public Tile(Position position){
         location = position;
         initalTileImage();
     }
 
+    /**
+     * Initializes the tile image.
+     */
     public void initalTileImage(){
         try {
             tileImage = ImageIO.read(new File(System.getProperty("user.dir") + "/res/Tiles/tile1.png"));
@@ -33,58 +41,46 @@ public class Tile implements CharacterAvaliablePosition {
         
     }
 
+    /**
+     * Gets the position of the tile.
+     *
+     * @return The position of the tile.
+     */
     @Override
     public Position getPosition() {
         return location;
     }
 
+    /**
+     * Gets whether the player can access the tile.
+     *
+     * @return True if the player can access the tile, false otherwise.
+     */
     @Override
     public boolean getPlayerAvaliable() {
         return playerAvaliable;
     }
 
+    /**
+     * Gets whether the position is already taken.
+     *
+     * @return True if the position is taken, false otherwise.
+     */
     @Override
     public boolean getTakenPlace() {
         return takenPlace;
     }
     
+    /**
+     * Draws the tile on the graphics context.
+     *
+     * @param g2 The Graphics2D context on which to draw the tile.
+     */
     @Override
     public void draw(Graphics2D g2){
         if(tileImage != null)
             g2.drawImage(tileImage, location.getX_axis(), location.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
-        
-        
     }
-
-    public String getImageNameForPosition(Position p,List<Position> wallPositions) {
-        boolean north = false, south = false, east = false, west = false;
-
-        for (Position wallPosition : wallPositions) {
-            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() - GamePanel.tileSize))) {
-                north = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() + GamePanel.tileSize))) {
-                south = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis() + GamePanel.tileSize, p.getY_axis()))) {
-                east = true;
-            }
-            if (wallPosition.equals(new Position(p.getX_axis() - GamePanel.tileSize, p.getY_axis()))) {
-                west = true;
-            }
-        }
-
-        String imageName = "";
-        if (north) imageName += "north_";
-        if (east) imageName += "east_";
-        if (south) imageName += "south_";
-        if (west) imageName += "west_";
-
-        imageName += ".png";
-
-        return imageName;
-    }
-
 
 
     
