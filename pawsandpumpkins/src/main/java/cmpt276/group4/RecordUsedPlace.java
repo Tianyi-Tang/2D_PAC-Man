@@ -37,7 +37,9 @@ public class RecordUsedPlace {
     private int numberOfObstacles = 0;
 
     
+
     public Position getRandomFromAvailablePosition() {
+
         // return a random position from variable available
         if (available == null || available.isEmpty()) {
             System.out.println("No available used place to choose from");
