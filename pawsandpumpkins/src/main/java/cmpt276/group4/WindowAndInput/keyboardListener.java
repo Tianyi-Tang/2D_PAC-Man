@@ -9,6 +9,9 @@ import java.awt.event.MouseMotionListener;
 import cmpt276.group4.Position;
 import cmpt276.group4.Player.KeyMovingObserver;
 
+/**
+ * Class lister to the input from keyboard and send the changing to observer
+ */
 public class keyboardListener implements KeyListener, MouseListener, MouseMotionListener  {
     private KeyMovingObserver player;
     private Position mousePsition;
@@ -48,6 +51,11 @@ public class keyboardListener implements KeyListener, MouseListener, MouseMotion
     public void keyTyped(KeyEvent e) {
     }
 
+    /**
+     * When people press the moving key, call the obsever to get changing
+     * moving key including A, W, S, D, upArrow, DownArrow, LeftArrow, RightArrow
+     * @param KeyEvent the key pressed event
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -74,6 +82,11 @@ public class keyboardListener implements KeyListener, MouseListener, MouseMotion
         }
     }
 
+    /**
+     * When people relased the moving key, call the obsever to get changing
+     * moving key including A, W, S, D, upArrow, DownArrow, LeftArrow, RightArrow
+     * @param KeyEvent the key released event
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();

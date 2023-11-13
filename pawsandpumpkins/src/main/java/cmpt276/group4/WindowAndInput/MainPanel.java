@@ -16,19 +16,25 @@ import javax.swing.JPanel;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.gameLevel;
 
-public class MainPanel extends JPanel implements Runnable {
+/**
+ * Class represent the Main menu of game 
+ */
+public class MainPanel extends JPanel {
     
     private final int screenWidth = 48 * 16;
     private final int screenHeight = 48 * 16;
 
-    private Thread mainThread;
-    private JButton startButton;
+    private JButton startButton;// start the game 
+
+    // difficulty level
     private JButton easyLevelButton;
     private JButton middleLevelButton;
     private JButton hardLevelButton;
     private BufferedImage mainPanel_img;
 
-
+    /**
+     * Constructor to initla button and background for main menu
+     */
     public MainPanel(){
         loadingImage();
         startButton = new JButton();
@@ -53,6 +59,9 @@ public class MainPanel extends JPanel implements Runnable {
         createButton();
     }
 
+    /**
+     * Set the difficulty button
+     */
     private void createButton(){
         easyLevelButton = new JButton();
         easyLevelButton.setText("Easy");
@@ -96,6 +105,10 @@ public class MainPanel extends JPanel implements Runnable {
         this.add(hardLevelButton);
     }
 
+
+    /**
+     * laoding the background image
+     */
     private void loadingImage(){
         try {
             mainPanel_img = ImageIO.read(new File("res/pop_up/game_welcome_page2.png"));
@@ -103,22 +116,6 @@ public class MainPanel extends JPanel implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void createTimeLine(){
-        if(mainThread == null){
-            mainThread = new Thread(this);
-            mainThread.start();
-        }
-    }
-
-    @Override
-    public void run() {
-
-        while (mainThread != null) {
-            
-        }
-        
     }
 
     @Override
@@ -129,6 +126,9 @@ public class MainPanel extends JPanel implements Runnable {
             g.drawImage(mainPanel_img,0,0,GamePanel.screenWidth,GamePanel.screenHeight,this);
     }
 
+    /**
+     * make the difficlty button avaliable
+     */
     private void VisibleDifficultButton(){
         easyLevelButton.setVisible(true);
         middleLevelButton.setVisible(true);

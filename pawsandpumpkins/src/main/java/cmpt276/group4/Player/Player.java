@@ -3,7 +3,6 @@ package cmpt276.group4.Player;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -17,6 +16,9 @@ import cmpt276.group4.Room.Room;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
+/**
+ * Class tha represent character that control by people
+ */
 public class Player implements KeyMovingObserver {
     private Position playerPosition;
     private Position destination;
@@ -27,12 +29,12 @@ public class Player implements KeyMovingObserver {
     private boolean checkDoor = false;
     private boolean wining = false;
 
-    private boolean move_up, move_down, move_left, move_right = false;
-    private MoveDirection direction = MoveDirection.Down;
+    private boolean move_up, move_down, move_left, move_right = false;//directions player can move
+    private MoveDirection direction = MoveDirection.Down; //the current direction playe move
     private boolean org_State = true;
     private int stateCounter = 0;
 
-    private PlayerMovement movement;
+    private PlayerMovement movement;//check player move to avalibale position
     private int time_counter = 0;
 
     private int deductScore = 0;
@@ -41,8 +43,8 @@ public class Player implements KeyMovingObserver {
     private int bonusReward_num = 0;
     private int generalReward_num =0;
 
-   private  BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-   private  BufferedImage currentImage = null;
+   private  BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;//images for player moving 
+   private  BufferedImage currentImage = null;// The image will draw on the window
 
    /**
     * constructor for the player initlization
@@ -184,7 +186,11 @@ public class Player implements KeyMovingObserver {
         return collectScore - deductScore;
     }
 
-
+    /**
+     * Get information send from KeybaordListener and change player moving direction 
+     * @param direction the direction player move to 
+     * @param turnOn is people press or release keyboard
+     */
     @Override
     public void observerUpdate(MoveDirection direction, boolean turnOn) {
         switch (direction) {
