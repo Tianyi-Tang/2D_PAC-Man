@@ -22,6 +22,7 @@ public class RecordUsedPlace {
     private ArrayList<Position> available;
 
     private ArrayList<Position> characterAvaliable_pos;
+    private ArrayList<Position> walls;
     private ArrayList<Position> obstacle_pos;
 
     private ArrayList<Enemy> enemies;

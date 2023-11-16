@@ -1,9 +1,6 @@
 package cmpt276.group4.Logic;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import cmpt276.group4.Position;
 
 /**
  * Represents the basic configuration for game difficulty.
