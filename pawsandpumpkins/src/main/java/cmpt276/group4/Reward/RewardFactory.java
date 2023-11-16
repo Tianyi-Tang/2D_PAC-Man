@@ -27,10 +27,8 @@ public class RewardFactory {
     private Reward createSingleReward(RewardType type) {
         switch (type) {
             case Candy:
-                System.out.println("Candy created.");
                 return new Candy();
             case PumpkinHead:
-                System.out.println("PumpkinHead created.");
                 return new PumpkinHead();
             default:
                 throw new IllegalArgumentException("Invalid Reward type");

@@ -160,7 +160,6 @@ public class RecordUsedPlace {
                 characterAvaliable_pos.add(object.getPosition());
                 numberofTiles++;
             } else {
-                System.out.println("numberOfwall " + numberofWall);
                 removeCharaterAviable(object.getPosition());
                 if (object instanceof Wall){
                     numberofWall++;
@@ -201,12 +200,10 @@ public class RecordUsedPlace {
 
     public boolean addReward(Reward reward) {
         if (isPlaceAviable(reward.getPosition())) {
-            System.out.println("Adding reward at position: " + reward.getPosition());
             rewards.add(reward);
             elementTakenPlace(false, reward.getPosition());
             return true;
         } else {
-            System.out.println("Failed to add reward at position: " + reward.getPosition());
             return false;
         }
     }
