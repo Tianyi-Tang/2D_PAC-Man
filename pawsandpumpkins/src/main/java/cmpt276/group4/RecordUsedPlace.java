@@ -284,6 +284,14 @@ public class RecordUsedPlace {
         return available;
     }
 
+    public ArrayList<Position> getWallPosition(){
+        return walls_pos;
+    }
+
+    public ArrayList<Position> getObstcalePosition(){
+        return obstacle_pos;
+    }
+
     public boolean characterMovable(Position destination) {
         for (Position position : characterAvaliable_pos) {
             if (destination.equal(position))
