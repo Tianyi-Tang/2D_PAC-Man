@@ -9,6 +9,10 @@ import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
+/**
+ * The Room class represents a room in the game, containing information about its size,
+ * center, coordinates, door position, obstacles, and doors.
+ */
 public class Room {
     private Position doorPosition;
     private Obstacle[] obstacle;
@@ -20,8 +24,12 @@ public class Room {
     public int roomCenterY;
     public int RoomX1, RoomX2, RoomY1, RoomY2;
 
-    
-    //room size is it avaliable 
+    /**
+     * Constructor to initialize a room with the specified maximum X and Y coordinates.
+     *
+     * @param max_X Maximum X-coordinate of the room.
+     * @param max_Y Maximum Y-coordinate of the room.
+     */
     public Room(int max_X, int max_Y) {
         if (GamePanel.maxScreenRow < max_X || GamePanel.maxScreenCol < max_Y){
             System.out.println("Screen too small");
@@ -42,6 +50,9 @@ public class Room {
         } 
     }
 
+    /**
+     * Generates all positions in the room and adds them to the list of available positions.
+     */
     private void generateAllPosition(){
         
         for (int x = RoomX1; x < RoomX2; x++){
@@ -50,34 +61,58 @@ public class Room {
                 RecordUsedPlace.getInstance().addAviable(position);
             }
         }
-        // GameManager.getInstance().RecordUsedPlaceAviable();
     }
 
+    /**
+     * Creates doors for the room.
+     */
     private void createDoors(){
         doors = new Door[2];
         doors[0] = new Door(false, new Position(1 * GamePanel.tileSize, 0));
         doors[1] = new Door(false, new Position(14 * GamePanel.tileSize, 15 * GamePanel.tileSize));
     }
         
-
-    // Getter methods for attributes
+    /**
+     * Gets the position of the door in the room.
+     *
+     * @return The position of the door.
+     */
     public Position getDoorPosition() {
         return doorPosition;
     }
 
+    /**
+     * Gets the obstacles in the room.
+     *
+     * @return Array of obstacles in the room.
+     */
     public Obstacle[] getObstacles() {
         return obstacle;
     }
 
+    /**
+     * Gets the doors in the room.
+     *
+     * @return Array of doors in the room.
+     */
     public Door[] getDoors() {
         return doors;
     }
 
-    // Setter methods for attributes if needed
+    /**
+     * Sets the position of the door in the room.
+     *
+     * @param doorPosition The position of the door.
+     */
     public void setDoorPosition(Position doorPosition) {
         this.doorPosition = doorPosition;
     }
 
+    /**
+     * Sets the obstacles in the room.
+     *
+     * @param obstacles Array of obstacles to set in the room.
+     */
     public void setObstacles(Obstacle[] obstacles) {
         this.obstacle = obstacles;
     }

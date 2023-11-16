@@ -40,7 +40,7 @@ public class BasicConfig extends GameDifficultyConfig {
         public BasicConfig() {
 
                 super();
-                numberOfObstacles = 5;
+                numberOfObstacles = 3;
                 numberOfSpiders = 3;
                 numberOfBasicGhosts = 1;
                 numberOfAdvancedGhosts = 0;

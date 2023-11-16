@@ -167,10 +167,7 @@ public class GamePanel extends JPanel implements Runnable {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        record.printTileAndObstacleCounts();
         Graphics2D g2 = (Graphics2D) g;
-
-        record.printTileAndObstacleCounts();
 
         synchronized (record.getElemet()) {
             for (CharacterAvaliablePosition element : record.getElemet()) {
@@ -179,7 +176,6 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         for (Reward reward : record.getRewardList()) {
-            System.out.println("reward:" + record.getRewardList().size());
             reward.draw(g2);
 
         }
@@ -197,7 +193,6 @@ public class GamePanel extends JPanel implements Runnable {
             enemy.draw(g2);
         }
         if (pauseButtonImage != null) {
-            System.out.println("pause image found");
             int buttonX = screenWidth - PAUSE_BUTTON_WIDTH - 10;
             int buttonY = 10;
 

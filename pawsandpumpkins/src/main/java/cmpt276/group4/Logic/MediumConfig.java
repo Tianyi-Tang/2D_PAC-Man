@@ -58,8 +58,8 @@ public class MediumConfig extends GameDifficultyConfig {
          */
         public MediumConfig() {
                 super();
-                numberOfObstacles = 5;
-                numberOfSpiders = 9;
+                numberOfObstacles = 4;
+                numberOfSpiders = 4;
                 numberOfBasicGhosts = 2;
                 numberOfAdvancedGhosts = 0;
                 numberOfRegularRewards = 6;
