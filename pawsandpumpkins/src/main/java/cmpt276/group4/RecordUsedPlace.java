@@ -22,7 +22,7 @@ public class RecordUsedPlace {
     private ArrayList<Position> available;
 
     private ArrayList<Position> characterAvaliable_pos;
-    private ArrayList<Position> walls;
+    private ArrayList<Position> walls_pos;
     private ArrayList<Position> obstacle_pos;
 
     private ArrayList<Enemy> enemies;
@@ -133,6 +133,7 @@ public class RecordUsedPlace {
 
         enemies = new ArrayList<Enemy>();
         rewards = new ArrayList<Reward>();
+        walls_pos = new ArrayList<Position>();
 
     }
 
@@ -177,7 +178,7 @@ public class RecordUsedPlace {
                 removeCharaterAviable(object.getPosition());
                 if (object instanceof Wall){
                     numberofWall++;
-                    walls.add(object.getPosition());
+                    walls_pos.add(object.getPosition());
                 }
                 else{
                     numberOfObstacles++;
@@ -197,6 +198,8 @@ public class RecordUsedPlace {
 
     public boolean addEnemy(Enemy enemy) {
         if (isPlaceAviable(enemy.getEnemyPosition())) {
+            if(enemy instanceof Spider)
+                obstacle_pos.add(enemy.getPosition());
             enemies.add(enemy);
             elementTakenPlace(true, enemy.getEnemyPosition());
             return true;
