@@ -177,6 +177,7 @@ public class RecordUsedPlace {
                 removeCharaterAviable(object.getPosition());
                 if (object instanceof Wall){
                     numberofWall++;
+                    walls.add(object.getPosition());
                 }
                 else{
                     numberOfObstacles++;
