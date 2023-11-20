@@ -63,5 +63,10 @@ public class SpiderTest {
         assertFalse(spider.isMovable(), "Spiders should not be movable.");
     }
 
+    @Test
+    void testSpiderIsAddedToRecordUsedPlace() {
+        verify(mockRecord).addEnemy(spider);
+    }
+
     
 }
