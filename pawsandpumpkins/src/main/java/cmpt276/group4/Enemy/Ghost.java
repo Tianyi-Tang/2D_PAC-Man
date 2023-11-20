@@ -71,7 +71,7 @@ public class Ghost implements Enemy {
             // If the player is not around, move to a random position
             moveToRandomPosition();
         }
-        enemyMovement.moveTo(enemyPosition);
+        //emyMovement.moveTo(enemyPosition);
     }
 
     /**
