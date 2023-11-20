@@ -152,4 +152,8 @@ public class GameConfig {
         return level;
     }
 
+	public static void setInstance(GameConfig mockGameConfig) {
+         instance= mockGameConfig;
+	}
+
 }

@@ -42,7 +42,7 @@ class EnemyMovementTest {
     void testIsPositionAvailableTrue() {
         Position availablePosition = new Position(1, 1);
         
-        // Configure the mock to return true for the available position
+        // Configure the mock to return true for the avai position
         when(mockRecord.characterMovable(availablePosition)).thenReturn(true);
 
         assertTrue(enemyMovement.isPositionAvailable(availablePosition), 
