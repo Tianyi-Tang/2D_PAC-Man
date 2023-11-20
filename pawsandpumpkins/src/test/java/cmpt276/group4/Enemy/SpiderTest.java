@@ -30,7 +30,7 @@ public class SpiderTest {
         gameManagerIns.setPlayerForTest(mockPlayer);
         
         when(mockRecord.getPlayerPosition()).thenReturn(mockPlayerPosition);
-        when(mockRecord.getRandomSafePosition()).thenReturn(new Position(10, 10)); // Example safe position
+        when(mockRecord.getRandomSafePosition()).thenReturn(new Position(10, 10)); 
 
         spider = new Spider();
     }
