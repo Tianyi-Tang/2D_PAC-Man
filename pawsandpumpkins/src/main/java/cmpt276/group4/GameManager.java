@@ -83,6 +83,13 @@ public class GameManager {
     }
 
     /**
+     * Method for testing purposes to set the mock player
+     */
+    public void setPlayerForTest(Player player) {
+        this.player = player;
+    }
+
+    /**
      * laoding the main menu to window and start of game
      */
     public void createMainWindow(){

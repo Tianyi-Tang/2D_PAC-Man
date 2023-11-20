@@ -29,6 +29,10 @@ public class RecordUsedPlace {
     private ArrayList<Reward> rewards;// all rewards 
     private Player player;
     private Iterator<Position> iterator_avaliablePos;
+    public static void setInstance(RecordUsedPlace instance) {
+        RecordUsedPlace.instance = instance;
+    }
+
     private Iterator<Position> iterator_pos;
     private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;

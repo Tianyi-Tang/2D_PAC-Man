@@ -121,7 +121,7 @@ public class Spider implements Enemy {
      */
     @Override
     public boolean isMovable() {
-        return movable;
+        return false;
     }
 
     /**

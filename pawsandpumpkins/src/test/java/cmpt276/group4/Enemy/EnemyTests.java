@@ -16,7 +16,7 @@ public class EnemyTests {
     // @BeforeEach
     // public void setUp() {
     //     enemyFactory = new EnemyFactory();
-    //     enemyInitialization = new EnemyInitialization(5); // Initializing 5 enemies
+    //     enemyInitialization = new EnemyInitialization(enemyFactory); // Initializing 5 enemies
     // }
 
     // @Test
