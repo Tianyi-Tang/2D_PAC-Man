@@ -10,14 +10,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import cmpt276.group4.GameManager;
 import cmpt276.group4.PanelController;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
 import cmpt276.group4.Logic.GameConfig;
-import cmpt276.group4.Player.Player;
+
 import cmpt276.group4.Player.PlayerGenerator;
 import cmpt276.group4.Reward.RewardFactory;
 import cmpt276.group4.Reward.RewardInitialization;
@@ -216,8 +215,6 @@ public class LoadingPanel extends JPanel implements Runnable {
      */
     private void checkPlayer(){
         if(record.getPlayerPosition() != null){
-            Player.getInstance().setRoom(room);
-            Player.getInstance().setWinRequire(config.getNumberOfRegularRewards());
             generatePlayer = true;
             createObstacle();
             progress ++;
@@ -229,7 +226,6 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once meet the requirement, loading the enemy
      */
     private void checkObstacle (){
-        System.out.println("number of obstacle:" + record.getObstaclesNumber() +"; should be:" +config.getNumberOfObstacles());
         if(record.getObstaclesNumber() == config.getNumberOfObstacles()){
             generateObstacle = true;
             createEnemy();
@@ -281,6 +277,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * loading all walls in the game
      */
     private void createWall(){
+        System.out.println("Require Wall:" +config.getNumberOfWall());
         room_initialization.iWalls(factory);
     }
 

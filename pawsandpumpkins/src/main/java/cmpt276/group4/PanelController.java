@@ -95,6 +95,8 @@ public class PanelController {
             layout.show(cardContainer, "game");
             gamePanel.createTimeLine();
             gamePanel.setPlayer(Player.getInstance());
+            gamePanel.setDoors(Room.getInstance().getDoors());
+
             addKeyboardListener();
             status = GameStatus.GamePanel;
         }
@@ -124,7 +126,7 @@ public class PanelController {
         manager.setNumberOfGeneralRewards(GameConfig.getGameConfigInstance());
         manager.setDoors(Room.getInstance().getDoors());
 
-        
+
     }
 
     private void initalNumberPanel(){

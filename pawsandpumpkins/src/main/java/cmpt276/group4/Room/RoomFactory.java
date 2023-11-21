@@ -49,7 +49,6 @@ public class RoomFactory {
         for (int i=0; i < amount && i < positions.size(); i++){
             RecordUsedPlace.getInstance().addElementToMap(new Wall(type,amount,positions.get(i)));
         }
-
     }
 
     /**

@@ -23,6 +23,7 @@ import cmpt276.group4.Enemy.Ghost;
 import cmpt276.group4.Player.Player;
 
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.Room.Door;
 import cmpt276.group4.UI.NumberPanel;
 import cmpt276.group4.Reward.MangeBonusReward;
 
@@ -79,6 +80,8 @@ public class GamePanel extends JPanel implements Runnable {
     private GameTime gameTime;
     private BufferedImage pauseButtonImage;
 
+    private Door[] doors;
+
     /**
      * constructor for GamePanel to build up defualt seting
      */
@@ -105,6 +108,10 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void setDoors(Door[] doors){
+        this.doors = doors;
     }
 
     /**
@@ -140,6 +147,13 @@ public class GamePanel extends JPanel implements Runnable {
      */
     private void update() {
         player.update();
+
+        if(doors != null){
+            for (Door door : doors) {
+                door.playerLeaveRoom();
+            }
+        }
+            
 
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
             for (Enemy enemy : record.getEnemyList()) {

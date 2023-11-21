@@ -95,12 +95,16 @@ public class GameManager {
     public void collectReward(int generalReward){
         if(generalReward == generalRewards_num){
             collectAllRewards = true;
+            for (Door door : doors) {
+                door.turnOnDoor();
+            }
         }
     }
 
     public void playerLeaveDoor(){
         if(collectAllRewards){
-
+            status = GameStatus.Win;
+            endOfGame();
         }
     }
 
@@ -128,18 +132,15 @@ public class GameManager {
         }
     }
 
-    public void collectAllRewards(){
-    }
-
     /**
      * Player succesful go out of door and he win
      */
-    public void leaveDoor(){
-        if(player.playerWin()){
-            status = GameStatus.Win;
-            endOfGame();
-        }
-    }
+    // public void leaveDoor(){
+    //     if(player.playerWin()){
+    //         status = GameStatus.Win;
+    //         endOfGame();
+    //     }
+    // }
 
     /**
      * laoding the result panel to end of gmae

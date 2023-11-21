@@ -39,8 +39,11 @@ public class Room {
         }
         else{
             //Assuming centre of screen will always be even after division
-            roomCenterX = GameConfig.getGameConfigInstance().getRoomColumn();
-            roomCenterY = GameConfig.getGameConfigInstance().getRoomRow();
+            roomCenterX = GameConfig.getGameConfigInstance().getRoomColumn()/2;
+            roomCenterY = GameConfig.getGameConfigInstance().getRoomRow()/2;
+
+            max_X = GamePanel.maxScreenCol;
+            max_Y = GamePanel.maxScreenRow;
 
             
             // X1 Y1 is a corner oposite of corner X2 Y2 and with these to points we
@@ -67,8 +70,8 @@ public class Room {
      */
     private void generateAllPosition(){
         
-        for (int x = RoomX1; x < RoomX2; x++){
-            for(int y = RoomY1; y <RoomY2; y++){
+        for (int x = RoomX1; x <  RoomX2; x++){
+            for(int y = RoomY1; y < RoomY2; y++){
                 Position position = new Position(x *GamePanel.tileSize, y * GamePanel.tileSize);
                 RecordUsedPlace.getInstance().addAviable(position);
             }
