@@ -7,6 +7,7 @@ import cmpt276.group4.GameManager;
 //import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 /**
@@ -38,8 +39,8 @@ public class Room {
         }
         else{
             //Assuming centre of screen will always be even after division
-            roomCenterX = GamePanel.maxScreenRow/2;
-            roomCenterY = GamePanel.maxScreenCol/2;
+            roomCenterX = GameConfig.getGameConfigInstance().getRoomColumn();
+            roomCenterY = GameConfig.getGameConfigInstance().getRoomRow();
 
             
             // X1 Y1 is a corner oposite of corner X2 Y2 and with these to points we
@@ -51,6 +52,12 @@ public class Room {
             generateAllPosition();
             createDoors();
         } 
+    }
+
+    public static Room getInstance(){
+        if(instance == null)
+            instance = new Room();
+        return instance;
     }
 
     
