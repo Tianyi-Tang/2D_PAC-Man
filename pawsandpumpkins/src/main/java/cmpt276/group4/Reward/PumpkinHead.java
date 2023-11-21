@@ -3,6 +3,7 @@ package cmpt276.group4.Reward;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.Reward.BonusReward;
 
@@ -114,7 +115,7 @@ public class PumpkinHead extends BonusReward {
             currentImage = ppk2;
         if(displayStartTime<=gameTime.getTime() && gameTime.getTime()-displayStartTime<=displayDuration) {
 
-    g1.drawImage(currentImage, ppkPosition.getX_axis(), ppkPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize, null);
+    g1.drawImage(currentImage, ppkPosition.getX_axis(), ppkPosition.getY_axis(), WindowConfig.tileSize, WindowConfig.tileSize, null);
 
         }
 

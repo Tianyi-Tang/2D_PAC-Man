@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
 import cmpt276.group4.Logic.GameConfig;
-
+import cmpt276.group4.Logic.WindowConfig;
 
 import javax.imageio.ImageIO;
 
@@ -46,16 +46,16 @@ public class Wall extends Obstacle {
         wallPositions = gc.getWallPositions();
 
         for (Position wallPosition : wallPositions) {
-            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() - GamePanel.tileSize))) {
+            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() - WindowConfig.tileSize))) {
                 north = true;
             }
-            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() + GamePanel.tileSize))) {
+            if (wallPosition.equals(new Position(p.getX_axis(), p.getY_axis() + WindowConfig.tileSize))) {
                 south = true;
             }
-            if (wallPosition.equals(new Position(p.getX_axis() + GamePanel.tileSize, p.getY_axis()))) {
+            if (wallPosition.equals(new Position(p.getX_axis() + WindowConfig.tileSize, p.getY_axis()))) {
                 east = true;
             }
-            if (wallPosition.equals(new Position(p.getX_axis() - GamePanel.tileSize, p.getY_axis()))) {
+            if (wallPosition.equals(new Position(p.getX_axis() - WindowConfig.tileSize, p.getY_axis()))) {
                 west = true;
             }
         }
@@ -91,6 +91,6 @@ public class Wall extends Obstacle {
     @Override
     public void draw(Graphics2D g2){
         if(wallImage != null)
-            g2.drawImage(wallImage, position.getX_axis(), position.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
+            g2.drawImage(wallImage, position.getX_axis(), position.getY_axis(), WindowConfig.tileSize , WindowConfig.tileSize, null);
     }
 }

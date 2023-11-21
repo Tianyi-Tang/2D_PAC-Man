@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 /**
@@ -137,8 +138,8 @@ public class Spider implements Enemy {
     @Override
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(currentImage, enemyPosition.getX_axis(), enemyPosition.getY_axis(), GamePanel.tileSize,
-                GamePanel.tileSize, null);
+        g2.drawImage(currentImage, enemyPosition.getX_axis(), enemyPosition.getY_axis(), WindowConfig.tileSize,
+                WindowConfig.tileSize, null);
     }
 
     /**

@@ -14,7 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import cmpt276.group4.GameManager;
+import cmpt276.group4.PanelController;
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.Logic.WindowConfig;
 
 /**
  * Class represent the Main menu of game 
@@ -48,7 +50,7 @@ public class MainPanel extends JPanel {
 
             }
         });
-        startButton.setBounds(7* GamePanel.tileSize,7* GamePanel.tileSize,GamePanel.tileSize *2,GamePanel.tileSize);
+        startButton.setBounds(7* WindowConfig.tileSize,7* WindowConfig.tileSize,WindowConfig.tileSize *2,WindowConfig.tileSize);
         this.setLayout(null);
 
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -69,7 +71,7 @@ public class MainPanel extends JPanel {
         easyLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                GameManager.getInstance().transformToLoadingScreen(gameLevel.BASIC);
+                PanelController.getInstance().transformToLoadingScreen(gameLevel.BASIC);
                 super.mouseClicked(e);
             }
         });
@@ -80,7 +82,7 @@ public class MainPanel extends JPanel {
         middleLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                GameManager.getInstance().transformToLoadingScreen(gameLevel.MEDIUM);
+                PanelController.getInstance().transformToLoadingScreen(gameLevel.MEDIUM);
                 super.mouseClicked(e);
             }
         });
@@ -91,14 +93,14 @@ public class MainPanel extends JPanel {
         hardLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                 GameManager.getInstance().transformToLoadingScreen(gameLevel.HARD);
+                 PanelController.getInstance().transformToLoadingScreen(gameLevel.HARD);
                 super.mouseClicked(e);
             }
         });
 
-        easyLevelButton.setBounds(7* GamePanel.tileSize,7* GamePanel.tileSize,GamePanel.tileSize *2,GamePanel.tileSize);
-        middleLevelButton.setBounds(7* GamePanel.tileSize, 8* GamePanel.tileSize , GamePanel.tileSize *2, GamePanel.tileSize);
-        hardLevelButton.setBounds(7* GamePanel.tileSize, 9* GamePanel.tileSize, GamePanel.tileSize *2, GamePanel.tileSize);
+        easyLevelButton.setBounds(7* WindowConfig.tileSize,7* WindowConfig.tileSize,WindowConfig.tileSize *2,WindowConfig.tileSize);
+        middleLevelButton.setBounds(7* WindowConfig.tileSize, 8* WindowConfig.tileSize, WindowConfig.tileSize *2, WindowConfig.tileSize);
+        hardLevelButton.setBounds(7* WindowConfig.tileSize, 9* WindowConfig.tileSize, WindowConfig.tileSize *2, WindowConfig.tileSize);
 
         this.add(easyLevelButton);
         this.add(middleLevelButton);
@@ -123,7 +125,7 @@ public class MainPanel extends JPanel {
         super.paintComponent(g);
 
         if(mainPanel_img != null)
-            g.drawImage(mainPanel_img,0,0,GamePanel.screenWidth,GamePanel.screenHeight,this);
+            g.drawImage(mainPanel_img,0,0,WindowConfig.screenWidth,WindowConfig.screenHeight,this);
     }
 
     /**

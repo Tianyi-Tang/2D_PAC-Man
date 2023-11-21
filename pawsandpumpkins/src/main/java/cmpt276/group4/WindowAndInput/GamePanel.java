@@ -20,9 +20,11 @@ import cmpt276.group4.GameTime;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.Player;
 
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.Room.Door;
 import cmpt276.group4.UI.NumberPanel;
 import cmpt276.group4.Reward.MangeBonusReward;
 
@@ -57,14 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     private NumberPanel numberPanel;
 
     // Screen Sitting
-    private static final int original_tileSize = 16;
-    private static final int scale = 3;
-    public static final int tileSize = original_tileSize * scale;
 
-    public static final int maxScreenCol = 16;
-    public static final int maxScreenRow = 16;
-    public static final int screenWidth = maxScreenCol * tileSize;
-    public static final int screenHeight = maxScreenRow * tileSize;
     // Define the desired width and height for the pause button
     private static final int PAUSE_BUTTON_WIDTH = 50; // example width
     private static final int PAUSE_BUTTON_HEIGHT = 50; // example height
@@ -79,11 +74,13 @@ public class GamePanel extends JPanel implements Runnable {
     private GameTime gameTime;
     private BufferedImage pauseButtonImage;
 
+    private Door[] doors;
+
     /**
      * constructor for GamePanel to build up defualt seting
      */
     public GamePanel() {
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setPreferredSize(new Dimension(WindowConfig.screenWidth, WindowConfig.screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         loadPauseButtonImage();
@@ -105,6 +102,10 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void setDoors(Door[] doors){
+        this.doors = doors;
     }
 
     /**
@@ -139,7 +140,14 @@ public class GamePanel extends JPanel implements Runnable {
      * It also manages the timing of enemy movements and game time counting.
      */
     private void update() {
-        Player.getInstance().update();
+        player.update();
+
+        if(doors != null){
+            for (Door door : doors) {
+                door.playerLeaveRoom();
+            }
+        }
+            
 
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
             for (Enemy enemy : record.getEnemyList()) {
@@ -193,7 +201,7 @@ public class GamePanel extends JPanel implements Runnable {
             enemy.draw(g2);
         }
         if (pauseButtonImage != null) {
-            int buttonX = screenWidth - PAUSE_BUTTON_WIDTH - 10;
+            int buttonX = WindowConfig.screenWidth - PAUSE_BUTTON_WIDTH - 10;
             int buttonY = 10;
 
             g.drawImage(pauseButtonImage, buttonX, buttonY, PAUSE_BUTTON_WIDTH, PAUSE_BUTTON_HEIGHT, this);

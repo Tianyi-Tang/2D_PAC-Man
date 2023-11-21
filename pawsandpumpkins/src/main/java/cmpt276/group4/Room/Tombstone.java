@@ -3,6 +3,7 @@ package cmpt276.group4.Room;
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 import java.awt.Graphics2D;
@@ -53,7 +54,7 @@ public class Tombstone extends Obstacle {
             // Get a random position from available positions
             potentialPosition = RecordUsedPlace.getInstance().getRandomFromAvailablePosition();
             // Repeat until the position is not too close to the player
-        } while (record.isPlayerNearBy(2 * GamePanel.tileSize, potentialPosition));
+        } while (record.isPlayerNearBy(2 * WindowConfig.tileSize, potentialPosition));
 
         // Set the chosen position for the obstacle
         position = potentialPosition;
@@ -78,7 +79,7 @@ public class Tombstone extends Obstacle {
     @Override
     public void draw(Graphics2D g2){
         if(tombImage != null)
-            g2.drawImage(tombImage, position.getX_axis(), position.getY_axis(), GamePanel.tileSize , GamePanel.tileSize, null);
+            g2.drawImage(tombImage, position.getX_axis(), position.getY_axis(), WindowConfig.tileSize , WindowConfig.tileSize, null);
 
     }
 

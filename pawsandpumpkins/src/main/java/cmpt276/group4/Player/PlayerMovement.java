@@ -3,7 +3,7 @@ package cmpt276.group4.Player;
 import cmpt276.group4.Movement;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
-import cmpt276.group4.WindowAndInput.GamePanel;
+import cmpt276.group4.Logic.WindowConfig;
 
 /**
  * Class the judge whether player can move to the center position
@@ -31,7 +31,7 @@ public class PlayerMovement implements Movement {
         if(RecordUsedPlace.getInstance().characterMovable(position)){
             if(position.getX_axis() < 0 || position.getY_axis() < 0)
                 return false;
-            if(position.getX_axis() > GamePanel.screenWidth - GamePanel.tileSize || position.getY_axis() > GamePanel.screenHeight - GamePanel.tileSize)
+            if(position.getX_axis() > WindowConfig.screenWidth - WindowConfig.tileSize || position.getY_axis() > WindowConfig.screenHeight - WindowConfig.tileSize)
                 return false;
             return true;
         }

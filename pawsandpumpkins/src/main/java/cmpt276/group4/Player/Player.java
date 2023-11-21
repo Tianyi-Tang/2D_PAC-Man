@@ -10,6 +10,7 @@ import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.Room.Door;
 import cmpt276.group4.Room.Room;
@@ -24,9 +25,6 @@ public class Player implements KeyMovingObserver {
     private Position destination;
     private static Player _instance = null;
 
-    private Door[] doors;
-    private int generalReward_require;
-    private boolean checkDoor = false;
     private boolean wining = false;
 
     private boolean move_up, move_down, move_left, move_right = false;//directions player can move
@@ -50,7 +48,7 @@ public class Player implements KeyMovingObserver {
     * constructor for the player initlization
     */
     Player(){
-        playerPosition = new Position(1 * GamePanel.tileSize, 1 * GamePanel.tileSize);
+        playerPosition = new Position(1 * WindowConfig.tileSize, 1 * WindowConfig.tileSize);
         movement = new PlayerMovement();
         getPlayerImage();
         destination = new Position(0, 0);
@@ -104,22 +102,6 @@ public class Player implements KeyMovingObserver {
     }
 
     /**
-     * Set the door position base on current room 
-     * @param room current room player in
-     */
-    public void setRoom(Room room){
-        doors = room.getDoors();
-    }
-
-    /**
-     * Set the wining requirement for player
-     * @param require how many generalReward need player collect
-     */
-    public void setWinRequire(int require){
-        generalReward_require = require;
-    }
-
-    /**
      * When player catach by enemy, give punishment to player
      * @param deductScore how many socre need to be deduct
      */
@@ -141,7 +123,7 @@ public class Player implements KeyMovingObserver {
             bonusReward_num ++;
         else{
             generalReward_num ++;
-            meetWiningRequirement();
+            GameManager.getInstance().collectReward(generalReward_num);
         }
             
     }
@@ -281,7 +263,7 @@ public class Player implements KeyMovingObserver {
                 break;
         }
 
-        g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize,null); 
+        g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), WindowConfig.tileSize, WindowConfig.tileSize,null); 
         
     }
 
@@ -304,7 +286,6 @@ public class Player implements KeyMovingObserver {
     private void updatePosition(){
         if(movement.isPositionAvailable(destination)){
             playerPosition.setPosition(destination);
-            outOfDoor();
             Reward reward = RecordUsedPlace.getInstance().playerGetReward();
             if(reward != null)
                 reward.addBenefit(this);
@@ -320,25 +301,25 @@ public class Player implements KeyMovingObserver {
      * Check whether player position is same as door position after
      * player meet the wining requirement
      */
-    private void outOfDoor(){
-        if(checkDoor){
-            for (Door door : doors) {
-                if(playerPosition.equal(door.getPosition())){
-                    wining = true;
-                    GameManager.getInstance().leaveDoor();
-                }
+    // private void outOfDoor(){
+    //     if(checkDoor){
+    //         for (Door door : doors) {
+    //             if(playerPosition.equal(door.getPosition())){
+    //                 wining = true;
+    //                 GameManager.getInstance().leaveDoor();
+    //             }
                     
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
     /**
      * Check whether player meeting the requirement of wining
      */
-    private void meetWiningRequirement(){
-        if(generalReward_num == generalReward_require)
-            checkDoor = true;
-    }
+    // private void meetWiningRequirement(){
+    //     if(generalReward_num == generalReward_require)
+    //         checkDoor = true;
+    // }
 
 
 

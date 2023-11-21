@@ -3,6 +3,7 @@ package cmpt276.group4.Reward;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -107,7 +108,7 @@ public class Candy extends GeneralReward {
         else
             currentImage = cd2;
 
-        g1.drawImage(currentImage,cdposition.getX_axis(),cdposition.getY_axis(), GamePanel.tileSize,GamePanel.tileSize,null);
+        g1.drawImage(currentImage,cdposition.getX_axis(),cdposition.getY_axis(), WindowConfig.tileSize, WindowConfig.tileSize,null);
     }
 
 

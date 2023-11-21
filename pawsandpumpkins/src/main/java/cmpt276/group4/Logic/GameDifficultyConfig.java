@@ -157,7 +157,7 @@ public abstract class GameDifficultyConfig {
 
         if (arrayX.length == arrayY.length) {
             for (int i = 0; i < arrayX.length; i++) {
-                currentWallPositions.add(new Position(arrayX[i]*GamePanel.tileSize, arrayY[i]*GamePanel.tileSize));
+                currentWallPositions.add(new Position(arrayX[i]* WindowConfig.tileSize, arrayY[i]* WindowConfig.tileSize));
             }
         }
     }

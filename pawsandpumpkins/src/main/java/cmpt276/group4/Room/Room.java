@@ -7,6 +7,8 @@ import cmpt276.group4.GameManager;
 //import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Logic.GameConfig;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 /**
@@ -14,6 +16,8 @@ import cmpt276.group4.WindowAndInput.GamePanel;
  * center, coordinates, door position, obstacles, and doors.
  */
 public class Room {
+    private static Room instance;
+
     private Position doorPosition;
     private Obstacle[] obstacle;
     private Door[] doors;
@@ -30,15 +34,19 @@ public class Room {
      * @param max_X Maximum X-coordinate of the room.
      * @param max_Y Maximum Y-coordinate of the room.
      */
-    public Room(int max_X, int max_Y) {
-        if (GamePanel.maxScreenRow < max_X || GamePanel.maxScreenCol < max_Y){
+    public Room() {
+        if (WindowConfig.maxScreenRow < max_X || WindowConfig.maxScreenCol < max_Y){
             System.out.println("Screen too small");
         }
         else{
             //Assuming centre of screen will always be even after division
-            roomCenterX = GamePanel.maxScreenRow/2;
-            roomCenterY = GamePanel.maxScreenCol/2;
+            roomCenterX = GameConfig.getGameConfigInstance().getRoomColumn()/2;
+            roomCenterY = GameConfig.getGameConfigInstance().getRoomRow()/2;
 
+            max_X = WindowConfig.maxScreenCol;
+            max_Y = WindowConfig.maxScreenRow;
+
+            
             // X1 Y1 is a corner oposite of corner X2 Y2 and with these to points we
             // can generate a room to fill in the room with tiles
             RoomX1 = (roomCenterX -  (max_X/2));
@@ -50,14 +58,22 @@ public class Room {
         } 
     }
 
+    public static synchronized Room getInstance(){
+        if(instance == null)
+            instance = new Room();
+        return instance;
+    }
+
+    
+
     /**
      * Generates all positions in the room and adds them to the list of available positions.
      */
     private void generateAllPosition(){
         
-        for (int x = RoomX1; x < RoomX2; x++){
-            for(int y = RoomY1; y <RoomY2; y++){
-                Position position = new Position(x *GamePanel.tileSize, y * GamePanel.tileSize);
+        for (int x = RoomX1; x <  RoomX2; x++){
+            for(int y = RoomY1; y < RoomY2; y++){
+                Position position = new Position(x *WindowConfig.tileSize, y * WindowConfig.tileSize);
                 RecordUsedPlace.getInstance().addAviable(position);
             }
         }
@@ -68,8 +84,8 @@ public class Room {
      */
     private void createDoors(){
         doors = new Door[2];
-        doors[0] = new Door(false, new Position(1 * GamePanel.tileSize, 0));
-        doors[1] = new Door(false, new Position(14 * GamePanel.tileSize, 15 * GamePanel.tileSize));
+        doors[0] = new Door(false, new Position(1 * WindowConfig.tileSize, 0));
+        doors[1] = new Door(false, new Position(14 * WindowConfig.tileSize, 15 * WindowConfig.tileSize));
     }
         
     /**

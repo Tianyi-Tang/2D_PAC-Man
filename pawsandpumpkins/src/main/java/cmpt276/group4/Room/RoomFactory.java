@@ -18,8 +18,8 @@ public class RoomFactory {
      * @param max_Y The maximum Y-coordinate of the room.
      * @return An instance of the room.
      */
-    public Room createRoom(int max_X, int max_Y) {
-        return new Room(max_X, max_Y);
+    public Room createRoom() {
+        return Room.getInstance();
     }
 
 
@@ -49,7 +49,6 @@ public class RoomFactory {
         for (int i=0; i < amount && i < positions.size(); i++){
             RecordUsedPlace.getInstance().addElementToMap(new Wall(type,amount,positions.get(i)));
         }
-
     }
 
     /**
