@@ -125,7 +125,7 @@ public class MainPanel extends JPanel {
         super.paintComponent(g);
 
         if(mainPanel_img != null)
-            g.drawImage(mainPanel_img,0,0,GamePanel.screenWidth,GamePanel.screenHeight,this);
+            g.drawImage(mainPanel_img,0,0,WindowConfig.screenWidth,WindowConfig.screenHeight,this);
     }
 
     /**

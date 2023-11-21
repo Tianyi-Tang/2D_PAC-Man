@@ -16,7 +16,7 @@ import cmpt276.group4.gameLevel;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
 import cmpt276.group4.Logic.GameConfig;
-
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.PlayerGenerator;
 import cmpt276.group4.Reward.RewardFactory;
 import cmpt276.group4.Reward.RewardInitialization;
@@ -319,7 +319,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         if(background_img != null)
-            g.drawImage(background_img,0,0,GamePanel.screenWidth, GamePanel.screenHeight,this);
+            g.drawImage(background_img,0,0,WindowConfig.screenWidth, WindowConfig.screenHeight,this);
         else
             System.out.println("error");
     }

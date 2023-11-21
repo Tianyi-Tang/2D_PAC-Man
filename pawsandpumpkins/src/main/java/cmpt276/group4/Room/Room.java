@@ -35,7 +35,7 @@ public class Room {
      * @param max_Y Maximum Y-coordinate of the room.
      */
     public Room() {
-        if (GamePanel.maxScreenRow < max_X || GamePanel.maxScreenCol < max_Y){
+        if (WindowConfig.maxScreenRow < max_X || WindowConfig.maxScreenCol < max_Y){
             System.out.println("Screen too small");
         }
         else{
@@ -43,8 +43,8 @@ public class Room {
             roomCenterX = GameConfig.getGameConfigInstance().getRoomColumn()/2;
             roomCenterY = GameConfig.getGameConfigInstance().getRoomRow()/2;
 
-            max_X = GamePanel.maxScreenCol;
-            max_Y = GamePanel.maxScreenRow;
+            max_X = WindowConfig.maxScreenCol;
+            max_Y = WindowConfig.maxScreenRow;
 
             
             // X1 Y1 is a corner oposite of corner X2 Y2 and with these to points we

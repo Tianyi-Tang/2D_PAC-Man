@@ -60,10 +60,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Screen Sitting
 
-    public static final int maxScreenCol = 16;
-    public static final int maxScreenRow = 16;
-    public static final int screenWidth = maxScreenCol * WindowConfig.tileSize;
-    public static final int screenHeight = maxScreenRow * WindowConfig.tileSize;
     // Define the desired width and height for the pause button
     private static final int PAUSE_BUTTON_WIDTH = 50; // example width
     private static final int PAUSE_BUTTON_HEIGHT = 50; // example height
@@ -84,7 +80,7 @@ public class GamePanel extends JPanel implements Runnable {
      * constructor for GamePanel to build up defualt seting
      */
     public GamePanel() {
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setPreferredSize(new Dimension(WindowConfig.screenWidth, WindowConfig.screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         loadPauseButtonImage();
@@ -205,7 +201,7 @@ public class GamePanel extends JPanel implements Runnable {
             enemy.draw(g2);
         }
         if (pauseButtonImage != null) {
-            int buttonX = screenWidth - PAUSE_BUTTON_WIDTH - 10;
+            int buttonX = WindowConfig.screenWidth - PAUSE_BUTTON_WIDTH - 10;
             int buttonY = 10;
 
             g.drawImage(pauseButtonImage, buttonX, buttonY, PAUSE_BUTTON_WIDTH, PAUSE_BUTTON_HEIGHT, this);
