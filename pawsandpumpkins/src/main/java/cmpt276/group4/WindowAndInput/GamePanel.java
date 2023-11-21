@@ -139,7 +139,7 @@ public class GamePanel extends JPanel implements Runnable {
      * It also manages the timing of enemy movements and game time counting.
      */
     private void update() {
-        Player.getInstance().update();
+        player.update();
 
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
             for (Enemy enemy : record.getEnemyList()) {
