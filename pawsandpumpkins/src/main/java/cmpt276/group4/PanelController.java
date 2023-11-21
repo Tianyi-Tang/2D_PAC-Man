@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.UI.NumberPanel;
 import cmpt276.group4.WindowAndInput.GamePanel;
@@ -89,7 +90,7 @@ public class PanelController {
      */
     public void transformToGameScreen(){
         if(status == GameStatus.LoadingPanel){
-            playerIsReady();
+            enterGame();
             layout.show(cardContainer, "game");
             gamePanel.createTimeLine();
             gamePanel.setPlayer(Player.getInstance());
@@ -116,8 +117,10 @@ public class PanelController {
     /**
      * call the gameManagerment to get player
      */
-    private void playerIsReady(){
-        GameManager.getInstance().setPlayer(Player.getInstance());
+    private void enterGame(){
+        GameManager manager = GameManager.getInstance();
+        manager.setPlayer(Player.getInstance());
+        manager.setNumberOfGeneralRewards(GameConfig.getGameConfigInstance());
     }
 
     private void initalNumberPanel(){

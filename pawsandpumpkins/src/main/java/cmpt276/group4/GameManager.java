@@ -3,6 +3,7 @@ package cmpt276.group4;
 
 
 
+import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 
 
@@ -11,8 +12,11 @@ import cmpt276.group4.Player.Player;
  */
 public class GameManager {    
     private GameStatus status;
+
+    private int generalRewards_num;
     private boolean gameEnd = false;// end of game 
     private boolean playerWin = false;
+    
 
     //level: BASIC, MEDIUM, HARD
     private static GameManager instance;// singleton
@@ -70,7 +74,9 @@ public class GameManager {
         return playerWin;
     }
 
-
+    public void setNumberOfGeneralRewards(GameConfig config){
+        generalRewards_num = config.getNumberOfRegularRewards();
+    }
 
     /**
      * Enemy catch player and base on the type of enemy give different result
@@ -94,6 +100,9 @@ public class GameManager {
             status = GameStatus.GameOver;
             endOfGame();
         }
+    }
+
+    public void collectAllRewards(){
     }
 
     /**
