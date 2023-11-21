@@ -34,7 +34,7 @@ public class EnemyFactoryTest {
         when(mockRecord.getPlayerPosition()).thenReturn(new Position(10, 10));
 
         // GameManager.setInstance(mockGameManager);
-        mockGameManager.setPlayerForTest(mockPlayer);
+        mockGameManager.setPlayer(mockPlayer);
 
         factory = new EnemyFactory();
     }

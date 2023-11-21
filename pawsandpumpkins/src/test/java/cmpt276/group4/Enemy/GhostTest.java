@@ -33,7 +33,8 @@ class GhostTest {
         mockRecord = mock(RecordUsedPlace.class);
         RecordUsedPlace.setInstance(mockRecord);
         mockPlayer = mock(Player.class);
-        mockGameManager = mock(GameManager.class);
+        //mockGameManager = mock(GameManager.class);
+        mockGameManager = spy(GameManager.getInstance());
         mockGameManager.setPlayer(mockPlayer);
         gameManagerIns = GameManager.getInstance();
         gameManagerIns.setPlayer(mockPlayer);
@@ -52,9 +53,11 @@ class GhostTest {
     void testCatchPlayerWhenPlayerIsCaught() {
         Position samePosition = new Position(48, 48);
         when(mockRecord.getPlayerPosition()).thenReturn(samePosition);
+        //GameManager.setInstance(mockGameManager);
         ghost.setEnemyPosition(samePosition);
 
         ghost.catchPlayer();
+        //verify(mockGameManager).enemyCatachPlayer((anyBoolean()));
 
         // verify(mockPlayer).getCollectScore();
         // verify(mockPlayer).getGeneralRewardNum();
