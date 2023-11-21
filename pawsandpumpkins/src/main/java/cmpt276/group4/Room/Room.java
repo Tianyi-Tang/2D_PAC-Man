@@ -32,7 +32,7 @@ public class Room {
      * @param max_X Maximum X-coordinate of the room.
      * @param max_Y Maximum Y-coordinate of the room.
      */
-    public Room(int max_X, int max_Y) {
+    public Room() {
         if (GamePanel.maxScreenRow < max_X || GamePanel.maxScreenCol < max_Y){
             System.out.println("Screen too small");
         }
@@ -41,6 +41,7 @@ public class Room {
             roomCenterX = GamePanel.maxScreenRow/2;
             roomCenterY = GamePanel.maxScreenCol/2;
 
+            
             // X1 Y1 is a corner oposite of corner X2 Y2 and with these to points we
             // can generate a room to fill in the room with tiles
             RoomX1 = (roomCenterX -  (max_X/2));

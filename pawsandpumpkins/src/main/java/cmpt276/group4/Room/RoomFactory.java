@@ -18,8 +18,8 @@ public class RoomFactory {
      * @param max_Y The maximum Y-coordinate of the room.
      * @return An instance of the room.
      */
-    public Room createRoom(int max_X, int max_Y) {
-        return new Room(max_X, max_Y);
+    public Room createRoom() {
+        return new Room();
     }
 
 

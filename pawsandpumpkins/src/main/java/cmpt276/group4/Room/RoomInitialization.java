@@ -50,7 +50,7 @@ public class RoomInitialization {
      * @return An instance of the room.
      */
     public Room iRoom(RoomFactory rmFactory) {
-        return rmFactory.createRoom(max_X, max_Y);
+        return rmFactory.createRoom();
     }
 
 
