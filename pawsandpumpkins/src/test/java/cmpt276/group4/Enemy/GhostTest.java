@@ -34,9 +34,9 @@ class GhostTest {
         RecordUsedPlace.setInstance(mockRecord);
         mockPlayer = mock(Player.class);
         mockGameManager = mock(GameManager.class);
-        mockGameManager.setPlayerForTest(mockPlayer);
+        mockGameManager.setPlayer(mockPlayer);
         gameManagerIns = GameManager.getInstance();
-        gameManagerIns.setPlayerForTest(mockPlayer);
+        gameManagerIns.setPlayer(mockPlayer);
 
         when(mockRecord.getRandomSafePosition()).thenReturn(new Position(10, 10)); // Example safe position
         when(mockRecord.getPlayerPosition()).thenReturn(new Position(10, 10)); // Player's position
