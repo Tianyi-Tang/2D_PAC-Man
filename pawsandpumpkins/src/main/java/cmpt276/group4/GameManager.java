@@ -3,8 +3,6 @@ package cmpt276.group4;
 
 
 
-import java.util.ArrayList;
-
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Room.Door;
@@ -29,34 +27,6 @@ public class GameManager {
 
     private Player player;
 
-
-    /**
-     * constructor to set the defualt setting fot JFrame and laoding all panel
-     */
-    // public GameManager(){
-    //     window = new JFrame();
-    //     layout = new CardLayout();
-    //     cardContainer = new JPanel(layout);
-        
-    //     gamePanel = new GamePanel();
-    //     mainPanel = new MainPanel();
-    //     loadPanel = new LoadingPanel();
-    //     numberPanel = new NumberPanel();
-
-    //     cardContainer.add(gamePanel,"game");
-    //     cardContainer.add(mainPanel,"main");
-    //     cardContainer.add(loadPanel,"load");
-    //     cardContainer.add(numberPanel, "gameEnd");
-
-
-    //     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    //     window.setResizable(false);
-    //     window.setTitle("paws and pumpkins");
-
-    //     window.getContentPane().add(cardContainer);
-    //     window.pack();
-    //     window.setLocationRelativeTo(null);
-    // }
 
     public static synchronized GameManager getInstance(){
         if(instance == null)
@@ -133,16 +103,6 @@ public class GameManager {
     }
 
     /**
-     * Player succesful go out of door and he win
-     */
-    // public void leaveDoor(){
-    //     if(player.playerWin()){
-    //         status = GameStatus.Win;
-    //         endOfGame();
-    //     }
-    // }
-
-    /**
      * laoding the result panel to end of gmae
      */
     private void endOfGame(){
@@ -154,6 +114,15 @@ public class GameManager {
         PanelController.getInstance().transformToEndScreen();
     }
 
+        /**
+     * Player succesful go out of door and he win
+     */
+    // public void leaveDoor(){
+    //     if(player.playerWin()){
+    //         status = GameStatus.Win;
+    //         endOfGame();
+    //     }
+    // }
         /**
      * laoding the main menu to window and start of game
      */

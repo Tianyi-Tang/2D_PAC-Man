@@ -320,8 +320,6 @@ public class LoadingPanel extends JPanel implements Runnable {
 
         if(background_img != null)
             g.drawImage(background_img,0,0,WindowConfig.screenWidth, WindowConfig.screenHeight,this);
-        else
-            System.out.println("error");
     }
 
     /**
