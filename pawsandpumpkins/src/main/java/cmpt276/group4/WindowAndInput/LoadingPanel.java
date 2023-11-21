@@ -343,8 +343,13 @@ public class LoadingPanel extends JPanel implements Runnable {
      */
     private void initialLoading(){
         generateRoom = generateAllTile =generateAllEnemies = generateObstacle  = generateAllRewards = generatePlayer =false;
+        passDoorInfor();
         loadingThread = null;
         System.out.println("Success!!");
+    }
+
+    private void passDoorInfor(){
+        
     }
 
     /**

@@ -14,6 +14,8 @@ import cmpt276.group4.WindowAndInput.GamePanel;
  * center, coordinates, door position, obstacles, and doors.
  */
 public class Room {
+    private static Room instance;
+
     private Position doorPosition;
     private Obstacle[] obstacle;
     private Door[] doors;
@@ -49,6 +51,8 @@ public class Room {
             createDoors();
         } 
     }
+
+    
 
     /**
      * Generates all positions in the room and adds them to the list of available positions.
