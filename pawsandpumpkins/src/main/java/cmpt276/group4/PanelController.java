@@ -123,6 +123,8 @@ public class PanelController {
         manager.setPlayer(Player.getInstance());
         manager.setNumberOfGeneralRewards(GameConfig.getGameConfigInstance());
         manager.setDoors(Room.getInstance().getDoors());
+
+        
     }
 
     private void initalNumberPanel(){

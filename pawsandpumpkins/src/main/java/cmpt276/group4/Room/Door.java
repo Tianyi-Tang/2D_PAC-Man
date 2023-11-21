@@ -34,6 +34,10 @@ public class Door implements CharacterAvaliablePosition{
         return true;
     }
 
+    public void turnOnDoor(){
+        open = true;
+    }
+
     /**
      * Gets the position of the door.
      *

@@ -87,6 +87,10 @@ public class GameManager {
         this.doors = doors;
     }
 
+    public boolean isPlayerCollectAllRewards(){
+        return collectAllRewards;
+    }
+
 
     public void collectReward(int generalReward){
         if(generalReward == generalRewards_num){
