@@ -3,7 +3,9 @@ package cmpt276.group4.Room;
 import java.awt.Graphics2D;
 
 import cmpt276.group4.CharacterAvaliablePosition;
+import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
+import cmpt276.group4.Player.Player;
 
 /**
  * The Door class represents a door in the game, implementing the CharacterAvaliablePosition interface.
@@ -35,7 +37,15 @@ public class Door implements CharacterAvaliablePosition{
     }
 
     public void turnOnDoor(){
-        open = true;
+        if(GameManager.getInstance().isPlayerCollectAllRewards())
+            open = true;
+    }
+
+    public void playerLeaveRoom(){
+        if(open){
+            if(Player.getInstance().getPosition().equal(position))
+                GameManager.getInstance().playerLeaveDoor();
+        }
     }
 
     /**

@@ -98,7 +98,7 @@ public class GameManager {
         }
     }
 
-    public void PlayerLeaveDoor(){
+    public void playerLeaveDoor(){
         if(collectAllRewards){
 
         }
