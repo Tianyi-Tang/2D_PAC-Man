@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import cmpt276.group4.Position;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 /**
@@ -23,7 +24,7 @@ public class PlayerTests {
 
     @Test
     public void initalPosition(){
-        assertEquals(new Position(GamePanel.tileSize, GamePanel.tileSize), player.getPosition());
+        assertEquals(new Position(WindowConfig.tileSize, WindowConfig.tileSize), player.getPosition());
     }
 
     

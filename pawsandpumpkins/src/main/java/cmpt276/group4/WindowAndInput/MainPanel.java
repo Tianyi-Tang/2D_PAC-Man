@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.PanelController;
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.Logic.WindowConfig;
 
 /**
  * Class represent the Main menu of game 
@@ -49,7 +50,7 @@ public class MainPanel extends JPanel {
 
             }
         });
-        startButton.setBounds(7* GamePanel.tileSize,7* GamePanel.tileSize,GamePanel.tileSize *2,GamePanel.tileSize);
+        startButton.setBounds(7* WindowConfig.tileSize,7* WindowConfig.tileSize,WindowConfig.tileSize *2,WindowConfig.tileSize);
         this.setLayout(null);
 
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -97,9 +98,9 @@ public class MainPanel extends JPanel {
             }
         });
 
-        easyLevelButton.setBounds(7* GamePanel.tileSize,7* GamePanel.tileSize,GamePanel.tileSize *2,GamePanel.tileSize);
-        middleLevelButton.setBounds(7* GamePanel.tileSize, 8* GamePanel.tileSize , GamePanel.tileSize *2, GamePanel.tileSize);
-        hardLevelButton.setBounds(7* GamePanel.tileSize, 9* GamePanel.tileSize, GamePanel.tileSize *2, GamePanel.tileSize);
+        easyLevelButton.setBounds(7* WindowConfig.tileSize,7* WindowConfig.tileSize,WindowConfig.tileSize *2,WindowConfig.tileSize);
+        middleLevelButton.setBounds(7* WindowConfig.tileSize, 8* WindowConfig.tileSize, WindowConfig.tileSize *2, WindowConfig.tileSize);
+        hardLevelButton.setBounds(7* WindowConfig.tileSize, 9* WindowConfig.tileSize, WindowConfig.tileSize *2, WindowConfig.tileSize);
 
         this.add(easyLevelButton);
         this.add(middleLevelButton);

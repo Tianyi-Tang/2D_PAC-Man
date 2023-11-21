@@ -3,6 +3,7 @@ package cmpt276.group4.Player;
 import cmpt276.group4.Movement;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 /**
@@ -31,7 +32,7 @@ public class PlayerMovement implements Movement {
         if(RecordUsedPlace.getInstance().characterMovable(position)){
             if(position.getX_axis() < 0 || position.getY_axis() < 0)
                 return false;
-            if(position.getX_axis() > GamePanel.screenWidth - GamePanel.tileSize || position.getY_axis() > GamePanel.screenHeight - GamePanel.tileSize)
+            if(position.getX_axis() > GamePanel.screenWidth - WindowConfig.tileSize || position.getY_axis() > GamePanel.screenHeight - WindowConfig.tileSize)
                 return false;
             return true;
         }

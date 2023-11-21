@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.PlayerMovement;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
@@ -47,7 +48,7 @@ public class Ghost implements Enemy {
         potentialPosition.equal(playerPosition);
         do {
             potentialPosition = record.getRandomSafePosition();
-        } while (record.isPlayerNearBy(8 * GamePanel.tileSize, potentialPosition));
+        } while (record.isPlayerNearBy(8 * WindowConfig.tileSize, potentialPosition));
 
         this.enemyPosition.setPosition(potentialPosition);
         record.addEnemy(this);
@@ -64,7 +65,7 @@ public class Ghost implements Enemy {
         getPlayerPosition();
 
         // Check if the player is around
-        if (record.isPlayerNearBy(4 * GamePanel.tileSize, enemyPosition)) {
+        if (record.isPlayerNearBy(4 * WindowConfig.tileSize, enemyPosition)) {
             // If the player is around, move towards the player
             setToClosestPlayerPosition();
         } else {
@@ -142,14 +143,14 @@ public class Ghost implements Enemy {
     private List<Position> getPriorityPositions() {
         int deltaX = playerPosition.getX_axis() - enemyPosition.getX_axis();
         int deltaY = playerPosition.getY_axis() - enemyPosition.getY_axis();
-        Position newPositionRight = new Position(enemyPosition.getX_axis() + GamePanel.tileSize,
+        Position newPositionRight = new Position(enemyPosition.getX_axis() + WindowConfig.tileSize,
                 enemyPosition.getY_axis());
-        Position newPositionLeft = new Position(enemyPosition.getX_axis() - GamePanel.tileSize,
+        Position newPositionLeft = new Position(enemyPosition.getX_axis() - WindowConfig.tileSize,
                 enemyPosition.getY_axis());
         Position newPositionUp = new Position(enemyPosition.getX_axis(),
-                enemyPosition.getY_axis() + GamePanel.tileSize);
+                enemyPosition.getY_axis() + WindowConfig.tileSize);
         Position newPositionDown = new Position(enemyPosition.getX_axis(),
-                enemyPosition.getY_axis() - GamePanel.tileSize);
+                enemyPosition.getY_axis() - WindowConfig.tileSize);
         List<Position> priorityList = new ArrayList<>();
 
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
@@ -212,19 +213,19 @@ public class Ghost implements Enemy {
             switch (direction) {
                 case 0:
                     // Move up
-                    newY = newY - GamePanel.tileSize;
+                    newY = newY - WindowConfig.tileSize;
                     break;
                 case 1:
                     // Move down
-                    newY = newY + GamePanel.tileSize;
+                    newY = newY + WindowConfig.tileSize;
                     break;
                 case 2:
                     // Move left
-                    newX = newX - GamePanel.tileSize;
+                    newX = newX - WindowConfig.tileSize;
                     break;
                 case 3:
                     // Move right
-                    newX = newX + GamePanel.tileSize;
+                    newX = newX + WindowConfig.tileSize;
                     break;
             }
             Position newPosition = new Position(newX, newY);
@@ -298,8 +299,8 @@ public class Ghost implements Enemy {
                 currentImage = ghost_advanced;
                 break;
         }
-        g2.drawImage(currentImage, enemyPosition.getX_axis(), enemyPosition.getY_axis(), GamePanel.tileSize,
-                GamePanel.tileSize, null);
+        g2.drawImage(currentImage, enemyPosition.getX_axis(), enemyPosition.getY_axis(), WindowConfig.tileSize,
+            WindowConfig.tileSize, null);
     }
 
     @Override

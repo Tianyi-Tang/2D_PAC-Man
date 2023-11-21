@@ -20,6 +20,7 @@ import cmpt276.group4.GameTime;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.Player;
 
 import cmpt276.group4.Reward.Reward;
@@ -58,14 +59,11 @@ public class GamePanel extends JPanel implements Runnable {
     private NumberPanel numberPanel;
 
     // Screen Sitting
-    private static final int original_tileSize = 16;
-    private static final int scale = 3;
-    public static final int tileSize = original_tileSize * scale;
 
     public static final int maxScreenCol = 16;
     public static final int maxScreenRow = 16;
-    public static final int screenWidth = maxScreenCol * tileSize;
-    public static final int screenHeight = maxScreenRow * tileSize;
+    public static final int screenWidth = maxScreenCol * WindowConfig.tileSize;
+    public static final int screenHeight = maxScreenRow * WindowConfig.tileSize;
     // Define the desired width and height for the pause button
     private static final int PAUSE_BUTTON_WIDTH = 50; // example width
     private static final int PAUSE_BUTTON_HEIGHT = 50; // example height

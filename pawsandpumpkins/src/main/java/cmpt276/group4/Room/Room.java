@@ -8,6 +8,7 @@ import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Logic.GameConfig;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 /**
@@ -72,7 +73,7 @@ public class Room {
         
         for (int x = RoomX1; x <  RoomX2; x++){
             for(int y = RoomY1; y < RoomY2; y++){
-                Position position = new Position(x *GamePanel.tileSize, y * GamePanel.tileSize);
+                Position position = new Position(x *WindowConfig.tileSize, y * WindowConfig.tileSize);
                 RecordUsedPlace.getInstance().addAviable(position);
             }
         }
@@ -83,8 +84,8 @@ public class Room {
      */
     private void createDoors(){
         doors = new Door[2];
-        doors[0] = new Door(false, new Position(1 * GamePanel.tileSize, 0));
-        doors[1] = new Door(false, new Position(14 * GamePanel.tileSize, 15 * GamePanel.tileSize));
+        doors[0] = new Door(false, new Position(1 * WindowConfig.tileSize, 0));
+        doors[1] = new Door(false, new Position(14 * WindowConfig.tileSize, 15 * WindowConfig.tileSize));
     }
         
     /**

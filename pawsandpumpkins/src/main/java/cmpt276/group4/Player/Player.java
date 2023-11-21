@@ -10,6 +10,7 @@ import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.Room.Door;
 import cmpt276.group4.Room.Room;
@@ -47,7 +48,7 @@ public class Player implements KeyMovingObserver {
     * constructor for the player initlization
     */
     Player(){
-        playerPosition = new Position(1 * GamePanel.tileSize, 1 * GamePanel.tileSize);
+        playerPosition = new Position(1 * WindowConfig.tileSize, 1 * WindowConfig.tileSize);
         movement = new PlayerMovement();
         getPlayerImage();
         destination = new Position(0, 0);
@@ -262,7 +263,7 @@ public class Player implements KeyMovingObserver {
                 break;
         }
 
-        g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), GamePanel.tileSize, GamePanel.tileSize,null); 
+        g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), WindowConfig.tileSize, WindowConfig.tileSize,null); 
         
     }
 
