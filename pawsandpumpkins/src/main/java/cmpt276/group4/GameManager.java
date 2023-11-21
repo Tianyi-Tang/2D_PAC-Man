@@ -1,25 +1,9 @@
 package cmpt276.group4;
 
 
-import java.awt.CardLayout;
-
-
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 
 
 import cmpt276.group4.Player.Player;
-
-
-
-import cmpt276.group4.UI.NumberPanel;
-
-import cmpt276.group4.WindowAndInput.GamePanel;
-import cmpt276.group4.WindowAndInput.LoadingPanel;
-import cmpt276.group4.WindowAndInput.MainPanel;
-import cmpt276.group4.WindowAndInput.keyboardListener;
 
 
 /**
@@ -28,53 +12,42 @@ import cmpt276.group4.WindowAndInput.keyboardListener;
 public class GameManager {    
     private GameStatus status;
     private boolean gameEnd = false;// end of game 
+    private boolean playerWin = false;
 
     //level: BASIC, MEDIUM, HARD
     private static GameManager instance;// singleton
 
-    private JFrame window;
-
-    private CardLayout layout;//manager to the different panel
-    private JPanel cardContainer;
-
-    //panels in the game
-    private GamePanel gamePanel;
-    private MainPanel mainPanel;
-    private LoadingPanel loadPanel;
-    private NumberPanel numberPanel;
-
     private Player player;
 
-    private keyboardListener listener;
+
 
     /**
      * constructor to set the defualt setting fot JFrame and laoding all panel
      */
-    public GameManager(){
-        window = new JFrame();
-        layout = new CardLayout();
-        cardContainer = new JPanel(layout);
+    // public GameManager(){
+    //     window = new JFrame();
+    //     layout = new CardLayout();
+    //     cardContainer = new JPanel(layout);
         
-        gamePanel = new GamePanel();
-        mainPanel = new MainPanel();
-        loadPanel = new LoadingPanel();
-        numberPanel = new NumberPanel();
+    //     gamePanel = new GamePanel();
+    //     mainPanel = new MainPanel();
+    //     loadPanel = new LoadingPanel();
+    //     numberPanel = new NumberPanel();
 
-        cardContainer.add(gamePanel,"game");
-        cardContainer.add(mainPanel,"main");
-        cardContainer.add(loadPanel,"load");
-        cardContainer.add(numberPanel, "gameEnd");
+    //     cardContainer.add(gamePanel,"game");
+    //     cardContainer.add(mainPanel,"main");
+    //     cardContainer.add(loadPanel,"load");
+    //     cardContainer.add(numberPanel, "gameEnd");
 
 
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("paws and pumpkins");
+    //     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //     window.setResizable(false);
+    //     window.setTitle("paws and pumpkins");
 
-        window.getContentPane().add(cardContainer);
-        window.pack();
-        window.setLocationRelativeTo(null);
-        
-    }
+    //     window.getContentPane().add(cardContainer);
+    //     window.pack();
+    //     window.setLocationRelativeTo(null);
+    // }
 
     public static synchronized GameManager getInstance(){
         if(instance == null)
@@ -85,29 +58,19 @@ public class GameManager {
     /**
      * Method for testing purposes to set the mock player
      */
-    public void setPlayerForTest(Player player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 
-    /**
-     * laoding the main menu to window and start of game
-     */
-    public void createMainWindow(){
-        status = GameStatus.MainPanel;
-        layout.show(cardContainer, "main");
-
-        window.setVisible(true);
+    public boolean isGameEnd(){
+        return gameEnd;
     }
 
-    /**
-     * lading the result panel to window and it is end of game
-     */
-    public void createNumberPanel(){
-        status = GameStatus.Win;
-
-        layout.show(cardContainer, "gameEnd");
-        window.setVisible(true);
+    public boolean isPalyerWin(){
+        return playerWin;
     }
+
+
 
     /**
      * Enemy catch player and base on the type of enemy give different result
@@ -121,40 +84,6 @@ public class GameManager {
         else{
             player.deductPoint(5);
         }
-    }
-
-    /**
-     * Switch the main panel to laoding panel
-     * @param level the difficulty of game 
-     */
-    public void transformToLoadingScreen(gameLevel level){
-        if(status == GameStatus.MainPanel){
-            layout.show(cardContainer, "load");
-            loadPanel.gameLevelSending(level);
-            status = GameStatus.LoadingPanel;
-        }
-    }
-
-    /**
-     * Switch the loading panel to game panel
-     */
-    public void transformToGameScreen(){
-        if(status == GameStatus.LoadingPanel){
-            layout.show(cardContainer, "game");
-            gamePanel.createTimeLine();
-            player = Player.getInstance();
-            gamePanel.setPlayer(player);
-            addKeyboardListener();
-            status = GameStatus.GamePanel;
-        }
-    }
-
-
-    private void addKeyboardListener(){
-        listener = new keyboardListener();
-        gamePanel.addKeyListener(listener);
-        gamePanel.requestFocusInWindow();
-        listener.addPlayer(Player.getInstance());
     }
 
     /**
@@ -178,23 +107,63 @@ public class GameManager {
     }
 
     /**
-     * Chcek the game is end or not
-     * @return If true, it mean the game end; else the game still contius
-     */
-    public boolean isGameEnd(){
-        if(status == GameStatus.GameOver || status == GameStatus.Win)
-            return true;
-        else
-            return false;
-    }
-
-    /**
      * laoding the result panel to end of gmae
      */
     private void endOfGame(){
-        layout.show(cardContainer, "gameEnd");
-        numberPanel.init(status);
-        numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum() * 5, player.getDeductScore(), player.totalScore());
+        gameEnd =true;
+        if(status == GameStatus.Win)
+            playerWin = true;
+        else
+            playerWin = false;
+        PanelController.getInstance().transformToEndScreen();
     }
+
+        /**
+     * laoding the main menu to window and start of game
+     */
+    // public void createMainWindow(){
+    //     status = GameStatus.MainPanel;
+    //     layout.show(cardContainer, "main");
+
+    //     window.setVisible(true);
+    // }
+
+
+
+    // /**
+    //  * lading the result panel to window and it is end of game
+    //  */
+    // public void createNumberPanel(){
+    //     status = GameStatus.Win;
+
+    //     layout.show(cardContainer, "gameEnd");
+    //     window.setVisible(true);
+    // }
+
+       /**
+     * Switch the main panel to laoding panel
+     * @param level the difficulty of game 
+     */
+    // public void transformToLoadingScreen(gameLevel level){
+    //     if(status == GameStatus.MainPanel){
+    //         layout.show(cardContainer, "load");
+    //         loadPanel.gameLevelSending(level);
+    //         status = GameStatus.LoadingPanel;
+    //     }
+    // }
+
+    /**
+     * Switch the loading panel to game panel
+     */
+    // public void transformToGameScreen(){
+    //     if(status == GameStatus.LoadingPanel){
+    //         layout.show(cardContainer, "game");
+    //         gamePanel.createTimeLine();
+    //         player = Player.getInstance();
+    //         gamePanel.setPlayer(player);
+    //         addKeyboardListener();
+    //         status = GameStatus.GamePanel;
+    //     }
+    // }
 
 }

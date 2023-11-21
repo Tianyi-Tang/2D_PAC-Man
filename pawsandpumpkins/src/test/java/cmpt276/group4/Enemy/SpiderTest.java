@@ -27,7 +27,7 @@ public class SpiderTest {
         mockPlayerPosition = mock(Position.class);
         mockPlayer = mock(Player.class);
         GameManager gameManagerIns = GameManager.getInstance();
-        gameManagerIns.setPlayerForTest(mockPlayer);
+        gameManagerIns.setPlayer(mockPlayer);
         
         when(mockRecord.getPlayerPosition()).thenReturn(mockPlayerPosition);
         when(mockRecord.getRandomSafePosition()).thenReturn(new Position(10, 10)); // Example safe position

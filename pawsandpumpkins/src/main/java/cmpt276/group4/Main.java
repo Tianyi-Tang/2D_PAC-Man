@@ -6,8 +6,11 @@ import javax.swing.JProgressBar;
 public class Main {
     public static void main( String[] args )
     {
-        GameManager manager = GameManager.getInstance();
-        manager.createMainWindow();
+        PanelController controller = PanelController.getInstance();
+        controller.createMainWindow();
+
+        // GameManager manager = GameManager.getInstance();
+        // manager.createMainWindow();
         System.out.println("Hello World" );
 
     }

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import cmpt276.group4.GameManager;
+import cmpt276.group4.PanelController;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.Enemy.EnemyFactory;
@@ -350,7 +351,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * swtich to game panel
      */
     private void startGame(){
-        GameManager.getInstance().transformToGameScreen();
+        PanelController.getInstance().transformToGameScreen();
     }
 
 

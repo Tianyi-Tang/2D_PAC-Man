@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import cmpt276.group4.GameManager;
+import cmpt276.group4.PanelController;
 import cmpt276.group4.gameLevel;
 
 /**
@@ -69,7 +70,7 @@ public class MainPanel extends JPanel {
         easyLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                GameManager.getInstance().transformToLoadingScreen(gameLevel.BASIC);
+                PanelController.getInstance().transformToLoadingScreen(gameLevel.BASIC);
                 super.mouseClicked(e);
             }
         });
@@ -80,7 +81,7 @@ public class MainPanel extends JPanel {
         middleLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                GameManager.getInstance().transformToLoadingScreen(gameLevel.MEDIUM);
+                PanelController.getInstance().transformToLoadingScreen(gameLevel.MEDIUM);
                 super.mouseClicked(e);
             }
         });
@@ -91,7 +92,7 @@ public class MainPanel extends JPanel {
         hardLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                 GameManager.getInstance().transformToLoadingScreen(gameLevel.HARD);
+                 PanelController.getInstance().transformToLoadingScreen(gameLevel.HARD);
                 super.mouseClicked(e);
             }
         });
