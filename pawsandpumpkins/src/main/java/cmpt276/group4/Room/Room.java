@@ -54,7 +54,7 @@ public class Room {
         } 
     }
 
-    public static Room getInstance(){
+    public static synchronized Room getInstance(){
         if(instance == null)
             instance = new Room();
         return instance;

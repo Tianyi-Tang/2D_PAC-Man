@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
+import cmpt276.group4.Room.Room;
 import cmpt276.group4.UI.NumberPanel;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.LoadingPanel;
@@ -121,6 +122,7 @@ public class PanelController {
         GameManager manager = GameManager.getInstance();
         manager.setPlayer(Player.getInstance());
         manager.setNumberOfGeneralRewards(GameConfig.getGameConfigInstance());
+        manager.setDoors(Room.getInstance().getDoors());
     }
 
     private void initalNumberPanel(){

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
+import cmpt276.group4.Room.Door;
 
 
 /**
@@ -17,7 +18,7 @@ public class GameManager {
 
     private int generalRewards_num;
     private boolean collectAllRewards;
-    private ArrayList<Position> doors;
+    private Door[] doors;
 
     private boolean gameEnd;// end of game 
     private boolean playerWin;
@@ -28,9 +29,6 @@ public class GameManager {
 
     private Player player;
 
-    public GameManager(){
-        doors = new ArrayList<Position>();
-    }
 
     /**
      * constructor to set the defualt setting fot JFrame and laoding all panel
@@ -83,6 +81,10 @@ public class GameManager {
 
     public void setNumberOfGeneralRewards(GameConfig config){
         generalRewards_num = config.getNumberOfRegularRewards();
+    }
+
+    public void setDoors(Door[] doors){
+        this.doors = doors;
     }
 
 

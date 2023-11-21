@@ -19,7 +19,7 @@ public class RoomFactory {
      * @return An instance of the room.
      */
     public Room createRoom() {
-        return new Room();
+        return Room.getInstance();
     }
 
 
