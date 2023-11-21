@@ -25,4 +25,6 @@ public class PlayerTests {
     public void initalPosition(){
         assertEquals(new Position(GamePanel.tileSize, GamePanel.tileSize), player.getPosition());
     }
+
+    
 }
