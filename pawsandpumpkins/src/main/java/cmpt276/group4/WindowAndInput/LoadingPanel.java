@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import cmpt276.group4.PanelController;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
