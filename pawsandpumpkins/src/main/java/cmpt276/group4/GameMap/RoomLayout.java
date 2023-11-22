@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
 import cmpt276.group4.Logic.WindowConfig;
+import cmpt276.group4.Room.Obstacle;
 
 
 public class RoomLayout {
@@ -30,10 +31,41 @@ public class RoomLayout {
         return instance;
     }
 
-    public void addElementInMap(CharacterAvaliablePosition element){
+    public boolean addElementInMap(CharacterAvaliablePosition element){
+        if(element instanceof Obstacle){
+             return placeObstacle(element.getPosition());
+        }
+        else{
+            return placeOtherItem(element);
+        }
         
-        
-        
+    }
+
+    /**
+     * Note the function is not complete, wait for record usedPlace provide more detail function
+     * @param position
+     * @return
+     */
+    private boolean placeObstacle(Position position){
+        if(record.isPlaceAviable(position)){
+            obstacleNum ++;
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private boolean placeOtherItem(CharacterAvaliablePosition element){
+        if(record.isPlaceAviable(element.getPosition())){
+            if(element.getTakenPlace()){
+                wallNum ++;
+            }
+            else{
+                tileNum ++;
+            }
+            return true;
+        }
+        return false;
     }
 
     
