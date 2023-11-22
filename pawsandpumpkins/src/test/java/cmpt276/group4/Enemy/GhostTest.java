@@ -33,14 +33,16 @@ class GhostTest {
         mockRecord = mock(RecordUsedPlace.class);
         RecordUsedPlace.setInstance(mockRecord);
         mockPlayer = mock(Player.class);
-        mockGameManager = mock(GameManager.class);
+        //mockGameManager = mock(GameManager.class);
+        // mockGameManager = spy(GameManager.getInstance());
+         mockGameManager = spy(GameManager.class);
         mockGameManager.setPlayer(mockPlayer);
         gameManagerIns = GameManager.getInstance();
         gameManagerIns.setPlayer(mockPlayer);
 
         when(mockRecord.getRandomSafePosition()).thenReturn(new Position(10, 10)); // Example safe position
         when(mockRecord.getPlayerPosition()).thenReturn(new Position(10, 10)); // Player's position
-
+        
         ghost = new Ghost(EnemyType.GHOST_BASIC);
     }
     
@@ -49,19 +51,35 @@ class GhostTest {
      * Verifies if the correct methods are called on the mock player.
      */
     @Test
-    void testCatchPlayerWhenPlayerIsCaught() {
-        Position samePosition = new Position(48, 48);
-        when(mockRecord.getPlayerPosition()).thenReturn(samePosition);
-        ghost.setEnemyPosition(samePosition);
+    void testCatchPlayerWhenIsCaught() {
+        Position playerPosition = new Position(10, 10);
+        Position enemyPosition = new Position(10, 10);
+
+        Ghost ghost = new Ghost(EnemyType.GHOST_BASIC);
+        ghost.setEnemyPosition(enemyPosition);
+
+        when(mockRecord.getPlayerPosition()).thenReturn(playerPosition);
 
         ghost.catchPlayer();
 
-        // verify(mockPlayer).getCollectScore();
-        // verify(mockPlayer).getGeneralRewardNum();
-        // verify(mockPlayer).getBonusRewardNum();
-        // verify(mockPlayer).getDeductScore();
-        // verify(mockPlayer).totalScore();
+        assertTrue(playerPosition.equal(enemyPosition), "The player position should be equal to the enemy position");
     }
+
+     @Test
+    void testCatchPlayerWhenIsNotCaught() {
+        Position playerPosition = new Position(10, 10);
+        Position enemyPosition = new Position(96, 96);
+
+        Ghost ghost = new Ghost(EnemyType.GHOST_BASIC);
+        ghost.setEnemyPosition(enemyPosition);
+
+        when(mockRecord.getPlayerPosition()).thenReturn(playerPosition);
+
+        ghost.catchPlayer();
+
+        assertFalse(playerPosition.equal(enemyPosition), "The player position should be equal to the enemy position");
+    }
+
 
     /**
      * Tests the isMovable method of the Ghost class.

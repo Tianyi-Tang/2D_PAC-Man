@@ -39,6 +39,7 @@ public class Spider implements Enemy {
      */
     Spider() {
         getPlayerPosition();
+        System.out.println("here 1 \n");
         record = RecordUsedPlace.getInstance();
         // get the list of enemy from recordUsedPlace and randomly picked one.
         switch ((record.getEnemyList().size()) % 2) {
@@ -54,10 +55,14 @@ public class Spider implements Enemy {
         getEnemyImage();
         Position potentialPosition = new Position(0, 0);
         potentialPosition.equal(playerPosition);
+        System.out.println("here 2 \n");
 
         do {
             potentialPosition = record.getRandomSafePosition();
+                    System.out.println("here 3 \n");
+
         } while (potentialPosition.equal(playerPosition) || record.containsCandyAtPosition(potentialPosition));
+        System.out.println("here 4 \n");
 
         enemyPosition.setPosition(potentialPosition);
         record.addEnemy(this);

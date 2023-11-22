@@ -264,6 +264,7 @@ public class Ghost implements Enemy {
     public void catchPlayer() {
         getPlayerPosition();
         if (playerPosition.equal(enemyPosition)) {
+            System.out.println("player position is the same: in ghost.java");
             GameManager.getInstance().enemyCatachPlayer(movable);
         } 
     }
