@@ -14,8 +14,8 @@ public class RoomLayout {
     private static RoomLayout  instance;
 
     private int tileNum;
-    private int WallNum;
-    private int ObstacleNum;
+    private int wallNum;
+    private int obstacleNum;
 
     public RoomLayout(){
         elements = new ArrayList<CharacterAvaliablePosition>();
@@ -30,14 +30,18 @@ public class RoomLayout {
 
     public void addElementInMap(CharacterAvaliablePosition element,RoomItemType type){
         elements.add(element);
-        isPositionUnAviable(element);
-    }
-
-    private void isPositionUnAviable(CharacterAvaliablePosition element){
-        if(!element.getPlayerAvaliable()){
+        
+        if(type == RoomItemType.Tile)
+            tileNum ++;
+        else{
             unAviablePositions.add(element.getPosition());
+            if(type == RoomItemType.Wall)
+                wallNum ++;
+            else
+                obstacleNum++;
         }
     }
+
     
     public ArrayList<CharacterAvaliablePosition> getElements(){
         return elements;
