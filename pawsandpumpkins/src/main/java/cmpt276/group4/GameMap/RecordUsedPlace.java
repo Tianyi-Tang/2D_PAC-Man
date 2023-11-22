@@ -266,7 +266,7 @@ public class RecordUsedPlace {
     }
 
 
-    private void removeFromAviable(Position takePosition) {
+    public void removeFromAviable(Position takePosition) {
         iterator_pos = available.iterator();
         Position position;
         while (iterator_pos.hasNext()) {
