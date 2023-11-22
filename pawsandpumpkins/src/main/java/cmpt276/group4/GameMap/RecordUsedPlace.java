@@ -19,7 +19,6 @@ import cmpt276.group4.Room.Wall;
  * Class record the position for every resoucre in game
  */
 public class RecordUsedPlace {
-    private RoomLayout layout_room;
     // for reward to check
     private ArrayList<Position> available;
     private ArrayList<Position> walls_pos;
@@ -39,8 +38,6 @@ public class RecordUsedPlace {
 
     public RecordUsedPlace() {
         available = new ArrayList<Position>();
-
-        layout_room = RoomLayout.getInstance();
 
         obstacle_pos = new ArrayList<Position>();
 
@@ -149,14 +146,12 @@ public class RecordUsedPlace {
     public boolean addElementToMap(CharacterAvaliablePosition object) {
         if (isPlaceAviable(object.getPosition())) {
             if (object.getPlayerAvaliable()) 
-                sendingElement(object,RoomItemType.Tile);
+                return true;
             else {
                 if (object instanceof Wall){
-                    sendingElement(object,RoomItemType.Wall);
                     walls_pos.add(object.getPosition());
                 }
                 else{
-                    sendingElement(object, RoomItemType.Obstacle);
                     obstacle_pos.add(object.getPosition());
                 }
                 removeFromAviable(object.getPosition());
@@ -166,9 +161,6 @@ public class RecordUsedPlace {
             return false;
     }
 
-    private void sendingElement(CharacterAvaliablePosition element, RoomItemType type){
-        layout_room.addElementInMap(element,type);
-    }
 
 
     public boolean addEnemy(Enemy enemy) {

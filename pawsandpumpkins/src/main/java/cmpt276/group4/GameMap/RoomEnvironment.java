@@ -10,6 +10,5 @@ public class RoomEnvironment {
     private ArrayList<Reward> rewards;
     private ArrayList<Enemy> enemies;
 
-    
 
 }

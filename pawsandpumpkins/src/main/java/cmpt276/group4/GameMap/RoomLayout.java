@@ -9,6 +9,7 @@ import cmpt276.group4.Room.RoomItemType;
 
 public class RoomLayout {
 
+
     private ArrayList<CharacterAvaliablePosition> elements;
     private ArrayList<Position> unAviablePositions;
     private static RoomLayout  instance;
