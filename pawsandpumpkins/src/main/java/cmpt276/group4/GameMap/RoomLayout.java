@@ -8,8 +8,20 @@ import cmpt276.group4.Logic.WindowConfig;
 
 public class RoomLayout {
 
-    ArrayList<CharacterAvaliablePosition> elements;
-    ArrayList<Position> unAviablePositions;
+    private ArrayList<CharacterAvaliablePosition> elements;
+    private ArrayList<Position> unAviablePositions;
+    private static RoomLayout  instance;
+
+    public RoomLayout(){
+        elements = new ArrayList<CharacterAvaliablePosition>();
+        unAviablePositions = new ArrayList<Position>();
+    }
+
+    public static RoomLayout getInstance(){
+        if(instance == null)
+            instance = new RoomLayout();
+        return instance;
+    }
 
     public void addElementInMap(CharacterAvaliablePosition element){
         elements.add(element);
