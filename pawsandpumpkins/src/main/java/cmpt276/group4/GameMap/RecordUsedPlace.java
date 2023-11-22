@@ -21,8 +21,6 @@ public class RecordUsedPlace {
     private RoomLayout layout_room;
     // for reward to check
     private ArrayList<Position> available;
-
-    private ArrayList<Position> characterAvaliable_pos;
     private ArrayList<Position> walls_pos;
     private ArrayList<Position> obstacle_pos;
 
@@ -39,7 +37,6 @@ public class RecordUsedPlace {
     private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;
 
-    private int numberofTiles = 0;
     private int numberofWall = 0;
     private int numberOfObstacles = 0;
 
@@ -69,13 +66,11 @@ public class RecordUsedPlace {
 
     public void initalAllInfor() {
         if (GameManager.getInstance().isGameEnd()) {
-            characterAvaliable_pos = new ArrayList<Position>();
             obstacle_pos = new ArrayList<Position>();
 
             enemies = new ArrayList<Enemy>();
             rewards  = new ArrayList<Reward>();
 
-            numberofTiles = 0;
             numberOfObstacles = 0;
             numberofWall = 0;
         }
@@ -120,7 +115,6 @@ public class RecordUsedPlace {
 
         layout_room = RoomLayout.getInstance();
 
-        characterAvaliable_pos = new ArrayList<Position>();
         obstacle_pos = new ArrayList<Position>();
 
         enemies = new ArrayList<Enemy>();
@@ -167,10 +161,8 @@ public class RecordUsedPlace {
     public boolean addElementToMap(CharacterAvaliablePosition object) {
         if (isPlaceAviable(object.getPosition())) {
             if (object.getPlayerAvaliable()) {
-                characterAvaliable_pos.add(object.getPosition());
-                numberofTiles++;
+
             } else {
-                removeCharaterAviable(object.getPosition());
                 if (object instanceof Wall){
                     numberofWall++;
                     walls_pos.add(object.getPosition());
@@ -253,10 +245,6 @@ public class RecordUsedPlace {
         return enemies.size();
     }
 
-    public int getTileNumber() {
-        return numberofTiles;
-    }
-
     public int getWallNumber() {
         return numberofWall;
     }
@@ -281,13 +269,6 @@ public class RecordUsedPlace {
         return obstacle_pos;
     }
 
-    public boolean characterMovable(Position destination) {
-        for (Position position : characterAvaliable_pos) {
-            if (destination.equal(position))
-                return true;
-        }
-        return false;
-    }
 
     public Reward playerGetReward() {
         for (Reward reward : rewards) {
@@ -316,19 +297,6 @@ public class RecordUsedPlace {
     private void elementTakenPlace(boolean takenPlace, Position position) {
         if (takenPlace) {
             RemoveFromAviable(position);
-        }
-    }
-    /**
-     * Check if the position is be taken and remove the takne place 
-     * @param obstPos
-     */
-    private void removeCharaterAviable(Position obstPos) {
-        iterator_avaliablePos = characterAvaliable_pos.iterator();
-        while (iterator_avaliablePos.hasNext()) {
-            if (iterator_avaliablePos.next().equal(obstPos)) {
-                iterator_avaliablePos.remove();
-                break;
-            }
         }
     }
 
