@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomLayout;
 
 /**
  * Test class for EnemyMovement.
@@ -16,11 +17,11 @@ import cmpt276.group4.GameMap.RecordUsedPlace;
 class EnemyMovementTest {
 
     private EnemyMovement enemyMovement;
-    private RecordUsedPlace mockRecord;
+    private RoomLayout mockRommLayout;
     
     @BeforeEach
     void setUp() {
-        mockRecord = mock(RecordUsedPlace.class);
+        mockRommLayout = mock(RoomLayout.class);
         RecordUsedPlace.setInstance(mockRecord);
 
         enemyMovement = new EnemyMovement();

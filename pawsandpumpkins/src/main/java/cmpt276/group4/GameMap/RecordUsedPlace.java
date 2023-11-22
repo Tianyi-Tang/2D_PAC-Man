@@ -37,7 +37,18 @@ public class RecordUsedPlace {
     private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;
 
+    public RecordUsedPlace() {
+        available = new ArrayList<Position>();
 
+        layout_room = RoomLayout.getInstance();
+
+        obstacle_pos = new ArrayList<Position>();
+
+        enemies = new ArrayList<Enemy>();
+        rewards = new ArrayList<Reward>();
+        walls_pos = new ArrayList<Position>();
+
+    }
     
 
     public Position getRandomFromAvailablePosition() {
@@ -106,28 +117,13 @@ public class RecordUsedPlace {
         return availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
     }
 
-    public RecordUsedPlace() {
-        initalAvailableArray();
 
-        layout_room = RoomLayout.getInstance();
-
-        obstacle_pos = new ArrayList<Position>();
-
-        enemies = new ArrayList<Enemy>();
-        rewards = new ArrayList<Reward>();
-        walls_pos = new ArrayList<Position>();
-
-    }
 
     public void setPlayer(Player player) {
         this.player = player;
     }
 
-    private void initalAvailableArray() {
-        available = new ArrayList<Position>();
 
-        // add all aviable area in this function
-    }
 
     public boolean addAviable(Position position) {
         if (isPlaceAviable(position))
