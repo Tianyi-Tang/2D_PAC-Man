@@ -132,6 +132,10 @@ public class RecordUsedPlace {
 
     }
 
+    private void sendingElement(CharacterAvaliablePosition element){
+        layout_room.addElementInMap(element);
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
