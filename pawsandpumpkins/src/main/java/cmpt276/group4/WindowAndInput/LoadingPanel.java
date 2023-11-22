@@ -10,11 +10,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import GameMap.RecordUsedPlace;
 import cmpt276.group4.PanelController;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.PlayerGenerator;

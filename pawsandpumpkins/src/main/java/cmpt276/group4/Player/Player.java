@@ -6,10 +6,10 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-import GameMap.RecordUsedPlace;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.WindowAndInput.MoveDirection;

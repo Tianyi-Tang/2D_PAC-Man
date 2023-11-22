@@ -1,4 +1,4 @@
-package GameMap;
+package cmpt276.group4.GameMap;
 
 import java.util.ArrayList;
 import java.util.Iterator;

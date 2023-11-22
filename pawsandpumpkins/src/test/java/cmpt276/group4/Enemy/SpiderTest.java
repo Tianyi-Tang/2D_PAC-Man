@@ -79,9 +79,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import GameMap.RecordUsedPlace;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Player.Player;
 
 /**

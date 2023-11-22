@@ -1,14 +1,12 @@
 package cmpt276.group4.Reward;
 
 import cmpt276.group4.GameTime;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Reward.BonusReward;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import GameMap.RecordUsedPlace;
-
 import java.awt.*;
 
 public class MangeBonusReward {

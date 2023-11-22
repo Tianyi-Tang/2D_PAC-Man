@@ -2,6 +2,7 @@ package cmpt276.group4.Reward;
 
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.Reward.BonusReward;
@@ -9,12 +10,11 @@ import cmpt276.group4.Reward.BonusReward;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import GameMap.RecordUsedPlace;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import cmpt276.group4.GameTime;
 public class PumpkinHead extends BonusReward {
     private long displayStartTime =10;

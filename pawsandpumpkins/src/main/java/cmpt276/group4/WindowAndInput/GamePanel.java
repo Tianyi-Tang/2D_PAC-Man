@@ -15,11 +15,11 @@ import java.awt.Font;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import GameMap.RecordUsedPlace;
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.GameTime;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.Player;
 
