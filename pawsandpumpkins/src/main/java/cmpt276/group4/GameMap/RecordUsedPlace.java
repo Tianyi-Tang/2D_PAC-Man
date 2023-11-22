@@ -12,7 +12,6 @@ import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
-import cmpt276.group4.Room.RoomItemType;
 import cmpt276.group4.Room.Wall;
 
 /**
