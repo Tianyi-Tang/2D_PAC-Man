@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
 import cmpt276.group4.Logic.WindowConfig;
-import cmpt276.group4.Room.RoomItemType;
+
 
 public class RoomLayout {
-
+    private RecordUsedPlace record;
 
     private ArrayList<CharacterAvaliablePosition> elements;
     private ArrayList<Position> unAviablePositions;
@@ -19,6 +19,7 @@ public class RoomLayout {
     private int obstacleNum;
 
     public RoomLayout(){
+        record = RecordUsedPlace.getInstance();
         elements = new ArrayList<CharacterAvaliablePosition>();
         unAviablePositions = new ArrayList<Position>();
     }
@@ -29,18 +30,10 @@ public class RoomLayout {
         return instance;
     }
 
-    public void addElementInMap(CharacterAvaliablePosition element,RoomItemType type){
-        elements.add(element);
+    public void addElementInMap(CharacterAvaliablePosition element){
         
-        if(type == RoomItemType.Tile)
-            tileNum ++;
-        else{
-            unAviablePositions.add(element.getPosition());
-            if(type == RoomItemType.Wall)
-                wallNum ++;
-            else
-                obstacleNum++;
-        }
+        
+        
     }
 
     
