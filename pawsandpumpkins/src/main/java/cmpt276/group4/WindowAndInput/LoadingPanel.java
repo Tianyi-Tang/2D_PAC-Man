@@ -15,6 +15,7 @@ import cmpt276.group4.gameLevel;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
 import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.PlayerGenerator;
@@ -44,6 +45,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private Room room;// room for this game
 
     private RecordUsedPlace record;
+    private RoomLayout roomLayout;
     private GameConfig config;//object contain the information about game 
     private boolean generateconfi,generateRoom, generateAllTile, generateWall, generatePlayer,generateObstacle,generateAllEnemies, generateAllRewards =false;
     //boolean value to check each resource is generate
@@ -89,6 +91,7 @@ public class LoadingPanel extends JPanel implements Runnable {
             loadingThread = new Thread(this);
             loadingThread.start();
             record = RecordUsedPlace.getInstance();
+            roomLayout =RoomLayout.getInstance();
         }
     }
 
@@ -190,7 +193,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      */
     private void checkTitle(){
         System.out.println(config.areaofRoom());
-        if(record.getTileNumber() == config.areaofRoom()){
+        if(roomLayout.getTileNumber() == config.areaofRoom()){
             generateAllTile = true;
             createWall();
             progress ++;
@@ -202,7 +205,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once it success loadin, loading the player 
      */
     private void checkWall(){
-        if(record.getWallNumber() == config.getNumberOfWall()){
+        if(roomLayout.getWallNumber() == config.getNumberOfWall()){
             generateWall = true;
             createPlayer();
             progress ++;
@@ -226,7 +229,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once meet the requirement, loading the enemy
      */
     private void checkObstacle (){
-        if(record.getObstaclesNumber() == config.getNumberOfObstacles()){
+        if(roomLayout.getObstaclesNumber() == config.getNumberOfObstacles()){
             generateObstacle = true;
             createEnemy();
             progress ++;
