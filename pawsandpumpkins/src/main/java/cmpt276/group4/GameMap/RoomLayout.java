@@ -63,7 +63,7 @@ public class RoomLayout {
         if(!outOfScreen(position))
             return false;
         for (Position unAviablePos  : unAviablePositions) {
-            if(position == unAviablePos)
+            if(position.equal(unAviablePos))
                 return false;
         }
         return true;
