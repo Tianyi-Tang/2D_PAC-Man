@@ -163,9 +163,8 @@ public class RecordUsedPlace {
                     sendingElement(object, RoomItemType.Obstacle);
                     obstacle_pos.add(object.getPosition());
                 }
+                removeFromAviable(object.getPosition());
             }
-            
-            elementTakenPlace(object.getTakenPlace(), object.getPosition());
             return true;
         } else
             return false;
@@ -181,7 +180,7 @@ public class RecordUsedPlace {
             if(enemy instanceof Spider)
                 obstacle_pos.add(enemy.getPosition());
             enemies.add(enemy);
-            elementTakenPlace(true, enemy.getEnemyPosition());
+            removeFromAviable(enemy.getEnemyPosition());
             return true;
         } else {
             System.out.println("no did not add");
@@ -192,7 +191,7 @@ public class RecordUsedPlace {
     public boolean addReward(Reward reward) {
         if (isPlaceAviable(reward.getPosition())) {
             rewards.add(reward);
-            elementTakenPlace(false, reward.getPosition());
+            removeFromAviable(reward.getPosition());
             return true;
         } else {
             return false;
@@ -279,13 +278,8 @@ public class RecordUsedPlace {
         return false;
     }
 
-    private void elementTakenPlace(boolean takenPlace, Position position) {
-        if (takenPlace) {
-            RemoveFromAviable(position);
-        }
-    }
 
-    private void RemoveFromAviable(Position takePosition) {
+    private void removeFromAviable(Position takePosition) {
         iterator_pos = available.iterator();
         Position position;
         while (iterator_pos.hasNext()) {
