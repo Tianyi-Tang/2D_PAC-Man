@@ -2,6 +2,7 @@ package cmpt276.group4.Enemy;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Movement;
 
 /**
@@ -9,6 +10,11 @@ import cmpt276.group4.Movement;
  * It implements the {@link Movement} interface to handle enemy position updates and checks.
  */
 public class EnemyMovement implements Movement {
+    RoomLayout roomLayout;
+
+    public EnemyMovement(){
+        roomLayout = RoomLayout.getInstance();
+    }
 
     /**
      * Moves the enemy to the specified position.
@@ -31,7 +37,6 @@ public class EnemyMovement implements Movement {
      */
     @Override
     public boolean isPositionAvailable(Position position) {
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        return record.characterMovable(position);
+        return roomLayout.isPositionAviable(position);
     }
 }

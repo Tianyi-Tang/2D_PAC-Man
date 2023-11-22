@@ -2,9 +2,7 @@ package cmpt276.group4.Player;
 
 import cmpt276.group4.Movement;
 import cmpt276.group4.Position;
-import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomLayout;
-import cmpt276.group4.Logic.WindowConfig;
 
 /**
  * Class the judge whether player can move to the center position
