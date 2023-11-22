@@ -22,7 +22,7 @@ public class RoomLayout {
         unAviablePositions = new ArrayList<Position>();
     }
 
-    public static RoomLayout getInstance(){
+    public static synchronized RoomLayout getInstance(){
         if(instance == null)
             instance = new RoomLayout();
         return instance;
