@@ -12,14 +12,13 @@ import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
-import cmpt276.group4.Room.Obstacle;
-import cmpt276.group4.Room.Tile;
 import cmpt276.group4.Room.Wall;
 
 /**
  * Class record the position for every resoucre in game
  */
 public class RecordUsedPlace {
+    private RoomLayout layout_room;
     // for reward to check
     private ArrayList<CharacterAvaliablePosition> elements;//contain wall, obstcale for drawing
     private ArrayList<Position> available;
@@ -32,6 +31,7 @@ public class RecordUsedPlace {
     private ArrayList<Reward> rewards;// all rewards 
     private Player player;
     private Iterator<Position> iterator_avaliablePos;
+
     public static void setInstance(RecordUsedPlace instance) {
         RecordUsedPlace.instance = instance;
     }
@@ -119,6 +119,8 @@ public class RecordUsedPlace {
 
     public RecordUsedPlace() {
         initalAvailableArray();
+
+        layout_room = RoomLayout.getInstance();
 
         characterAvaliable_pos = new ArrayList<Position>();
         obstacle_pos = new ArrayList<Position>();
