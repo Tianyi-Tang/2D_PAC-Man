@@ -12,6 +12,7 @@ import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.Room.RoomItemType;
 import cmpt276.group4.Room.Wall;
 
 /**
@@ -27,7 +28,6 @@ public class RecordUsedPlace {
     private ArrayList<Enemy> enemies;
     private ArrayList<Reward> rewards;// all rewards 
     private Player player;
-    private Iterator<Position> iterator_avaliablePos;
 
     public static void setInstance(RecordUsedPlace instance) {
         RecordUsedPlace.instance = instance;
@@ -37,8 +37,6 @@ public class RecordUsedPlace {
     private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;
 
-    private int numberofWall = 0;
-    private int numberOfObstacles = 0;
 
     
 
@@ -71,8 +69,6 @@ public class RecordUsedPlace {
             enemies = new ArrayList<Enemy>();
             rewards  = new ArrayList<Reward>();
 
-            numberOfObstacles = 0;
-            numberofWall = 0;
         }
     }
 
@@ -123,10 +119,6 @@ public class RecordUsedPlace {
 
     }
 
-    private void sendingElement(CharacterAvaliablePosition element){
-        layout_room.addElementInMap(element);
-    }
-
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -160,26 +152,27 @@ public class RecordUsedPlace {
      */
     public boolean addElementToMap(CharacterAvaliablePosition object) {
         if (isPlaceAviable(object.getPosition())) {
-            if (object.getPlayerAvaliable()) {
-
-            } else {
+            if (object.getPlayerAvaliable()) 
+                sendingElement(object,RoomItemType.Tile);
+            else {
                 if (object instanceof Wall){
-                    numberofWall++;
+                    sendingElement(object,RoomItemType.Wall);
                     walls_pos.add(object.getPosition());
                 }
                 else{
-                    numberOfObstacles++;
+                    sendingElement(object, RoomItemType.Obstacle);
                     obstacle_pos.add(object.getPosition());
                 }
-                    
             }
-
-
-            sendingElement(object);
+            
             elementTakenPlace(object.getTakenPlace(), object.getPosition());
             return true;
         } else
             return false;
+    }
+
+    private void sendingElement(CharacterAvaliablePosition element, RoomItemType type){
+        layout_room.addElementInMap(element,type);
     }
 
 
@@ -243,14 +236,6 @@ public class RecordUsedPlace {
 
     public int getLengthOfEnemies(){
         return enemies.size();
-    }
-
-    public int getWallNumber() {
-        return numberofWall;
-    }
-
-    public int getObstaclesNumber() {
-        return numberOfObstacles;
     }
 
     public int getLengthOfRewards(){

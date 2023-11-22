@@ -47,6 +47,18 @@ public class RoomLayout {
         return elements;
     }
 
+    public int getTileNumber(){
+        return tileNum;
+    }
+
+    public int getWallNumber(){
+        return wallNum;
+    }
+
+    public int getObstaclesNumber(){
+        return obstacleNum;
+    }
+
     public boolean isPositionAviable(Position position){
         if(!outOfScreen(position))
             return false;
