@@ -1,8 +1,8 @@
 package cmpt276.group4.Player;
 
+import GameMap.RecordUsedPlace;
 import cmpt276.group4.Movement;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Logic.WindowConfig;
 
 /**

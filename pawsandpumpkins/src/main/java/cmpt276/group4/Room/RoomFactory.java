@@ -6,8 +6,8 @@ import cmpt276.group4.WindowAndInput.GamePanel;
 import java.lang.reflect.Array;
 import java.util.List;
 
+import GameMap.RecordUsedPlace;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
 public class RoomFactory {
 

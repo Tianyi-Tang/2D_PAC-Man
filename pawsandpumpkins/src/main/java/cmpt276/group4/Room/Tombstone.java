@@ -2,7 +2,6 @@ package cmpt276.group4.Room;
 
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
@@ -11,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+
+import GameMap.RecordUsedPlace;
 
 
 /**

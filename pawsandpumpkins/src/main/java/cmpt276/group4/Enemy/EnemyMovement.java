@@ -1,7 +1,7 @@
 package cmpt276.group4.Enemy;
 
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import GameMap.RecordUsedPlace;
 import cmpt276.group4.Movement;
 
 /**

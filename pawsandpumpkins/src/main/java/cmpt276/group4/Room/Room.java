@@ -3,10 +3,10 @@ package cmpt276.group4.Room;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import GameMap.RecordUsedPlace;
 import cmpt276.group4.GameManager;
 //import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;

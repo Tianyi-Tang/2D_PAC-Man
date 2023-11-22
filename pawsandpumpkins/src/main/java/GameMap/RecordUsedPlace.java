@@ -1,10 +1,13 @@
-package cmpt276.group4;
+package GameMap;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import cmpt276.group4.CharacterAvaliablePosition;
+import cmpt276.group4.GameManager;
+import cmpt276.group4.Position;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
