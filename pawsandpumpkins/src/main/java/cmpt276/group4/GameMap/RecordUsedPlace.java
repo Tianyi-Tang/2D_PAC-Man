@@ -20,7 +20,6 @@ import cmpt276.group4.Room.Wall;
 public class RecordUsedPlace {
     private RoomLayout layout_room;
     // for reward to check
-    private ArrayList<CharacterAvaliablePosition> elements;//contain wall, obstcale for drawing
     private ArrayList<Position> available;
 
     private ArrayList<Position> characterAvaliable_pos;
@@ -72,7 +71,6 @@ public class RecordUsedPlace {
         if (GameManager.getInstance().isGameEnd()) {
             characterAvaliable_pos = new ArrayList<Position>();
             obstacle_pos = new ArrayList<Position>();
-            elements = new ArrayList<CharacterAvaliablePosition>();
 
             enemies = new ArrayList<Enemy>();
             rewards  = new ArrayList<Reward>();
@@ -124,7 +122,6 @@ public class RecordUsedPlace {
 
         characterAvaliable_pos = new ArrayList<Position>();
         obstacle_pos = new ArrayList<Position>();
-        elements = new ArrayList<CharacterAvaliablePosition>();
 
         enemies = new ArrayList<Enemy>();
         rewards = new ArrayList<Reward>();
@@ -186,7 +183,7 @@ public class RecordUsedPlace {
             }
 
 
-            elements.add(object);
+            sendingElement(object);
             elementTakenPlace(object.getTakenPlace(), object.getPosition());
             return true;
         } else
@@ -205,10 +202,6 @@ public class RecordUsedPlace {
             System.out.println("no did not add");
             return false;
         }
-    }
-
-    public ArrayList<CharacterAvaliablePosition> getElemet() {
-        return elements;
     }
 
     public boolean addReward(Reward reward) {
