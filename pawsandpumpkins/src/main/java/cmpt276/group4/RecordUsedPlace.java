@@ -82,8 +82,7 @@ public class RecordUsedPlace {
 
     /**
      * Retrieves a random position that is not currently occupied by any enemies.
-     * This method ensures that the position selected is free from enemies,
-     * providing a 'safe' spot.
+     * This method ensures that the enemies are not place on top of each other. 
      *
      * @return A random safe {@link Position} not occupied by enemies. Returns
      *         {@code null} if no such positions are available.
