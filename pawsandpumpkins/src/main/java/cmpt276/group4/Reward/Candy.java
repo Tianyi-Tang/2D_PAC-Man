@@ -51,18 +51,8 @@ public class Candy extends GeneralReward {
     }
 
     @Override
-    public boolean isAvailable() {
-        return false;
-    }
-    @Override
     public boolean isBonusReward(){
         return isBonusReward;
-    }
-
-    @Override
-    public void deleteImage() {
-        this.cd1=null;
-        this.cd2=null;
     }
 
     @Override
@@ -92,10 +82,7 @@ public class Candy extends GeneralReward {
             e.printStackTrace();
         }
     }
-    @Override
-    public boolean shouldDraw(long time){
-        return true;
-    }
+
     @Override
     public void draw(Graphics2D g1){
         stateCounter++;

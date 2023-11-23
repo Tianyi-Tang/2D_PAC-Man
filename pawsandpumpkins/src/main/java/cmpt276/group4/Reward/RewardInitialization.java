@@ -1,5 +1,6 @@
 package cmpt276.group4.Reward;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.gameLevel;
@@ -31,5 +32,13 @@ public class RewardInitialization {
         int numberOfBonusRewards = gameConfig.getNumberOfBonusRewards();
         List<Reward> newRewards = rFactory.createReward(RewardType.PumpkinHead, numberOfBonusRewards);
         bonusRewards.addAll(newRewards);
+    }
+
+    public int getGeneralRewards() {
+        return generalRewards.size();
+    }
+
+    public int getBonusRewards() {
+        return bonusRewards.size();
     }
 }

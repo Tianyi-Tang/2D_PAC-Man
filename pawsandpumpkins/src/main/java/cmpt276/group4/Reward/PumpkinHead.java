@@ -51,20 +51,12 @@ public class PumpkinHead extends BonusReward {
         this.ppkPosition = position;
     }
 
-    @Override
-    public boolean isAvailable() {
-        return available;
-    }
 
     @Override
     public boolean isBonusReward(){
         return isBonusReward;
     }
-    @Override
-    public void deleteImage() {
-        this.ppk1 = null;
-        this.ppk2 = null;
-    }
+
     private void getPlayerPosition() {
 
         RecordUsedPlace record = RecordUsedPlace.getInstance();
@@ -93,11 +85,6 @@ public class PumpkinHead extends BonusReward {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    @Override
-    public boolean shouldDraw(long currentTime) {
-        return currentTime >= displayStartTime &&
-                currentTime < displayStartTime + displayDuration;
     }
 
     GameTime gameTime = GameTime.getInstance();

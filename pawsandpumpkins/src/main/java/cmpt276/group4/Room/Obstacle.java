@@ -54,7 +54,7 @@ public class Obstacle implements CharacterAvaliablePosition {
      */
     @Override
     public boolean getPlayerAvaliable() {
-        return playerAvaliable;
+    return playerAvaliable;
     }
 
     /**
