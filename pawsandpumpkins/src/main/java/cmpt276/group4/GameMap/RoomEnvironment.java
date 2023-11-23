@@ -1,16 +1,19 @@
 package cmpt276.group4.GameMap;
 
 
+import java.lang.management.PlatformManagedObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
 
 public class RoomEnvironment {
     private RecordUsedPlace record;
     private static RoomEnvironment instacne;
+    private Player player;
 
     private ArrayList<Reward> rewards;
     private ArrayList<Enemy> enemies;
@@ -26,6 +29,10 @@ public class RoomEnvironment {
         rewards = new ArrayList<Reward>();
         enemies = new ArrayList<Enemy>();
         record = RecordUsedPlace.getInstance();
+    }
+
+    public void setPlayer(){
+        player = Player.getInstance();
     }
 
     public boolean addEnemy(Enemy enemy){

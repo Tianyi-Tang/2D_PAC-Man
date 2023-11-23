@@ -107,6 +107,12 @@ public class RecordUsedPlace {
         this.player = player;
     }
 
+    public boolean PlayerLoading(){
+        if(player == null)
+            return true;
+        else
+            return false;
+    }
 
 
     public boolean addAviable(Position position) {
