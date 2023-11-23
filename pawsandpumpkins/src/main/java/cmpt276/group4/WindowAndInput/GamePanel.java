@@ -151,11 +151,13 @@ public class GamePanel extends JPanel implements Runnable {
                 door.playerLeaveRoom();
             }
         }
-            
 
+        for (Enemy enemy : roomEnvironment.getEnemies()) {
+            enemy.catchPlayer();            
+        }
+        
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
             for (Enemy enemy : roomEnvironment.getEnemies()) {
-                enemy.catchPlayer();
                 if (enemy instanceof Ghost) {
                     ((Ghost) enemy).ghostMoveNextPosition();
                 }
