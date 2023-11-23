@@ -33,7 +33,7 @@ public class RoomLayout {
 
     public boolean addElementInMap(CharacterAvaliablePosition element){
         if(element instanceof Obstacle){
-             return placeObstacle(element.getPosition());
+             return placeObstacle(element);
         }
         else{
             return placeOtherItem(element);
@@ -46,8 +46,10 @@ public class RoomLayout {
      * @param position
      * @return
      */
-    private boolean placeObstacle(Position position){
-        if(record.isPlaceAviable(position)){
+    private boolean placeObstacle(CharacterAvaliablePosition element){
+        if(record.isPlaceAviable(element.getPosition())){
+            addPositionToRecord(element.getPosition(), true);
+            elements.add(element);
             obstacleNum ++;
             return true;
         }
@@ -57,8 +59,10 @@ public class RoomLayout {
 
     private boolean placeOtherItem(CharacterAvaliablePosition element){
         if(record.isPlaceAviable(element.getPosition())){
+            elements.add(element);
             if(element.getTakenPlace()){
                 wallNum ++;
+                addPositionToRecord(element.getPosition(), true);
             }
             else{
                 tileNum ++;
@@ -66,6 +70,10 @@ public class RoomLayout {
             return true;
         }
         return false;
+    }
+
+    private void addPositionToRecord(Position position,boolean isWall){
+        record.removeFromAviable(position);
     }
 
     
