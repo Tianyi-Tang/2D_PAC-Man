@@ -19,7 +19,7 @@ public class GameTime {
        TimerTask task = new TimerTask() {
         @Override
         public void run() {
-            listener.update();
+            listener.arriveTime();
         }
        };
        timer.schedule(task, interval);
