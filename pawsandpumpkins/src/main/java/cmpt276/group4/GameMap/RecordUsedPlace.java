@@ -180,16 +180,16 @@ public class RecordUsedPlace {
     //     }
     // }
 
-    public void removeReward(Reward reward) {
-        available.add(reward.getPosition());
-        iterator_reward = rewards.iterator();
-        Reward rewardInList;
-        while (iterator_reward.hasNext()) {
-            rewardInList = iterator_reward.next();
-            if (rewardInList == reward)
-                iterator_reward.remove();
-        }
-    }
+    // public void removeReward(Reward reward) {
+    //     available.add(reward.getPosition());
+    //     iterator_reward = rewards.iterator();
+    //     Reward rewardInList;
+    //     while (iterator_reward.hasNext()) {
+    //         rewardInList = iterator_reward.next();
+    //         if (rewardInList == reward)
+    //             iterator_reward.remove();
+    //     }
+    // }
 
     public Position getPlayerPosition() {
         if(player != null)

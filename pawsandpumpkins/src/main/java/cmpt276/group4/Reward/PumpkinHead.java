@@ -79,7 +79,7 @@ public class PumpkinHead extends BonusReward {
             getPlayerPosition();
         if (playerPosition.equal(ppkPosition)) {
             addScore(player,score);
-            record.removeReward(this);
+            RoomEnvironment.getInstance().removeReward(this);
         }
     }
 

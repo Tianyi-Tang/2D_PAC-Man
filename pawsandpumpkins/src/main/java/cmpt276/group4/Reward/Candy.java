@@ -69,7 +69,7 @@ public class Candy extends GeneralReward {
         playerPosition = Player.getInstance().getPosition();
         if (playerPosition.equal(cdposition)) {
             addScore(player,score);
-            record.removeReward(this);
+            RoomEnvironment.getInstance().removeReward(this);
         }
 
     }
