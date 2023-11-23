@@ -99,8 +99,7 @@ public class RoomEnvironment {
             if(movable)
                 return true;
             else{
-                // another function neeed to for if statement
-                return true;
+                return record.canPlaceEnemyAndObstacle(enmemyPos);
             }
         }
         return false;

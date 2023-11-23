@@ -47,7 +47,7 @@ public class RoomLayout {
      * @return
      */
     private boolean placeObstacle(CharacterAvaliablePosition element){
-        if(record.isPlaceAviable(element.getPosition())){
+        if(record.isPlaceAviable(element.getPosition())&& record.canPlaceEnemyAndObstacle(element.getPosition())){
             addPositionToRecord(element.getPosition(), false);
             elements.add(element);
             obstacleNum ++;
