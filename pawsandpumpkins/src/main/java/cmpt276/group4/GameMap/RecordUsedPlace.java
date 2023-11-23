@@ -1,13 +1,14 @@
 package cmpt276.group4.GameMap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.Player.Player;
-
 
 /**
  * Class record the position for every resoucre in game
@@ -35,7 +36,6 @@ public class RecordUsedPlace {
         walls_pos = new ArrayList<Position>();
 
     }
-    
 
     public Position getRandomFromAvailablePosition() {
 
@@ -49,14 +49,72 @@ public class RecordUsedPlace {
         return available.get(random.nextInt(available.size()));
     }
 
+    
+
+    private List<Position> getAdjacentPositions(Position p) {
+        int tileSize = 48;
+        return Arrays.asList(
+                new Position(p.getX_axis() - tileSize, p.getY_axis() - tileSize), // Top-left
+                new Position(p.getX_axis(), p.getY_axis() - tileSize), // Top
+                new Position(p.getX_axis() + tileSize, p.getY_axis() - tileSize), // Top-right
+                new Position(p.getX_axis() - tileSize, p.getY_axis()), // Left
+                new Position(p.getX_axis() + tileSize, p.getY_axis()), // Right
+                new Position(p.getX_axis() - tileSize, p.getY_axis() + tileSize), // Bottom-left
+                new Position(p.getX_axis(), p.getY_axis() + tileSize), // Bottom
+                new Position(p.getX_axis() + tileSize, p.getY_axis() + tileSize) // Bottom-right
+        );
+    }
+
+    private static boolean containsPosition(List<Position> positions, Position position) {
+        for (Position pos : positions) {
+            if (pos.equal(position)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isPositionAObstacle(Position position) {
+        return containsPosition(walls_pos, position) || containsPosition(obstacle_pos, position);
+    }
+
+    public boolean canPlaceEnemyAndObstacle(Position p) {
+        List<Position> adjacentPositions = getAdjacentPositions(p);
+        List<Boolean> isAdjacentObstacle = new ArrayList<>();
+
+        // Iterate through each adjacent position and check if it's an obstacle
+        for (Position adjacentPos : adjacentPositions) {
+            isAdjacentObstacle.add(isPositionAObstacle(adjacentPos));
+        }
+        //combinations of surrounding obstac le that will ccause problem if place enemy or obstalcce in inpt position
+        boolean condition1 = (isAdjacentObstacle.get(0) && isAdjacentObstacle.get(2)) || (isAdjacentObstacle.get(5) && isAdjacentObstacle.get(7)) 
+                            || (isAdjacentObstacle.get(3) && isAdjacentObstacle.get(4));
+
+        boolean condition4 = (isAdjacentObstacle.get(0) && isAdjacentObstacle.get(5)) || (isAdjacentObstacle.get(1) && isAdjacentObstacle.get(6)) 
+                            ||(isAdjacentObstacle.get(2) && isAdjacentObstacle.get(7));
+
+        boolean condition7 = (isAdjacentObstacle.get(0) && isAdjacentObstacle.get(7)) || (isAdjacentObstacle.get(2) && isAdjacentObstacle.get(5));
+
+        boolean condition9 = (isAdjacentObstacle.get(1) && isAdjacentObstacle.get(5)) ||  (isAdjacentObstacle.get(1) && isAdjacentObstacle.get(7));
+
+        boolean condition11 = (isAdjacentObstacle.get(4) && isAdjacentObstacle.get(5)) || (isAdjacentObstacle.get(4) && isAdjacentObstacle.get(0));
+
+        boolean condition13 = (isAdjacentObstacle.get(6) && isAdjacentObstacle.get(0)) || (isAdjacentObstacle.get(6) && isAdjacentObstacle.get(2));
+
+        boolean condition15 = (isAdjacentObstacle.get(3) && isAdjacentObstacle.get(2)) || (isAdjacentObstacle.get(3) && isAdjacentObstacle.get(7));
+
+        //can place enemy or obstacle in the input position if no above conditions are 
+        return !(condition1 || condition4 || condition1 || condition7 || condition9 || condition11 || condition13 || condition15); 
+    }
+
     // public boolean containsCandyAtPosition(Position position) {
-    //     for (Reward candy : rewards) {
-    //         if (candy.getPosition().equals(position)) {
-    //             // if (candy instanceof Candy && candy.getPosition().equals(position)) {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
+    // for (Reward candy : rewards) {
+    // if (candy.getPosition().equals(position)) {
+    // // if (candy instanceof Candy && candy.getPosition().equals(position)) {
+    // return true;
+    // }
+    // }
+    // return false;
     // }
 
     public void initalAllInfor() {
@@ -68,45 +126,43 @@ public class RecordUsedPlace {
     }
 
     // /**
-    //  * Retrieves a random position that is not currently occupied by any enemies.
-    //  * This method ensures that the position selected is free from enemies,
-    //  * providing a 'safe' spot.
-    //  *
-    //  * @return A random safe {@link Position} not occupied by enemies. Returns
-    //  *         {@code null} if no such positions are available.
-    //  */
+    // * Retrieves a random position that is not currently occupied by any enemies.
+    // * This method ensures that the position selected is free from enemies,
+    // * providing a 'safe' spot.
+    // *
+    // * @return A random safe {@link Position} not occupied by enemies. Returns
+    // * {@code null} if no such positions are available.
+    // */
     // public Position getRandomSafePosition() {
-    //     ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
+    // ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
 
-    //     // Iterate through available positions and remove those occupied by enemies
-    //     Iterator<Position> positionIterator = availableWithoutSpiders.iterator();
-    //     while (positionIterator.hasNext()) {
-    //         Position pos = positionIterator.next();
-    //         for (Enemy enemy : enemies) {
-    //             // Check if any enemy occupies the position
-    //             if (enemy.getEnemyPosition().equals(pos)) {
-    //                 // Remove the position if occupied by an enemy
-    //                 positionIterator.remove();
-    //                 break; // No need to check other enemies for this position
-    //             }
-    //         }
-    //     }
-    //     if (availableWithoutSpiders.isEmpty()) {
-    //         System.out.println("No available positions without enemies");
-    //         return null;
-    //     }
-
-    //     // Return a random position from the list of available positions
-    //     Random random = new Random();
-    //     return availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
+    // // Iterate through available positions and remove those occupied by enemies
+    // Iterator<Position> positionIterator = availableWithoutSpiders.iterator();
+    // while (positionIterator.hasNext()) {
+    // Position pos = positionIterator.next();
+    // for (Enemy enemy : enemies) {
+    // // Check if any enemy occupies the position
+    // if (enemy.getEnemyPosition().equals(pos)) {
+    // // Remove the position if occupied by an enemy
+    // positionIterator.remove();
+    // break; // No need to check other enemies for this position
+    // }
+    // }
+    // }
+    // if (availableWithoutSpiders.isEmpty()) {
+    // System.out.println("No available positions without enemies");
+    // return null;
     // }
 
-
+    // // Return a random position from the list of available positions
+    // Random random = new Random();
+    // return
+    // availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
+    // }
 
     public void setPlayer(Player player) {
         this.player = player;
     }
-
 
     public boolean addAviable(Position position) {
         if (isPlaceAviable(position))
@@ -124,70 +180,69 @@ public class RecordUsedPlace {
     }
 
     // /**
-    //  * Add haracterAvaliablePosition elements in the map
-    //  * Element can be tile, wall, obstacles 
-    //  * @param object the element add to the room
-    //  * @return If ture, then the element is successful be adding; else the positon is already taken by other
-    //  */
+    // * Add haracterAvaliablePosition elements in the map
+    // * Element can be tile, wall, obstacles
+    // * @param object the element add to the room
+    // * @return If ture, then the element is successful be adding; else the positon
+    // is already taken by other
+    // */
     // public boolean addElementToMap(CharacterAvaliablePosition object) {
-    //     if (isPlaceAviable(object.getPosition())) {
-    //         if (object.getPlayerAvaliable()) 
-    //             return true;
-    //         else {
-    //             if (object instanceof Wall){
-    //                 walls_pos.add(object.getPosition());
-    //             }
-    //             else{
-    //                 obstacle_pos.add(object.getPosition());
-    //             }
-    //             removeFromAviable(object.getPosition());
-    //         }
-    //         return true;
-    //     } else
-    //         return false;
+    // if (isPlaceAviable(object.getPosition())) {
+    // if (object.getPlayerAvaliable())
+    // return true;
+    // else {
+    // if (object instanceof Wall){
+    // walls_pos.add(object.getPosition());
+    // }
+    // else{
+    // obstacle_pos.add(object.getPosition());
+    // }
+    // removeFromAviable(object.getPosition());
+    // }
+    // return true;
+    // } else
+    // return false;
     // }
 
-
-
     // public boolean addEnemy(Enemy enemy) {
-    //     if (isPlaceAviable(enemy.getEnemyPosition())) {
-    //         if(enemy instanceof Spider)
-    //             obstacle_pos.add(enemy.getPosition());
-    //         enemies.add(enemy);
-    //         removeFromAviable(enemy.getEnemyPosition());
-    //         return true;
-    //     } else {
-    //         System.out.println("no did not add");
-    //         return false;
-    //     }
+    // if (isPlaceAviable(enemy.getEnemyPosition())) {
+    // if(enemy instanceof Spider)
+    // obstacle_pos.add(enemy.getPosition());
+    // enemies.add(enemy);
+    // removeFromAviable(enemy.getEnemyPosition());
+    // return true;
+    // } else {
+    // System.out.println("no did not add");
+    // return false;
+    // }
     // }
 
     // public boolean addReward(Reward reward) {
-    //     if (isPlaceAviable(reward.getPosition())) {
-    //         rewards.add(reward);
-    //         removeFromAviable(reward.getPosition());
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
+    // if (isPlaceAviable(reward.getPosition())) {
+    // rewards.add(reward);
+    // removeFromAviable(reward.getPosition());
+    // return true;
+    // } else {
+    // return false;
+    // }
     // }
 
     // public void removeReward(Reward reward) {
-    //     available.add(reward.getPosition());
-    //     iterator_reward = rewards.iterator();
-    //     Reward rewardInList;
-    //     while (iterator_reward.hasNext()) {
-    //         rewardInList = iterator_reward.next();
-    //         if (rewardInList == reward)
-    //             iterator_reward.remove();
-    //     }
+    // available.add(reward.getPosition());
+    // iterator_reward = rewards.iterator();
+    // Reward rewardInList;
+    // while (iterator_reward.hasNext()) {
+    // rewardInList = iterator_reward.next();
+    // if (rewardInList == reward)
+    // iterator_reward.remove();
+    // }
     // }
 
     // public Position getPlayerPosition() {
-    //     if(player != null)
-    //         return player.getPosition();
-    //     else 
-    //         return null;
+    // if(player != null)
+    // return player.getPosition();
+    // else
+    // return null;
     // }
 
     /**
@@ -204,7 +259,7 @@ public class RecordUsedPlace {
         return deltaX <= range && deltaY <= range;
     }
 
-    public int getLengthOfAviable(){
+    public int getLengthOfAviable() {
         return available.size();
     }
 
@@ -212,29 +267,28 @@ public class RecordUsedPlace {
         return available;
     }
 
-    public void addWallPosition(Position position){
+    public void addWallPosition(Position position) {
         walls_pos.add(position);
     }
 
-    public void addObstcalePosition(Position position){
+    public void addObstcalePosition(Position position) {
         obstacle_pos.add(position);
     }
 
-
     // public Reward playerGetReward() {
-    //     for (Reward reward : rewards) {
-    //         if (player.getPosition().equal(reward.getPosition()))
-    //             return reward;
-    //     }
-    //     return null;
+    // for (Reward reward : rewards) {
+    // if (player.getPosition().equal(reward.getPosition()))
+    // return reward;
+    // }
+    // return null;
     // }
 
     // public Enemy playerMeetEnemy(){
-    //     for(Enemy enemy : enemies){
-    //         if(player.getPosition().equal(enemy.getPosition()))
-    //             return enemy;
-    //     }
-    //     return null;
+    // for(Enemy enemy : enemies){
+    // if(player.getPosition().equal(enemy.getPosition()))
+    // return enemy;
+    // }
+    // return null;
     // }
 
     public boolean isPlaceAviable(Position planingPosition) {
@@ -244,7 +298,6 @@ public class RecordUsedPlace {
         }
         return false;
     }
-
 
     public void removeFromAviable(Position takePosition) {
         iterator_pos = available.iterator();
@@ -258,14 +311,13 @@ public class RecordUsedPlace {
         }
     }
 
-
     // public boolean isNotSpiderPosition(Position pos) {
-    //     for (Enemy enemy : enemies) {
-    //         if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
+    // for (Enemy enemy : enemies) {
+    // if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
+    // return false;
+    // }
+    // }
+    // return true;
     // }
 
 }
