@@ -170,15 +170,15 @@ public class RecordUsedPlace {
     //     }
     // }
 
-    public boolean addReward(Reward reward) {
-        if (isPlaceAviable(reward.getPosition())) {
-            rewards.add(reward);
-            removeFromAviable(reward.getPosition());
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // public boolean addReward(Reward reward) {
+    //     if (isPlaceAviable(reward.getPosition())) {
+    //         rewards.add(reward);
+    //         removeFromAviable(reward.getPosition());
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     public void removeReward(Reward reward) {
         available.add(reward.getPosition());

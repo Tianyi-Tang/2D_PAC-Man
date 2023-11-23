@@ -34,11 +34,7 @@ public class Candy extends GeneralReward {
     public int getScore() {
         return score;
     }
-    private void getPlayerPosition() {
 
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        playerPosition = record.getPlayerPosition();
-    }
     @Override
     public Position getPosition() {
         return cdposition;
@@ -68,7 +64,7 @@ public class Candy extends GeneralReward {
 
     @Override
     public void addBenefit(Player player) {
-        getPlayerPosition();
+        playerPosition = Player.getInstance().getPosition();
         if (playerPosition.equal(cdposition)) {
             addScore(player,score);
             record.removeReward(this);
