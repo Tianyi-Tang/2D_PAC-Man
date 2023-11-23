@@ -3,6 +3,7 @@ package cmpt276.group4.GameMap;
 
 import java.util.ArrayList;
 
+import cmpt276.group4.Position;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Reward.Reward;
 
@@ -20,32 +21,27 @@ public class RoomEnvironment {
     }
 
     public boolean addEnemy(Enemy enemy){
-        if(enemy.isMovable()){
-            return placeMoveEnemy(enemy);
-        }
-        else{
-            return placeFixedEnemy(enemy);
-        }
-    }
-
-    private boolean placeMoveEnemy(Enemy enemy){
-        if(record.isPlaceAviable(enemy.getPosition())){
+        if(placeAviableForEnemy(enemy.getEnemyPosition(), enemy.getMovable())){
             enemies.add(enemy);
+            record.removeFromAviable(enemy.getPosition());
             return true;
         }
         return false;
-            
     }
-
     /**
-     * Note: this function is not compeleted wait another function in RecordUsedPlace
-     * @param enemy
+     * Note this function is not complenet, another function require from RecordUsedPlace
+     * @param enmemyPos
+     * @param movable
      * @return
      */
-    private boolean placeFixedEnemy(Enemy enemy){
-        if(record.isPlaceAviable(enemy.getPosition())){
-            enemies.add(enemy);
-            return true;
+    private boolean placeAviableForEnemy(Position enmemyPos, boolean movable){
+        if(record.isPlaceAviable(enmemyPos)){
+            if(movable)
+                return true;
+            else{
+                // another function neeed to for if statement
+                return true;
+            }
         }
         return false;
     }
