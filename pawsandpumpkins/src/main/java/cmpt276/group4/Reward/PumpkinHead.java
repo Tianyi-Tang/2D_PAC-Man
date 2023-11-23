@@ -3,6 +3,7 @@ package cmpt276.group4.Reward;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
 import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.Reward.BonusReward;
@@ -33,7 +34,7 @@ public class PumpkinHead extends BonusReward {
         record = RecordUsedPlace.getInstance();
         getPumpkinImage();
         ppkPosition=record.getRandomFromAvailablePosition();
-        record.addReward(this);
+        RoomEnvironment.getInstance().addReward(this);
     }
 
     @Override
