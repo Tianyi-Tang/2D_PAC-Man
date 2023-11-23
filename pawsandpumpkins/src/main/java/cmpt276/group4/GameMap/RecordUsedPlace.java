@@ -232,6 +232,14 @@ public class RecordUsedPlace {
         return available;
     }
 
+    public void addWallPosition(Position position){
+        walls_pos.add(position);
+    }
+
+    public void addObstcalePosition(Position position){
+        obstacle_pos.add(position);
+    }
+
     public ArrayList<Position> getWallPosition(){
         return walls_pos;
     }
