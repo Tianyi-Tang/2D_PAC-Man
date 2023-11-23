@@ -6,6 +6,7 @@ import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Room.Obstacle;
+import cmpt276.group4.Room.Tombstone;
 
 
 public class RoomLayout {
@@ -32,7 +33,7 @@ public class RoomLayout {
     }
 
     public boolean addElementInMap(CharacterAvaliablePosition element){
-        if(element instanceof Obstacle){
+        if(element instanceof Tombstone){
              return placeObstacle(element);
         }
         else{
@@ -74,6 +75,7 @@ public class RoomLayout {
 
     private void addPositionToRecord(Position position,boolean isWall){
         record.removeFromAviable(position);
+        
         if(isWall)
             record.addWallPosition(position);
         else

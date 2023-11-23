@@ -279,7 +279,6 @@ public class LoadingPanel extends JPanel implements Runnable {
      * loading all walls in the game
      */
     private void createWall(){
-        System.out.println("Require Wall:" +config.getNumberOfWall());
         room_initialization.iWalls(factory);
     }
 
