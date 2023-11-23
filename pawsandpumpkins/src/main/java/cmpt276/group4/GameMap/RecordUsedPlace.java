@@ -5,14 +5,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
-import cmpt276.group4.Room.Wall;
 
 /**
  * Class record the position for every resoucre in game
