@@ -46,5 +46,13 @@ public class RoomEnvironment {
         return false;
     }
 
+    public ArrayList<Enemy> getEnemies(){
+        return enemies;
+    }
+
+    public int getEnemyNumber(){
+        return enemies.size();
+    }
+
     
 }

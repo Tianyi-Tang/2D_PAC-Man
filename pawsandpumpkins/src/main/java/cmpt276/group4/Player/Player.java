@@ -10,6 +10,7 @@ import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.WindowAndInput.MoveDirection;
@@ -276,7 +277,7 @@ public class Player implements KeyMovingObserver {
             Reward reward = RecordUsedPlace.getInstance().playerGetReward();
             if(reward != null)
                 reward.addBenefit(this);
-            Enemy enemy = RecordUsedPlace.getInstance().playerMeetEnemy();
+            Enemy enemy = RoomEnvironment.getInstance().playerMeetEnemy();
             if(enemy != null){
                 GameManager.getInstance().enemyCatachPlayer(enemy.getMovable());
             }

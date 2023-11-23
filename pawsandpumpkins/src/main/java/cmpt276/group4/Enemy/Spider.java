@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
@@ -22,6 +23,7 @@ public class Spider implements Enemy {
     SpiderType spideType;
     private BufferedImage currentImage;
     private RecordUsedPlace record;
+    private RoomEnvironment roomEnvironment;
     private Position playerPosition;
 
     /**
@@ -40,8 +42,9 @@ public class Spider implements Enemy {
     Spider() {
         getPlayerPosition();
         record = RecordUsedPlace.getInstance();
+        roomEnvironment = RoomEnvironment.getInstance();
         // get the list of enemy from recordUsedPlace and randomly picked one.
-        switch ((record.getEnemyList().size()) % 2) {
+        switch ((roomEnvironment.getEnemyNumber()) % 2) {
             case 1:
                 spideType = SpiderType.type_spider_1;
                 break;
@@ -56,11 +59,11 @@ public class Spider implements Enemy {
         potentialPosition.equal(playerPosition);
 
         do {
-            potentialPosition = record.getRandomSafePosition();
+            potentialPosition = record.getRandomFromAvailablePosition();
         } while (potentialPosition.equal(playerPosition) || record.containsCandyAtPosition(potentialPosition));
 
         enemyPosition.setPosition(potentialPosition);
-        record.addEnemy(this);
+        roomEnvironment.addEnemy(this);
 
     }
 

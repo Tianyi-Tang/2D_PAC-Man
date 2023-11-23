@@ -14,6 +14,7 @@ import cmpt276.group4.gameLevel;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
 import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
@@ -45,6 +46,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     private RecordUsedPlace record;
     private RoomLayout roomLayout;
+    private RoomEnvironment roomEnvironment;
     private GameConfig config;//object contain the information about game 
     private boolean generateconfi,generateRoom, generateAllTile, generateWall, generatePlayer,generateObstacle,generateAllEnemies, generateAllRewards =false;
     //boolean value to check each resource is generate
@@ -91,6 +93,7 @@ public class LoadingPanel extends JPanel implements Runnable {
             loadingThread.start();
             record = RecordUsedPlace.getInstance();
             roomLayout =RoomLayout.getInstance();
+            roomEnvironment = RoomEnvironment.getInstance();
         }
     }
 
@@ -240,7 +243,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once meet the requirement, loading the rewards
      */
     private void checkEnemy(){
-        if(record.getLengthOfEnemies() == config.getTotalGhosts()){
+        if(roomEnvironment.getEnemyNumber() == config.getTotalGhosts()){
             generateAllEnemies = true;
             createReward();
             progress ++;

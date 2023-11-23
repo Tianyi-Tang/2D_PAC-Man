@@ -32,7 +32,7 @@ public class PumpkinHead extends BonusReward {
 
         record = RecordUsedPlace.getInstance();
         getPumpkinImage();
-        ppkPosition=record.getRandomSafePosition();
+        ppkPosition=record.getRandomFromAvailablePosition();
         record.addReward(this);
     }
 

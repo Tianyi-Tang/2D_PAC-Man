@@ -20,6 +20,7 @@ import cmpt276.group4.GameTime;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
 import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.Player;
@@ -58,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     RecordUsedPlace record = RecordUsedPlace.getInstance();
     private RoomLayout roomLayout = RoomLayout.getInstance();
+    private RoomEnvironment roomEnvironment =  RoomEnvironment.getInstance();
     private NumberPanel numberPanel;
 
     // Screen Sitting
@@ -152,7 +154,7 @@ public class GamePanel extends JPanel implements Runnable {
             
 
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
-            for (Enemy enemy : record.getEnemyList()) {
+            for (Enemy enemy : roomEnvironment.getEnemies()) {
                 enemy.catchPlayer();
                 if (enemy instanceof Ghost) {
                     ((Ghost) enemy).ghostMoveNextPosition();
@@ -198,7 +200,7 @@ public class GamePanel extends JPanel implements Runnable {
             int score = player.totalScore();
             g2.drawString("Score: " + score, 10, 30);
         }
-        for (Enemy enemy : record.getEnemyList()) {
+        for (Enemy enemy : roomEnvironment.getEnemies()) {
 
             enemy.draw(g2);
         }

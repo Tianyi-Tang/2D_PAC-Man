@@ -21,7 +21,6 @@ public class RecordUsedPlace {
     private ArrayList<Position> walls_pos;
     private ArrayList<Position> obstacle_pos;
 
-    private ArrayList<Enemy> enemies;
     private ArrayList<Reward> rewards;// all rewards 
     private Player player;
 
@@ -38,7 +37,6 @@ public class RecordUsedPlace {
 
         obstacle_pos = new ArrayList<Position>();
 
-        enemies = new ArrayList<Enemy>();
         rewards = new ArrayList<Reward>();
         walls_pos = new ArrayList<Position>();
 
@@ -71,45 +69,44 @@ public class RecordUsedPlace {
         if (GameManager.getInstance().isGameEnd()) {
             obstacle_pos = new ArrayList<Position>();
 
-            enemies = new ArrayList<Enemy>();
             rewards  = new ArrayList<Reward>();
 
         }
     }
 
-    /**
-     * Retrieves a random position that is not currently occupied by any enemies.
-     * This method ensures that the position selected is free from enemies,
-     * providing a 'safe' spot.
-     *
-     * @return A random safe {@link Position} not occupied by enemies. Returns
-     *         {@code null} if no such positions are available.
-     */
-    public Position getRandomSafePosition() {
-        ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
+    // /**
+    //  * Retrieves a random position that is not currently occupied by any enemies.
+    //  * This method ensures that the position selected is free from enemies,
+    //  * providing a 'safe' spot.
+    //  *
+    //  * @return A random safe {@link Position} not occupied by enemies. Returns
+    //  *         {@code null} if no such positions are available.
+    //  */
+    // public Position getRandomSafePosition() {
+    //     ArrayList<Position> availableWithoutSpiders = new ArrayList<>(available);
 
-        // Iterate through available positions and remove those occupied by enemies
-        Iterator<Position> positionIterator = availableWithoutSpiders.iterator();
-        while (positionIterator.hasNext()) {
-            Position pos = positionIterator.next();
-            for (Enemy enemy : enemies) {
-                // Check if any enemy occupies the position
-                if (enemy.getEnemyPosition().equals(pos)) {
-                    // Remove the position if occupied by an enemy
-                    positionIterator.remove();
-                    break; // No need to check other enemies for this position
-                }
-            }
-        }
-        if (availableWithoutSpiders.isEmpty()) {
-            System.out.println("No available positions without enemies");
-            return null;
-        }
+    //     // Iterate through available positions and remove those occupied by enemies
+    //     Iterator<Position> positionIterator = availableWithoutSpiders.iterator();
+    //     while (positionIterator.hasNext()) {
+    //         Position pos = positionIterator.next();
+    //         for (Enemy enemy : enemies) {
+    //             // Check if any enemy occupies the position
+    //             if (enemy.getEnemyPosition().equals(pos)) {
+    //                 // Remove the position if occupied by an enemy
+    //                 positionIterator.remove();
+    //                 break; // No need to check other enemies for this position
+    //             }
+    //         }
+    //     }
+    //     if (availableWithoutSpiders.isEmpty()) {
+    //         System.out.println("No available positions without enemies");
+    //         return null;
+    //     }
 
-        // Return a random position from the list of available positions
-        Random random = new Random();
-        return availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
-    }
+    //     // Return a random position from the list of available positions
+    //     Random random = new Random();
+    //     return availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
+    // }
 
 
 
@@ -160,18 +157,18 @@ public class RecordUsedPlace {
 
 
 
-    public boolean addEnemy(Enemy enemy) {
-        if (isPlaceAviable(enemy.getEnemyPosition())) {
-            if(enemy instanceof Spider)
-                obstacle_pos.add(enemy.getPosition());
-            enemies.add(enemy);
-            removeFromAviable(enemy.getEnemyPosition());
-            return true;
-        } else {
-            System.out.println("no did not add");
-            return false;
-        }
-    }
+    // public boolean addEnemy(Enemy enemy) {
+    //     if (isPlaceAviable(enemy.getEnemyPosition())) {
+    //         if(enemy instanceof Spider)
+    //             obstacle_pos.add(enemy.getPosition());
+    //         enemies.add(enemy);
+    //         removeFromAviable(enemy.getEnemyPosition());
+    //         return true;
+    //     } else {
+    //         System.out.println("no did not add");
+    //         return false;
+    //     }
+    // }
 
     public boolean addReward(Reward reward) {
         if (isPlaceAviable(reward.getPosition())) {
@@ -218,10 +215,6 @@ public class RecordUsedPlace {
         return available.size();
     }
 
-    public int getLengthOfEnemies(){
-        return enemies.size();
-    }
-
     public int getLengthOfRewards(){
         return rewards.size();
     }
@@ -255,13 +248,13 @@ public class RecordUsedPlace {
         return null;
     }
 
-    public Enemy playerMeetEnemy(){
-        for(Enemy enemy : enemies){
-            if(player.getPosition().equal(enemy.getPosition()))
-                return enemy;
-        }
-        return null;
-    }
+    // public Enemy playerMeetEnemy(){
+    //     for(Enemy enemy : enemies){
+    //         if(player.getPosition().equal(enemy.getPosition()))
+    //             return enemy;
+    //     }
+    //     return null;
+    // }
 
     public boolean isPlaceAviable(Position planingPosition) {
         for (Position position : available) {
@@ -284,21 +277,18 @@ public class RecordUsedPlace {
         }
     }
 
-    public List<Enemy> getEnemyList() {
-        return enemies;
-    }
 
     public List<Reward> getRewardList() {
         return rewards;
     }
 
-    public boolean isNotSpiderPosition(Position pos) {
-        for (Enemy enemy : enemies) {
-            if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
-                return false;
-            }
-        }
-        return true;
-    }
+    // public boolean isNotSpiderPosition(Position pos) {
+    //     for (Enemy enemy : enemies) {
+    //         if (enemy instanceof Spider && enemy.getEnemyPosition().equals(pos)) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
 
 }

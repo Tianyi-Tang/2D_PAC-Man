@@ -27,7 +27,7 @@ public class Candy extends GeneralReward {
     public Candy(){
         record = RecordUsedPlace.getInstance();
         getCandyImage();
-        cdposition=record.getRandomSafePosition();
+        cdposition=record.getRandomFromAvailablePosition();
         record.addReward(this);
     }
     @Override
