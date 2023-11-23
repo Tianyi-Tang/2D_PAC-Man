@@ -1,4 +1,4 @@
-package cmpt276.group4;
+package cmpt276.group4.Time;
 
 public class GameTime {
     private static GameTime instance = null;
