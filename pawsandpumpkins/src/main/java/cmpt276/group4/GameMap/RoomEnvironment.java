@@ -19,5 +19,36 @@ public class RoomEnvironment {
         return instacne;
     }
 
+    public boolean addEnemy(Enemy enemy){
+        if(enemy.isMovable()){
+            return placeMoveEnemy(enemy);
+        }
+        else{
+            return placeFixedEnemy(enemy);
+        }
+    }
+
+    private boolean placeMoveEnemy(Enemy enemy){
+        if(record.isPlaceAviable(enemy.getPosition())){
+            enemies.add(enemy);
+            return true;
+        }
+        return false;
+            
+    }
+
+    /**
+     * Note: this function is not compeleted wait another function in RecordUsedPlace
+     * @param enemy
+     * @return
+     */
+    private boolean placeFixedEnemy(Enemy enemy){
+        if(record.isPlaceAviable(enemy.getPosition())){
+            enemies.add(enemy);
+            return true;
+        }
+        return false;
+    }
+
     
 }
