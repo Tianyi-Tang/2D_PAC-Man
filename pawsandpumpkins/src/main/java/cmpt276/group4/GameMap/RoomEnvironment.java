@@ -2,6 +2,7 @@ package cmpt276.group4.GameMap;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.Enemy.Enemy;
@@ -13,6 +14,7 @@ public class RoomEnvironment {
 
     private ArrayList<Reward> rewards;
     private ArrayList<Enemy> enemies;
+    private Iterator<Reward> iterator_reward;
 
     public static synchronized RoomEnvironment getInstance(){
         if(instacne == null)
@@ -34,6 +36,26 @@ public class RoomEnvironment {
         }
         return false;
     }
+
+    public boolean addReward(Reward reward){
+        if(record.isPlaceAviable(reward.getPosition())){
+            rewards.add(reward);
+            record.removeFromAviable(reward.getPosition());
+            return true;
+        }
+        return false;
+    }
+
+    public void removeReward(Reward reward){
+        iterator_reward = rewards.iterator();
+        while (iterator_reward.hasNext()) {
+            if(iterator_reward.next() == reward){
+                iterator_reward.remove();
+                record.addAviable(reward.getPosition());
+            }
+        }
+    }
+
     /**
      * Note this function is not complenet, another function require from RecordUsedPlace
      * @param enmemyPos
@@ -56,9 +78,20 @@ public class RoomEnvironment {
         return enemies;
     }
 
+    public ArrayList<Reward> getRewards(){
+        return rewards;
+    }
+
     public int getEnemyNumber(){
         return enemies.size();
     }
+
+    public int getRewardNumber(){
+        return rewards.size();
+    }
+
+
+
 
     
 }
