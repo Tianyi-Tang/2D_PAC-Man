@@ -15,8 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import cmpt276.group4.GameTime;
 public class PumpkinHead extends BonusReward {
-    private long displayStartTime =10;
-    private long displayDuration = 20;
+    private long displayDuration = 10;
     private int score = 5;
     private BufferedImage ppk1, ppk2, currentImage;
     private Position ppkPosition,playerPosition;
@@ -26,6 +25,7 @@ public class PumpkinHead extends BonusReward {
     private boolean available;
     private RecordUsedPlace record;
     public boolean isBonusReward = true;
+    private boolean isAvailable = true;
     public PumpkinHead() {
 
         record = RecordUsedPlace.getInstance();
@@ -66,7 +66,7 @@ public class PumpkinHead extends BonusReward {
     @Override
     public void addBenefit(Player player) {
             getPlayerPosition();
-        if (playerPosition.equal(ppkPosition)) {
+        if (playerPosition.equal(ppkPosition) && isAvailable) {
             addScore(player,score);
             record.removeReward(this);
         }
@@ -89,6 +89,10 @@ public class PumpkinHead extends BonusReward {
 
     GameTime gameTime = GameTime.getInstance();
 
+    public boolean getAvailable(){
+        return isAvailable;
+    }
+
 @Override
     public void draw(Graphics2D g1) {
         stateCounter++;
@@ -100,10 +104,14 @@ public class PumpkinHead extends BonusReward {
             currentImage = ppk1;
         else
             currentImage = ppk2;
-        if(displayStartTime<=gameTime.getTime() && gameTime.getTime()-displayStartTime<=displayDuration) {
+        if(gameTime.getTime() % displayDuration>= displayDuration/2) {
+            isAvailable = true;
 
     g1.drawImage(currentImage, ppkPosition.getX_axis(), ppkPosition.getY_axis(), WindowConfig.tileSize, WindowConfig.tileSize, null);
 
+        }
+        else {
+            isAvailable = false;
         }
 
     }
