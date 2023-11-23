@@ -10,6 +10,7 @@ import cmpt276.group4.Position;
 import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Logic.WindowConfig;
+import cmpt276.group4.Room.Room;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 /**
@@ -40,7 +41,6 @@ public class Spider implements Enemy {
      * The spider is positioned at a random position after checking vacancy.
      */
     Spider() {
-        getPlayerPosition();
         record = RecordUsedPlace.getInstance();
         roomEnvironment = RoomEnvironment.getInstance();
         // get the list of enemy from recordUsedPlace and randomly picked one.
@@ -56,25 +56,23 @@ public class Spider implements Enemy {
         // System.out.println("Spider.java: Creating spider");
         getEnemyImage();
         Position potentialPosition = new Position(0, 0);
-        potentialPosition.equal(playerPosition);
+        //potentialPosition.equal(playerPosition);
 
         do {
             potentialPosition = record.getRandomFromAvailablePosition();
-        } while (potentialPosition.equal(playerPosition));
+        } while (RoomEnvironment.getInstance().sameAsPlayerPosition(potentialPosition));
 
         enemyPosition.setPosition(potentialPosition);
         roomEnvironment.addEnemy(this);
 
     }
 
-    /**
-     * Retrieves the current position of the player.
-     */
-    private void getPlayerPosition() {
-
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        playerPosition = record.getPlayerPosition();
-    }
+    // /**
+    //  * Retrieves the current position of the player.
+    //  */
+    // private void getPlayerPosition() {
+    //     RoomEnvironment.getInstance().getPlayerPosition();
+    // }
 
     /**
      * Gets the current position of the spider.
@@ -92,8 +90,8 @@ public class Spider implements Enemy {
      */
     @Override
     public void catchPlayer() {
-        Position playerPosition = record.getPlayerPosition();
-        if (playerPosition.equals(enemyPosition)) {
+        // Position playerPosition = record.getPlayerPosition();
+        if (RoomEnvironment.getInstance().sameAsPlayerPosition(enemyPosition)) {
             GameManager.getInstance().enemyCatachPlayer(movable);
         } 
     }

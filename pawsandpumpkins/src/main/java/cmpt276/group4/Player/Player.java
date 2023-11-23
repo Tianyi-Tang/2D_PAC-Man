@@ -274,7 +274,7 @@ public class Player implements KeyMovingObserver {
     private void updatePosition(){
         if(movement.isPositionAvailable(destination)){
             playerPosition.setPosition(destination);
-            Reward reward = RoomEnvironment.getInstance().collectReward(playerPosition);
+            Reward reward = RoomEnvironment.getInstance().collectReward();
             if(reward != null){
                 reward.addBenefit(this);
             }

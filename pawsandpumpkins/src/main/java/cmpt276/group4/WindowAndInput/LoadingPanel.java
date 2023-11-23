@@ -18,6 +18,7 @@ import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
+import cmpt276.group4.Player.Player;
 import cmpt276.group4.Player.PlayerGenerator;
 import cmpt276.group4.Reward.RewardFactory;
 import cmpt276.group4.Reward.RewardInitialization;
@@ -219,7 +220,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once it success loadin,set wining requirement to player and loading the obstacle
      */
     private void checkPlayer(){
-        if(record.getPlayerPosition() != null){
+        if(roomEnvironment.getPlayerPosition() != null){
             generatePlayer = true;
             createObstacle();
             progress ++;
@@ -289,7 +290,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * loading all walls in the game
      */
     private void createPlayer(){
-        record.setPlayer(PlayerGenerator.creatPlayer());
+        roomEnvironment.setPlayer(Player.getInstance());
     }
 
      /**

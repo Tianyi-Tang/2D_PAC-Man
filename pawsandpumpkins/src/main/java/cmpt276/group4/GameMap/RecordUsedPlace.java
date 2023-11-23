@@ -107,13 +107,6 @@ public class RecordUsedPlace {
         this.player = player;
     }
 
-    public boolean PlayerLoading(){
-        if(player == null)
-            return true;
-        else
-            return false;
-    }
-
 
     public boolean addAviable(Position position) {
         if (isPlaceAviable(position))
@@ -190,12 +183,12 @@ public class RecordUsedPlace {
     //     }
     // }
 
-    public Position getPlayerPosition() {
-        if(player != null)
-            return player.getPosition();
-        else 
-            return null;
-    }
+    // public Position getPlayerPosition() {
+    //     if(player != null)
+    //         return player.getPosition();
+    //     else 
+    //         return null;
+    // }
 
     /**
      * Determines if the player is within a specified range from a given position.
@@ -205,15 +198,15 @@ public class RecordUsedPlace {
      * @return true if the player is within the specified range, false otherwise.
      */
     public boolean isPlayerNearBy(int range, Position p) {
-        int deltaX = Math.abs(getPlayerPosition().getX_axis() - p.getX_axis());
-        int deltaY = Math.abs(getPlayerPosition().getY_axis() - p.getY_axis());
+        Player player = Player.getInstance();
+        int deltaX = Math.abs(player.getPosition().getX_axis() - p.getX_axis());
+        int deltaY = Math.abs(player.getPosition().getY_axis() - p.getY_axis());
         return deltaX <= range && deltaY <= range;
     }
 
     public int getLengthOfAviable(){
         return available.size();
     }
-
 
     public ArrayList<Position> getAviablePosition() {
         return available;
@@ -225,14 +218,6 @@ public class RecordUsedPlace {
 
     public void addObstcalePosition(Position position){
         obstacle_pos.add(position);
-    }
-
-    public ArrayList<Position> getWallPosition(){
-        return walls_pos;
-    }
-
-    public ArrayList<Position> getObstcalePosition(){
-        return obstacle_pos;
     }
 
 

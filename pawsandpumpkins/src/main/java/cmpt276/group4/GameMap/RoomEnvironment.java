@@ -31,8 +31,15 @@ public class RoomEnvironment {
         record = RecordUsedPlace.getInstance();
     }
 
-    public void setPlayer(){
-        player = Player.getInstance();
+    public void setPlayer(Player player){
+        this.player = player;
+    }
+
+    public Position getPlayerPosition(){
+        if(player != null)
+            return player.getPosition();
+        else
+            return null;
     }
 
     public boolean addEnemy(Enemy enemy){
@@ -63,12 +70,19 @@ public class RoomEnvironment {
         }
     }
 
-    public Reward collectReward(Position position){
+    public Reward collectReward(){
         for (Reward reward : rewards) {
-            if(position.equal(reward.getPosition()))
+            if(player.getPosition().equal(reward.getPosition()))
                 return reward;
         }
         return null;
+    }
+
+    public boolean sameAsPlayerPosition(Position position){
+        if(position.equal(player.getPosition()))
+            return true;
+        else
+            return false;
     }
 
     /**
