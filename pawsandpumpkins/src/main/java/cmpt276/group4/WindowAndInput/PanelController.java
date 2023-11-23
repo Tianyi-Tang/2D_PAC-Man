@@ -106,6 +106,7 @@ public class PanelController {
      */
     public void transformToEndScreen(){
         if(GameManager.getInstance().isGameEnd()){
+            gamePanel.endGameLoop();
             layout.show(cardContainer, "gameEnd");
             initalNumberPanel();
         }

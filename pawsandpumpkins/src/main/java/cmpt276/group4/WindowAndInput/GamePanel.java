@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
+import cmpt276.group4.GameManager;
 import cmpt276.group4.GameTime;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
@@ -214,6 +215,12 @@ public class GamePanel extends JPanel implements Runnable {
 
         }
         g2.dispose();
+    }
+
+    public void endGameLoop(){
+        if(GameManager.getInstance().isGameEnd()){
+            gameThread = null;
+        }
     }
 
     /**
