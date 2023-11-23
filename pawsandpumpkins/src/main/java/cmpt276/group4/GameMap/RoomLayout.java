@@ -75,7 +75,7 @@ public class RoomLayout {
 
     private void addPositionToRecord(Position position,boolean isWall){
         record.removeFromAviable(position);
-        
+        unAviablePositions.add(position);
         if(isWall)
             record.addWallPosition(position);
         else
