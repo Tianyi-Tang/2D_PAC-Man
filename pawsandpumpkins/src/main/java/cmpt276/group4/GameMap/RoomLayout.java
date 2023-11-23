@@ -48,7 +48,7 @@ public class RoomLayout {
      */
     private boolean placeObstacle(CharacterAvaliablePosition element){
         if(record.isPlaceAviable(element.getPosition())){
-            addPositionToRecord(element.getPosition(), true);
+            addPositionToRecord(element.getPosition(), false);
             elements.add(element);
             obstacleNum ++;
             return true;
@@ -74,6 +74,10 @@ public class RoomLayout {
 
     private void addPositionToRecord(Position position,boolean isWall){
         record.removeFromAviable(position);
+        if(isWall)
+            record.addWallPosition(position);
+        else
+            record.addObstcalePosition(position);
     }
 
     

@@ -136,29 +136,29 @@ public class RecordUsedPlace {
         return instance;
     }
 
-    /**
-     * Add haracterAvaliablePosition elements in the map
-     * Element can be tile, wall, obstacles 
-     * @param object the element add to the room
-     * @return If ture, then the element is successful be adding; else the positon is already taken by other
-     */
-    public boolean addElementToMap(CharacterAvaliablePosition object) {
-        if (isPlaceAviable(object.getPosition())) {
-            if (object.getPlayerAvaliable()) 
-                return true;
-            else {
-                if (object instanceof Wall){
-                    walls_pos.add(object.getPosition());
-                }
-                else{
-                    obstacle_pos.add(object.getPosition());
-                }
-                removeFromAviable(object.getPosition());
-            }
-            return true;
-        } else
-            return false;
-    }
+    // /**
+    //  * Add haracterAvaliablePosition elements in the map
+    //  * Element can be tile, wall, obstacles 
+    //  * @param object the element add to the room
+    //  * @return If ture, then the element is successful be adding; else the positon is already taken by other
+    //  */
+    // public boolean addElementToMap(CharacterAvaliablePosition object) {
+    //     if (isPlaceAviable(object.getPosition())) {
+    //         if (object.getPlayerAvaliable()) 
+    //             return true;
+    //         else {
+    //             if (object instanceof Wall){
+    //                 walls_pos.add(object.getPosition());
+    //             }
+    //             else{
+    //                 obstacle_pos.add(object.getPosition());
+    //             }
+    //             removeFromAviable(object.getPosition());
+    //         }
+    //         return true;
+    //     } else
+    //         return false;
+    // }
 
 
 
