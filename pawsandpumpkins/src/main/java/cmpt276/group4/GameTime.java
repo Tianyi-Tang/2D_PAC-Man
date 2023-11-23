@@ -9,7 +9,7 @@ public class GameTime {
     private GameTime() {}
 
     // Static method to get the singleton instance
-    public static GameTime getInstance() {
+    public static synchronized GameTime getInstance() {
         if (instance == null) {
             instance = new GameTime();
         }
