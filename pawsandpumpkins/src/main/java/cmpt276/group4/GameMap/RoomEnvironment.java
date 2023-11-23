@@ -20,6 +20,12 @@ public class RoomEnvironment {
         return instacne;
     }
 
+    public RoomEnvironment(){
+        rewards = new ArrayList<Reward>();
+        enemies = new ArrayList<Enemy>();
+        record = RecordUsedPlace.getInstance();
+    }
+
     public boolean addEnemy(Enemy enemy){
         if(placeAviableForEnemy(enemy.getEnemyPosition(), enemy.getMovable())){
             enemies.add(enemy);
