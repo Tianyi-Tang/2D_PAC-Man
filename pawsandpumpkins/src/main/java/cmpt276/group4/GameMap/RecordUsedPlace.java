@@ -2,15 +2,12 @@ package cmpt276.group4.GameMap;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.Enemy.Enemy;
-import cmpt276.group4.Enemy.Spider;
 import cmpt276.group4.Player.Player;
-import cmpt276.group4.Reward.Reward;
+
 
 /**
  * Class record the position for every resoucre in game
@@ -21,7 +18,6 @@ public class RecordUsedPlace {
     private ArrayList<Position> walls_pos;
     private ArrayList<Position> obstacle_pos;
 
-    private ArrayList<Reward> rewards;// all rewards 
     private Player player;
 
     public static void setInstance(RecordUsedPlace instance) {
@@ -29,7 +25,6 @@ public class RecordUsedPlace {
     }
 
     private Iterator<Position> iterator_pos;
-    private Iterator<Reward> iterator_reward;
     public static RecordUsedPlace instance;
 
     public RecordUsedPlace() {
@@ -37,7 +32,6 @@ public class RecordUsedPlace {
 
         obstacle_pos = new ArrayList<Position>();
 
-        rewards = new ArrayList<Reward>();
         walls_pos = new ArrayList<Position>();
 
     }
@@ -55,21 +49,20 @@ public class RecordUsedPlace {
         return available.get(random.nextInt(available.size()));
     }
 
-    public boolean containsCandyAtPosition(Position position) {
-        for (Reward candy : rewards) {
-            if (candy.getPosition().equals(position)) {
-                // if (candy instanceof Candy && candy.getPosition().equals(position)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    // public boolean containsCandyAtPosition(Position position) {
+    //     for (Reward candy : rewards) {
+    //         if (candy.getPosition().equals(position)) {
+    //             // if (candy instanceof Candy && candy.getPosition().equals(position)) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
 
     public void initalAllInfor() {
         if (GameManager.getInstance().isGameEnd()) {
             obstacle_pos = new ArrayList<Position>();
-
-            rewards  = new ArrayList<Reward>();
+            walls_pos = new ArrayList<>();
 
         }
     }
@@ -215,9 +208,6 @@ public class RecordUsedPlace {
         return available.size();
     }
 
-    public int getLengthOfRewards(){
-        return rewards.size();
-    }
 
     public ArrayList<Position> getAviablePosition() {
         return available;
@@ -240,13 +230,13 @@ public class RecordUsedPlace {
     }
 
 
-    public Reward playerGetReward() {
-        for (Reward reward : rewards) {
-            if (player.getPosition().equal(reward.getPosition()))
-                return reward;
-        }
-        return null;
-    }
+    // public Reward playerGetReward() {
+    //     for (Reward reward : rewards) {
+    //         if (player.getPosition().equal(reward.getPosition()))
+    //             return reward;
+    //     }
+    //     return null;
+    // }
 
     // public Enemy playerMeetEnemy(){
     //     for(Enemy enemy : enemies){
@@ -277,10 +267,6 @@ public class RecordUsedPlace {
         }
     }
 
-
-    public List<Reward> getRewardList() {
-        return rewards;
-    }
 
     // public boolean isNotSpiderPosition(Position pos) {
     //     for (Enemy enemy : enemies) {

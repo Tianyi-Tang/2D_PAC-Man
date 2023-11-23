@@ -60,7 +60,7 @@ public class Spider implements Enemy {
 
         do {
             potentialPosition = record.getRandomFromAvailablePosition();
-        } while (potentialPosition.equal(playerPosition) || record.containsCandyAtPosition(potentialPosition));
+        } while (potentialPosition.equal(playerPosition));
 
         enemyPosition.setPosition(potentialPosition);
         roomEnvironment.addEnemy(this);

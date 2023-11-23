@@ -254,7 +254,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * check all reward load to the room
      */
     private void checkRewards(){
-        if(record.getLengthOfRewards() == config.getAllRewardNum()){
+        if(roomEnvironment.getRewardNumber() == config.getAllRewardNum()){
             generateAllRewards = true;
             createPlayer();
             progress ++;

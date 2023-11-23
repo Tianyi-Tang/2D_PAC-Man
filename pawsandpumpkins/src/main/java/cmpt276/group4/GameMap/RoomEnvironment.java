@@ -56,6 +56,14 @@ public class RoomEnvironment {
         }
     }
 
+    public Reward collectReward(Position position){
+        for (Reward reward : rewards) {
+            if(position.equal(reward.getPosition()))
+                return reward;
+        }
+        return null;
+    }
+
     /**
      * Note this function is not complenet, another function require from RecordUsedPlace
      * @param enmemyPos

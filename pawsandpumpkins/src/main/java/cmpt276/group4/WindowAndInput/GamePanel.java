@@ -190,7 +190,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        for (Reward reward : record.getRewardList()) {
+        for (Reward reward : roomEnvironment.getRewards()) {
             reward.draw(g2);
 
         }
