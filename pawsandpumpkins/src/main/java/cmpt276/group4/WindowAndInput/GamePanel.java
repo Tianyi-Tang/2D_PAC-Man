@@ -16,7 +16,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
-import cmpt276.group4.GameTime;
 import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
@@ -25,6 +24,7 @@ import cmpt276.group4.Player.Player;
 
 import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.Room.Door;
+import cmpt276.group4.Time.GameTime;
 import cmpt276.group4.UI.NumberPanel;
 import cmpt276.group4.Reward.MangeBonusReward;
 

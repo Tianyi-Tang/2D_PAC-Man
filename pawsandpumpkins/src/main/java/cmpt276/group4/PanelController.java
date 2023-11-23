@@ -102,6 +102,9 @@ public class PanelController {
         }
     }
 
+    /**
+     * switch the game panel to game end panel
+     */
     public void transformToEndScreen(){
         if(GameManager.getInstance().isGameEnd()){
             layout.show(cardContainer, "gameEnd");
@@ -129,6 +132,9 @@ public class PanelController {
 
     }
 
+    /**
+     * inital 
+     */
     private void initalNumberPanel(){
         Player player = Player.getInstance();
         numberPanel.init(GameManager.getInstance().isPalyerWin());

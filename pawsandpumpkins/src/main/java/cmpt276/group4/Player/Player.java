@@ -12,9 +12,6 @@ import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Reward.Reward;
-import cmpt276.group4.Room.Door;
-import cmpt276.group4.Room.Room;
-import cmpt276.group4.WindowAndInput.GamePanel;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
 /**
@@ -24,8 +21,6 @@ public class Player implements KeyMovingObserver {
     private Position playerPosition;
     private Position destination;
     private static Player _instance = null;
-
-    private boolean wining = false;
 
     private boolean move_up, move_down, move_left, move_right = false;//directions player can move
     private MoveDirection direction = MoveDirection.Down; //the current direction playe move
@@ -91,14 +86,6 @@ public class Player implements KeyMovingObserver {
      */
     public Position getPosition(){
         return playerPosition;
-    }
-
-    /**
-     * return a boolean value to represent player wining the game
-     * @return is player wining game
-     */
-    public boolean playerWin(){
-        return wining;
     }
 
     /**
