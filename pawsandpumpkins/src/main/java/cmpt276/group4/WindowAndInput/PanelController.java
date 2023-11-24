@@ -1,18 +1,17 @@
-package cmpt276.group4;
+package cmpt276.group4.WindowAndInput;
 import java.awt.CardLayout;
 
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cmpt276.group4.GameManager;
+import cmpt276.group4.GameStatus;
+import cmpt276.group4.gameLevel;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Room.Room;
 import cmpt276.group4.UI.NumberPanel;
-import cmpt276.group4.WindowAndInput.GamePanel;
-import cmpt276.group4.WindowAndInput.LoadingPanel;
-import cmpt276.group4.WindowAndInput.MainPanel;
-import cmpt276.group4.WindowAndInput.keyboardListener;
 
 /**
  * controlling the panel switching
@@ -107,6 +106,7 @@ public class PanelController {
      */
     public void transformToEndScreen(){
         if(GameManager.getInstance().isGameEnd()){
+            gamePanel.endGameLoop();
             layout.show(cardContainer, "gameEnd");
             initalNumberPanel();
         }

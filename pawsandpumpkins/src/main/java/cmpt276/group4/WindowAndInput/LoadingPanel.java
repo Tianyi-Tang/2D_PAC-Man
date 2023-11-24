@@ -10,13 +10,15 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import cmpt276.group4.PanelController;
-import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
+import cmpt276.group4.Player.Player;
 import cmpt276.group4.Player.PlayerGenerator;
 import cmpt276.group4.Reward.RewardFactory;
 import cmpt276.group4.Reward.RewardInitialization;
@@ -44,6 +46,8 @@ public class LoadingPanel extends JPanel implements Runnable {
     private Room room;// room for this game
 
     private RecordUsedPlace record;
+    private RoomLayout roomLayout;
+    private RoomEnvironment roomEnvironment;
     private GameConfig config;//object contain the information about game 
     private boolean generateconfi,generateRoom, generateAllTile, generateWall, generatePlayer,generateObstacle,generateAllEnemies, generateAllRewards =false;
     //boolean value to check each resource is generate
@@ -89,6 +93,8 @@ public class LoadingPanel extends JPanel implements Runnable {
             loadingThread = new Thread(this);
             loadingThread.start();
             record = RecordUsedPlace.getInstance();
+            roomLayout =RoomLayout.getInstance();
+            roomEnvironment = RoomEnvironment.getInstance();
         }
     }
 
@@ -190,7 +196,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      */
     private void checkTitle(){
         System.out.println(config.areaofRoom());
-        if(record.getTileNumber() == config.areaofRoom()){
+        if(roomLayout.getTileNumber() == config.areaofRoom()){
             generateAllTile = true;
             createWall();
             progress ++;
@@ -202,7 +208,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once it success loadin, loading the player 
      */
     private void checkWall(){
-        if(record.getWallNumber() == config.getNumberOfWall()){
+        if(roomLayout.getWallNumber() == config.getNumberOfWall()){
             generateWall = true;
             createPlayer();
             progress ++;
@@ -214,7 +220,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once it success loadin,set wining requirement to player and loading the obstacle
      */
     private void checkPlayer(){
-        if(record.getPlayerPosition() != null){
+        if(roomEnvironment.getPlayerPosition() != null){
             generatePlayer = true;
             createObstacle();
             progress ++;
@@ -226,7 +232,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once meet the requirement, loading the enemy
      */
     private void checkObstacle (){
-        if(record.getObstaclesNumber() == config.getNumberOfObstacles()){
+        if(roomLayout.getObstaclesNumber() == config.getNumberOfObstacles()){
             generateObstacle = true;
             createEnemy();
             progress ++;
@@ -238,7 +244,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once meet the requirement, loading the rewards
      */
     private void checkEnemy(){
-        if(record.getLengthOfEnemies() == config.getTotalGhosts()){
+        if(roomEnvironment.getEnemyNumber() == config.getTotalGhosts()){
             generateAllEnemies = true;
             createReward();
             progress ++;
@@ -249,7 +255,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * check all reward load to the room
      */
     private void checkRewards(){
-        if(record.getLengthOfRewards() == config.getAllRewardNum()){
+        if(roomEnvironment.getRewardNumber() == config.getAllRewardNum()){
             generateAllRewards = true;
             createPlayer();
             progress ++;
@@ -277,7 +283,6 @@ public class LoadingPanel extends JPanel implements Runnable {
      * loading all walls in the game
      */
     private void createWall(){
-        System.out.println("Require Wall:" +config.getNumberOfWall());
         room_initialization.iWalls(factory);
     }
 
@@ -285,7 +290,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * loading all walls in the game
      */
     private void createPlayer(){
-        record.setPlayer(PlayerGenerator.creatPlayer());
+        roomEnvironment.setPlayer(Player.getInstance());
     }
 
      /**

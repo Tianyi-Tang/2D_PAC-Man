@@ -7,8 +7,9 @@ import java.lang.reflect.Array;
 import java.util.List;
 
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.GameMap.RoomLayout;
+
 public class RoomFactory {
 
     /**
@@ -33,7 +34,7 @@ public class RoomFactory {
     public void createTombstones(Obstacletype type, Position position, int amount){
         while(amount > 0){
             Obstacle obstacle = new Tombstone(type,amount,position);
-            RecordUsedPlace.getInstance().addElementToMap(obstacle);
+            RoomLayout.getInstance().addElementInMap(obstacle);
             amount--;
         }
     }
@@ -47,7 +48,7 @@ public class RoomFactory {
      */
     public void createWall(Obstacletype type, List<Position> positions, int amount){
         for (int i=0; i < amount && i < positions.size(); i++){
-            RecordUsedPlace.getInstance().addElementToMap(new Wall(type,amount,positions.get(i)));
+            RoomLayout.getInstance().addElementInMap(new Wall(type,amount,positions.get(i)));
         }
     }
 
@@ -58,7 +59,7 @@ public class RoomFactory {
      */
     public void createTile(List<Position> positions){
         for (Position position : positions) {
-            RecordUsedPlace.getInstance().addElementToMap(new Tile(position));
+            RoomLayout.getInstance().addElementInMap(new Tile(position));
         };
     }
 }

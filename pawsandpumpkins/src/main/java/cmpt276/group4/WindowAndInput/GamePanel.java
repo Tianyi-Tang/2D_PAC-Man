@@ -7,18 +7,23 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.awt.Font;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
+
 import cmpt276.group4.RecordUsedPlace;
+
+import cmpt276.group4.GameManager;
+
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
+
+import cmpt276.group4.GameMap.RoomEnvironment;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.Player;
 
@@ -26,7 +31,6 @@ import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.Room.Door;
 import cmpt276.group4.Time.GameTime;
 import cmpt276.group4.UI.NumberPanel;
-import cmpt276.group4.Reward.MangeBonusReward;
 
 /**
  * GamePanel is a custom JPanel class that serves as the main game area for a
@@ -56,6 +60,8 @@ import cmpt276.group4.Reward.MangeBonusReward;
 public class GamePanel extends JPanel implements Runnable {
 
     RecordUsedPlace record = RecordUsedPlace.getInstance();
+    private RoomLayout roomLayout = RoomLayout.getInstance();
+    private RoomEnvironment roomEnvironment =  RoomEnvironment.getInstance();
     private NumberPanel numberPanel;
 
     // Screen Sitting
@@ -147,11 +153,13 @@ public class GamePanel extends JPanel implements Runnable {
                 door.playerLeaveRoom();
             }
         }
-            
 
+        for (Enemy enemy : roomEnvironment.getEnemies()) {
+            enemy.catchPlayer();            
+        }
+        
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
-            for (Enemy enemy : record.getEnemyList()) {
-                enemy.catchPlayer();
+            for (Enemy enemy : roomEnvironment.getEnemies()) {
                 if (enemy instanceof Ghost) {
                     ((Ghost) enemy).ghostMoveNextPosition();
                 }
@@ -177,13 +185,13 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        synchronized (record.getElemet()) {
-            for (CharacterAvaliablePosition element : record.getElemet()) {
+        synchronized (roomLayout.getElements()) {
+            for (CharacterAvaliablePosition element : roomLayout.getElements()) {
                 element.draw(g2);
             }
         }
 
-        for (Reward reward : record.getRewardList()) {
+        for (Reward reward : roomEnvironment.getRewards()) {
             reward.draw(g2);
 
         }
@@ -196,7 +204,7 @@ public class GamePanel extends JPanel implements Runnable {
             int score = player.totalScore();
             g2.drawString("Score: " + score, 10, 30);
         }
-        for (Enemy enemy : record.getEnemyList()) {
+        for (Enemy enemy : roomEnvironment.getEnemies()) {
 
             enemy.draw(g2);
         }
@@ -208,6 +216,12 @@ public class GamePanel extends JPanel implements Runnable {
 
         }
         g2.dispose();
+    }
+
+    public void endGameLoop(){
+        if(GameManager.getInstance().isGameEnd()){
+            gameThread = null;
+        }
     }
 
     /**

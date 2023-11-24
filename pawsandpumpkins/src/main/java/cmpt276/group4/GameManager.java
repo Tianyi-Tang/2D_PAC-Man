@@ -6,6 +6,7 @@ package cmpt276.group4;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Room.Door;
+import cmpt276.group4.WindowAndInput.PanelController;
 
 
 /**

@@ -13,7 +13,9 @@ import javax.imageio.ImageIO;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.PlayerMovement;
 import cmpt276.group4.WindowAndInput.GamePanel;
@@ -30,6 +32,8 @@ public class Ghost implements Enemy {
     private BufferedImage ghost_basic, ghost_advanced;
     private BufferedImage currentImage = null;
     private RecordUsedPlace record;
+    private RoomEnvironment roomEnvironment;
+
 
     /**
      * Constructs a Ghost enemy with specified type.
@@ -39,19 +43,22 @@ public class Ghost implements Enemy {
     public Ghost(EnemyType type) {
         getPlayerPosition();
         record = RecordUsedPlace.getInstance();
+        roomEnvironment = RoomEnvironment.getInstance();
+
         enemyPosition = new Position(0, 0);
         enemyType = type;
         getEnemyImage();
         this.enemyMovement = new EnemyMovement();
+       
 
         Position potentialPosition = new Position(0, 0);
         potentialPosition.equal(playerPosition);
         do {
-            potentialPosition = record.getRandomSafePosition();
+            potentialPosition = record.getRandomFromAvailablePosition();
         } while (record.isPlayerNearBy(8 * WindowConfig.tileSize, potentialPosition));
 
         this.enemyPosition.setPosition(potentialPosition);
-        record.addEnemy(this);
+        roomEnvironment.addEnemy(this);
     }
 
     /**
@@ -80,8 +87,7 @@ public class Ghost implements Enemy {
      * places.
      */
     private void getPlayerPosition() {
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        playerPosition = record.getPlayerPosition();
+        playerPosition = RoomEnvironment.getInstance().getPlayerPosition();
     }
 
     /**

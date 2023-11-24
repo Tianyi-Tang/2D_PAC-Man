@@ -2,7 +2,7 @@ package cmpt276.group4.Room;
 
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
@@ -54,7 +54,7 @@ public class Tombstone extends Obstacle {
             // Get a random position from available positions
             potentialPosition = RecordUsedPlace.getInstance().getRandomFromAvailablePosition();
             // Repeat until the position is not too close to the player
-        } while (record.isPlayerNearBy(2 * WindowConfig.tileSize, potentialPosition));
+        } while (!record.canPlaceEnemyAndObstacle(potentialPosition));
 
         // Set the chosen position for the obstacle
         position = potentialPosition;

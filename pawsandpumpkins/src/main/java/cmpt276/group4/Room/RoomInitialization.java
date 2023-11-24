@@ -7,8 +7,8 @@ import javax.lang.model.type.NullType;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Logic.GameConfig;
 
 
