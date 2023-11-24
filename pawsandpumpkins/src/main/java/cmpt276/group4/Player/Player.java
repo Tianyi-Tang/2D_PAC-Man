@@ -11,8 +11,9 @@ import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.WindowConfig;
-import cmpt276.group4.Reward.Reward;
+
 import cmpt276.group4.Time.GameTime;
 import cmpt276.group4.Time.TimeElapsedListener;
 import cmpt276.group4.WindowAndInput.MoveDirection;
@@ -22,7 +23,6 @@ import cmpt276.group4.WindowAndInput.MoveDirection;
  */
 public class Player implements KeyMovingObserver, TimeElapsedListener {
     private GameManager manager;
-    private RoomEnvironment roomEnvironment;
 
     private Position playerPosition;
     private Position destination;
@@ -69,9 +69,9 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         return _instance;
     }
 
-    public void init(GameManager manager, RoomEnvironment roomEnvironment){
+    public void init(GameManager manager, RoomEnvironment roomEnvironment,RoomLayout roomLayout){
         this.manager = manager;
-        this.roomEnvironment = roomEnvironment;
+        movement.init(roomLayout, roomEnvironment, this);
     }
 
     /**
@@ -92,6 +92,10 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setPosition(Position position){
+        playerPosition.setPosition(position);
     }
 
     /**
@@ -224,23 +228,19 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         if(time_counter >= 10){
             if(move_up){
                 direction = MoveDirection.Up;
-                updateDestination(0, -48);
-                updatePosition();
+                updatePosition(0, -48);
             }
             else if(move_down){
                 direction = MoveDirection.Down;
-                updateDestination(0, 48);
-                updatePosition();
+                updatePosition(0, 48);
             }
             else if(move_right){
                 direction = MoveDirection.Right;
-                updateDestination(48, 0);
-                updatePosition();
+                updatePosition(48, 0);
             }
             else if(move_left){
                 direction = MoveDirection.Left;
-                updateDestination(-48, 0);
-                updatePosition();
+                updatePosition(-48, 0);
             }
             time_counter =0;
         }
@@ -299,15 +299,9 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
      * destination position to player position and check the destination has
      * reward or enemy
      */
-    private void updatePosition(){
-        if(movement.isPositionAvailable(destination)){
-            playerPosition.setPosition(destination);
-            Reward reward = roomEnvironment.collectReward();
-            if(reward != null){
-                reward.addBenefit(this);
-            }
-        }
-            
+    private void updatePosition(int x_increment,int y_increment){
+        updateDestination(x_increment, y_increment);
+        movement.isPositionAvailable(destination);
     }
 
     /**

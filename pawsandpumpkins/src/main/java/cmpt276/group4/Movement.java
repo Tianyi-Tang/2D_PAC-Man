@@ -12,5 +12,5 @@ public interface Movement {
      * @param position The position to check for availability.
      * @return true if the position is available, false otherwise.
      */
-    boolean isPositionAvailable(Position position);
+     boolean isPositionAvailable(Position position);
 }

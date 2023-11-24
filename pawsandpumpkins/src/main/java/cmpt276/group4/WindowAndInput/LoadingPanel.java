@@ -291,7 +291,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * loading all walls in the game
      */
     private void createPlayer(){
-        Player player = PlayerGenerator.creatPlayer(GameManager.getInstance(), roomEnvironment);
+        Player player = PlayerGenerator.creatPlayer(GameManager.getInstance(), roomEnvironment,roomLayout);
         roomEnvironment.setPlayer(player);
     }
 
