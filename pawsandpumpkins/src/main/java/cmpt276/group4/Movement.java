@@ -7,14 +7,6 @@ package cmpt276.group4;
 public interface Movement {
     
     /**
-     * Moves an entity to the specified position.
-     *
-     * @param position The position to move the entity to.
-     * @return true if the movement is successful, false otherwise.
-     */
-    boolean moveTo(Position position);
-
-    /**
      * Checks if the specified position is available for movement.
      *
      * @param position The position to check for availability.

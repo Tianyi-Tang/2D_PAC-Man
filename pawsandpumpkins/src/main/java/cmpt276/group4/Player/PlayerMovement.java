@@ -13,16 +13,7 @@ public class PlayerMovement implements Movement {
     public PlayerMovement(){
         roomLayout = RoomLayout.getInstance();
     }
-    /**
-     * Moves the player to the target position
-     * @param position The target position that player want to move 
-     * @return If this position is avaliable for player return true, else return false
-     */
-    @Override
-    public boolean moveTo(Position position) {
-        return isPositionAvailable(position);
-    }
-
+    
     /**
      * Check the target position is aviable to player or not 
      * @param position The target position for player moving

@@ -16,17 +16,17 @@ public class EnemyMovement implements Movement {
         roomLayout = RoomLayout.getInstance();
     }
 
-    /**
-     * Moves the enemy to the specified position.
-     * This method updates the enemy's position and  handle updating the enemy's image in the game.
-     *
-     * @param position The new position to move the enemy to.
-     * @return Returns true, indicating that the move operation was successful.
-     */
-    @Override
-    public boolean moveTo(Position position) {
-        return true;
-    }
+    // /**
+    //  * Moves the enemy to the specified position.
+    //  * This method updates the enemy's position and  handle updating the enemy's image in the game.
+    //  *
+    //  * @param position The new position to move the enemy to.
+    //  * @return Returns true, indicating that the move operation was successful.
+    //  */
+    // @Override
+    // public boolean moveTo(Position position) {
+    //     return true;
+    // }
 
     /**
      * Checks if a specified position is available for the enemy to move to.
