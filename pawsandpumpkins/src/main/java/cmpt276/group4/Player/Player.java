@@ -21,6 +21,8 @@ import cmpt276.group4.WindowAndInput.MoveDirection;
  * Class tha represent character that control by people
  */
 public class Player implements KeyMovingObserver, TimeElapsedListener {
+    private GameManager manager;
+    private RoomEnvironment roomEnvironment;
 
     private Position playerPosition;
     private Position destination;
@@ -65,6 +67,11 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
             _instance = new Player();
         }      
         return _instance;
+    }
+
+    public void init(GameManager manager, RoomEnvironment roomEnvironment){
+        this.manager = manager;
+        this.roomEnvironment = roomEnvironment;
     }
 
     /**
