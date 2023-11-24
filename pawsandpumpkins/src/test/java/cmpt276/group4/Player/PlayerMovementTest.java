@@ -28,18 +28,18 @@ public class PlayerMovementTest {
         mockRoomEnvironment = mock(RoomEnvironment.class);
 
         unaivailbePosition = new Position(2* 48,48);
-        roomLayout.addElementInMap(new Tombstone(unaivailbePosition));
+        roomLayout.addElementInMap(new Wall(unaivailbePosition));
         movement.init(roomLayout, mockRoomEnvironment, Player.getInstance());
     }
 
 
     @Test
     public void goToAviablePosition(){
-        assertEquals(true,movement.isPositionAvailable(unaivailbePosition));
+        assertEquals(true,movement.isPositionAvailable(new Position(48, 48)));
     }
 
     @Test
     public void goToUnaviablePosition(){
-        assertEquals(false, movement.isPositionAvailable(new Position(48, 48)));
+        assertEquals(false, movement.isPositionAvailable(unaivailbePosition));
     }
 }
