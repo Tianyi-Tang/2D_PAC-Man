@@ -8,16 +8,19 @@ import javax.swing.JPanel;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.GameStatus;
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.GameMap.RoomEnvironment;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Room.Room;
+import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.UI.NumberPanel;
 
 /**
  * controlling the panel switching
  */
 public class PanelController {
-     private JFrame window;
+    private JFrame window;
 
     private static PanelController instance;
 
@@ -25,6 +28,9 @@ public class PanelController {
     private JPanel cardContainer;
 
     private GameStatus status;
+    private GameManager gameManager;
+    private RoomLayout roomLayout;
+    private RoomEnvironment roomEnvironment;
 
     private GamePanel gamePanel;
     private MainPanel mainPanel;
@@ -45,8 +51,18 @@ public class PanelController {
         cardContainer.add(mainPanel,"main");
         cardContainer.add(loadPanel,"load");
         cardContainer.add(numberPanel, "gameEnd");
+        createWindow();
+        initalKeySinglton();
+    }
 
 
+    public static synchronized PanelController getInstance(){
+        if(instance == null)
+            instance = new PanelController();
+        return instance;
+    }
+
+    private void createWindow(){
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("paws and pumpkins");
@@ -56,11 +72,10 @@ public class PanelController {
         window.setLocationRelativeTo(null);
     }
 
-
-    public static synchronized PanelController getInstance(){
-        if(instance == null)
-            instance = new PanelController();
-        return instance;
+    private void initalKeySinglton(){
+        gameManager = GameManager.getInstance();
+        roomLayout = RoomLayout.getInstance();
+        roomEnvironment = RoomEnvironment.getInstance();
     }
 
      /**
