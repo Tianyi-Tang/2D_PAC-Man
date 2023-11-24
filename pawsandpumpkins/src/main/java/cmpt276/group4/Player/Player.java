@@ -123,6 +123,9 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         
     }
 
+    /**
+     * Player shouldn't deduct score during 0.5 second interval
+     */
     private void undeductInterval(){
         interval = true;
         GameTime.getInstance().setTimeInterval(this, 500);
@@ -208,7 +211,9 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         }
     }
 
-
+    /**
+     * the undeduct time is end, player should available for deduct score 
+     */
     @Override
     public void arriveTime() {
         interval = false;
@@ -306,30 +311,6 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         if(movement.isPositionAvailable(destination))
             playerPosition.setPosition(destination);
     }
-
-    /**
-     * Check whether player position is same as door position after
-     * player meet the wining requirement
-     */
-    // private void outOfDoor(){
-    //     if(checkDoor){
-    //         for (Door door : doors) {
-    //             if(playerPosition.equal(door.getPosition())){
-    //                 wining = true;
-    //                 GameManager.getInstance().leaveDoor();
-    //             }
-                    
-    //         }
-    //     }
-    // }
-
-    /**
-     * Check whether player meeting the requirement of wining
-     */
-    // private void meetWiningRequirement(){
-    //     if(generalReward_num == generalReward_require)
-    //         checkDoor = true;
-    // }
 
 
 
