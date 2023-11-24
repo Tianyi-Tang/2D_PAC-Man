@@ -11,12 +11,13 @@ import cmpt276.group4.Position;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.Time.TimeElapsedListener;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
 /**
  * Class tha represent character that control by people
  */
-public class Player implements KeyMovingObserver {
+public class Player implements KeyMovingObserver, TimeElapsedListener {
     private Position playerPosition;
     private Position destination;
     private static Player _instance = null;
@@ -176,6 +177,12 @@ public class Player implements KeyMovingObserver {
                 move_right = turnOn;
                 break;
         }
+    }
+
+
+    @Override
+    public void arriveTime() {
+        
     }
 
     /**
