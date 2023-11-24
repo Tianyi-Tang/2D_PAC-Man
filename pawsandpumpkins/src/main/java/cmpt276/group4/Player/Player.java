@@ -49,7 +49,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
    /**
     * constructor for the player initlization
     */
-    private Player(){
+    public Player(){
         playerPosition = new Position(1 * WindowConfig.tileSize, 1 * WindowConfig.tileSize);
         RecordUsedPlace.getInstance().removeFromAviable(playerPosition);
         movement = new PlayerMovement();

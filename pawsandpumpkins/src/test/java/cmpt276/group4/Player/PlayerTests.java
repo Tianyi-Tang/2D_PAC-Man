@@ -37,7 +37,7 @@ public class PlayerTests {
      */
     @BeforeEach
     public void setUp(){
-        player = Player.getInstance();
+        player = new Player();
 
         mockGameManager = mock(GameManager.class);
         player.init(mockGameManager, RoomEnvironment.getInstance(), RoomLayout.getInstance());
@@ -53,6 +53,28 @@ public class PlayerTests {
         assertEquals(new Position( WindowConfig.tileSize, WindowConfig.tileSize), player.getPosition());
     }
 
+
+    /**
+     * Test player can record how many general reward it collect and call the collectReward
+     * function in GameManager
+     */
+    @Test
+    public void addGeneralRewards(){
+        player.addScoreToPlayer(5, false);
+        player.addScoreToPlayer(2, false);
+        verify(mockGameManager).collectReward(player.getGeneralRewardNum());
+        assertEquals(player.getGeneralRewardNum(), 2);
+    }
+
+    /**
+    * Test player can record how many bonus reward it collect
+    */
+    @Test
+    public void addBonusReward(){
+        player.addScoreToPlayer(6, true);
+        assertEquals(player.getBonusRewardNum(), 1);
+    }
+
     /**
      * Check the score is successfully adding to player
      */
@@ -66,7 +88,7 @@ public class PlayerTests {
      */
     @Test
     public void deductPoint(){
-        player.addScoreToPlayer(15, true);
+        player.addScoreToPlayer(15, false);
         player.deductPoint(10);
         assertEquals(player.totalScore(), 5);
     }
@@ -89,27 +111,6 @@ public class PlayerTests {
         player.deductPoint(5);
         player.deductPoint(10);
         assertEquals(player.getDeductScore(), 5);
-    }
-
-    /**
-     * Test player can record how many general reward it collect and call the collectReward
-     * function in GameManager
-     */
-    @Test
-    public void addGeneralRewards(){
-        player.addScoreToPlayer(5, false);
-        player.addScoreToPlayer(2, false);
-        verify(mockGameManager).collectReward(player.getGeneralRewardNum());
-        assertEquals(player.getGeneralRewardNum(), 2);
-    }
-
-    /**
-     * Test player can record how many bonus reward it collect
-     */
-    @Test
-    public void addBonusReward(){
-        player.addScoreToPlayer(6, true);
-        assertEquals(player.getBonusRewardNum(), 1);
     }
 
     /**
