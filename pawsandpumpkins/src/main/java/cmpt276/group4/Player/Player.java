@@ -70,10 +70,10 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
     }
 
     /**
-     * 
-     * @param manager
-     * @param roomEnvironment
-     * @param roomLayout
+     * send singleton objects to set up the movement
+     * @param manager the GameManger objec
+     * @param roomEnvironment the RoomEnvironment object
+     * @param roomLayout the RoomLayout object
      */
     public void init(GameManager manager, RoomEnvironment roomEnvironment,RoomLayout roomLayout){
         this.manager = manager;
@@ -98,10 +98,6 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void setPosition(Position position){
-        playerPosition.setPosition(position);
     }
 
     /**
@@ -188,9 +184,6 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         return collectScore - deductScore;
     }
 
-    public BufferedImage currentBufferedImage(){
-        return currentImage;
-    }
 
     /**
      * Get information send from KeybaordListener and change player moving direction 
@@ -310,7 +303,8 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
      */
     private void updatePosition(int x_increment,int y_increment){
         updateDestination(x_increment, y_increment);
-        movement.isPositionAvailable(destination);
+        if(movement.isPositionAvailable(destination))
+            playerPosition.setPosition(destination);
     }
 
     /**

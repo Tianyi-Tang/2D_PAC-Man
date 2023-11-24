@@ -31,15 +31,14 @@ public class PlayerMovement implements Movement {
     @Override
     public boolean isPositionAvailable(Position position) {
         if(roomLayout.isPositionAviable(position)){
-            moveTo(position);
+            checkReward(position);
             return true;
         }
         else
             return false;
     }
 
-    private void moveTo(Position position){
-        player.setPosition(position);
+    private void checkReward(Position position){
         reward = roomEnvironment.collectReward();
         if(reward != null)
             reward.addBenefit(player);

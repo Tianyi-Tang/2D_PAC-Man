@@ -40,13 +40,7 @@ public class PlayerTests {
     public void initalPosition(){
         assertEquals(new Position( WindowConfig.tileSize, WindowConfig.tileSize), player.getPosition());
     }
-
-    @Test
-    public void setPlayerPosition(){
-        player.setPosition(new Position(5, 4));
-        assertEquals(player.getPosition(), new Position(5, 4));
-    }
-
+    
     @Test
     public void addScoreToPlayer(){
         player.addScoreToPlayer(4, true);
