@@ -18,8 +18,7 @@ import java.io.IOException;
 
 
 public class PumpkinHead extends BonusReward {
-    private long displayStartTime =10;
-    private long displayDuration = 20;
+    private long displayDuration = 10;
     private int score = 5;
     private BufferedImage ppk1, ppk2, currentImage;
     private Position ppkPosition;
@@ -29,6 +28,7 @@ public class PumpkinHead extends BonusReward {
     private boolean available;
     private RecordUsedPlace record;
     public boolean isBonusReward = true;
+    private boolean isAvailable = true;
     public PumpkinHead() {
 
         record = RecordUsedPlace.getInstance();
@@ -54,24 +54,17 @@ public class PumpkinHead extends BonusReward {
         this.ppkPosition = position;
     }
 
-    @Override
-    public boolean isAvailable() {
-        return available;
-    }
 
     @Override
     public boolean isBonusReward(){
         return isBonusReward;
     }
-    @Override
-    public void deleteImage() {
-        this.ppk1 = null;
-        this.ppk2 = null;
-    }
+
 
     @Override
     public void addBenefit(Player player) {
-        if (RoomEnvironment.getInstance().getPlayerPosition().equal(ppkPosition)) {
+
+        if (RoomEnvironment.getInstance().sameAsPlayerPosition(ppkPosition)) {
             addScore(player,score);
             RoomEnvironment.getInstance().removeReward(this);
         }
@@ -91,13 +84,12 @@ public class PumpkinHead extends BonusReward {
             e.printStackTrace();
         }
     }
-    @Override
-    public boolean shouldDraw(long currentTime) {
-        return currentTime >= displayStartTime &&
-                currentTime < displayStartTime + displayDuration;
-    }
 
     GameTime gameTime = GameTime.getInstance();
+
+    public boolean getAvailable(){
+        return isAvailable;
+    }
 
 @Override
     public void draw(Graphics2D g1) {
@@ -110,10 +102,14 @@ public class PumpkinHead extends BonusReward {
             currentImage = ppk1;
         else
             currentImage = ppk2;
-        if(displayStartTime<=gameTime.getTime() && gameTime.getTime()-displayStartTime<=displayDuration) {
+        if(gameTime.getTime() % displayDuration>= displayDuration/2) {
+            isAvailable = true;
 
     g1.drawImage(currentImage, ppkPosition.getX_axis(), ppkPosition.getY_axis(), WindowConfig.tileSize, WindowConfig.tileSize, null);
 
+        }
+        else {
+            isAvailable = false;
         }
 
     }
