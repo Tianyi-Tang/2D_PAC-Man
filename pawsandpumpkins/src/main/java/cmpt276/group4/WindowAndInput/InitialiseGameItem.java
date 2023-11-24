@@ -18,8 +18,15 @@ public class InitialiseGameItem {
     private RoomInitialization roomInitialization;
     private RoomFactory roomFactory;
 
-    public void setGameConfig(GameConfig config){
+    public InitialiseGameItem(GameConfig config){
         this.config = config;
+    }
+
+    public boolean getConfig(){
+        if(config == null)
+            return false;
+        else
+            return true;
     }
 
     public void createRoom(){

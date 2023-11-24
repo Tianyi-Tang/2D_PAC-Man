@@ -53,6 +53,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private boolean generateconfi,generateRoom, generateAllTile, generateWall, generatePlayer,generateObstacle,generateAllEnemies, generateAllRewards =false;
     //boolean value to check each resource is generate
 
+    private InitialiseGameItem initialiseItem;
     private BufferedImage background_img;
 
     /**
@@ -83,6 +84,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     public void gameLevelSending(gameLevel level){
         config = GameConfig.getGameConfigInstance();
         config.passGameLevel(level);
+        initialiseItem = new InitialiseGameItem(config);
         createTimeLine();
     }
 
@@ -172,13 +174,21 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    private boolean keySingltonReady(){
+        if(record != null && roomLayout != null && roomEnvironment != null)
+            return true;
+        else
+            return false;
+    }
+
     /**
      * Check the game config is successful build
      */
     private void checkConfig(){
-        if(config.alreayInitialize() && record != null && roomLayout != null && roomEnvironment != null){
+        if(config.alreayInitialize() && keySingltonReady()  && initialiseItem.getConfig()){
             generateconfi = true;
-            createRoom();
+            initialiseItem.createRoom();
+            progress ++;
         }
     }
 
@@ -189,7 +199,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkRoom(){
         if(record.getLengthOfAviable() == config.areaofRoom()){
             generateRoom = true;
-            createTile();
+            initialiseItem.createTile();
             progress ++;
         }
     }
@@ -202,7 +212,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         System.out.println(config.areaofRoom());
         if(roomLayout.getTileNumber() == config.areaofRoom()){
             generateAllTile = true;
-            createWall();
+            initialiseItem.createWall();;
             progress ++;
         }
     }
@@ -214,7 +224,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkWall(){
         if(roomLayout.getWallNumber() == config.getNumberOfWall()){
             generateWall = true;
-            createPlayer();
+            initialiseItem.createPlayer(roomLayout, roomEnvironment);
             progress ++;
         }
     }
@@ -226,7 +236,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkPlayer(){
         if(roomEnvironment.getPlayerPosition() != null){
             generatePlayer = true;
-            createObstacle();
+            initialiseItem.createObstacle();
             progress ++;
         }
     }
@@ -238,7 +248,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkObstacle (){
         if(roomLayout.getObstaclesNumber() == config.getNumberOfObstacles()){
             generateObstacle = true;
-            createEnemy();
+            initialiseItem.createEnemy();
             progress ++;
         }
     }
@@ -250,7 +260,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkEnemy(){
         if(roomEnvironment.getEnemyNumber() == config.getTotalGhosts()){
             generateAllEnemies = true;
-            createReward();
+            initialiseItem.createReward();
             progress ++;
         }
     }
@@ -261,7 +271,6 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkRewards(){
         if(roomEnvironment.getRewardNumber() == config.getAllRewardNum()){
             generateAllRewards = true;
-            createPlayer();
             progress ++;
         }
     }
@@ -351,7 +360,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         loadingThread = null;
         System.out.println("Success!!");
     }
-    
+
     /**
      * swtich to game panel
      */
