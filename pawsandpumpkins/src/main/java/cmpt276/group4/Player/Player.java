@@ -3,14 +3,17 @@ package cmpt276.group4.Player;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Timer;
 
 import javax.imageio.ImageIO;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Reward.Reward;
+import cmpt276.group4.Time.GameTime;
 import cmpt276.group4.Time.TimeElapsedListener;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
@@ -18,6 +21,7 @@ import cmpt276.group4.WindowAndInput.MoveDirection;
  * Class tha represent character that control by people
  */
 public class Player implements KeyMovingObserver, TimeElapsedListener {
+
     private Position playerPosition;
     private Position destination;
     private static Player _instance = null;
@@ -31,7 +35,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
     private int time_counter = 0;
 
     private int deductScore = 0;
-    private boolean undeductInterval = false;
+    private boolean interval = false;
 
     private int collectScore = 0;
     private int bonusReward_num = 0;
@@ -45,7 +49,9 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
     */
     private Player(){
         playerPosition = new Position(1 * WindowConfig.tileSize, 1 * WindowConfig.tileSize);
+        RecordUsedPlace.getInstance().removeFromAviable(playerPosition);
         movement = new PlayerMovement();
+        
         getPlayerImage();
         destination = new Position(0, 0);
     }
@@ -94,10 +100,19 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
      * @param deductScore how many socre need to be deduct
      */
     public void deductPoint(int deductPoint){
-        deductScore += deductPoint;
-        if(deductScore > collectScore){
-            GameManager.getInstance().negativePoint();
+        if(!interval){
+            undeductInterval();
+            deductScore += deductPoint;
+            if(deductScore > collectScore){
+                GameManager.getInstance().negativePoint();
+            }
         }
+        
+    }
+
+    private void undeductInterval(){
+        interval = true;
+        GameTime.getInstance().setTimeInterval(this, 500);
     }
 
     /**
@@ -182,7 +197,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
 
     @Override
     public void arriveTime() {
-        
+        interval = false;
     }
 
     /**
