@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import cmpt276.group4.GameManager;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
@@ -290,7 +291,8 @@ public class LoadingPanel extends JPanel implements Runnable {
      * loading all walls in the game
      */
     private void createPlayer(){
-        roomEnvironment.setPlayer(Player.getInstance());
+        Player player = PlayerGenerator.creatPlayer(GameManager.getInstance(), roomEnvironment);
+        roomEnvironment.setPlayer(player);
     }
 
      /**

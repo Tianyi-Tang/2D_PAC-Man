@@ -3,7 +3,7 @@ package cmpt276.group4.Player;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Timer;
+
 
 import javax.imageio.ImageIO;
 
@@ -111,7 +111,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
             undeductInterval();
             deductScore += deductPoint;
             if(deductScore > collectScore){
-                GameManager.getInstance().negativePoint();
+                manager.negativePoint();
             }
         }
         
@@ -133,7 +133,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
             bonusReward_num ++;
         else{
             generalReward_num ++;
-            GameManager.getInstance().collectReward(generalReward_num);
+            manager.collectReward(generalReward_num);
         }
             
     }
@@ -302,7 +302,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
     private void updatePosition(){
         if(movement.isPositionAvailable(destination)){
             playerPosition.setPosition(destination);
-            Reward reward = RoomEnvironment.getInstance().collectReward();
+            Reward reward = roomEnvironment.collectReward();
             if(reward != null){
                 reward.addBenefit(this);
             }
