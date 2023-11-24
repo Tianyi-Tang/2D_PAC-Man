@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+
 import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,20 +28,28 @@ import cmpt276.group4.WindowAndInput.MoveDirection;
 public class PlayerTests {
     public Player player;
     public GameManager mockGameManager;
+    Graphics2D mockGraphic;
+    public final int directionUpdateTime =10;
+    public final int imageChangingTime = 15;
 
+    /**
+     * Set up the player before testing
+     */
     @BeforeEach
     public void setUp(){
         player = Player.getInstance();
+
         mockGameManager = mock(GameManager.class);
         player.init(mockGameManager, RoomEnvironment.getInstance(), RoomLayout.getInstance());
         mockGameManager.setPlayer(player);
+        mockGraphic = mock(Graphics2D.class);
     }
 
     @Test
     public void initalPosition(){
         assertEquals(new Position( WindowConfig.tileSize, WindowConfig.tileSize), player.getPosition());
     }
-    
+
     @Test
     public void addScoreToPlayer(){
         player.addScoreToPlayer(4, true);
@@ -84,8 +93,7 @@ public class PlayerTests {
     @Test
     public void playerMovingLeft(){
         player.observerUpdate(MoveDirection.Left, true);
-        for(int i=0;i < 10;i++)
-            player.update();
+        runUpdatemultipleTime(directionUpdateTime);
         assertEquals(player.getPosition(), new Position(0, 48));
     }
 
@@ -94,6 +102,66 @@ public class PlayerTests {
         player.observerUpdate(MoveDirection.Left, true);
         player.update();
         assertEquals(player.getPosition(), new Position(48, 48));
+    }
+
+    @Test
+    public void initialmovingImage(){
+        player.draw(mockGraphic);
+        BufferedImage expectImage = loadImage("res/Player/down1.png");
+        assertImagesEqual(expectImage,player.getCurrentImage());
+    }
+
+    @Test
+    public void movingImageUp(){
+        player.observerUpdate(MoveDirection.Up, true);
+        runUpdatemultipleTime(directionUpdateTime);
+        player.draw(mockGraphic);
+        BufferedImage expecImage = loadImage("res/Player/up1.png");
+        assertImagesEqual(expecImage, player.getCurrentImage());
+    }
+
+    @Test
+    public void imageSwitch(){
+        player.observerUpdate(MoveDirection.Left, true);
+        runUpdatemultipleTime(imageChangingTime);
+        player.draw(mockGraphic);
+        BufferedImage expecImage = loadImage("res/Player/left2.png");
+        assertImagesEqual(expecImage, player.getCurrentImage());
+    }
+
+    @Test
+    public void imageAfterReleaseKey(){
+        player.observerUpdate(MoveDirection.Right, true);
+        runUpdatemultipleTime(directionUpdateTime);
+        player.draw(mockGraphic);
+
+        player.observerUpdate(MoveDirection.Right, false);
+        player.draw(mockGraphic);
+        BufferedImage expecImage = loadImage("res/Player/right1.png");
+        assertImagesEqual(expecImage, player.getCurrentImage());
+    }
+
+    private void runUpdatemultipleTime(int index){
+        for(int i=0;i < index;i++)
+            player.update();
+    }
+
+    private BufferedImage loadImage(String path){
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File(path));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+
+
+    private void  assertImagesEqual(BufferedImage expectImage, BufferedImage actualImage){
+        int[] expectedPixels = expectImage.getRGB(0, 0, expectImage.getWidth(), expectImage.getHeight(), null, 0, expectImage.getWidth());
+        int[] actualPixels = actualImage.getRGB(0, 0, actualImage.getWidth(), actualImage.getHeight(), null, 0, actualImage.getWidth());
+
+        assertArrayEquals(expectedPixels, actualPixels);
     }
 
 

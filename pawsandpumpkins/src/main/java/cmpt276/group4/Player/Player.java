@@ -187,6 +187,10 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         return collectScore - deductScore;
     }
 
+    public BufferedImage getCurrentImage(){
+        return currentImage;
+    }
+
 
     /**
      * Get information send from KeybaordListener and change player moving direction 
