@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Player.Player;
 
 import java.util.List;
@@ -44,9 +44,9 @@ public class EnemyFactoryTest {
         RecordUsedPlace.setInstance(mockRecord);
         //when(mockRecord.getRandomSafePosition()).thenReturn(new Position(10, 10));
         //when(mockRecord.getPlayerPosition()).thenReturn(new Position(10, 10));
-        when(mockRecord.containsCandyAtPosition(any(Position.class))).thenReturn(false);
-        when(mockRecord.getRandomSafePosition()).thenReturn(new Position(10, 10)); 
-        when(mockRecord.getPlayerPosition()).thenReturn(mockPlayerPosition);
+        // when(mockRecord.containsCandyAtPosition(any(Position.class))).thenReturn(false);
+        // when(mockRecord.getRandomSafePosition()).thenReturn(new Position(10, 10)); 
+        // when(mockRecord.getPlayerPosition()).thenReturn(mockPlayerPosition);
         
         mockGameManager.setPlayer(mockPlayer);
 
