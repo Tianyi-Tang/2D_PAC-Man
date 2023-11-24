@@ -15,13 +15,11 @@ import javax.swing.JPanel;
 
 import cmpt276.group4.CharacterAvaliablePosition;
 
-import cmpt276.group4.RecordUsedPlace;
-
 import cmpt276.group4.GameManager;
 
 import cmpt276.group4.Enemy.Enemy;
 import cmpt276.group4.Enemy.Ghost;
-
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.WindowConfig;
@@ -30,7 +28,6 @@ import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.Room.Door;
 import cmpt276.group4.Time.GameTime;
-import cmpt276.group4.UI.NumberPanel;
 
 /**
  * GamePanel is a custom JPanel class that serves as the main game area for a
@@ -58,13 +55,12 @@ import cmpt276.group4.UI.NumberPanel;
  *
  */
 public class GamePanel extends JPanel implements Runnable {
-
-    RecordUsedPlace record = RecordUsedPlace.getInstance();
-    private RoomLayout roomLayout = RoomLayout.getInstance();
-    private RoomEnvironment roomEnvironment =  RoomEnvironment.getInstance();
-    private NumberPanel numberPanel;
-
     // Screen Sitting
+    private RecordUsedPlace record;
+    private RoomLayout roomLayout;
+    private RoomEnvironment roomEnvironment =  RoomEnvironment.getInstance();
+
+    
 
     // Define the desired width and height for the pause button
     private static final int PAUSE_BUTTON_WIDTH = 50; // example width
@@ -90,6 +86,12 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         loadPauseButtonImage();
+    }
+
+    public void setKeySingleton(RecordUsedPlace record, RoomLayout roomLayout, RoomEnvironment roomEnvironment){
+        this.record = record;
+        this.roomLayout = roomLayout;
+        this.roomEnvironment = roomEnvironment;
     }
 
     /**

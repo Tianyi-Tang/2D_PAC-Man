@@ -8,12 +8,12 @@ import javax.swing.JPanel;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.GameStatus;
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Room.Room;
-import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.UI.NumberPanel;
 
 /**
@@ -29,6 +29,7 @@ public class PanelController {
 
     private GameStatus status;
     private GameManager gameManager;
+    private RecordUsedPlace record;
     private RoomLayout roomLayout;
     private RoomEnvironment roomEnvironment;
 
@@ -74,6 +75,7 @@ public class PanelController {
 
     private void initalKeySinglton(){
         gameManager = GameManager.getInstance();
+        record = RecordUsedPlace.getInstance();
         roomLayout = RoomLayout.getInstance();
         roomEnvironment = RoomEnvironment.getInstance();
     }
@@ -94,6 +96,8 @@ public class PanelController {
      */
     public void transformToLoadingScreen(gameLevel level){
         if(status == GameStatus.MainPanel){
+            loadPanel.setKeySingleton(record, roomLayout, roomEnvironment);
+            gamePanel.setKeySingleton(record, roomLayout, roomEnvironment);
             layout.show(cardContainer, "load");
             loadPanel.gameLevelSending(level);
             status = GameStatus.LoadingPanel;
@@ -120,7 +124,7 @@ public class PanelController {
      * switch the game panel to game end panel
      */
     public void transformToEndScreen(){
-        if(GameManager.getInstance().isGameEnd()){
+        if(gameManager.isGameEnd()){
             gamePanel.endGameLoop();
             layout.show(cardContainer, "gameEnd");
             initalNumberPanel();
@@ -139,12 +143,9 @@ public class PanelController {
      * call the gameManagerment to get player
      */
     private void enterGame(){
-        GameManager manager = GameManager.getInstance();
-        manager.setPlayer(Player.getInstance());
-        manager.setNumberOfGeneralRewards(GameConfig.getGameConfigInstance());
-        manager.setDoors(Room.getInstance().getDoors());
-
-
+        gameManager.setPlayer(Player.getInstance());
+        gameManager.setNumberOfGeneralRewards(GameConfig.getGameConfigInstance());
+        gameManager.setDoors(Room.getInstance().getDoors());
     }
 
     /**
@@ -152,7 +153,7 @@ public class PanelController {
      */
     private void initalNumberPanel(){
         Player player = Player.getInstance();
-        numberPanel.init(GameManager.getInstance().isPalyerWin());
+        numberPanel.init(gameManager.isPalyerWin());
         numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum() * 5, player.getDeductScore(), player.totalScore());
     }
 

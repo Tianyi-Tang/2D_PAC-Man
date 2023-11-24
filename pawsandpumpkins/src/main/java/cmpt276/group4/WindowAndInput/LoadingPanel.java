@@ -86,6 +86,12 @@ public class LoadingPanel extends JPanel implements Runnable {
         createTimeLine();
     }
 
+    public void setKeySingleton(RecordUsedPlace record, RoomLayout roomLayout, RoomEnvironment roomEnvironment){
+        this.record = record;
+        this.roomLayout = roomLayout;
+        this.roomEnvironment = roomEnvironment;
+    }
+
     /**
      * Create the gamme loop for the laoding panel
     */
@@ -93,9 +99,6 @@ public class LoadingPanel extends JPanel implements Runnable {
         if(loadingThread == null){
             loadingThread = new Thread(this);
             loadingThread.start();
-            record = RecordUsedPlace.getInstance();
-            roomLayout =RoomLayout.getInstance();
-            roomEnvironment = RoomEnvironment.getInstance();
         }
     }
 
@@ -173,7 +176,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Check the game config is successful build
      */
     private void checkConfig(){
-        if(config.alreayInitialize()){
+        if(config.alreayInitialize() && record != null && roomLayout != null && roomEnvironment != null){
             generateconfi = true;
             createRoom();
         }
