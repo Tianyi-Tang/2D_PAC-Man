@@ -351,8 +351,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         loadingThread = null;
         System.out.println("Success!!");
     }
-
-
+    
     /**
      * swtich to game panel
      */
