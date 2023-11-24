@@ -28,7 +28,7 @@ public class PlayerMovementTest {
         mockRoomEnvironment = mock(RoomEnvironment.class);
 
         unaivailbePosition = new Position(2* 48,48);
-        //roomLayout.addElementInMap(new Tombstone(, 0, unaivailbePosition));
+        roomLayout.addElementInMap(new Tombstone(unaivailbePosition));
         movement.init(roomLayout, mockRoomEnvironment, Player.getInstance());
     }
 

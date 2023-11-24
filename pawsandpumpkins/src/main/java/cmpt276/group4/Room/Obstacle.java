@@ -21,12 +21,9 @@ public class Obstacle implements CharacterAvaliablePosition {
     /**
      * Constructor to initialize an obstacle with player access, enemy
      * traversability, and positions.
-     *
-     * @param type     The type of obstacle.
-     * @param amount   The number of obstacles.
      * @param position The position of the obstacle.
      */
-    public Obstacle( int amount, Position position) {
+    public Obstacle( Position position) {
         record = RecordUsedPlace.getInstance();
     }
 

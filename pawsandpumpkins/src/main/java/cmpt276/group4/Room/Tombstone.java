@@ -26,8 +26,8 @@ public class Tombstone extends Obstacle {
      * @param amount   The number of tombstone obstacles.
      * @param position The position of the tombstone.
      */
-    public Tombstone( int amount, Position position ) {
-        super(amount, position);
+    public Tombstone( Position position ) {
+        super(position);
         setObstaclePosition();
         initialWallImage();
         setPlayerAccess();
