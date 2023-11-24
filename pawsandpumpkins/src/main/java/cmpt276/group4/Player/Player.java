@@ -8,8 +8,6 @@ import javax.imageio.ImageIO;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.Enemy.Enemy;
-import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Reward.Reward;
@@ -32,6 +30,7 @@ public class Player implements KeyMovingObserver {
     private int time_counter = 0;
 
     private int deductScore = 0;
+    private boolean undeductInterval = false;
 
     private int collectScore = 0;
     private int bonusReward_num = 0;
