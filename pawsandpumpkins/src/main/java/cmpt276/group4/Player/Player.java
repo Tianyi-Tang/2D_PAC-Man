@@ -93,8 +93,8 @@ public class Player implements KeyMovingObserver {
      * When player catach by enemy, give punishment to player
      * @param deductScore how many socre need to be deduct
      */
-    public void deductPoint(int deductScore){
-        this.deductScore += deductScore;
+    public void deductPoint(int deductPoint){
+        deductScore += deductPoint;
         if(deductScore > collectScore){
             GameManager.getInstance().negativePoint();
         }
