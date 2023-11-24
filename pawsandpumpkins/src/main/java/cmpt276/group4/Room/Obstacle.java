@@ -26,7 +26,7 @@ public class Obstacle implements CharacterAvaliablePosition {
      * @param amount   The number of obstacles.
      * @param position The position of the obstacle.
      */
-    public Obstacle(Obstacletype type, int amount, Position position) {
+    public Obstacle( int amount, Position position) {
         record = RecordUsedPlace.getInstance();
     }
 

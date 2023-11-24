@@ -60,7 +60,7 @@ public class RoomInitialization {
      * @param rmFactory  The room factory used to create tombstones.
      */
     public void iTombs(RoomFactory rmFactory){
-        rmFactory.createTombstones(Obstacletype.TOMBSTONE, position, tombstone);
+        rmFactory.createTombstones(position, tombstone);
     }
 
     /**
@@ -69,7 +69,7 @@ public class RoomInitialization {
      * @param rmFactory  The room factory used to create walls.
      */
     public void iWalls(RoomFactory rmFactory){
-        rmFactory.createWall(Obstacletype.WALL, wallPositionList, wall);
+        rmFactory.createWall( wallPositionList, wall);
     }
 
 

@@ -23,12 +23,11 @@ public class Tombstone extends Obstacle {
     /**
      * Constructor to initialize a tombstone with the specified type, amount, and position.
      *
-     * @param type     The type of tombstone obstacle.
      * @param amount   The number of tombstone obstacles.
      * @param position The position of the tombstone.
      */
-    public Tombstone(Obstacletype type, int amount, Position position ) {
-        super(type, amount, position);
+    public Tombstone( int amount, Position position ) {
+        super(amount, position);
         setObstaclePosition();
         initialWallImage();
         setPlayerAccess();

@@ -23,12 +23,11 @@ public class Wall extends Obstacle {
     /**
      * Constructor to initialize a wall with the specified type, amount, and position.
      *
-     * @param type     The type of wall obstacle.
      * @param amount   The number of wall obstacles.
      * @param position The position of the wall.
      */
-    public Wall(Obstacletype type, int amount, Position position) {
-        super(type, amount, position);
+    public Wall(int amount, Position position) {
+        super(amount, position);
         this.position = position;
         initialWallImage();
     }

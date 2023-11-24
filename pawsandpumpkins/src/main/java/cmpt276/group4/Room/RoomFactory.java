@@ -31,9 +31,9 @@ public class RoomFactory {
      * @param position The position of the tombstone.
      * @param amount   The number of tombstones to create.
      */
-    public void createTombstones(Obstacletype type, Position position, int amount){
+    public void createTombstones( Position position, int amount){
         while(amount > 0){
-            Obstacle obstacle = new Tombstone(type,amount,position);
+            Obstacle obstacle = new Tombstone(amount,position);
             RoomLayout.getInstance().addElementInMap(obstacle);
             amount--;
         }
@@ -46,9 +46,9 @@ public class RoomFactory {
      * @param positions The list of positions for the walls.
      * @param amount    The number of walls to create.
      */
-    public void createWall(Obstacletype type, List<Position> positions, int amount){
+    public void createWall( List<Position> positions, int amount){
         for (int i=0; i < amount && i < positions.size(); i++){
-            RoomLayout.getInstance().addElementInMap(new Wall(type,amount,positions.get(i)));
+            RoomLayout.getInstance().addElementInMap(new Wall(amount,positions.get(i)));
         }
     }
 
