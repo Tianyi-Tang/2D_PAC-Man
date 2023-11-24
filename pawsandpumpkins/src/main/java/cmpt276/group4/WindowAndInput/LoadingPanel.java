@@ -10,22 +10,14 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import cmpt276.group4.GameManager;
 import cmpt276.group4.gameLevel;
-import cmpt276.group4.Enemy.EnemyFactory;
-import cmpt276.group4.Enemy.EnemyInitialization;
+
 import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
-import cmpt276.group4.Player.Player;
-import cmpt276.group4.Player.PlayerGenerator;
-import cmpt276.group4.Reward.RewardFactory;
-import cmpt276.group4.Reward.RewardInitialization;
-import cmpt276.group4.Room.Room;
-import cmpt276.group4.Room.RoomFactory;
-import cmpt276.group4.Room.RoomInitialization;
+
 
 /**
  * Panel that laoding all resources in the game 
@@ -41,10 +33,6 @@ public class LoadingPanel extends JPanel implements Runnable {
     private double timeInterval = 1000000000/FPS;//timer interval for each update
     private JProgressBar progressBar;
     private int progress;
-
-    private RoomInitialization room_initialization;
-    private RoomFactory factory;
-    private Room room;// room for this game
 
     private RecordUsedPlace record;
     private RoomLayout roomLayout;
@@ -273,60 +261,6 @@ public class LoadingPanel extends JPanel implements Runnable {
             generateAllRewards = true;
             progress ++;
         }
-    }
-
-    /**
-     * generate the room for the game
-     */
-    private void createRoom(){
-        room_initialization = new RoomInitialization();
-        factory = new RoomFactory();
-        room_initialization.initializeRoom(config.getGameLevel(), factory);
-        room =room_initialization.iRoom(factory);
-    }
-
-    /**
-     * loading all tiles in the game
-     */
-    private void createTile(){
-        room_initialization.iTiles(factory);
-    }
-
-    /**
-     * loading all walls in the game
-     */
-    private void createWall(){
-        room_initialization.iWalls(factory);
-    }
-
-     /**
-     * loading all walls in the game
-     */
-    private void createPlayer(){
-        Player player = PlayerGenerator.creatPlayer(GameManager.getInstance(), roomEnvironment,roomLayout);
-        roomEnvironment.setPlayer(player);
-    }
-
-     /**
-     * loading all obstacles in the game
-     */
-    private void  createObstacle(){
-        room_initialization.iTombs(factory);
-    }
-
-     /**
-     * loading all enemies in the game
-     */
-    private void createEnemy(){
-        new EnemyInitialization(new EnemyFactory());
-    }
-
-     /**
-     * loading all rewards in the game
-     */
-    private void createReward(){
-        RewardInitialization reward_initialization = new RewardInitialization(new RewardFactory());
-        reward_initialization.generateReward();
     }
 
     /**
