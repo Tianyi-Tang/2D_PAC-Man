@@ -106,7 +106,7 @@ public class GameManager {
     /**
      * laoding the result panel to end of gmae
      */
-    private void endOfGame(){
+    private  void endOfGame(){
         gameEnd =true;
         if(status == GameStatus.Win)
             playerWin = true;

@@ -69,6 +69,12 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         return _instance;
     }
 
+    /**
+     * 
+     * @param manager
+     * @param roomEnvironment
+     * @param roomLayout
+     */
     public void init(GameManager manager, RoomEnvironment roomEnvironment,RoomLayout roomLayout){
         this.manager = manager;
         movement.init(roomLayout, roomEnvironment, this);
@@ -182,6 +188,10 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         return collectScore - deductScore;
     }
 
+    public BufferedImage currentBufferedImage(){
+        return currentImage;
+    }
+
     /**
      * Get information send from KeybaordListener and change player moving direction 
      * @param direction the direction player move to 
@@ -280,7 +290,6 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         }
 
         g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), WindowConfig.tileSize, WindowConfig.tileSize,null); 
-        
     }
 
     /**
