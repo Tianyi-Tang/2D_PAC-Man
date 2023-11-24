@@ -43,7 +43,7 @@ public class Player implements KeyMovingObserver {
    /**
     * constructor for the player initlization
     */
-    Player(){
+    private Player(){
         playerPosition = new Position(1 * WindowConfig.tileSize, 1 * WindowConfig.tileSize);
         movement = new PlayerMovement();
         getPlayerImage();

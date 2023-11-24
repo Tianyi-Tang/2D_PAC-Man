@@ -28,7 +28,7 @@ public class RecordUsedPlace {
     private Iterator<Position> iterator_pos;
     public static RecordUsedPlace instance;
 
-    public RecordUsedPlace() {
+    private RecordUsedPlace() {
         available = new ArrayList<Position>();
 
         obstacle_pos = new ArrayList<Position>();

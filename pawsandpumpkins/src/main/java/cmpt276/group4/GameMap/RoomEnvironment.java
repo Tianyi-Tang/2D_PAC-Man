@@ -28,7 +28,7 @@ public class RoomEnvironment {
         return instacne;
     }
 
-    public RoomEnvironment(){
+    private RoomEnvironment(){
         rewards = new ArrayList<Reward>();
         enemies = new ArrayList<Enemy>();
         record = RecordUsedPlace.getInstance();

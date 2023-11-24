@@ -19,7 +19,7 @@ public class RoomLayout {
     private int wallNum;
     private int obstacleNum;
 
-    public RoomLayout(){
+    private RoomLayout(){
         record = RecordUsedPlace.getInstance();
         elements = new ArrayList<CharacterAvaliablePosition>();
         unAviablePositions = new ArrayList<Position>();

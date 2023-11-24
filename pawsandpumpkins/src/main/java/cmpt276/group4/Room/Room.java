@@ -34,7 +34,7 @@ public class Room {
      * @param max_X Maximum X-coordinate of the room.
      * @param max_Y Maximum Y-coordinate of the room.
      */
-    public Room() {
+    private Room() {
         if (WindowConfig.maxScreenRow < max_X || WindowConfig.maxScreenCol < max_Y){
             System.out.println("Screen too small");
         }
