@@ -18,6 +18,8 @@ import cmpt276.group4.WindowAndInput.GamePanel;
 public class GameConfig {
     private gameLevel level;
     private int roomColumn = 16;
+    
+
     private int roomRow = 16;
     // obstacle
     protected List<Position> wallPositions;
@@ -28,6 +30,8 @@ public class GameConfig {
     protected int numberOfAdvancedGhosts;
     // rewards
     protected int numberOfRegularRewards;
+    
+
     protected int numberOfBonusRewards;
     public static GameConfig instance;
     private GameDifficultyConfig gameLevelConfig;
@@ -112,6 +116,10 @@ public class GameConfig {
         return numberOfRegularRewards;
     }
 
+    public void setNumberOfRegularRewards(int numberOfRegularRewards) {
+        this.numberOfRegularRewards = numberOfRegularRewards;
+    }
+
     public int getNumberOfBonusRewards() {
         return numberOfBonusRewards;
     }
@@ -122,6 +130,10 @@ public class GameConfig {
 
     public List<Position> getWallPositions() {
         return wallPositions;
+    }
+
+    public void setWallPositions(List<Position> wallPositions) {
+        this.wallPositions = wallPositions;
     }
 
     public int getNumberOfWall(){

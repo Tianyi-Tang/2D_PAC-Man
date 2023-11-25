@@ -17,8 +17,9 @@ import cmpt276.group4.GameStatus;
  */
 
 public class NumberPanel extends JPanel {
-    private static final int NUM_IMAGES = 10; // Number of digit images to display digits 0-9
+    private static final int NUM_IMAGES = 11; // Number of digit images to display digits 0-9
     private BufferedImage[] digitImages = new BufferedImage[NUM_IMAGES];
+    private BufferedImage negativeSignImage;
     private BufferedImage backgroundImage; // Image for the pop up window
     private BufferedImage greyOut; // Image used for grey out effect
     private int[][] numbersToDisplay; // Array of numbers for each line to display
@@ -29,10 +30,6 @@ public class NumberPanel extends JPanel {
     private int xAxisLineUp; // X-axis position for the number
     private int digitXSize, digitYSize; // Size of the digit images
     private double popUpScale; // Scale factor for the pop-up window
-
-    public enum Status {
-        Win, GameOver // Game status types
-    }
 
     /**
      * Constructor for NumberPanel.
@@ -52,33 +49,15 @@ public class NumberPanel extends JPanel {
 
     }
 
-    /**
-     * Initializes the panel with a specific background image based on the game's
-     * win status.
-     * 
-     * @param isWin A boolean indicating if the game was won.
-     */
+    // /**
+    // * Initializes the panel with a specific background image based on the game's
+    // * win status.
+    // *
+    // * @param isWin A boolean indicating if the game was won.
+    // */
     public void init(boolean isWin) {
 
         if (isWin) {
-            backgroundImgName = "win.png";
-        } else {
-            backgroundImgName = "game_over.png";
-        }
-
-        loadBackgroundImage(backgroundImgName);
-
-    }
-
-    /**
-     * Initializes the panel with a specific background image based on the game's
-     * status.
-     * 
-     * @param status The status of the game (Win or Game Over).
-     */
-    public void init(GameStatus status) {
-
-        if (status == GameStatus.Win) {
             backgroundImgName = "win.png";
         } else {
             backgroundImgName = "game_over.png";
@@ -95,13 +74,20 @@ public class NumberPanel extends JPanel {
      * digit (0-9) and storing them in an array for later use.
      */
     private void loadNumberImages() {
-
-        for (int i = 0; i < NUM_IMAGES; i++) {
+        for (int i = 0; i < NUM_IMAGES - 1; i++) {
             try {
                 digitImages[i] = ImageIO.read(new File(directory + "/res/num/" + i + ".png"));
             } catch (IOException e) {
-                e.printStackTrace(); // Or handle the exception as needed
+                e.printStackTrace();
             }
+        }
+
+        // Load the image for negative sign
+        try {
+            negativeSignImage = ImageIO.read(new File(directory + "/res/num/negative.png"));
+            digitImages[NUM_IMAGES - 1] = negativeSignImage; // Assuming the last index is for the negative sign
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -176,12 +162,10 @@ public class NumberPanel extends JPanel {
                 BufferedImage img = digitImages[number];
                 if (img != null) {
                     g.drawImage(img, x, startY, digitXSize, digitYSize, this);
-                    x += (imageWidth + 1); // Move to the right for the next digit
-
+                    x += (imageWidth + 1); // Adjust space for the next digit
                 }
             }
         }
-
     }
 
     /**
@@ -193,14 +177,37 @@ public class NumberPanel extends JPanel {
      */
     private int[] intToArray(int number) {
         String numberStr = Integer.toString(number);
+        boolean isNegative = number < 0;
 
-        int[] digits = new int[numberStr.length()];
+        int[] digits = new int[isNegative ? numberStr.length() - 1 : numberStr.length()];
 
-        for (int i = 0; i < numberStr.length(); i++) {
-            digits[i] = numberStr.charAt(i) - '0';
+        for (int i = isNegative ? 1 : 0; i < numberStr.length(); i++) {
+            digits[isNegative ? i - 1 : i] = numberStr.charAt(i) - '0';
+        }
+
+        if (isNegative) {
+            digits = prependNegativeSign(digits);
         }
 
         return digits;
+    }
+
+    /**
+     * Prepends a negative sign symbol to an array of digit representations.
+     * This method is designed to modify the array of digits representing a number
+     * to include a symbol that indicates the number is negative. The negative sign
+     * is represented by the last index in the digit images array, which is assumed
+     * to be the image for the negative sign.
+     *
+     * @param digits The array of digits representing a number.
+     * @return An array of digits with the negative sign symbol added as the first
+     *         element.
+     */
+    private int[] prependNegativeSign(int[] digits) {
+        int[] newDigits = new int[digits.length + 1];
+        System.arraycopy(digits, 0, newDigits, 1, digits.length);
+        newDigits[0] = NUM_IMAGES - 1; // Index for the negative sign
+        return newDigits;
     }
 
 }
