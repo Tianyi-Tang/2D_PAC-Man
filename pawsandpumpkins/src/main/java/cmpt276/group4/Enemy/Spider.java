@@ -162,4 +162,9 @@ public class Spider implements Enemy {
     public boolean getMovable() {
         return false;
     }
+
+    @Override
+    public void action(){
+        return;
+    }
 }

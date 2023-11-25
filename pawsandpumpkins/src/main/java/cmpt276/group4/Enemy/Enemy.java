@@ -58,4 +58,9 @@ public interface Enemy {
      * @return
      */
     boolean getMovable();
+
+    /**
+     * Set movable enemy to next position
+     */
+    void action();
 }

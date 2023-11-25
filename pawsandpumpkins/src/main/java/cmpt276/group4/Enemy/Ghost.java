@@ -83,6 +83,27 @@ public class Ghost implements Enemy {
         //emyMovement.moveTo(enemyPosition);
     }
 
+
+    /**
+     * Moves the ghost to its next position based on the player's location.
+     * If the player is nearby, the ghost moves towards the player.
+     * Otherwise, it moves to a random position.
+     */
+    @Override
+    public void action(){
+        catchPlayer();
+        getPlayerPosition();
+
+        // Check if the player is around
+        if (record.isPlayerNearBy(4 * WindowConfig.tileSize, enemyPosition)) {
+            // If the player is around, move towards the player
+            setToClosestPlayerPosition();
+        } else {
+            // If the player is not around, move to a random position
+            moveToRandomPosition();
+        }
+    }
+
     /**
      * Retrieves and updates the player's current position from the record of used
      * places.
