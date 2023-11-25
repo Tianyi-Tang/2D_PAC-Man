@@ -53,25 +53,24 @@ public class Spider implements Enemy {
                 spideType = SpiderType.type_spider_2;
                 break;
         }
-        // System.out.println("Spider.java: Creating spider");
+
         getEnemyImage();
         Position potentialPosition = new Position(0, 0);
-        //potentialPosition.equal(playerPosition);
+        boolean isPositionAvailable = false;
 
         do {
             potentialPosition = record.getRandomFromAvailablePosition();
-        } while (RoomEnvironment.getInstance().sameAsPlayerPosition(potentialPosition) || !(record.canPlaceEnemyAndObstacle(potentialPosition)));
-        
-        enemyPosition.setPosition(potentialPosition);
-        roomEnvironment.addEnemy(this);
+            this.enemyPosition.setPosition(potentialPosition);
+            isPositionAvailable = roomEnvironment.addEnemy(this);
+        } while (!isPositionAvailable);
 
     }
 
     // /**
-    //  * Retrieves the current position of the player.
-    //  */
+    // * Retrieves the current position of the player.
+    // */
     // private void getPlayerPosition() {
-    //     RoomEnvironment.getInstance().getPlayerPosition();
+    // RoomEnvironment.getInstance().getPlayerPosition();
     // }
 
     /**
@@ -93,7 +92,7 @@ public class Spider implements Enemy {
         // Position playerPosition = record.getPlayerPosition();
         if (RoomEnvironment.getInstance().sameAsPlayerPosition(enemyPosition)) {
             GameManager.getInstance().enemyCatachPlayer(movable);
-        } 
+        }
     }
 
     /**
