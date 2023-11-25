@@ -29,15 +29,11 @@ public class RoomEnvironment {
         return instacne;
     }
 
-<<<<<<< HEAD
-    public static void setInstacne(RoomEnvironment instacne) {
+    public static void setInstance(RoomEnvironment instacne) {
         RoomEnvironment.instacne = instacne;
     }
 
     private RoomEnvironment(){
-=======
-    public RoomEnvironment(){
->>>>>>> 8234011ead4c5c95c2d2f909eb1167b194478326
         rewards = new ArrayList<Reward>();
         enemies = new ArrayList<Enemy>();
     }
