@@ -52,13 +52,14 @@ public class Ghost implements Enemy {
        
 
         Position potentialPosition = new Position(0, 0);
-        potentialPosition.equal(playerPosition);
+        //potentialPosition.equal(playerPosition);
+        boolean isPositionAvailable = false;
+
         do {
             potentialPosition = record.getRandomFromAvailablePosition();
-        } while (record.isPlayerNearBy(8 * WindowConfig.tileSize, potentialPosition));
-
-        this.enemyPosition.setPosition(potentialPosition);
-        roomEnvironment.addEnemy(this);
+            this.enemyPosition.setPosition(potentialPosition);
+            isPositionAvailable = roomEnvironment.addEnemy(this);
+        } while (!isPositionAvailable);
     }
 
     /**
