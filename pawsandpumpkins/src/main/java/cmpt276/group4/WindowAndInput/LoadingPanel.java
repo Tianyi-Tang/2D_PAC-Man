@@ -17,6 +17,8 @@ import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
+import cmpt276.group4.Room.RoomFactory;
+import cmpt276.group4.Room.RoomInitialization;
 
 
 /**
@@ -73,6 +75,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         config = GameConfig.getGameConfigInstance();
         config.passGameLevel(level);
         initialiseItem= new InitialiseGameItem(config);
+        initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
         createTimeLine();
     }
 
