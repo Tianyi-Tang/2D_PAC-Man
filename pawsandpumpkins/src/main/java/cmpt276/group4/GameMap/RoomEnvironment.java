@@ -14,6 +14,8 @@ import cmpt276.group4.Reward.Reward;
  * Storing the enemy and rewards
  */
 public class RoomEnvironment {
+   
+
     private RecordUsedPlace record;
     private static RoomEnvironment instacne;
     private Player player;
@@ -26,6 +28,10 @@ public class RoomEnvironment {
         if(instacne == null)
             instacne = new RoomEnvironment();
         return instacne;
+    }
+
+    public static void setInstacne(RoomEnvironment instacne) {
+        RoomEnvironment.instacne = instacne;
     }
 
     private RoomEnvironment(){

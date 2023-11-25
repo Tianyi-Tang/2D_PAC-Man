@@ -59,6 +59,7 @@ public class Ghost implements Enemy {
             potentialPosition = record.getRandomFromAvailablePosition();
             this.enemyPosition.setPosition(potentialPosition);
             isPositionAvailable = roomEnvironment.addEnemy(this);
+            //System.out.println("in while loop");
         } while (!isPositionAvailable);
     }
 
