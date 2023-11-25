@@ -11,10 +11,6 @@ import cmpt276.group4.Position;
 import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
-import cmpt276.group4.Reward.Candy;
-import cmpt276.group4.Room.Room;
-import cmpt276.group4.Room.Tile;
-import cmpt276.group4.Room.Tombstone;
 import cmpt276.group4.Room.Wall;
 
 public class PlayerMovementTest {
