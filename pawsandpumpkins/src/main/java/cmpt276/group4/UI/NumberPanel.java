@@ -50,32 +50,14 @@ public class NumberPanel extends JPanel {
     }
 
     // /**
-    //  * Initializes the panel with a specific background image based on the game's
-    //  * win status.
-    //  * 
-    //  * @param isWin A boolean indicating if the game was won.
-    //  */
+    // * Initializes the panel with a specific background image based on the game's
+    // * win status.
+    // *
+    // * @param isWin A boolean indicating if the game was won.
+    // */
     public void init(boolean isWin) {
 
         if (isWin) {
-            backgroundImgName = "win.png";
-        } else {
-            backgroundImgName = "game_over.png";
-        }
-
-        loadBackgroundImage(backgroundImgName);
-
-    }
-
-    /**
-     * Initializes the panel with a specific background image based on the game's
-     * status.
-     * 
-     * @param status The status of the game (Win or Game Over).
-     */
-    public void init(GameStatus status) {
-
-        if (status == GameStatus.Win) {
             backgroundImgName = "win.png";
         } else {
             backgroundImgName = "game_over.png";
@@ -91,18 +73,6 @@ public class NumberPanel extends JPanel {
      * This method is responsible for reading the image files corresponding to each
      * digit (0-9) and storing them in an array for later use.
      */
-    // private void loadNumberImages() {
-
-    //     for (int i = 0; i < NUM_IMAGES; i++) {
-    //         try {
-    //             digitImages[i] = ImageIO.read(new File(directory + "/res/num/" + i + ".png"));
-    //         } catch (IOException e) {
-    //             e.printStackTrace(); // Or handle the exception as needed
-    //         }
-    //     }
-
-    // }
-
     private void loadNumberImages() {
         for (int i = 0; i < NUM_IMAGES - 1; i++) {
             try {
@@ -185,21 +155,6 @@ public class NumberPanel extends JPanel {
      * @param startX     The starting X position for drawing the line.
      * @param startY     The starting Y position for drawing the line.
      */
-    // private void drawNumberLine(Graphics g, int[] numberLine, int startX, int startY) {
-    //     int x = startX;
-    //     for (int number : numberLine) {
-    //         if (number >= 0 && number < digitImages.length) {
-    //             BufferedImage img = digitImages[number];
-    //             if (img != null) {
-    //                 g.drawImage(img, x, startY, digitXSize, digitYSize, this);
-    //                 x += (imageWidth + 1); // Move to the right for the next digit
-
-    //             }
-    //         }
-    //     }
-
-    // }
-
     private void drawNumberLine(Graphics g, int[] numberLine, int startX, int startY) {
         int x = startX;
         for (int number : numberLine) {
@@ -220,18 +175,6 @@ public class NumberPanel extends JPanel {
      * @param number The number to be converted to an array of digits.
      * @return An array of integers representing each digit of the number.
      */
-    // private int[] intToArray(int number) {
-    //     String numberStr = Integer.toString(number);
-
-    //     int[] digits = new int[numberStr.length()];
-
-    //     for (int i = 0; i < numberStr.length(); i++) {
-    //         digits[i] = numberStr.charAt(i) - '0';
-    //     }
-
-    //     return digits;
-    // }
-
     private int[] intToArray(int number) {
         String numberStr = Integer.toString(number);
         boolean isNegative = number < 0;
@@ -248,6 +191,18 @@ public class NumberPanel extends JPanel {
 
         return digits;
     }
+
+    /**
+     * Prepends a negative sign symbol to an array of digit representations.
+     * This method is designed to modify the array of digits representing a number
+     * to include a symbol that indicates the number is negative. The negative sign
+     * is represented by the last index in the digit images array, which is assumed
+     * to be the image for the negative sign.
+     *
+     * @param digits The array of digits representing a number.
+     * @return An array of digits with the negative sign symbol added as the first
+     *         element.
+     */
     private int[] prependNegativeSign(int[] digits) {
         int[] newDigits = new int[digits.length + 1];
         System.arraycopy(digits, 0, newDigits, 1, digits.length);
