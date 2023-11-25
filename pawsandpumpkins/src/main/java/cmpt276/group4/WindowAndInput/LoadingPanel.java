@@ -72,7 +72,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     public void gameLevelSending(gameLevel level){
         config = GameConfig.getGameConfigInstance();
         config.passGameLevel(level);
-        initialiseItem = new InitialiseGameItem(config);
+        initialiseItem= new InitialiseGameItem(config);
         createTimeLine();
     }
 

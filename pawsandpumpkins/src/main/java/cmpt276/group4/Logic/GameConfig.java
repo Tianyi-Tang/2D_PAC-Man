@@ -5,8 +5,7 @@ import java.util.List;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.gameLevel;
-import cmpt276.group4.GameMap.RecordUsedPlace;
-import cmpt276.group4.WindowAndInput.GamePanel;
+
 
 /**
  * Configures and stores game settings including room dimensions, obstacles,

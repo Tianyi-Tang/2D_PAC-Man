@@ -29,10 +29,13 @@ public class InitialiseGameItem {
             return true;
     }
 
+    public void setRoomInitialize(RoomInitialization roomInitialization, RoomFactory roomFactory){
+        this.roomInitialization = roomInitialization;
+        this.roomFactory = roomFactory;        
+    }
+
     public void createRoom(){
-        if(config != null){
-            roomInitialization = new RoomInitialization();
-            roomFactory = new RoomFactory();
+        if(config != null && roomFactory != null){
             roomInitialization.initializeRoom(config.getGameLevel(), roomFactory);
             roomInitialization.iRoom(roomFactory);
         }
