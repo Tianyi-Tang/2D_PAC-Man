@@ -1,100 +1,94 @@
 package cmpt276.group4.Enemy;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
-import cmpt276.group4.Player.Player;
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-/**
- * Test class for Ghost.
- * This class contains unit tests and integration tests for the Ghost class using Mockito to mock dependencies.
- */
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 class GhostTest {
 
-    private Ghost ghost;
+    @Mock
     private RecordUsedPlace mockRecord;
+    @Mock
+    private RoomEnvironment mockRoomEnvironment;
+    @Mock
+    private EnemyMovement mockEnemyMovement;
+    private Ghost ghost;
+    private Position startPosition = new Position(0, 0);
+    private Position playerPosition = new Position(10, 10);
     private GameManager mockGameManager;
-    private GameManager gameManagerIns;
-    private GameManager gameManagerSpy;
-    private Player mockPlayer;
 
-    /**
-     * Sets up the test environment before each test.
-     * Initializes mocks for RecordUsedPlace, GameManager, and Player.
-     * Creates a new instance of Ghost for testing.
-     */
     @BeforeEach
     void setUp() {
-        mockRecord = mock(RecordUsedPlace.class);
+        MockitoAnnotations.openMocks(this);
         RecordUsedPlace.setInstance(mockRecord);
-        mockPlayer = mock(Player.class);
-        //mockGameManager = mock(GameManager.class);
-        // mockGameManager = spy(GameManager.getInstance());
-         mockGameManager = spy(GameManager.class);
-        mockGameManager.setPlayer(mockPlayer);
-        gameManagerIns = GameManager.getInstance();
-        gameManagerIns.setPlayer(mockPlayer);
+        RoomEnvironment.setInstance(mockRoomEnvironment);
+        mockGameManager = mock(GameManager.class);
+        GameManager.setInstance(mockGameManager);
+        when(mockRecord.getRandomFromAvailablePosition()).thenReturn(new Position(0, 0));
+        when(mockRoomEnvironment.addEnemy(any(Ghost.class))).thenReturn(true);
+        when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPosition);
+        when(mockRecord.isPlayerNearBy(anyInt(), any(Position.class))).thenReturn(true);
 
-        when(mockRecord.getRandomSafePosition()).thenReturn(new Position(10, 10)); // Example safe position
-        when(mockRecord.getPlayerPosition()).thenReturn(new Position(10, 10)); // Player's position
-        
         ghost = new Ghost(EnemyType.GHOST_BASIC);
+        ghost.setPlayerMovement(mockEnemyMovement);
     }
-    
-    /**
-     * Tests the scenario where the player is caught by the ghost.
-     * Verifies if the correct methods are called on the mock player.
-     */
+
     @Test
-    void testCatchPlayerWhenIsCaught() {
-        Position playerPosition = new Position(10, 10);
-        Position enemyPosition = new Position(10, 10);
+    void testConstructor() {
+        assertNotNull(ghost);
+    }
 
-        Ghost ghost = new Ghost(EnemyType.GHOST_BASIC);
-        ghost.setEnemyPosition(enemyPosition);
+    @Test
+    void testAction() {
+        ghost.action();
+        verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
+    }
 
-        when(mockRecord.getPlayerPosition()).thenReturn(playerPosition);
+    @Test
+    void isMovableTest() {
+        assertTrue(ghost.isMovable(), "Ghost should be movable");
+    }
 
+    @Test
+    void getMovableTest() {
+        assertTrue(ghost.getMovable(), "getMovable should return true for ghost");
+    }
+
+    @Test
+    void setEnemyPositionTest() {
+        Position newPosition = new Position(5, 5);
+        ghost.setEnemyPosition(newPosition);
+        assertEquals(newPosition, ghost.getEnemyPosition(), "Enemy position should be updated");
+    }
+
+    @Test
+    void getPositionTest() {
+        assertEquals(startPosition, ghost.getPosition(), "Positions should match");
+    }
+
+    @Test
+    void catchPlayerTest_NotCatchingPlayer() {
+        Position differentPosition = new Position(20, 20);
+        ghost.setEnemyPosition(differentPosition);
         ghost.catchPlayer();
-
-        assertTrue(playerPosition.equal(enemyPosition), "The player position should be equal to the enemy position");
+        verify(mockGameManager, times(0)).enemyCatachPlayer(anyBoolean());
     }
 
-     @Test
-    void testCatchPlayerWhenIsNotCaught() {
-        Position playerPosition = new Position(10, 10);
-        Position enemyPosition = new Position(96, 96);
-
-        Ghost ghost = new Ghost(EnemyType.GHOST_BASIC);
-        ghost.setEnemyPosition(enemyPosition);
-
-        when(mockRecord.getPlayerPosition()).thenReturn(playerPosition);
-
+    @Test
+    void catchPlayerTest_CatchingPlayer() {
+        ghost.setEnemyPosition(playerPosition);
         ghost.catchPlayer();
-
-        assertFalse(playerPosition.equal(enemyPosition), "The player position should be equal to the enemy position");
+        verify(mockGameManager, times(1)).enemyCatachPlayer(anyBoolean());
     }
 
-
-    /**
-     * Tests the isMovable method of the Ghost class.
-     * Asserts that the Ghost is movable.
-     */
-    @Test
-    void testIsMovable() {
-        assertTrue(ghost.isMovable(), "Ghost should be movable.");
-    }
-
-    /**
-     * Verifies if the Ghost instance is correctly added to RecordUsedPlace.
-     */
-    @Test
-    void testGhostIsAddedToRecordUsedPlace() {
-        verify(mockRecord).addEnemy(ghost);
-    }
 }

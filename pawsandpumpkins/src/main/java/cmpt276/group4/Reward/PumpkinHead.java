@@ -2,23 +2,26 @@ package cmpt276.group4.Reward;
 
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Logic.WindowConfig;
-import cmpt276.group4.WindowAndInput.GamePanel;
-import cmpt276.group4.Reward.BonusReward;
+
 import cmpt276.group4.Time.GameTime;
 
+
 import javax.imageio.ImageIO;
-import javax.swing.*;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+
 public class PumpkinHead extends BonusReward {
     private long displayDuration = 10;
     private int score = 5;
     private BufferedImage ppk1, ppk2, currentImage;
-    private Position ppkPosition,playerPosition;
+    private Position ppkPosition;
 
     private int stateCounter=0;
     private boolean org_State = true;
@@ -30,8 +33,8 @@ public class PumpkinHead extends BonusReward {
 
         record = RecordUsedPlace.getInstance();
         getPumpkinImage();
-        ppkPosition=record.getRandomSafePosition();
-        record.addReward(this);
+        ppkPosition=record.getRandomFromAvailablePosition();
+        RoomEnvironment.getInstance().addReward(this);
     }
 
     @Override
@@ -57,18 +60,13 @@ public class PumpkinHead extends BonusReward {
         return isBonusReward;
     }
 
-    private void getPlayerPosition() {
-
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        playerPosition = record.getPlayerPosition();
-    }
 
     @Override
     public void addBenefit(Player player) {
-            getPlayerPosition();
-        if (playerPosition.equal(ppkPosition) && isAvailable) {
+
+        if (RoomEnvironment.getInstance().sameAsPlayerPosition(ppkPosition)) {
             addScore(player,score);
-            record.removeReward(this);
+            RoomEnvironment.getInstance().removeReward(this);
         }
     }
 

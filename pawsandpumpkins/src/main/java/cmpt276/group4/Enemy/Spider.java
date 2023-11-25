@@ -7,8 +7,10 @@ import javax.imageio.ImageIO;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Logic.WindowConfig;
+import cmpt276.group4.Room.Room;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 /**
@@ -22,6 +24,7 @@ public class Spider implements Enemy {
     SpiderType spideType;
     private BufferedImage currentImage;
     private RecordUsedPlace record;
+    private RoomEnvironment roomEnvironment;
     private Position playerPosition;
 
     /**
@@ -38,11 +41,10 @@ public class Spider implements Enemy {
      * The spider is positioned at a random position after checking vacancy.
      */
     Spider() {
-        getPlayerPosition();
-        System.out.println("here 1 \n");
         record = RecordUsedPlace.getInstance();
+        roomEnvironment = RoomEnvironment.getInstance();
         // get the list of enemy from recordUsedPlace and randomly picked one.
-        switch ((record.getEnemyList().size()) % 2) {
+        switch ((roomEnvironment.getEnemyNumber()) % 2) {
             case 1:
                 spideType = SpiderType.type_spider_1;
                 break;
@@ -51,32 +53,25 @@ public class Spider implements Enemy {
                 spideType = SpiderType.type_spider_2;
                 break;
         }
-        // System.out.println("Spider.java: Creating spider");
+
         getEnemyImage();
         Position potentialPosition = new Position(0, 0);
-        potentialPosition.equal(playerPosition);
-        System.out.println("here 2 \n");
+        boolean isPositionAvailable = false;
 
         do {
-            potentialPosition = record.getRandomSafePosition();
-                    System.out.println("here 3 \n");
-
-        } while (potentialPosition.equal(playerPosition) || record.containsCandyAtPosition(potentialPosition));
-        System.out.println("here 4 \n");
-
-        enemyPosition.setPosition(potentialPosition);
-        record.addEnemy(this);
+            potentialPosition = record.getRandomFromAvailablePosition();
+            this.enemyPosition.setPosition(potentialPosition);
+            isPositionAvailable = roomEnvironment.addEnemy(this);
+        } while (!isPositionAvailable);
 
     }
 
-    /**
-     * Retrieves the current position of the player.
-     */
-    private void getPlayerPosition() {
-
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        playerPosition = record.getPlayerPosition();
-    }
+    // /**
+    // * Retrieves the current position of the player.
+    // */
+    // private void getPlayerPosition() {
+    // RoomEnvironment.getInstance().getPlayerPosition();
+    // }
 
     /**
      * Gets the current position of the spider.
@@ -94,10 +89,10 @@ public class Spider implements Enemy {
      */
     @Override
     public void catchPlayer() {
-        Position playerPosition = record.getPlayerPosition();
-        if (playerPosition.equals(enemyPosition)) {
+        // Position playerPosition = record.getPlayerPosition();
+        if (RoomEnvironment.getInstance().sameAsPlayerPosition(enemyPosition)) {
             GameManager.getInstance().enemyCatachPlayer(movable);
-        } 
+        }
     }
 
     /**
@@ -166,5 +161,10 @@ public class Spider implements Enemy {
     @Override
     public boolean getMovable() {
         return false;
+    }
+
+    @Override
+    public void action(){
+        return;
     }
 }

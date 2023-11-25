@@ -7,8 +7,8 @@ import javax.lang.model.type.NullType;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Logic.GameConfig;
 
 
@@ -60,7 +60,7 @@ public class RoomInitialization {
      * @param rmFactory  The room factory used to create tombstones.
      */
     public void iTombs(RoomFactory rmFactory){
-        rmFactory.createTombstones(Obstacletype.TOMBSTONE, position, tombstone);
+        rmFactory.createTombstones(position, tombstone);
     }
 
     /**
@@ -69,7 +69,7 @@ public class RoomInitialization {
      * @param rmFactory  The room factory used to create walls.
      */
     public void iWalls(RoomFactory rmFactory){
-        rmFactory.createWall(Obstacletype.WALL, wallPositionList, wall);
+        rmFactory.createWall( wallPositionList, wall);
     }
 
 

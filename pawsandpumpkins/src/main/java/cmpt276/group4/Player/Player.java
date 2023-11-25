@@ -4,20 +4,26 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+
 import javax.imageio.ImageIO;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
-import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.WindowConfig;
-import cmpt276.group4.Reward.Reward;
+
+import cmpt276.group4.Time.GameTime;
+import cmpt276.group4.Time.TimeElapsedListener;
 import cmpt276.group4.WindowAndInput.MoveDirection;
 
 /**
  * Class tha represent character that control by people
  */
-public class Player implements KeyMovingObserver {
+public class Player implements KeyMovingObserver, TimeElapsedListener {
+    private GameManager manager;
+
     private Position playerPosition;
     private Position destination;
     private static Player _instance = null;
@@ -31,6 +37,7 @@ public class Player implements KeyMovingObserver {
     private int time_counter = 0;
 
     private int deductScore = 0;
+    private boolean interval = false;
 
     private int collectScore = 0;
     private int bonusReward_num = 0;
@@ -42,9 +49,11 @@ public class Player implements KeyMovingObserver {
    /**
     * constructor for the player initlization
     */
-    Player(){
+    public Player(){
         playerPosition = new Position(1 * WindowConfig.tileSize, 1 * WindowConfig.tileSize);
+        RecordUsedPlace.getInstance().removeFromAviable(playerPosition);
         movement = new PlayerMovement();
+        
         getPlayerImage();
         destination = new Position(0, 0);
     }
@@ -58,6 +67,17 @@ public class Player implements KeyMovingObserver {
             _instance = new Player();
         }      
         return _instance;
+    }
+
+    /**
+     * send singleton objects to set up the movement
+     * @param manager the GameManger objec
+     * @param roomEnvironment the RoomEnvironment object
+     * @param roomLayout the RoomLayout object
+     */
+    public void init(GameManager manager, RoomEnvironment roomEnvironment,RoomLayout roomLayout){
+        this.manager = manager;
+        movement.init(roomLayout, roomEnvironment, this);
     }
 
     /**
@@ -92,11 +112,23 @@ public class Player implements KeyMovingObserver {
      * When player catach by enemy, give punishment to player
      * @param deductScore how many socre need to be deduct
      */
-    public void deductPoint(int deductScore){
-        this.deductScore += deductScore;
-        if(deductScore > collectScore){
-            GameManager.getInstance().negativePoint();
+    public void deductPoint(int deductPoint){
+        if(!interval){
+            undeductInterval();
+            deductScore += deductPoint;
+            if(deductScore > collectScore){
+                manager.negativePoint();
+            }
         }
+        
+    }
+
+    /**
+     * Player shouldn't deduct score during 0.5 second interval
+     */
+    private void undeductInterval(){
+        interval = true;
+        GameTime.getInstance().setTimeInterval(this, 500);
     }
 
     /**
@@ -110,7 +142,7 @@ public class Player implements KeyMovingObserver {
             bonusReward_num ++;
         else{
             generalReward_num ++;
-            GameManager.getInstance().collectReward(generalReward_num);
+            manager.collectReward(generalReward_num);
         }
             
     }
@@ -155,6 +187,11 @@ public class Player implements KeyMovingObserver {
         return collectScore - deductScore;
     }
 
+    public BufferedImage getCurrentImage(){
+        return currentImage;
+    }
+
+
     /**
      * Get information send from KeybaordListener and change player moving direction 
      * @param direction the direction player move to 
@@ -179,6 +216,14 @@ public class Player implements KeyMovingObserver {
     }
 
     /**
+     * the undeduct time is end, player should available for deduct score 
+     */
+    @Override
+    public void arriveTime() {
+        interval = false;
+    }
+
+    /**
      * Logical update for player to change position base on keyboard input
      */
     public void update(){
@@ -195,25 +240,22 @@ public class Player implements KeyMovingObserver {
         if(time_counter >= 10){
             if(move_up){
                 direction = MoveDirection.Up;
-                updateDestination(0, -48);
-                updatePosition();
+                updatePosition(0, -48);
             }
             else if(move_down){
                 direction = MoveDirection.Down;
-                updateDestination(0, 48);
-                updatePosition();
+                updatePosition(0, 48);
             }
             else if(move_right){
                 direction = MoveDirection.Right;
-                updateDestination(48, 0);
-                updatePosition();
+                updatePosition(48, 0);
             }
             else if(move_left){
                 direction = MoveDirection.Left;
-                updateDestination(-48, 0);
-                updatePosition();
+                updatePosition(-48, 0);
             }
             time_counter =0;
+            movement.checkReward(playerPosition);
         }
         
     }
@@ -251,7 +293,6 @@ public class Player implements KeyMovingObserver {
         }
 
         g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), WindowConfig.tileSize, WindowConfig.tileSize,null); 
-        
     }
 
     /**
@@ -270,43 +311,11 @@ public class Player implements KeyMovingObserver {
      * destination position to player position and check the destination has
      * reward or enemy
      */
-    private void updatePosition(){
-        if(movement.isPositionAvailable(destination)){
+    private void updatePosition(int x_increment,int y_increment){
+        updateDestination(x_increment, y_increment);
+        if(movement.isPositionAvailable(destination))
             playerPosition.setPosition(destination);
-            Reward reward = RecordUsedPlace.getInstance().playerGetReward();
-            if(reward != null)
-                reward.addBenefit(this);
-            Enemy enemy = RecordUsedPlace.getInstance().playerMeetEnemy();
-            if(enemy != null){
-                GameManager.getInstance().enemyCatachPlayer(enemy.getMovable());
-            }
-        }
-            
     }
-
-    /**
-     * Check whether player position is same as door position after
-     * player meet the wining requirement
-     */
-    // private void outOfDoor(){
-    //     if(checkDoor){
-    //         for (Door door : doors) {
-    //             if(playerPosition.equal(door.getPosition())){
-    //                 wining = true;
-    //                 GameManager.getInstance().leaveDoor();
-    //             }
-                    
-    //         }
-    //     }
-    // }
-
-    /**
-     * Check whether player meeting the requirement of wining
-     */
-    // private void meetWiningRequirement(){
-    //     if(generalReward_num == generalReward_require)
-    //         checkDoor = true;
-    // }
 
 
 

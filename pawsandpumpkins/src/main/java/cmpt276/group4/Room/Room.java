@@ -6,7 +6,7 @@ import java.util.TimerTask;
 import cmpt276.group4.GameManager;
 //import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
@@ -34,7 +34,7 @@ public class Room {
      * @param max_X Maximum X-coordinate of the room.
      * @param max_Y Maximum Y-coordinate of the room.
      */
-    public Room() {
+    private Room() {
         if (WindowConfig.maxScreenRow < max_X || WindowConfig.maxScreenCol < max_Y){
             System.out.println("Screen too small");
         }

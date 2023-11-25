@@ -2,7 +2,7 @@ package cmpt276.group4.Room;
 
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 import java.awt.Graphics2D;
@@ -21,12 +21,9 @@ public class Obstacle implements CharacterAvaliablePosition {
     /**
      * Constructor to initialize an obstacle with player access, enemy
      * traversability, and positions.
-     *
-     * @param type     The type of obstacle.
-     * @param amount   The number of obstacles.
      * @param position The position of the obstacle.
      */
-    public Obstacle(Obstacletype type, int amount, Position position) {
+    public Obstacle( Position position) {
         record = RecordUsedPlace.getInstance();
     }
 

@@ -2,7 +2,7 @@ package cmpt276.group4.Room;
 
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 import java.awt.Graphics2D;
@@ -23,12 +23,11 @@ public class Wall extends Obstacle {
     /**
      * Constructor to initialize a wall with the specified type, amount, and position.
      *
-     * @param type     The type of wall obstacle.
      * @param amount   The number of wall obstacles.
      * @param position The position of the wall.
      */
-    public Wall(Obstacletype type, int amount, Position position) {
-        super(type, amount, position);
+    public Wall(Position position) {
+        super( position);
         this.position = position;
         initialWallImage();
     }

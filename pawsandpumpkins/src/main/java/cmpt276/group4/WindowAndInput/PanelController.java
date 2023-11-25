@@ -1,24 +1,26 @@
-package cmpt276.group4;
+package cmpt276.group4.WindowAndInput;
 import java.awt.CardLayout;
 
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cmpt276.group4.GameManager;
+import cmpt276.group4.GameStatus;
+import cmpt276.group4.gameLevel;
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Room.Room;
 import cmpt276.group4.UI.NumberPanel;
-import cmpt276.group4.WindowAndInput.GamePanel;
-import cmpt276.group4.WindowAndInput.LoadingPanel;
-import cmpt276.group4.WindowAndInput.MainPanel;
-import cmpt276.group4.WindowAndInput.keyboardListener;
 
 /**
  * controlling the panel switching
  */
 public class PanelController {
-     private JFrame window;
+    private JFrame window;
 
     private static PanelController instance;
 
@@ -26,6 +28,10 @@ public class PanelController {
     private JPanel cardContainer;
 
     private GameStatus status;
+    private GameManager gameManager;
+    private RecordUsedPlace record;
+    private RoomLayout roomLayout;
+    private RoomEnvironment roomEnvironment;
 
     private GamePanel gamePanel;
     private MainPanel mainPanel;
@@ -46,15 +52,8 @@ public class PanelController {
         cardContainer.add(mainPanel,"main");
         cardContainer.add(loadPanel,"load");
         cardContainer.add(numberPanel, "gameEnd");
-
-
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("paws and pumpkins");
-
-        window.getContentPane().add(cardContainer);
-        window.pack();
-        window.setLocationRelativeTo(null);
+        createWindow();
+        setUpKeySinglton();
     }
 
 
@@ -64,13 +63,36 @@ public class PanelController {
         return instance;
     }
 
+    private void createWindow(){
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.setTitle("paws and pumpkins");
+
+        window.getContentPane().add(cardContainer);
+        window.pack();
+        window.setLocationRelativeTo(null);
+    }
+
+    private void setUpKeySinglton(){
+        gameManager = GameManager.getInstance();
+        record = RecordUsedPlace.getInstance();
+        roomLayout = RoomLayout.getInstance();
+        roomEnvironment = RoomEnvironment.getInstance();
+        initalKeySinglton();
+    }
+
+    private void initalKeySinglton(){
+        gameManager.init(this);
+        roomLayout.init(record);
+        roomEnvironment.init(record);
+    }
+
      /**
      * laoding the main menu to window and start of game
      */
     public void createMainWindow(){
         status = GameStatus.MainPanel;
         layout.show(cardContainer, "main");
-
         window.setVisible(true);
     }
 
@@ -80,6 +102,8 @@ public class PanelController {
      */
     public void transformToLoadingScreen(gameLevel level){
         if(status == GameStatus.MainPanel){
+            loadPanel.setKeySingleton(record, roomLayout, roomEnvironment);
+            gamePanel.setKeySingleton(record, roomLayout, roomEnvironment);
             layout.show(cardContainer, "load");
             loadPanel.gameLevelSending(level);
             status = GameStatus.LoadingPanel;
@@ -106,7 +130,8 @@ public class PanelController {
      * switch the game panel to game end panel
      */
     public void transformToEndScreen(){
-        if(GameManager.getInstance().isGameEnd()){
+        if(gameManager.isGameEnd()){
+            gamePanel.endGameLoop();
             layout.show(cardContainer, "gameEnd");
             initalNumberPanel();
         }
@@ -124,12 +149,9 @@ public class PanelController {
      * call the gameManagerment to get player
      */
     private void enterGame(){
-        GameManager manager = GameManager.getInstance();
-        manager.setPlayer(Player.getInstance());
-        manager.setNumberOfGeneralRewards(GameConfig.getGameConfigInstance());
-        manager.setDoors(Room.getInstance().getDoors());
-
-
+        gameManager.setPlayer(Player.getInstance());
+        gameManager.setNumberOfGeneralRewards(GameConfig.getGameConfigInstance());
+        gameManager.setDoors(Room.getInstance().getDoors());
     }
 
     /**
@@ -137,7 +159,7 @@ public class PanelController {
      */
     private void initalNumberPanel(){
         Player player = Player.getInstance();
-        numberPanel.init(GameManager.getInstance().isPalyerWin());
+        numberPanel.init(gameManager.isPalyerWin());
         numberPanel.setNumbers(player.getCollectScore(), player.getGeneralRewardNum(), player.getBonusRewardNum() * 5, player.getDeductScore(), player.totalScore());
     }
 

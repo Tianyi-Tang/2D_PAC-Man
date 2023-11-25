@@ -2,11 +2,14 @@ package cmpt276.group4.Reward;
 
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.WindowAndInput.GamePanel;
 
 import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,18 +29,14 @@ public class Candy extends GeneralReward {
     public Candy(){
         record = RecordUsedPlace.getInstance();
         getCandyImage();
-        cdposition=record.getRandomSafePosition();
-        record.addReward(this);
+        cdposition=record.getRandomFromAvailablePosition();
+        RoomEnvironment.getInstance().addReward(this);
     }
     @Override
     public int getScore() {
         return score;
     }
-    private void getPlayerPosition() {
 
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        playerPosition = record.getPlayerPosition();
-    }
     @Override
     public Position getPosition() {
         return cdposition;
@@ -57,10 +56,10 @@ public class Candy extends GeneralReward {
 
     @Override
     public void addBenefit(Player player) {
-        getPlayerPosition();
+        playerPosition = player.getPosition();
         if (playerPosition.equal(cdposition)) {
             addScore(player,score);
-            record.removeReward(this);
+            RoomEnvironment.getInstance().removeReward(this);
         }
 
     }

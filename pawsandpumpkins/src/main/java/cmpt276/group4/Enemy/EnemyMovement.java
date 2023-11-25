@@ -1,7 +1,8 @@
 package cmpt276.group4.Enemy;
 
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Movement;
 
 /**
@@ -9,18 +10,23 @@ import cmpt276.group4.Movement;
  * It implements the {@link Movement} interface to handle enemy position updates and checks.
  */
 public class EnemyMovement implements Movement {
+    RoomLayout roomLayout;
 
-    /**
-     * Moves the enemy to the specified position.
-     * This method updates the enemy's position and  handle updating the enemy's image in the game.
-     *
-     * @param position The new position to move the enemy to.
-     * @return Returns true, indicating that the move operation was successful.
-     */
-    @Override
-    public boolean moveTo(Position position) {
-        return true;
+    public EnemyMovement(){
+        roomLayout = RoomLayout.getInstance();
     }
+
+    // /**
+    //  * Moves the enemy to the specified position.
+    //  * This method updates the enemy's position and  handle updating the enemy's image in the game.
+    //  *
+    //  * @param position The new position to move the enemy to.
+    //  * @return Returns true, indicating that the move operation was successful.
+    //  */
+    // @Override
+    // public boolean moveTo(Position position) {
+    //     return true;
+    // }
 
     /**
      * Checks if a specified position is available for the enemy to move to.
@@ -31,7 +37,6 @@ public class EnemyMovement implements Movement {
      */
     @Override
     public boolean isPositionAvailable(Position position) {
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        return record.characterMovable(position);
+        return roomLayout.isPositionAviable(position);
     }
 }

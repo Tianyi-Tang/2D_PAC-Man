@@ -13,7 +13,9 @@ import javax.imageio.ImageIO;
 
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
-import cmpt276.group4.RecordUsedPlace;
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.GameMap.RoomEnvironment;
+import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.PlayerMovement;
 import cmpt276.group4.WindowAndInput.GamePanel;
@@ -30,6 +32,8 @@ public class Ghost implements Enemy {
     private BufferedImage ghost_basic, ghost_advanced;
     private BufferedImage currentImage = null;
     private RecordUsedPlace record;
+    private RoomEnvironment roomEnvironment;
+
 
     /**
      * Constructs a Ghost enemy with specified type.
@@ -39,28 +43,55 @@ public class Ghost implements Enemy {
     public Ghost(EnemyType type) {
         getPlayerPosition();
         record = RecordUsedPlace.getInstance();
+        roomEnvironment = RoomEnvironment.getInstance();
+
         enemyPosition = new Position(0, 0);
         enemyType = type;
         getEnemyImage();
         this.enemyMovement = new EnemyMovement();
+       
 
         Position potentialPosition = new Position(0, 0);
-        potentialPosition.equal(playerPosition);
-        do {
-            potentialPosition = record.getRandomSafePosition();
-        } while (record.isPlayerNearBy(8 * WindowConfig.tileSize, potentialPosition));
+        //potentialPosition.equal(playerPosition);
+        boolean isPositionAvailable = false;
 
-        this.enemyPosition.setPosition(potentialPosition);
-        record.addEnemy(this);
+        do {
+            potentialPosition = record.getRandomFromAvailablePosition();
+            this.enemyPosition.setPosition(potentialPosition);
+            isPositionAvailable = roomEnvironment.addEnemy(this);
+            //System.out.println("in while loop");
+        } while (!isPositionAvailable);
     }
+
+    // /**
+    //  * Moves the ghost to its next position based on the player's location.
+    //  * If the player is nearby, the ghost moves towards the player.
+    //  * Otherwise, it moves to a random position.
+    //  */
+    // public void ghostMoveNextPosition() {
+    //     // Get player's current position
+    //     catchPlayer();
+    //     getPlayerPosition();
+
+    //     // Check if the player is around
+    //     if (record.isPlayerNearBy(4 * WindowConfig.tileSize, enemyPosition)) {
+    //         // If the player is around, move towards the player
+    //         setToClosestPlayerPosition();
+    //     } else {
+    //         // If the player is not around, move to a random position
+    //         moveToRandomPosition();
+    //     }
+    //     //emyMovement.moveTo(enemyPosition);
+    // }
+
 
     /**
      * Moves the ghost to its next position based on the player's location.
      * If the player is nearby, the ghost moves towards the player.
      * Otherwise, it moves to a random position.
      */
-    public void ghostMoveNextPosition() {
-        // Get player's current position
+    @Override
+    public void action(){
         catchPlayer();
         getPlayerPosition();
 
@@ -72,7 +103,6 @@ public class Ghost implements Enemy {
             // If the player is not around, move to a random position
             moveToRandomPosition();
         }
-        //emyMovement.moveTo(enemyPosition);
     }
 
     /**
@@ -80,8 +110,7 @@ public class Ghost implements Enemy {
      * places.
      */
     private void getPlayerPosition() {
-        RecordUsedPlace record = RecordUsedPlace.getInstance();
-        playerPosition = record.getPlayerPosition();
+        playerPosition = RoomEnvironment.getInstance().getPlayerPosition();
     }
 
     /**
