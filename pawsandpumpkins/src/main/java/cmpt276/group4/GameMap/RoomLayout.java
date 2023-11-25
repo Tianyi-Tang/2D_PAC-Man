@@ -41,7 +41,6 @@ public class RoomLayout {
         else{
             return placeOtherItem(element);
         }
-        
     }
 
     /**

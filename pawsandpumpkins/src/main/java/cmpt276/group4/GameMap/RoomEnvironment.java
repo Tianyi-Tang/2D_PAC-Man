@@ -30,7 +30,6 @@ public class RoomEnvironment {
     public RoomEnvironment(){
         rewards = new ArrayList<Reward>();
         enemies = new ArrayList<Enemy>();
-        record = RecordUsedPlace.getInstance();
     }
 
     public void init(RecordUsedPlace record){
