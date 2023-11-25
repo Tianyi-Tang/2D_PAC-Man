@@ -38,7 +38,7 @@ class EnemyFactoryTest {
         mockPlayerPosition = mock(Position.class);
         mockEnemyPosition = mock(Position.class);
         mockRoomEnvironment = mock(RoomEnvironment.class);
-        RoomEnvironment.setInstacne(mockRoomEnvironment);
+        RoomEnvironment.setInstance(mockRoomEnvironment);
         mockPlayer = mock(Player.class);
         mockSpider = mock(Spider.class);
         mockEnemy = mock(Enemy.class);
