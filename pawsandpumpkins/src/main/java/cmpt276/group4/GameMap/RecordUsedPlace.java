@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.Player.Player;
 
@@ -35,12 +34,21 @@ public class RecordUsedPlace {
 
     }
 
+    /**
+     * Get RecordUsedPlace instance
+     * @return RecordUsedPlace instance
+     */
     public static synchronized RecordUsedPlace getInstance() {
         if (instance == null)
             instance = new RecordUsedPlace();
         return instance;
     }
 
+    /**
+     * Get a random position from availble, if availble is null or empty
+     * retrun null
+     * @return a position in avaible array or null
+     */
     public Position getRandomFromAvailablePosition() {
         // return a random position from variable available
         if (available == null || available.isEmpty()) {
@@ -53,7 +61,6 @@ public class RecordUsedPlace {
     }
 
     
-
     private List<Position> getAdjacentPositions(Position p) {
         int tileSize = 48;
         return Arrays.asList(
@@ -109,14 +116,13 @@ public class RecordUsedPlace {
         //can place enemy or obstacle in the input position if no above conditions are 
         return !(condition1 || condition4 || condition1 || condition7 || condition9 || condition11 || condition13 || condition15); 
     }
-
-    public void initalAllInfor() {
-        if (GameManager.getInstance().isGameEnd()) {
-            obstacle_pos = new ArrayList<Position>();
-            walls_pos = new ArrayList<>();
-        }
-    }
-
+    
+    /**
+     * Add position to availble array, the function will reject position 
+     * that already in the avaible array
+     * @param position the position want to add to availble array
+     * @return If return true, it mean the position is successful adding, else fail to add
+     */
     public boolean addAviable(Position position) {
         if (isPlaceAviable(position))
             return false;
@@ -140,22 +146,45 @@ public class RecordUsedPlace {
         return deltaX <= range && deltaY <= range;
     }
 
+    /**
+     * Get number of position in availble array
+     * @return size of availble array
+     */
     public int getLengthOfAviable() {
         return available.size();
     }
 
+    /**
+     * Get all position in avaible array
+     * @return Aviable array in record
+     */
     public ArrayList<Position> getAviablePosition() {
         return available;
     }
 
+    /**
+     * Add wall Position to the wall_pos array
+     * @param position the position of wall
+     */
     public void addWallPosition(Position position) {
         walls_pos.add(position);
     }
 
+    /**
+     * Add Obstcale position to the obstacle_pos array
+     * Obstcale can be fixed enemy or tombstone
+     * @param position the position of obstcale
+     */
     public void addObstcalePosition(Position position) {
         obstacle_pos.add(position);
     }
 
+    /**
+     * Check whether the passing position is in availble array or not
+     * @param planingPosition the position want to check whether it in available array
+     * @return If true, then the position is already in availble array; if false, the 
+     * position is not in available array
+     */
     public boolean isPlaceAviable(Position planingPosition) {
         for (Position position : available) {
             if (position.equal(planingPosition))
@@ -164,6 +193,10 @@ public class RecordUsedPlace {
         return false;
     }
 
+    /**
+     * Romve the position from available array
+     * @param takePosition the position want to remove from available array
+     */
     public void removeFromAviable(Position takePosition) {
         iterator_pos = available.iterator();
         Position position;
@@ -176,6 +209,12 @@ public class RecordUsedPlace {
         }
     }
 
+        // public void initalAllInfor() {
+    //     if (GameManager.getInstance().isGameEnd()) {
+    //         obstacle_pos = new ArrayList<Position>();
+    //         walls_pos = new ArrayList<>();
+    //     }
+    // }
 
         // public boolean containsCandyAtPosition(Position position) {
     // for (Reward candy : rewards) {
