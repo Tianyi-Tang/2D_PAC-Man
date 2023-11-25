@@ -55,17 +55,17 @@ public class NumberPanel extends JPanel {
     //  * 
     //  * @param isWin A boolean indicating if the game was won.
     //  */
-    // public void init(boolean isWin) {
+    public void init(boolean isWin) {
 
-    //     if (isWin) {
-    //         backgroundImgName = "win.png";
-    //     } else {
-    //         backgroundImgName = "game_over.png";
-    //     }
+        if (isWin) {
+            backgroundImgName = "win.png";
+        } else {
+            backgroundImgName = "game_over.png";
+        }
 
-    //     loadBackgroundImage(backgroundImgName);
+        loadBackgroundImage(backgroundImgName);
 
-    // }
+    }
 
     /**
      * Initializes the panel with a specific background image based on the game's
