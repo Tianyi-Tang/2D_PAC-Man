@@ -53,7 +53,7 @@ public class PanelController {
         cardContainer.add(loadPanel,"load");
         cardContainer.add(numberPanel, "gameEnd");
         createWindow();
-        initalKeySinglton();
+        setUpKeySinglton();
     }
 
 
@@ -73,11 +73,18 @@ public class PanelController {
         window.setLocationRelativeTo(null);
     }
 
-    private void initalKeySinglton(){
+    private void setUpKeySinglton(){
         gameManager = GameManager.getInstance();
         record = RecordUsedPlace.getInstance();
         roomLayout = RoomLayout.getInstance();
         roomEnvironment = RoomEnvironment.getInstance();
+        initalKeySinglton();
+    }
+
+    private void initalKeySinglton(){
+        gameManager.init(this);
+        roomLayout.init(record);
+        roomEnvironment.init(record);
     }
 
      /**
@@ -86,7 +93,6 @@ public class PanelController {
     public void createMainWindow(){
         status = GameStatus.MainPanel;
         layout.show(cardContainer, "main");
-
         window.setVisible(true);
     }
 

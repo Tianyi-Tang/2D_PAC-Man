@@ -19,8 +19,6 @@ public class RecordUsedPlace {
     private ArrayList<Position> walls_pos;
     private ArrayList<Position> obstacle_pos;
 
-    private Player player;
-
     public static void setInstance(RecordUsedPlace instance) {
         RecordUsedPlace.instance = instance;
     }
@@ -159,10 +157,6 @@ public class RecordUsedPlace {
     // return
     // availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
     // }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 
     public boolean addAviable(Position position) {
         if (isPlaceAviable(position))

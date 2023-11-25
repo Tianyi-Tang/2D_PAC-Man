@@ -1,8 +1,5 @@
 package cmpt276.group4;
 
-
-
-
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Room.Door;
@@ -21,6 +18,7 @@ public class GameManager {
 
     private boolean gameEnd;// end of game 
     private boolean playerWin;
+    private PanelController controll;
     
 
     //level: BASIC, MEDIUM, HARD
@@ -33,6 +31,10 @@ public class GameManager {
         if(instance == null)
             instance = new GameManager();
         return instance;
+    }
+
+    public void init(PanelController controller){
+        this.controll = controller;
     }
 
     /**
@@ -112,7 +114,7 @@ public class GameManager {
             playerWin = true;
         else
             playerWin = false;
-        PanelController.getInstance().transformToEndScreen();
+        controll.transformToEndScreen();
     }
 
         /**

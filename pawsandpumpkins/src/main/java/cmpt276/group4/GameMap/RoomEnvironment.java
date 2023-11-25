@@ -1,7 +1,6 @@
 package cmpt276.group4.GameMap;
 
 
-import java.lang.management.PlatformManagedObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -28,10 +27,14 @@ public class RoomEnvironment {
         return instacne;
     }
 
-    private RoomEnvironment(){
+    public RoomEnvironment(){
         rewards = new ArrayList<Reward>();
         enemies = new ArrayList<Enemy>();
         record = RecordUsedPlace.getInstance();
+    }
+
+    public void init(RecordUsedPlace record){
+        this.record = record;
     }
 
     public void setPlayer(Player player){
