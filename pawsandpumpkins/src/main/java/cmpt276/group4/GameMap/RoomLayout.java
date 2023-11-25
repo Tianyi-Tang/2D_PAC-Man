@@ -19,10 +19,13 @@ public class RoomLayout {
     private int wallNum;
     private int obstacleNum;
 
-    private RoomLayout(){
-        record = RecordUsedPlace.getInstance();
+    public RoomLayout(){
         elements = new ArrayList<CharacterAvaliablePosition>();
         unAviablePositions = new ArrayList<Position>();
+    }
+
+    public void init(RecordUsedPlace record){
+        this.record = record;
     }
 
     public static synchronized RoomLayout getInstance(){
@@ -38,7 +41,6 @@ public class RoomLayout {
         else{
             return placeOtherItem(element);
         }
-        
     }
 
     /**

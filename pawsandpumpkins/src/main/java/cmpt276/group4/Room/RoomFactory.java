@@ -33,7 +33,7 @@ public class RoomFactory {
      */
     public void createTombstones( Position position, int amount){
         while(amount > 0){
-            Obstacle obstacle = new Tombstone(amount,position);
+            Obstacle obstacle = new Tombstone(position);
             RoomLayout.getInstance().addElementInMap(obstacle);
             amount--;
         }
@@ -48,7 +48,7 @@ public class RoomFactory {
      */
     public void createWall( List<Position> positions, int amount){
         for (int i=0; i < amount && i < positions.size(); i++){
-            RoomLayout.getInstance().addElementInMap(new Wall(amount,positions.get(i)));
+            RoomLayout.getInstance().addElementInMap(new Wall(positions.get(i)));
         }
     }
 

@@ -26,8 +26,8 @@ public class Wall extends Obstacle {
      * @param amount   The number of wall obstacles.
      * @param position The position of the wall.
      */
-    public Wall(int amount, Position position) {
-        super(amount, position);
+    public Wall(Position position) {
+        super( position);
         this.position = position;
         initialWallImage();
     }

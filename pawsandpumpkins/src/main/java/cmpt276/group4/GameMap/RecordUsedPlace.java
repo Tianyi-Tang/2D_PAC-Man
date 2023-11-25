@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import cmpt276.group4.GameManager;
 import cmpt276.group4.Position;
 import cmpt276.group4.Player.Player;
 
@@ -19,8 +18,6 @@ public class RecordUsedPlace {
     private ArrayList<Position> walls_pos;
     private ArrayList<Position> obstacle_pos;
 
-    private Player player;
-
     public static void setInstance(RecordUsedPlace instance) {
         RecordUsedPlace.instance = instance;
     }
@@ -28,7 +25,7 @@ public class RecordUsedPlace {
     private Iterator<Position> iterator_pos;
     public static RecordUsedPlace instance;
 
-    private RecordUsedPlace() {
+    public RecordUsedPlace() {
         available = new ArrayList<Position>();
 
         obstacle_pos = new ArrayList<Position>();
@@ -37,8 +34,22 @@ public class RecordUsedPlace {
 
     }
 
-    public Position getRandomFromAvailablePosition() {
+    /**
+     * Get RecordUsedPlace instance
+     * @return RecordUsedPlace instance
+     */
+    public static synchronized RecordUsedPlace getInstance() {
+        if (instance == null)
+            instance = new RecordUsedPlace();
+        return instance;
+    }
 
+    /**
+     * Get a random position from availble, if availble is null or empty
+     * retrun null
+     * @return a position in avaible array or null
+     */
+    public Position getRandomFromAvailablePosition() {
         // return a random position from variable available
         if (available == null || available.isEmpty()) {
             System.out.println("No available used place to choose from");
@@ -50,7 +61,6 @@ public class RecordUsedPlace {
     }
 
     
-
     private List<Position> getAdjacentPositions(Position p) {
         int tileSize = 48;
         return Arrays.asList(
@@ -106,8 +116,107 @@ public class RecordUsedPlace {
         //can place enemy or obstacle in the input position if no above conditions are 
         return !(condition1 || condition4 || condition1 || condition7 || condition9 || condition11 || condition13 || condition15); 
     }
+    
+    /**
+     * Add position to availble array, the function will reject position 
+     * that already in the avaible array
+     * @param position the position want to add to availble array
+     * @return If return true, it mean the position is successful adding, else fail to add
+     */
+    public boolean addAviable(Position position) {
+        if (isPlaceAviable(position))
+            return false;
+        else {
+            available.add(position);
+            return true;
+        }
+    }
 
-    // public boolean containsCandyAtPosition(Position position) {
+    /**
+     * Determines if the player is within a specified range from a given position.
+     *
+     * @param range The range to check around the position.
+     * @param p     The position to check from.
+     * @return true if the player is within the specified range, false otherwise.
+     */
+    public boolean isPlayerNearBy(int range, Position p) {
+        Player player = Player.getInstance();
+        int deltaX = Math.abs(player.getPosition().getX_axis() - p.getX_axis());
+        int deltaY = Math.abs(player.getPosition().getY_axis() - p.getY_axis());
+        return deltaX <= range && deltaY <= range;
+    }
+
+    /**
+     * Get number of position in availble array
+     * @return size of availble array
+     */
+    public int getLengthOfAviable() {
+        return available.size();
+    }
+
+    /**
+     * Get all position in avaible array
+     * @return Aviable array in record
+     */
+    public ArrayList<Position> getAviablePosition() {
+        return available;
+    }
+
+    /**
+     * Add wall Position to the wall_pos array
+     * @param position the position of wall
+     */
+    public void addWallPosition(Position position) {
+        walls_pos.add(position);
+    }
+
+    /**
+     * Add Obstcale position to the obstacle_pos array
+     * Obstcale can be fixed enemy or tombstone
+     * @param position the position of obstcale
+     */
+    public void addObstcalePosition(Position position) {
+        obstacle_pos.add(position);
+    }
+
+    /**
+     * Check whether the passing position is in availble array or not
+     * @param planingPosition the position want to check whether it in available array
+     * @return If true, then the position is already in availble array; if false, the 
+     * position is not in available array
+     */
+    public boolean isPlaceAviable(Position planingPosition) {
+        for (Position position : available) {
+            if (position.equal(planingPosition))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Romve the position from available array
+     * @param takePosition the position want to remove from available array
+     */
+    public void removeFromAviable(Position takePosition) {
+        iterator_pos = available.iterator();
+        Position position;
+        while (iterator_pos.hasNext()) {
+            position = iterator_pos.next();
+            if (position.equal(takePosition)) {
+                iterator_pos.remove();
+                break;
+            }
+        }
+    }
+
+        // public void initalAllInfor() {
+    //     if (GameManager.getInstance().isGameEnd()) {
+    //         obstacle_pos = new ArrayList<Position>();
+    //         walls_pos = new ArrayList<>();
+    //     }
+    // }
+
+        // public boolean containsCandyAtPosition(Position position) {
     // for (Reward candy : rewards) {
     // if (candy.getPosition().equals(position)) {
     // // if (candy instanceof Candy && candy.getPosition().equals(position)) {
@@ -116,14 +225,6 @@ public class RecordUsedPlace {
     // }
     // return false;
     // }
-
-    public void initalAllInfor() {
-        if (GameManager.getInstance().isGameEnd()) {
-            obstacle_pos = new ArrayList<Position>();
-            walls_pos = new ArrayList<>();
-
-        }
-    }
 
     // /**
     // * Retrieves a random position that is not currently occupied by any enemies.
@@ -160,24 +261,6 @@ public class RecordUsedPlace {
     // availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
     // }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public boolean addAviable(Position position) {
-        if (isPlaceAviable(position))
-            return false;
-        else {
-            available.add(position);
-            return true;
-        }
-    }
-
-    public static synchronized RecordUsedPlace getInstance() {
-        if (instance == null)
-            instance = new RecordUsedPlace();
-        return instance;
-    }
 
     // /**
     // * Add haracterAvaliablePosition elements in the map
@@ -245,35 +328,7 @@ public class RecordUsedPlace {
     // return null;
     // }
 
-    /**
-     * Determines if the player is within a specified range from a given position.
-     *
-     * @param range The range to check around the position.
-     * @param p     The position to check from.
-     * @return true if the player is within the specified range, false otherwise.
-     */
-    public boolean isPlayerNearBy(int range, Position p) {
-        Player player = Player.getInstance();
-        int deltaX = Math.abs(player.getPosition().getX_axis() - p.getX_axis());
-        int deltaY = Math.abs(player.getPosition().getY_axis() - p.getY_axis());
-        return deltaX <= range && deltaY <= range;
-    }
-
-    public int getLengthOfAviable() {
-        return available.size();
-    }
-
-    public ArrayList<Position> getAviablePosition() {
-        return available;
-    }
-
-    public void addWallPosition(Position position) {
-        walls_pos.add(position);
-    }
-
-    public void addObstcalePosition(Position position) {
-        obstacle_pos.add(position);
-    }
+    
 
     // public Reward playerGetReward() {
     // for (Reward reward : rewards) {
@@ -291,25 +346,6 @@ public class RecordUsedPlace {
     // return null;
     // }
 
-    public boolean isPlaceAviable(Position planingPosition) {
-        for (Position position : available) {
-            if (position.equal(planingPosition))
-                return true;
-        }
-        return false;
-    }
-
-    public void removeFromAviable(Position takePosition) {
-        iterator_pos = available.iterator();
-        Position position;
-        while (iterator_pos.hasNext()) {
-            position = iterator_pos.next();
-            if (position.equal(takePosition)) {
-                iterator_pos.remove();
-                break;
-            }
-        }
-    }
 
     // public boolean isNotSpiderPosition(Position pos) {
     // for (Enemy enemy : enemies) {

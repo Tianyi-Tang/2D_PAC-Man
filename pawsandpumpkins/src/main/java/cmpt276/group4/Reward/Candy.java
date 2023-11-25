@@ -56,7 +56,7 @@ public class Candy extends GeneralReward {
 
     @Override
     public void addBenefit(Player player) {
-        playerPosition = Player.getInstance().getPosition();
+        playerPosition = player.getPosition();
         if (playerPosition.equal(cdposition)) {
             addScore(player,score);
             RoomEnvironment.getInstance().removeReward(this);
