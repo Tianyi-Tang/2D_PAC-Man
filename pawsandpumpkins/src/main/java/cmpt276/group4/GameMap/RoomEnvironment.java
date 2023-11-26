@@ -33,7 +33,7 @@ public class RoomEnvironment {
         RoomEnvironment.instacne = instacne;
     }
 
-    private RoomEnvironment(){
+    public RoomEnvironment(){
         rewards = new ArrayList<Reward>();
         enemies = new ArrayList<Enemy>();
     }
