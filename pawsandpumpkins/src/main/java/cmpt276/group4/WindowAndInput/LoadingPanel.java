@@ -67,22 +67,11 @@ public class LoadingPanel extends JPanel implements Runnable {
         this.add(progressBar);
     }
 
-    /**
-     * Set that difficulty is the game and initlize game config
-     * @param level difficulty of this game
-     */
-    public void gameLevelSending(gameLevel level){
-        config = GameConfig.getGameConfigInstance();
-        config.passGameLevel(level);
-        initialiseItem= new InitialiseGameItem(config);
-        initialiseItem.setRoomInitialize(new RoomInitialization() , new RoomFactory());
-        createTimeLine();
-    }
-
     public void init(InitialiseGameItem initialiseGameItem, GameConfig gameConfig){
         config = gameConfig;
         initialiseItem = initialiseGameItem;
         initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
+        createTimeLine();
     }
 
     public void setKeySingleton(RecordUsedPlace record, RoomLayout roomLayout, RoomEnvironment roomEnvironment){

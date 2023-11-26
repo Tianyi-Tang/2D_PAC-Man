@@ -104,10 +104,17 @@ public class PanelController {
         if(status == GameStatus.MainPanel){
             loadPanel.setKeySingleton(record, roomLayout, roomEnvironment);
             gamePanel.setKeySingleton(record, roomLayout, roomEnvironment);
-            layout.show(cardContainer, "load");
-            loadPanel.gameLevelSending(level);
+            GameConfig config = setingGameConfig(level);
+            loadPanel.init(new InitialiseGameItem(config), config);
             status = GameStatus.LoadingPanel;
+            layout.show(cardContainer, "load");
         }
+    }
+
+    private GameConfig setingGameConfig(gameLevel level){
+        GameConfig config = GameConfig.getGameConfigInstance();
+        config.passGameLevel(level);
+        return config;
     }
 
      /**
