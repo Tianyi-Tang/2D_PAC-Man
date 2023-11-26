@@ -24,9 +24,6 @@ import cmpt276.group4.Room.RoomInitialization;
  */
 public class LoadingPanel extends JPanel implements Runnable {
 
-    private final int screenWidth = 48 * 16;
-    private final int screenHeight = 48 * 16;
-
     private Thread loadingThread;
 
     final int FPS = 60;// how many update within one sconde
@@ -38,7 +35,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private RoomLayout roomLayout;
     private RoomEnvironment roomEnvironment;
     private GameConfig config;//object contain the information about game 
-    private boolean generateconfi,generateRoom, generateAllTile, generateWall, generatePlayer,generateObstacle,generateAllEnemies, generateAllRewards =false;
+    private boolean generateRoom, generateAllTile, generateWall, generatePlayer,generateObstacle,generateAllEnemies, generateAllRewards =false;
     //boolean value to check each resource is generate
 
     private InitialiseGameItem initialiseItem;
@@ -48,7 +45,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * constructor for loading panel to sthe the process bar and background
      */
     public LoadingPanel(){
-        this.setPreferredSize(new Dimension(screenWidth,screenHeight));
+        this.setPreferredSize(new Dimension(WindowConfig.screenWidth,WindowConfig.screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.setLayout(null);
@@ -69,7 +66,6 @@ public class LoadingPanel extends JPanel implements Runnable {
         initialiseItem = initialiseGameItem;
         config = initialiseItem.getConfig();
         initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
-        createTimeLine();
     }
 
     public void setKeySingleton(RecordUsedPlace record, RoomLayout roomLayout, RoomEnvironment roomEnvironment){
@@ -82,9 +78,10 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Create the gamme loop for the laoding panel
     */
     public void createTimeLine(){
-        if(loadingThread == null && record != null && config != null){
+        if(loadingThread == null && keySingltonReady() && config != null){
             loadingThread = new Thread(this);
             loadingThread.start();
+            initialiseItem.createRoom();
         }
     }
 
@@ -136,10 +133,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      */
     public void update(){
         progressBar.setValue(progress);
-        if(!generateconfi){
-            checkConfig();
-        }
-        else if(!generateRoom){
+        if(!generateRoom){
             checkRoom();
         }
         else if(!generateAllTile){
@@ -170,17 +164,6 @@ public class LoadingPanel extends JPanel implements Runnable {
     }
 
     /**
-     * Check the game config is successful build
-     */
-    private void checkConfig(){
-        if(config.alreayInitialize() && keySingltonReady()  && initialiseItem.getConfig() != null){
-            generateconfi = true;
-            initialiseItem.createRoom();
-            progress ++;
-        }
-    }
-
-    /**
      * Check the room is generate and send position in this room to record use place 
      * Once it success loadin, loading the tile in room
      */
@@ -197,7 +180,6 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once it success loadin, loading the wall in room
      */
     private void checkTitle(){
-        System.out.println(config.areaofRoom());
         if(roomLayout.getTileNumber() == config.areaofRoom()){
             generateAllTile = true;
             initialiseItem.createWall();;
@@ -246,7 +228,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Once meet the requirement, loading the rewards
      */
     private void checkEnemy(){
-        if(roomEnvironment.getEnemyNumber() == config.getTotalGhosts()){
+        if(roomEnvironment.getEnemyNumber() == config.getTotalEnemy()){
             generateAllEnemies = true;
             initialiseItem.createReward();
             progress ++;

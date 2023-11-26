@@ -105,6 +105,7 @@ public class PanelController {
             loadPanel.init(new InitialiseGameItem(setingGameConfig(level)));
             status = GameStatus.LoadingPanel;
             layout.show(cardContainer, "load");
+            loadPanel.createTimeLine();
         }
     }
 

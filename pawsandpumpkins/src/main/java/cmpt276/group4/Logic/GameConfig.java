@@ -17,7 +17,6 @@ import cmpt276.group4.gameLevel;
 public class GameConfig {
     private gameLevel level;
     private int roomColumn = 16;
-    
 
     private int roomRow = 16;
     // obstacle
@@ -155,7 +154,7 @@ public class GameConfig {
         return numberOfAdvancedGhosts;
     }
 
-    public int getTotalGhosts(){
+    public int getTotalEnemy(){
         return numberOfBasicGhosts + numberOfAdvancedGhosts + numberOfSpiders;
     }
 
