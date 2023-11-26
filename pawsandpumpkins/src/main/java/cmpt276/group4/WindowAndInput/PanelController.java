@@ -29,9 +29,6 @@ public class PanelController {
 
     private GameStatus status;
     private GameManager gameManager;
-    private RecordUsedPlace record;
-    private RoomLayout roomLayout;
-    private RoomEnvironment roomEnvironment;
 
     private GamePanel gamePanel;
     private MainPanel mainPanel;
@@ -53,7 +50,6 @@ public class PanelController {
         cardContainer.add(loadPanel,"load");
         cardContainer.add(numberPanel, "gameEnd");
         createWindow();
-        setUpKeySinglton();
     }
 
 
@@ -73,27 +69,31 @@ public class PanelController {
         window.setLocationRelativeTo(null);
     }
 
-    private void setUpKeySinglton(){
-        gameManager = GameManager.getInstance();
-        record = RecordUsedPlace.getInstance();
-        roomLayout = RoomLayout.getInstance();
-        roomEnvironment = RoomEnvironment.getInstance();
-        initalKeySinglton();
-    }
-
-    private void initalKeySinglton(){
-        gameManager.init(this);
-        roomLayout.init(record);
-        roomEnvironment.init(record);
-    }
-
      /**
      * laoding the main menu to window and start of game
      */
-    public void createMainWindow(){
+    public void createMainWindow(GameManager gameManager, RecordUsedPlace record,RoomLayout roomLayout,RoomEnvironment roomEnvironment){
         status = GameStatus.MainPanel;
         layout.show(cardContainer, "main");
         window.setVisible(true);
+        setKeySinglton(gameManager, record, roomLayout, roomEnvironment);
+    }
+
+    private void setKeySinglton(GameManager gameManager, RecordUsedPlace record,RoomLayout roomLayout,RoomEnvironment roomEnvironment){
+        this.gameManager = gameManager;
+        initalKeySinglton(record,roomLayout,roomEnvironment);
+        initAllPanel(record, roomLayout, roomEnvironment);
+    }
+
+    private void initAllPanel(RecordUsedPlace record,RoomLayout roomLayout,RoomEnvironment roomEnvironment){
+        loadPanel.setKeySingleton(record, roomLayout, roomEnvironment);
+        gamePanel.setKeySingleton(record, roomLayout, roomEnvironment);
+    }
+
+    private void initalKeySinglton(RecordUsedPlace record,RoomLayout roomLayout, RoomEnvironment roomEnvironment){
+        gameManager.init(this);
+        roomLayout.init(record);
+        roomEnvironment.init(record);
     }
 
     /**
@@ -102,7 +102,6 @@ public class PanelController {
      */
     public void transformToLoadingScreen(gameLevel level){
         if(status == GameStatus.MainPanel){
-            initAllPanel();
             loadPanel.init(new InitialiseGameItem(setingGameConfig(level)));
             status = GameStatus.LoadingPanel;
             layout.show(cardContainer, "load");
@@ -113,11 +112,6 @@ public class PanelController {
         GameConfig config = GameConfig.getGameConfigInstance();
         config.passGameLevel(level);
         return config;
-    }
-
-    private void initAllPanel(){
-        loadPanel.setKeySingleton(record, roomLayout, roomEnvironment);
-        gamePanel.setKeySingleton(record, roomLayout, roomEnvironment);
     }
 
      /**
