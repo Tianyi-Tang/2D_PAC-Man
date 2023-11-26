@@ -40,11 +40,12 @@ public class NumberPanel extends JPanel {
         loadNumberImages();
 
         this.imageWidth = 8;
-        this.numbersToDisplay = new int[5][];
+        //this.numbersToDisplay = new int[5][];
+        this.numbersToDisplay = new int[6][];
         digitXSize = 11;
         digitYSize = 11;
         xAxisLineUp = 420;
-        yAxisLineUp = new int[] { 348, 365, 378, 412, 444 };
+        yAxisLineUp = new int[] { 348, 365, 378, 412, 444, 470 };
         popUpScale = 0.75;
 
     }
@@ -120,6 +121,15 @@ public class NumberPanel extends JPanel {
      */
     public void setNumbers(int totalRewards, int regular, int bonus, int punishments, int overall) {
         int[] nums = { totalRewards, regular, bonus, punishments, overall };
+        for (int i = 0; i < nums.length; i++) {
+            numbersToDisplay[i] = intToArray(nums[i]);
+        }
+        repaint();
+
+    }
+
+    public void setNumbers(int totalRewards, int regular, int bonus, int punishments, int overall, int time) {
+        int[] nums = { totalRewards, regular, bonus, punishments, overall, time};
         for (int i = 0; i < nums.length; i++) {
             numbersToDisplay[i] = intToArray(nums[i]);
         }
