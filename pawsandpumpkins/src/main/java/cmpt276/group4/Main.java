@@ -11,9 +11,6 @@ public class Main {
         PanelController controller = PanelController.getInstance();
         controller.createMainWindow();
 
-        // GameManager manager = GameManager.getInstance();
-        // manager.createMainWindow();
-        System.out.println("Hello World" );
 
     }
 }
