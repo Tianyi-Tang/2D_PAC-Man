@@ -75,7 +75,7 @@ public class LoadingPanel extends JPanel implements Runnable {
         config = GameConfig.getGameConfigInstance();
         config.passGameLevel(level);
         initialiseItem= new InitialiseGameItem(config);
-        initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
+        initialiseItem.setRoomInitialize(new RoomInitialization() , new RoomFactory());
         createTimeLine();
     }
 
@@ -137,7 +137,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     /**
      * Check and laod resource by dependcy order
      */
-    private void update(){
+    public void update(){
         progressBar.setValue(progress);
         if(!generateconfi){
             checkConfig();
@@ -282,7 +282,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * check whether the loading panel finished the tast
      * @return if all resoucres is laoding, return true; else return false
      */
-    private boolean allResourceLoading(){
+    public boolean allResourceLoading(){
         if(!generateAllRewards)
             return false;
         else
