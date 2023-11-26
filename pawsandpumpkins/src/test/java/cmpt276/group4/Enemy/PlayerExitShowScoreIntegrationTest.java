@@ -1,4 +1,5 @@
 package cmpt276.group4.Enemy;
+
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Player.Player;
@@ -18,41 +19,50 @@ public class PlayerExitShowScoreIntegrationTest {
     private Player mockPlayer;
     private PanelController mockControll;
     private Door[] mockDoors;
+    private int rewardAmount;
 
     @BeforeEach
     void setUp() {
+        rewardAmount = 5 ; 
         mockControll = mock(PanelController.class);
         mockPlayer = mock(Player.class);
         gameManager = new GameManager();
         gameManager.init(mockControll);
-        
+
         GameManager.setInstance(gameManager);
         gameManager.setPlayer(mockPlayer);
         gameManager.init(mockControll);
-       
 
-        mockDoors = new Door[1]; 
+        mockDoors = new Door[1];
         mockDoors[0] = mock(Door.class);
         gameManager.setDoors(mockDoors);
 
-        when(mockPlayer.getGeneralRewardNum()).thenReturn(5); 
+        when(mockPlayer.getGeneralRewardNum()).thenReturn(5);
         GameConfig mockGameConfig = mock(GameConfig.class);
         GameConfig.setInstance(mockGameConfig);
-        when(mockGameConfig.getNumberOfRegularRewards()).thenReturn(5); 
+        when(mockGameConfig.getNumberOfRegularRewards()).thenReturn(rewardAmount);
         gameManager.setNumberOfGeneralRewards(mockGameConfig);
 
-        
     }
 
- @Test
-    void testShowScoreOnPlayerExit() {
+    @Test
+    void testShowScoreOnPlayerExitandWin() {
 
-        gameManager.collectReward(5);
+        gameManager.collectReward(rewardAmount);
         gameManager.playerLeaveDoor();
+        System.out.println("isGameEnd: " + gameManager.isGameEnd());
 
+        assertTrue(gameManager.isGameEnd());
+        verify(mockControll).transformToEndScreen();
+    }
 
-        // Verify transformToEndScreen is called
+    @Test
+    void testShowScoreOnPlayerCaughtByGhost() {
+
+        gameManager.enemyCatachPlayer(true);
+        System.out.println("isGameEnd: " + gameManager.isGameEnd());
+
+        assertTrue(gameManager.isGameEnd());
         verify(mockControll).transformToEndScreen();
     }
 }
-
