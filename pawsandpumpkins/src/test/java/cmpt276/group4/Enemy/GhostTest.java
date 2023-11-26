@@ -14,9 +14,17 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.*;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,17 +57,15 @@ class GhostTest {
         ghost = new Ghost(EnemyType.GHOST_BASIC);
         ghost.setPlayerMovement(mockEnemyMovement);
         ghostPosition = new Position(100, 100);
-       
+
     }
 
     // @BeforeEach
     // void setUp() {
-    //     ghostPosition = new Position(100, 100); // Initial position of ghost
-    //     ghost = new Ghost(EnemyType.GHOST_BASIC);
-    //     ghost.setEnemyPosition(ghostPosition);
+    // ghostPosition = new Position(100, 100); // Initial position of ghost
+    // ghost = new Ghost(EnemyType.GHOST_BASIC);
+    // ghost.setEnemyPosition(ghostPosition);
     // }
-
-   
 
     @Test
     void testConstructor() {
@@ -118,7 +124,7 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
-     @Test
+    @Test
     void testAction_PlayerBottomOfGhost() {
         Position playerPos = new Position(0, 0);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
@@ -147,7 +153,7 @@ class GhostTest {
 
     @Test
     void testAction_PlayerLeftOfGhost1() {
-        Position playerPos = new Position(2*WindowConfig.tileSize, WindowConfig.tileSize);
+        Position playerPos = new Position(2 * WindowConfig.tileSize, WindowConfig.tileSize);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(0, 0));
         ghost.action();
@@ -156,50 +162,58 @@ class GhostTest {
 
     @Test
     void testAction_PlayerLeftOfGhost2() {
-        Position playerPos = new Position(2*WindowConfig.tileSize, WindowConfig.tileSize);
+        Position playerPos = new Position(2 * WindowConfig.tileSize, WindowConfig.tileSize);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
-        ghost.setEnemyPosition(new Position(2*WindowConfig.tileSize, 0));
+        ghost.setEnemyPosition(new Position(2 * WindowConfig.tileSize, 0));
         ghost.action();
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
     @Test
     void testAction_PlayerLeftOfGhost3() {
-        Position playerPos = new Position(2*WindowConfig.tileSize, WindowConfig.tileSize);
+        Position playerPos = new Position(2 * WindowConfig.tileSize, WindowConfig.tileSize);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
-        ghost.setEnemyPosition(new Position(2*WindowConfig.tileSize, WindowConfig.tileSize));
+        ghost.setEnemyPosition(new Position(2 * WindowConfig.tileSize, WindowConfig.tileSize));
         ghost.action();
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
     @Test
     void testAction_PlayerLeftOfGhost4() {
-        Position playerPos = new Position(2*WindowConfig.tileSize, 10);
+        Position playerPos = new Position(2 * WindowConfig.tileSize, 10);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
-        ghost.setEnemyPosition(new Position(3*WindowConfig.tileSize, 0));
+        ghost.setEnemyPosition(new Position(3 * WindowConfig.tileSize, 0));
         ghost.action();
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
     @Test
     void testAction_PlayerLeftOfGhost5() {
-        Position playerPos = new Position(2*WindowConfig.tileSize, 0);
+        Position playerPos = new Position(2 * WindowConfig.tileSize, 0);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
-        ghost.setEnemyPosition(new Position(3*WindowConfig.tileSize, 0));
+        ghost.setEnemyPosition(new Position(3 * WindowConfig.tileSize, 0));
         ghost.action();
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
     @Test
     void testAction_PlayerLeftOfGhost6() {
-        Position playerPos = new Position(2*WindowConfig.tileSize, 2*WindowConfig.tileSize);
+        Position playerPos = new Position(2 * WindowConfig.tileSize, 2 * WindowConfig.tileSize);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
-        ghost.setEnemyPosition(new Position(WindowConfig.tileSize, 8*WindowConfig.tileSize));
+        ghost.setEnemyPosition(new Position(WindowConfig.tileSize, 8 * WindowConfig.tileSize));
         ghost.action();
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
-
-
+    @Test
+    void testDrawGhostBasic() {
+        Graphics2D mockGraphics = mock(Graphics2D.class);
+        Ghost ghost = new Ghost(EnemyType.GHOST_BASIC);
+        ghost.setEnemyPosition(new Position(10, 10)); // Arbitrary position
+        ghost.draw(mockGraphics);
+        verify(mockGraphics).drawImage(
+                isNotNull(), // Assuming getter method for ghost_basic image
+                eq(10), eq(10), eq(WindowConfig.tileSize), eq(WindowConfig.tileSize), isNull());
+    }
 
 }
