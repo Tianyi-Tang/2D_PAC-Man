@@ -67,9 +67,9 @@ public class LoadingPanel extends JPanel implements Runnable {
         this.add(progressBar);
     }
 
-    public void init(InitialiseGameItem initialiseGameItem, GameConfig gameConfig){
-        config = gameConfig;
+    public void init(InitialiseGameItem initialiseGameItem){
         initialiseItem = initialiseGameItem;
+        config = initialiseItem.getConfig();
         initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
         createTimeLine();
     }
@@ -175,7 +175,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Check the game config is successful build
      */
     private void checkConfig(){
-        if(config.alreayInitialize() && keySingltonReady()  && initialiseItem.getConfig()){
+        if(config.alreayInitialize() && keySingltonReady()  && initialiseItem.getConfig() != null){
             generateconfi = true;
             initialiseItem.createRoom();
             progress ++;

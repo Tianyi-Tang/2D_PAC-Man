@@ -104,8 +104,7 @@ public class PanelController {
         if(status == GameStatus.MainPanel){
             loadPanel.setKeySingleton(record, roomLayout, roomEnvironment);
             gamePanel.setKeySingleton(record, roomLayout, roomEnvironment);
-            GameConfig config = setingGameConfig(level);
-            loadPanel.init(new InitialiseGameItem(config), config);
+            loadPanel.init(new InitialiseGameItem(setingGameConfig(level)));
             status = GameStatus.LoadingPanel;
             layout.show(cardContainer, "load");
         }

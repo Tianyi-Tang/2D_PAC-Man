@@ -22,11 +22,8 @@ public class InitialiseGameItem {
         this.config = config;
     }
 
-    public boolean getConfig(){
-        if(config == null)
-            return false;
-        else
-            return true;
+    public GameConfig getConfig(){
+        return config;
     }
 
     public void setRoomInitialize(RoomInitialization roomInitialization, RoomFactory roomFactory){
