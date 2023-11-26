@@ -2,25 +2,30 @@ package cmpt276.group4.Player;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
+import cmpt276.group4.Logic.WindowConfig;
+import cmpt276.group4.Reward.Candy;
+import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.Room.Wall;
 
 public class PlayerMovementTest {
     public PlayerMovement movement;
 
-    public RoomEnvironment roomEnvironment;
+    public RoomEnvironment mockRoomEnvironment;
     public RecordUsedPlace record;
     public RoomLayout roomLayout;
 
-    public Position wallPosition;
+    public Position availblePos;
 
     @BeforeEach
     public void setUpMovement(){
@@ -28,26 +33,41 @@ public class PlayerMovementTest {
 
         record = new RecordUsedPlace();
         roomLayout = new RoomLayout();
-        roomEnvironment = new RoomEnvironment();
+        mockRoomEnvironment = mock(RoomEnvironment.class);
 
         roomLayout.init(record);
-        roomEnvironment.init(record);
-
-        wallPosition = new Position(2* 48,48);
-        record.addAviable(wallPosition);
-        roomLayout.addElementInMap(new Wall(wallPosition));
-        movement.init(roomLayout, roomEnvironment, Player.getInstance());
+        availblePos = new Position(WindowConfig.tileSize,WindowConfig.tileSize);
+        record.addAviable(availblePos);
+        
+        movement.init(roomLayout, mockRoomEnvironment, Player.getInstance());
     }
 
 
     @Test
     public void goToAviablePosition(){
-        assertEquals(true,movement.isPositionAvailable(new Position(48, 48)));
+        assertEquals(true,movement.isPositionAvailable(availblePos));
     }
 
     @Test
     public void goToUnaviablePosition(){
-        assertEquals(false, movement.isPositionAvailable(wallPosition));
+        roomLayout.addElementInMap(new Wall(availblePos));
+        assertEquals(false, movement.isPositionAvailable(availblePos));
+    }
+
+    @Test
+    public void collectReward(){
+        Reward mockCandy = mock(Candy.class);
+        when(mockRoomEnvironment.collectReward()).thenReturn(mockCandy);
+
+        movement.checkReward();
+        verify(mockCandy).addBenefit(Player.getInstance());
+    }
+
+    @Test
+    public void failToCollect(){
+        Reward mockReward = Mockito.mock(Reward.class);
+        movement.checkReward();
+        Mockito.verify(mockReward, Mockito.times(0)).addBenefit(Player.getInstance());
     }
 
 }

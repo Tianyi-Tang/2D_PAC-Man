@@ -255,7 +255,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
                 updatePosition(-48, 0);
             }
             time_counter =0;
-            movement.checkReward(playerPosition);
+            movement.checkReward();
         }
         
     }

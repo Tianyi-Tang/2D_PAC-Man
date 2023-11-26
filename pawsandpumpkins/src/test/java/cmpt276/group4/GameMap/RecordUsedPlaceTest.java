@@ -15,6 +15,7 @@ public class RecordUsedPlaceTest {
 
     /**
      * set up the RecordUsedPlace before each test cause run
+     * Haven't test the canPlaceEnemyAndObstacle, wait for refacotry
      */
     @BeforeEach
     public void setUp(){

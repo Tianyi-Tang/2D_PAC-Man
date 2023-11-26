@@ -40,7 +40,7 @@ public class Spider implements Enemy {
      * already present.
      * The spider is positioned at a random position after checking vacancy.
      */
-    Spider() {
+    public Spider() {
         record = RecordUsedPlace.getInstance();
         roomEnvironment = RoomEnvironment.getInstance();
         // get the list of enemy from recordUsedPlace and randomly picked one.
