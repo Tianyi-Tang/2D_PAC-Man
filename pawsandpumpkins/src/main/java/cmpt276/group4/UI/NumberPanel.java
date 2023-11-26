@@ -168,13 +168,13 @@ public class NumberPanel extends JPanel {
     private void drawNumberLine(Graphics g, int[] numberLine, int startX, int startY) {
         int x = startX;
         for (int number : numberLine) {
-            if (number >= 0 && number < digitImages.length) {
+            //if (number >= 0 && number < digitImages.length) {
                 BufferedImage img = digitImages[number];
                 if (img != null) {
                     g.drawImage(img, x, startY, digitXSize, digitYSize, this);
                     x += (imageWidth + 1); // Adjust space for the next digit
                 }
-            }
+            //}
         }
     }
 

@@ -88,7 +88,7 @@ class GhostTest {
     void setEnemyPositionTest() {
         Position newPosition = new Position(5, 5);
         ghost.setEnemyPosition(newPosition);
-        assertEquals(newPosition, ghost.getEnemyPosition(), "Enemy position should be updated");
+        assertEquals(newPosition, ghost.getPosition(), "Enemy position should be updated");
     }
 
     @Test
@@ -270,7 +270,7 @@ class GhostTest {
         when(mockRecord.isPlayerNearBy(anyInt(), any(Position.class))).thenReturn(false);
         when(mockEnemyMovement.isPositionAvailable(any(Position.class))).thenReturn(true);
         ghost.action();
-        assertNotEquals(startPosition, ghost.getEnemyPosition(), "Ghost should have moved");
+        assertNotEquals(startPosition, ghost.getPosition(), "Ghost should have moved");
     }
 
     @Test
@@ -287,7 +287,7 @@ class GhostTest {
 
         ghost.action();
 
-        assertTrue(ghost.getEnemyPosition().getY_axis() != ghostPosition.getY_axis(),
+        assertTrue(ghost.getPosition().getY_axis() != ghostPosition.getY_axis(),
                 "Ghost should have moved downwards");
     }
 

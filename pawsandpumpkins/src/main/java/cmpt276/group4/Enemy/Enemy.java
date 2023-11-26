@@ -17,12 +17,6 @@ public interface Enemy {
     boolean movable = true;
     Position enemyPosition = new Position(0, 0);
 
-    /**
-     * Gets the current position of the enemy.
-     * 
-     * @return The current position of the enemy.
-     */
-    Position getEnemyPosition();
 
     /**
      * Sets a new position for the enemy.

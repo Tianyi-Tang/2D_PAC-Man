@@ -97,14 +97,14 @@ class SpiderTest {
 
     @Test
     void getEnemyPositionTest() {
-        assertEquals(new Position(0, 0), spider.getEnemyPosition(), "Enemy position should match initial position");
+        assertEquals(new Position(0, 0), spider.getPosition(), "Enemy position should match initial position");
     }
 
     @Test
     void setEnemyPositionTest() {
         Position newPosition = new Position(5, 5);
         spider.setEnemyPosition(newPosition);
-        assertEquals(newPosition, spider.getEnemyPosition(), "Enemy position should be updated");
+        assertEquals(newPosition, spider.getPosition(), "Enemy position should be updated");
     }
 
     @Test

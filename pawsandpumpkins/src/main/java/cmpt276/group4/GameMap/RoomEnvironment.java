@@ -54,7 +54,7 @@ public class RoomEnvironment {
     }
 
     public boolean addEnemy(Enemy enemy){
-        if(placeAviableForEnemy(enemy.getEnemyPosition(), enemy.getMovable())){
+        if(placeAviableForEnemy(enemy.getPosition(), enemy.getMovable())){
             enemies.add(enemy);
             record.removeFromAviable(enemy.getPosition());
             return true;

@@ -97,15 +97,15 @@ public class Spider implements Enemy {
         }
     }
 
-    /**
-     * Gets the current enemy position.
-     * 
-     * @return The current enemy position.
-     */
-    @Override
-    public Position getEnemyPosition() {
-        return enemyPosition;
-    }
+    // /**
+    //  * Gets the current enemy position.
+    //  * 
+    //  * @return The current enemy position.
+    //  */
+    // @Override
+    // public Position getEnemyPosition() {
+    //     return enemyPosition;
+    // }
 
     /**
      * Sets a new position for this spider.

@@ -145,7 +145,7 @@ public class RoomEnvironmentTest {
             enemy = mock(Spider.class);
 
         when(enemy.getMovable()).thenReturn(ghost);
-        when(enemy.getEnemyPosition()).thenReturn(position);
+        when(enemy.getPosition()).thenReturn(position);
         return enemy;
     }
 

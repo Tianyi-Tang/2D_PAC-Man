@@ -280,11 +280,6 @@ public class Ghost implements Enemy {
     }
 
     @Override
-    public Position getEnemyPosition() {
-        return enemyPosition;
-    }
-
-    @Override
     public void setEnemyPosition(Position newPosition) {
         enemyPosition.setPosition(newPosition);
     }
