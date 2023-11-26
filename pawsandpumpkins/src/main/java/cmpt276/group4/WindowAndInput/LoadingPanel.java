@@ -10,8 +10,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import cmpt276.group4.gameLevel;
-
 import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
@@ -83,8 +81,8 @@ public class LoadingPanel extends JPanel implements Runnable {
     /**
      * Create the gamme loop for the laoding panel
     */
-    private void createTimeLine(){
-        if(loadingThread == null){
+    public void createTimeLine(){
+        if(loadingThread == null && record != null && config != null){
             loadingThread = new Thread(this);
             loadingThread.start();
         }
