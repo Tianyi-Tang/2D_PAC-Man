@@ -106,6 +106,10 @@ public class LoadingPanel extends JPanel implements Runnable {
         }
     }
 
+    public int loadingProcess(){
+        return progress;
+    }
+
     /**
      * Continues check all resource is loading
      * after all resource loading finished the loop and switch the game panel
