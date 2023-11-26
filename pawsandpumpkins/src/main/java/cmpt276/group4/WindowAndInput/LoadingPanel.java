@@ -79,6 +79,12 @@ public class LoadingPanel extends JPanel implements Runnable {
         createTimeLine();
     }
 
+    public void init(InitialiseGameItem initialiseGameItem, GameConfig gameConfig){
+        config = gameConfig;
+        initialiseItem = initialiseGameItem;
+        initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
+    }
+
     public void setKeySingleton(RecordUsedPlace record, RoomLayout roomLayout, RoomEnvironment roomEnvironment){
         this.record = record;
         this.roomLayout = roomLayout;
