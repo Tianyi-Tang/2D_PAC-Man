@@ -24,6 +24,10 @@ public class GameManager {
     //level: BASIC, MEDIUM, HARD
     private static GameManager instance;// singleton
 
+    public static void setInstance(GameManager instance) {
+        GameManager.instance = instance;
+    }
+
     private Player player;
 
 

@@ -13,6 +13,8 @@ import cmpt276.group4.Reward.Reward;
  * Storing the enemy and rewards
  */
 public class RoomEnvironment {
+   
+
     private RecordUsedPlace record;
     private static RoomEnvironment instacne;
     private Player player;
@@ -27,7 +29,11 @@ public class RoomEnvironment {
         return instacne;
     }
 
-    public RoomEnvironment(){
+    public static void setInstance(RoomEnvironment instacne) {
+        RoomEnvironment.instacne = instacne;
+    }
+
+    private RoomEnvironment(){
         rewards = new ArrayList<Reward>();
         enemies = new ArrayList<Enemy>();
     }

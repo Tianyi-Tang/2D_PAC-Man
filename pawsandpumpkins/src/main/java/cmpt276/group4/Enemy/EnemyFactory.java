@@ -23,6 +23,9 @@ public class EnemyFactory {
      * @throws IllegalArgumentException If an invalid enemy type is passed.
      */
     public List<Enemy> createEnemies(EnemyType type, int number) {
+        if (type == null) {
+            throw new IllegalArgumentException("Invalid enemy type");
+        }
         List<Enemy> enemies = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             switch (type) {
@@ -35,11 +38,8 @@ public class EnemyFactory {
                 case SPIDER:
                     enemies.add(new Spider());
                     // uncomment for testing
-
                     // System.out.println("Spider created.");
                     break;
-                default:
-                    throw new IllegalArgumentException("Invalid enemy type");
             }
         }
         return enemies;
