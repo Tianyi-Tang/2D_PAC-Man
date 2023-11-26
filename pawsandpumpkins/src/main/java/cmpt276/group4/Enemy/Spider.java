@@ -25,6 +25,8 @@ public class Spider implements Enemy {
     private BufferedImage currentImage;
     private RecordUsedPlace record;
     private RoomEnvironment roomEnvironment;
+    
+
     private Position playerPosition;
 
     /**
