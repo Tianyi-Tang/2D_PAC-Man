@@ -41,9 +41,7 @@ public class GameManager {
         this.controll = controller;
     }
 
-    /**
-     * Method for testing purposes to set the mock player
-     */
+
     public void setPlayer(Player player) {
         this.player = player;
     }

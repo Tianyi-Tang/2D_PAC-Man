@@ -13,7 +13,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import cmpt276.group4.GameManager;
 import cmpt276.group4.gameLevel;
 import cmpt276.group4.Logic.WindowConfig;
 
