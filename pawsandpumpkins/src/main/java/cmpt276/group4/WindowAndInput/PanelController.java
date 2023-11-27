@@ -86,7 +86,7 @@ public class PanelController {
     }
 
     private void initAllPanel(RecordUsedPlace record,RoomLayout roomLayout,RoomEnvironment roomEnvironment){
-        loadPanel.setKeySingleton(record, roomLayout, roomEnvironment);
+        loadPanel.setKeySingleton(record, roomLayout, roomEnvironment,this);
         gamePanel.setKeySingleton(record, roomLayout, roomEnvironment);
     }
 
@@ -101,12 +101,10 @@ public class PanelController {
      * @param level the difficulty of game 
      */
     public void transformToLoadingScreen(gameLevel level){
-        if(status == GameStatus.MainPanel){
-            loadPanel.init(new InitialiseGameItem(setingGameConfig(level)));
-            status = GameStatus.LoadingPanel;
-            layout.show(cardContainer, "load");
-            loadPanel.createTimeLine();
-        }
+        loadPanel.init(new InitialiseGameItem(setingGameConfig(level)));
+        status = GameStatus.LoadingPanel;
+        layout.show(cardContainer, "load");
+        loadPanel.createTimeLine();
     }
 
     private GameConfig setingGameConfig(gameLevel level){
@@ -119,16 +117,14 @@ public class PanelController {
      * Switch the loading panel to game panel
      */
     public void transformToGameScreen(){
-        if(status == GameStatus.LoadingPanel){
-            enterGame();
-            layout.show(cardContainer, "game");
-            gamePanel.createTimeLine();
-            gamePanel.setPlayer(Player.getInstance());
-            gamePanel.setDoors(Room.getInstance().getDoors());
+        enterGame();
+        layout.show(cardContainer, "game");
+        gamePanel.createTimeLine();
+        gamePanel.setPlayer(Player.getInstance());
+        gamePanel.setDoors(Room.getInstance().getDoors());
 
-            addKeyboardListener();
-            status = GameStatus.GamePanel;
-        }
+        addKeyboardListener();
+        status = GameStatus.GamePanel;
     }
 
     /**
@@ -140,6 +136,10 @@ public class PanelController {
             layout.show(cardContainer, "gameEnd");
             initalNumberPanel();
         }
+    }
+
+    public GameStatus getGameStatu(){
+        return status;
     }
 
     

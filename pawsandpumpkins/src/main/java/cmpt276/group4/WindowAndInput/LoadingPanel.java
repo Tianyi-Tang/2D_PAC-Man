@@ -34,6 +34,9 @@ public class LoadingPanel extends JPanel implements Runnable {
     private RecordUsedPlace record;
     private RoomLayout roomLayout;
     private RoomEnvironment roomEnvironment;
+    private PanelController panelController;
+
+
     private GameConfig config;//object contain the information about game 
     private boolean generateRoom, generateAllTile, generateWall, generatePlayer,generateObstacle,generateAllEnemies, generateAllRewards =false;
     //boolean value to check each resource is generate
@@ -68,10 +71,11 @@ public class LoadingPanel extends JPanel implements Runnable {
         initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
     }
 
-    public void setKeySingleton(RecordUsedPlace record, RoomLayout roomLayout, RoomEnvironment roomEnvironment){
+    public void setKeySingleton(RecordUsedPlace record, RoomLayout roomLayout, RoomEnvironment roomEnvironment, PanelController panelController){
         this.record = record;
         this.roomLayout = roomLayout;
         this.roomEnvironment = roomEnvironment;
+        this.panelController = panelController;
     }
 
     /**
@@ -272,7 +276,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * inital the loading panel
      */
     private void initialLoading(){
-        generateRoom = generateAllTile =generateAllEnemies = generateObstacle  = generateAllRewards = generatePlayer =false;
+        //generateRoom = generateAllTile =generateAllEnemies = generateObstacle  = generateAllRewards = generatePlayer =false;
         loadingThread = null;
         System.out.println("Success!!");
     }
@@ -281,7 +285,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * swtich to game panel
      */
     private void startGame(){
-        PanelController.getInstance().transformToGameScreen();
+        panelController.transformToGameScreen();
     }
 
 

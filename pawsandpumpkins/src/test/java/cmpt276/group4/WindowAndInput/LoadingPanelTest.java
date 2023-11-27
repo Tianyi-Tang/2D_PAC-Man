@@ -2,6 +2,7 @@ package cmpt276.group4.WindowAndInput;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +22,7 @@ public class LoadingPanelTest {
     public RecordUsedPlace mockrecord;
     public RoomLayout mockroomLayout;
     public RoomEnvironment mockroomEnvironment;
+    public PanelController mockpanelController;
 
     int aviablePos_num;
     int wall_num;
@@ -38,6 +40,8 @@ public class LoadingPanelTest {
         mockrecord = mock(RecordUsedPlace.class);
         mockroomLayout = mock(RoomLayout.class);
         mockroomEnvironment = mock(RoomEnvironment.class);
+        mockpanelController = mock(PanelController.class);
+
         
         config = GameConfig.getGameConfigInstance();
         config.passGameLevel(gameLevel.BASIC);
@@ -45,7 +49,7 @@ public class LoadingPanelTest {
 
         when(mockInialise.getConfig()).thenReturn(config);
         loadingPanel.init(mockInialise);
-        loadingPanel.setKeySingleton(mockrecord, mockroomLayout, mockroomEnvironment);
+        loadingPanel.setKeySingleton(mockrecord, mockroomLayout, mockroomEnvironment,mockpanelController);
         setUpAllReturnNumber();
     }
 
@@ -134,6 +138,20 @@ public class LoadingPanelTest {
         assertEquals(true, loadingPanel.allResourceLoading());
     }
 
+    @Test
+    public void laodingMoreReward(){
+        when(mockroomEnvironment.getRewardNumber()).thenReturn(reward_num + 5);
+        updateTime(7);
+        updateTime(6);
+    }
+
+    @Test
+    public void loadingProcess() throws InterruptedException{
+        loadingPanel.createTimeLine();
+        Thread.sleep(500);
+        verify(mockpanelController).transformToGameScreen();
+    }
+
     private void loadingVaild(int expectProcess){
         assertEquals(expectProcess, loadingPanel.loadingProcess());
     }
@@ -161,4 +179,5 @@ public class LoadingPanelTest {
         when(mockroomEnvironment.getEnemyNumber()).thenReturn(enemy_num);
         when(mockroomEnvironment.getRewardNumber()).thenReturn(reward_num);
     }
+
 }
