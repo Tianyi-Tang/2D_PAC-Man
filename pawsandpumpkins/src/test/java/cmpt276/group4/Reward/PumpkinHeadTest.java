@@ -5,7 +5,12 @@ import cmpt276.group4.Player.Player;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 class PumpkinHeadTest {
@@ -27,7 +32,7 @@ class PumpkinHeadTest {
     @Test
     void setPosition_SetRightPosition() {
         var pumpkinHead = new PumpkinHead();
-        var newPosition = new Position(10,10);
+        var newPosition = new Position(10, 10);
         pumpkinHead.setPosition(newPosition);
         assertEquals(newPosition, pumpkinHead.getPosition());
 
@@ -40,9 +45,8 @@ class PumpkinHeadTest {
     }
 
 
-
     @Test
-   void testAddScore() {
+    void testAddScore() {
         Player mockPlayer = Mockito.mock(Player.class);
         PumpkinHead reward = new PumpkinHead();
 
@@ -52,14 +56,16 @@ class PumpkinHeadTest {
         // Verify if player's score is updated
         verify(mockPlayer).addScoreToPlayer(initialScore, reward.isBonusReward());
     }
+
     @Test
-    void getAvailable_correctlyReturnAvailable(){
+    void getAvailable_correctlyReturnAvailable() {
         var pumpkinHead = new PumpkinHead();
         assertTrue(pumpkinHead.getAvailable());
 
     }
 
     @Test
-    void draw() {
+    void testDrawMethod() {
+
     }
 }
