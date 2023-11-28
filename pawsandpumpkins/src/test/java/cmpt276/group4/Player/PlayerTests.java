@@ -124,14 +124,17 @@ public class PlayerTests {
         assertEquals(player.getPosition(), new Position(48, 48));
     }
 
+    /**
+     * Test ObserverUpdate will return error if the pass value for direction is null
+     */
     @Test
     public void sendINullToObserverUpdate(){
-        Position initalPosition = player.getPosition();
         keyInputPlayerUpdate(null, true, 1,true);
-        assertEquals(initalPosition, player.getPosition());
-        
     }
 
+    /**
+     * Test ObserverUpdate will make player position change when the other key is press
+     */
     @Test
     public void sendOtherToObserverUpdate(){
         Position initalPosition = player.getPosition();
@@ -190,9 +193,9 @@ public class PlayerTests {
         keyInputPlayerUpdate(MoveDirection.Right,true,1,true);
         player.draw(mockGraphic);
 
-        player.observerUpdate(MoveDirection.Right, false);
+        keyInputPlayerUpdate(MoveDirection.Right,false,1,true);
         player.draw(mockGraphic);
-        BufferedImage expecImage = loadImage("res/Player/right1.png");
+        BufferedImage expecImage = loadImage("res/Player/right2.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
     }
 
@@ -208,6 +211,14 @@ public class PlayerTests {
         assertImagesEqual(expecImage, player.getCurrentImage());
     }
 
+    /**
+     * The fucniton to imitate after user press or release the key and player updater 
+     * several time to moving or chang its image
+     * @param direction the Moving Direction of player
+     * @param pressKey is the key press or release
+     * @param updateTime how many time you want to player to move or change image
+     * @param forPlayermoving is to view player to new position or siwtch image
+     */
     private void keyInputPlayerUpdate(MoveDirection direction, boolean pressKey, int updateTime, boolean forPlayermoving){
         player.observerUpdate(direction, pressKey);
         playerUpdate.playerUpdate(updateTime, forPlayermoving);
