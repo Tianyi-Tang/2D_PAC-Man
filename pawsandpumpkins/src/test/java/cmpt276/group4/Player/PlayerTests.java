@@ -180,22 +180,33 @@ public class PlayerTests {
     public void movingImageUp(){
         keyInputPlayerUpdate(MoveDirection.Up, true, 1, true);
         player.draw(mockGraphic);
+
         BufferedImage expecImage = loadImage("res/Player/up1.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
     }
 
     /**
      * Test player will main its' direction adn move image, even the observerUpdate
-     * turn off the move direction
+     * turn off the move direction and switch image
      */
     @Test
     public void imageAfterReleaseKey(){
         keyInputPlayerUpdate(MoveDirection.Right,true,1,true);
         player.draw(mockGraphic);
-
         keyInputPlayerUpdate(MoveDirection.Right,false,1,true);
         player.draw(mockGraphic);
         BufferedImage expecImage = loadImage("res/Player/right2.png");
+        assertImagesEqual(expecImage, player.getCurrentImage());
+    }
+
+    /**
+     * Test playe will still switch iamge even there is not key press at all
+     */
+    @Test
+    public void noPressKey(){
+        keyInputPlayerUpdate(null,true,2,true);
+        player.draw(mockGraphic);
+        BufferedImage expecImage = loadImage("res/Player/down2.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
     }
 
