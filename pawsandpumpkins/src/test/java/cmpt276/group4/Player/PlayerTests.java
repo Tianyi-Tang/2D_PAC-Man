@@ -124,6 +124,15 @@ public class PlayerTests {
         assertEquals(player.getPosition(), new Position(48, 48));
     }
 
+        @Test
+    public void failSendIform(){
+        Position initalPosition = player.getPosition();
+        player.observerUpdate(null, true);
+        playerUpdate.playerUpdate(1, true);
+        assertEquals(initalPosition, player.getPosition());
+        
+    }
+
     /**
      * Test observerUpdate will make Player move base on the direction input after
      * run several time of update 
@@ -196,16 +205,6 @@ public class PlayerTests {
         player.draw(mockGraphic);
         BufferedImage expecImage = loadImage("res/Player/left2.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
-    }
-
-    /**
-     * Method that imitate the time passing, by continues calling the update function
-     * in player
-     * @param index how many time you want to call the update
-     */
-    private void runUpdatemultipleTime(int index){
-        for(int i=0;i < index;i++)
-            player.update();
     }
 
     /**
