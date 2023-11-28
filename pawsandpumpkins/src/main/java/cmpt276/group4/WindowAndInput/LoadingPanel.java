@@ -222,7 +222,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkObstacle (){
         if(roomLayout.getObstaclesNumber() == config.getNumberOfObstacles()){
             generateObstacle = true;
-            initialiseItem.createEnemy();
+            initialiseItem.createEnemy(record);
             progress ++;
         }
     }
