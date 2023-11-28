@@ -3,6 +3,7 @@ package cmpt276.group4.WindowAndInput;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
@@ -22,17 +23,17 @@ public class InitialiseGameItem {
         this.config = config;
     }
 
-    public boolean getConfig(){
-        if(config == null)
-            return false;
-        else
-            return true;
+    public GameConfig getConfig(){
+        return config;
+    }
+
+    public void setRoomInitialize(RoomInitialization roomInitialization, RoomFactory roomFactory){
+        this.roomInitialization = roomInitialization;
+        this.roomFactory = roomFactory;        
     }
 
     public void createRoom(){
-        if(config != null){
-            roomInitialization = new RoomInitialization();
-            roomFactory = new RoomFactory();
+        if(config != null && roomFactory != null){
             roomInitialization.initializeRoom(config.getGameLevel(), roomFactory);
             roomInitialization.iRoom(roomFactory);
         }

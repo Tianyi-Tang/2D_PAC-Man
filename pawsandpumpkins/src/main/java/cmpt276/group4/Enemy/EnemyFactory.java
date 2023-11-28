@@ -3,6 +3,8 @@ package cmpt276.group4.Enemy;
 import java.util.ArrayList;
 import java.util.List;
 
+import cmpt276.group4.GameMap.RecordUsedPlace;
+
 /**
  * Factory class for creating enemy objects in the game.
  * This class is responsible for generating various types of enemies based on

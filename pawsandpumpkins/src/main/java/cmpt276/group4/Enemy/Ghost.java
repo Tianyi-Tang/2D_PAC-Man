@@ -42,7 +42,7 @@ public class Ghost implements Enemy {
      */
     public Ghost(EnemyType type) {
         getPlayerPosition();
-        record = RecordUsedPlace.getInstance();
+        this.record = RecordUsedPlace.getInstance();
         roomEnvironment = RoomEnvironment.getInstance();
 
         enemyPosition = new Position(0, 0);
@@ -277,11 +277,6 @@ public class Ghost implements Enemy {
             System.out.println("player position is the same: in ghost.java");
             GameManager.getInstance().enemyCatachPlayer(movable);
         } 
-    }
-
-    @Override
-    public Position getEnemyPosition() {
-        return enemyPosition;
     }
 
     @Override

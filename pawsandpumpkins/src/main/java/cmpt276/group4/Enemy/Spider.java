@@ -25,6 +25,8 @@ public class Spider implements Enemy {
     private BufferedImage currentImage;
     private RecordUsedPlace record;
     private RoomEnvironment roomEnvironment;
+    
+
     private Position playerPosition;
 
     /**
@@ -40,7 +42,7 @@ public class Spider implements Enemy {
      * already present.
      * The spider is positioned at a random position after checking vacancy.
      */
-    Spider() {
+    public Spider() {
         record = RecordUsedPlace.getInstance();
         roomEnvironment = RoomEnvironment.getInstance();
         // get the list of enemy from recordUsedPlace and randomly picked one.
@@ -95,15 +97,15 @@ public class Spider implements Enemy {
         }
     }
 
-    /**
-     * Gets the current enemy position.
-     * 
-     * @return The current enemy position.
-     */
-    @Override
-    public Position getEnemyPosition() {
-        return enemyPosition;
-    }
+    // /**
+    //  * Gets the current enemy position.
+    //  * 
+    //  * @return The current enemy position.
+    //  */
+    // @Override
+    // public Position getEnemyPosition() {
+    //     return enemyPosition;
+    // }
 
     /**
      * Sets a new position for this spider.

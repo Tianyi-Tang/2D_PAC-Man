@@ -56,7 +56,6 @@ import cmpt276.group4.Time.GameTime;
  */
 public class GamePanel extends JPanel implements Runnable {
     // Screen Sitting
-    private RecordUsedPlace record;
     private RoomLayout roomLayout;
     private RoomEnvironment roomEnvironment =  RoomEnvironment.getInstance();
 
@@ -88,8 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
         loadPauseButtonImage();
     }
 
-    public void setKeySingleton(RecordUsedPlace record, RoomLayout roomLayout, RoomEnvironment roomEnvironment){
-        this.record = record;
+    public void setKeySingleton(RoomLayout roomLayout, RoomEnvironment roomEnvironment){
         this.roomLayout = roomLayout;
         this.roomEnvironment = roomEnvironment;
     }
@@ -126,12 +124,10 @@ public class GamePanel extends JPanel implements Runnable {
         double last_time = System.nanoTime();
         double currentTime;
         gameTime = GameTime.getInstance();
-
         while (gameThread != null) {
             currentTime = System.nanoTime();
             iteration += (currentTime - last_time) / timeInterval;
             last_time = currentTime;
-
             if (iteration >= 1) {
                 update();
                 repaint();
@@ -224,14 +220,14 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    /**
-     * Restarts the game by stopping the current game thread. This method can be
-     * used to reset the game state
-     * and prepare the panel for a new game session.
-     */
-    public void restartGamePanel() {
-        gameThread = null;
-    }
+    // /**
+    //  * Restarts the game by stopping the current game thread. This method can be
+    //  * used to reset the game state
+    //  * and prepare the panel for a new game session.
+    //  */
+    // public void restartGamePanel() {
+    //     gameThread = null;
+    // }
 
     private void loadPauseButtonImage() {
         try {

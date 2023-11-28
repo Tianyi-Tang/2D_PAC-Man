@@ -29,9 +29,6 @@ public class PanelController {
 
     private GameStatus status;
     private GameManager gameManager;
-    private RecordUsedPlace record;
-    private RoomLayout roomLayout;
-    private RoomEnvironment roomEnvironment;
 
     private GamePanel gamePanel;
     private MainPanel mainPanel;
@@ -53,7 +50,6 @@ public class PanelController {
         cardContainer.add(loadPanel,"load");
         cardContainer.add(numberPanel, "gameEnd");
         createWindow();
-        setUpKeySinglton();
     }
 
 
@@ -73,27 +69,32 @@ public class PanelController {
         window.setLocationRelativeTo(null);
     }
 
-    private void setUpKeySinglton(){
-        gameManager = GameManager.getInstance();
-        record = RecordUsedPlace.getInstance();
-        roomLayout = RoomLayout.getInstance();
-        roomEnvironment = RoomEnvironment.getInstance();
-        initalKeySinglton();
-    }
-
-    private void initalKeySinglton(){
-        gameManager.init(this);
-        roomLayout.init(record);
-        roomEnvironment.init(record);
-    }
-
      /**
      * laoding the main menu to window and start of game
      */
-    public void createMainWindow(){
+    public void createMainWindow(GameManager gameManager, RecordUsedPlace record,RoomLayout roomLayout,RoomEnvironment roomEnvironment){
         status = GameStatus.MainPanel;
         layout.show(cardContainer, "main");
         window.setVisible(true);
+        setKeySinglton(gameManager, record, roomLayout, roomEnvironment);
+    }
+
+    private void setKeySinglton(GameManager gameManager, RecordUsedPlace record,RoomLayout roomLayout,RoomEnvironment roomEnvironment){
+        this.gameManager = gameManager;
+        initalKeySinglton(record,roomLayout,roomEnvironment);
+        initAllPanel(record, roomLayout, roomEnvironment);
+    }
+
+    private void initAllPanel(RecordUsedPlace record,RoomLayout roomLayout,RoomEnvironment roomEnvironment){
+        mainPanel.init(this);
+        loadPanel.setKeySingleton(record, roomLayout, roomEnvironment,this);
+        gamePanel.setKeySingleton(roomLayout, roomEnvironment);
+    }
+
+    private void initalKeySinglton(RecordUsedPlace record,RoomLayout roomLayout, RoomEnvironment roomEnvironment){
+        gameManager.init(this);
+        roomLayout.init(record);
+        roomEnvironment.init(record);
     }
 
     /**
@@ -101,29 +102,30 @@ public class PanelController {
      * @param level the difficulty of game 
      */
     public void transformToLoadingScreen(gameLevel level){
-        if(status == GameStatus.MainPanel){
-            loadPanel.setKeySingleton(record, roomLayout, roomEnvironment);
-            gamePanel.setKeySingleton(record, roomLayout, roomEnvironment);
-            layout.show(cardContainer, "load");
-            loadPanel.gameLevelSending(level);
-            status = GameStatus.LoadingPanel;
-        }
+        loadPanel.init(new InitialiseGameItem(setingGameConfig(level)));
+        status = GameStatus.LoadingPanel;
+        layout.show(cardContainer, "load");
+        loadPanel.createTimeLine();
+    }
+
+    private GameConfig setingGameConfig(gameLevel level){
+        GameConfig config = GameConfig.getGameConfigInstance();
+        config.passGameLevel(level);
+        return config;
     }
 
      /**
      * Switch the loading panel to game panel
      */
     public void transformToGameScreen(){
-        if(status == GameStatus.LoadingPanel){
-            enterGame();
-            layout.show(cardContainer, "game");
-            gamePanel.createTimeLine();
-            gamePanel.setPlayer(Player.getInstance());
-            gamePanel.setDoors(Room.getInstance().getDoors());
+        enterGame();
+        layout.show(cardContainer, "game");
+        gamePanel.createTimeLine();
+        gamePanel.setPlayer(Player.getInstance());
+        gamePanel.setDoors(Room.getInstance().getDoors());
 
-            addKeyboardListener();
-            status = GameStatus.GamePanel;
-        }
+        addKeyboardListener();
+        status = GameStatus.GamePanel;
     }
 
     /**
@@ -135,6 +137,10 @@ public class PanelController {
             layout.show(cardContainer, "gameEnd");
             initalNumberPanel();
         }
+    }
+
+    public GameStatus getGameStatu(){
+        return status;
     }
 
     

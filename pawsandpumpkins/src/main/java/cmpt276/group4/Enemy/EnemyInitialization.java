@@ -1,6 +1,7 @@
 package cmpt276.group4.Enemy;
 
 import cmpt276.group4.gameLevel;
+import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.Logic.GameConfig;
 
 /**
@@ -14,6 +15,7 @@ public class EnemyInitialization {
     private int spider, basicGhost, advancedGhost;
     private GameConfig gc;
 
+
     /**
      * Constructs an EnemyInitialization object using specified
      * {@link EnemyFactory}.
@@ -21,6 +23,7 @@ public class EnemyInitialization {
      * {@link GameConfig}.
      * 
      * @param eFactory The factory used to create enemy instances.
+     * @param reocrd the recordused place that asking for passing
      */
     public EnemyInitialization(EnemyFactory eFactory) {
         gc = GameConfig.getGameConfigInstance();

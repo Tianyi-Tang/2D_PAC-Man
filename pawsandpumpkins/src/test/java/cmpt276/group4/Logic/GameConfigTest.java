@@ -94,7 +94,7 @@ class GameConfigTest {
         gameConfig.passGameLevel(gameLevel.BASIC);
         int expectedTotalGhosts = gameConfig.getNumberOfBasicGhosts() + gameConfig.getNumberOfAdvancedGhosts()
                 + gameConfig.getNumberOfSpiders();
-        assertEquals(expectedTotalGhosts, gameConfig.getTotalGhosts(),
+        assertEquals(expectedTotalGhosts, gameConfig.getTotalEnemy(),
                 "Total ghosts should be the sum of basic, advanced ghosts, and spiders");
     }
 

@@ -40,11 +40,12 @@ public class NumberPanel extends JPanel {
         loadNumberImages();
 
         this.imageWidth = 8;
-        this.numbersToDisplay = new int[5][];
+        //this.numbersToDisplay = new int[5][];
+        this.numbersToDisplay = new int[6][];
         digitXSize = 11;
         digitYSize = 11;
         xAxisLineUp = 420;
-        yAxisLineUp = new int[] { 348, 365, 378, 412, 444 };
+        yAxisLineUp = new int[] { 348, 365, 378, 412, 444, 470 };
         popUpScale = 0.75;
 
     }
@@ -127,6 +128,15 @@ public class NumberPanel extends JPanel {
 
     }
 
+    public void setNumbers(int totalRewards, int regular, int bonus, int punishments, int overall, int time) {
+        int[] nums = { totalRewards, regular, bonus, punishments, overall, time};
+        for (int i = 0; i < nums.length; i++) {
+            numbersToDisplay[i] = intToArray(nums[i]);
+        }
+        repaint();
+
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -158,13 +168,13 @@ public class NumberPanel extends JPanel {
     private void drawNumberLine(Graphics g, int[] numberLine, int startX, int startY) {
         int x = startX;
         for (int number : numberLine) {
-            if (number >= 0 && number < digitImages.length) {
+            //if (number >= 0 && number < digitImages.length) {
                 BufferedImage img = digitImages[number];
                 if (img != null) {
                     g.drawImage(img, x, startY, digitXSize, digitYSize, this);
                     x += (imageWidth + 1); // Adjust space for the next digit
                 }
-            }
+            //}
         }
     }
 

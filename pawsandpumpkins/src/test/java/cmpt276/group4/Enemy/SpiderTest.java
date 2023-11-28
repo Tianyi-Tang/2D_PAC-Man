@@ -9,7 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.*;
+
+import java.awt.Graphics2D;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SpiderTest {
@@ -37,7 +44,35 @@ class SpiderTest {
     }
 
     @Test
-    void constructorTest() {
+    void constructorSpiderCase1While1Test() {
+        when(mockRoomEnvironment.getEnemyNumber()).thenReturn(1);
+        spider = new Spider();
+        assertNotNull(spider, "Spider should be instantiated");
+    }
+
+    @Test
+    void constructorSpiderCaseDefaultWhile1Test() {
+        when(mockRoomEnvironment.getEnemyNumber()).thenReturn(2);
+        assertNotNull(spider, "Spider should be instantiated");
+    }
+
+    @Test
+    void constructorSpiderCaseDefaultWhile2Test() {
+        when(mockRoomEnvironment.getEnemyNumber()).thenReturn(2);
+                when(mockRoomEnvironment.addEnemy(any(Spider.class))).thenReturn(false).
+                thenReturn(true);
+
+        assertNotNull(spider, "Spider should be instantiated");
+    }
+
+    @Test
+    void constructorSpiderCase1While2Test() {
+        when(mockRoomEnvironment.getEnemyNumber()).thenReturn(1);
+         when(mockRoomEnvironment.addEnemy(any(Spider.class))).thenReturn(false).
+                thenReturn(true);
+
+        spider = new Spider();
+               
         assertNotNull(spider, "Spider should be instantiated");
     }
 
@@ -62,14 +97,14 @@ class SpiderTest {
 
     @Test
     void getEnemyPositionTest() {
-        assertEquals(new Position(0, 0), spider.getEnemyPosition(), "Enemy position should match initial position");
+        assertEquals(new Position(0, 0), spider.getPosition(), "Enemy position should match initial position");
     }
 
     @Test
     void setEnemyPositionTest() {
         Position newPosition = new Position(5, 5);
         spider.setEnemyPosition(newPosition);
-        assertEquals(newPosition, spider.getEnemyPosition(), "Enemy position should be updated");
+        assertEquals(newPosition, spider.getPosition(), "Enemy position should be updated");
     }
 
     @Test
@@ -84,6 +119,21 @@ class SpiderTest {
 
     @Test
     void actionTest() {
-        spider.action(); // Since action does nothing, just ensure it doesn't cause errors
+        spider.action();
+    }
+
+    @Test
+    void testDrawMethod() {
+        Graphics2D mockGraphics = mock(Graphics2D.class);
+        Spider spider = new Spider();
+        spider.setEnemyPosition(new Position(100, 100));
+
+        spider.draw(mockGraphics);
+
+        verify(mockGraphics).drawImage(
+                isNotNull(),
+                eq(100), eq(100),
+                anyInt(), anyInt(),
+                isNull());
     }
 }

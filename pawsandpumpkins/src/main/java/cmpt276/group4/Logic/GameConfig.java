@@ -5,8 +5,7 @@ import java.util.List;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.gameLevel;
-import cmpt276.group4.GameMap.RecordUsedPlace;
-import cmpt276.group4.WindowAndInput.GamePanel;
+
 
 /**
  * Configures and stores game settings including room dimensions, obstacles,
@@ -18,7 +17,6 @@ import cmpt276.group4.WindowAndInput.GamePanel;
 public class GameConfig {
     private gameLevel level;
     private int roomColumn = 16;
-    
 
     private int roomRow = 16;
     // obstacle
@@ -156,7 +154,7 @@ public class GameConfig {
         return numberOfAdvancedGhosts;
     }
 
-    public int getTotalGhosts(){
+    public int getTotalEnemy(){
         return numberOfBasicGhosts + numberOfAdvancedGhosts + numberOfSpiders;
     }
 

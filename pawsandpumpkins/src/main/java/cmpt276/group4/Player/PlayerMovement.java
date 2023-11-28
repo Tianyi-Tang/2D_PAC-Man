@@ -37,7 +37,7 @@ public class PlayerMovement implements Movement {
             return false;
     }
 
-    public void checkReward(Position position){
+    public void checkReward(){
         reward = roomEnvironment.collectReward();
         if(reward != null){
             reward.addBenefit(player);
