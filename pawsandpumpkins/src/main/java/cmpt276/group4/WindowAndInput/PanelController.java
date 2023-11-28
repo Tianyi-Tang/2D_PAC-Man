@@ -86,8 +86,9 @@ public class PanelController {
     }
 
     private void initAllPanel(RecordUsedPlace record,RoomLayout roomLayout,RoomEnvironment roomEnvironment){
+        mainPanel.init(this);
         loadPanel.setKeySingleton(record, roomLayout, roomEnvironment,this);
-        gamePanel.setKeySingleton(record, roomLayout, roomEnvironment);
+        gamePanel.setKeySingleton(roomLayout, roomEnvironment);
     }
 
     private void initalKeySinglton(RecordUsedPlace record,RoomLayout roomLayout, RoomEnvironment roomEnvironment){

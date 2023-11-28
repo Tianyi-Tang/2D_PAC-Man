@@ -29,8 +29,7 @@ public class PlayerTests {
     public Player player;
     public GameManager mockGameManager;
     Graphics2D mockGraphic;
-    public final int directionUpdateTime =10;
-    public final int imageChangingTime = 15;
+    public PlayerUpdate playerUpdate;
 
     /**
      * Set up the player before testing
@@ -43,6 +42,8 @@ public class PlayerTests {
         player.init(mockGameManager, RoomEnvironment.getInstance(), RoomLayout.getInstance());
         mockGameManager.setPlayer(player);
         mockGraphic = mock(Graphics2D.class);
+
+        playerUpdate = new PlayerUpdate(player);
     }
 
     /**
@@ -130,7 +131,7 @@ public class PlayerTests {
     @Test
     public void playerMovingLeft(){
         player.observerUpdate(MoveDirection.Left, true);
-        runUpdatemultipleTime(directionUpdateTime);
+        playerUpdate.playerUpdate(1, true);
         assertEquals(player.getPosition(), new Position(0, 48));
     }
 
@@ -141,7 +142,7 @@ public class PlayerTests {
     @Test
     public void PlayerContinuesPressKey(){
         player.observerUpdate(MoveDirection.Down, true);
-        runUpdatemultipleTime(directionUpdateTime * 2);
+        playerUpdate.playerUpdate(2, true);
         assertEquals(player.getPosition(), new Position(48, 144));
     }
 
@@ -162,7 +163,7 @@ public class PlayerTests {
     @Test
     public void movingImageUp(){
         player.observerUpdate(MoveDirection.Up, true);
-        runUpdatemultipleTime(directionUpdateTime);
+        playerUpdate.playerUpdate(1, true);
         player.draw(mockGraphic);
         BufferedImage expecImage = loadImage("res/Player/up1.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
@@ -175,7 +176,7 @@ public class PlayerTests {
     @Test
     public void imageAfterReleaseKey(){
         player.observerUpdate(MoveDirection.Right, true);
-        runUpdatemultipleTime(directionUpdateTime);
+        playerUpdate.playerUpdate(1, true);
         player.draw(mockGraphic);
 
         player.observerUpdate(MoveDirection.Right, false);
@@ -191,7 +192,7 @@ public class PlayerTests {
     @Test
     public void imageSwitch(){
         player.observerUpdate(MoveDirection.Left, true);
-        runUpdatemultipleTime(imageChangingTime);
+        playerUpdate.playerUpdate(1, false);
         player.draw(mockGraphic);
         BufferedImage expecImage = loadImage("res/Player/left2.png");
         assertImagesEqual(expecImage, player.getCurrentImage());

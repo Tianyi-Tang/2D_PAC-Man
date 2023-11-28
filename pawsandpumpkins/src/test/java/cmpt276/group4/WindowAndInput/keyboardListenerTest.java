@@ -12,15 +12,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import cmpt276.group4.Player.Player;
+import cmpt276.group4.WindowAndInput.KeyInput.MovingKey;
 
 public class keyboardListenerTest {
     public keyboardListener listener;
     public Player mockPlayer;
     public KeyEvent mockevent;
+    public KeyInput keyInput;
 
-    public enum MovingKey{
-        W,A,S,D,upArrow,DownArrow,LeftArrow,RightArrow,other
-    }
 
     @BeforeEach
     public void setUp(){
@@ -28,58 +27,67 @@ public class keyboardListenerTest {
         mockPlayer = mock(Player.class);
         listener.addPlayer(mockPlayer);
         mockevent = mock(KeyEvent.class);
+        keyInput = new KeyInput();
+        keyInput.setup(listener);
     }
 
     @Test
     public void preessUpArraw(){
-        verifyKey(MovingKey.upArrow,true);
+        keyInput.inputKey(MovingKey.upArrow, true);
+        verifyPressKey(MovingKey.upArrow);
     }
 
     @Test
     public void relasedW(){
-        verifyKey(MovingKey.W, false);
+        keyInput.inputKey(MovingKey.W, false);
+        verifyRelaseKey(MovingKey.W);
     }
 
     @Test
     public void pressA(){
-        verifyKey(MovingKey.A, true);
+        keyInput.inputKey(MovingKey.A, true);
+        verifyPressKey(MovingKey.A);
     }
 
     @Test
     public void realseLeftArraw(){
-        verifyKey(MovingKey.LeftArrow, false);
+        keyInput.inputKey(MovingKey.LeftArrow, false);
+        verifyRelaseKey(MovingKey.LeftArrow);
     }
 
     @Test
     public void pressS(){
-        verifyKey(MovingKey.S, true);
+        keyInput.inputKey(MovingKey.S, true);
+        verifyPressKey(MovingKey.S);
     }
 
     @Test
     public void realseDownArraw(){
-        verifyKey(MovingKey.DownArrow, false);
+        keyInput.inputKey(MovingKey.DownArrow, false);
+        verifyRelaseKey(MovingKey.DownArrow);
     }
 
     @Test
     public void preessRightArraw(){
-        verifyKey(MovingKey.RightArrow, true);
+        keyInput.inputKey(MovingKey.RightArrow, true);
+        verifyPressKey(MovingKey.RightArrow);
     }
 
     @Test
     public void relasedD(){
-        verifyKey(MovingKey.D, false);
+        keyInput.inputKey(MovingKey.D, false);
+        verifyRelaseKey(MovingKey.D);
     }
 
     @Test
     public void otherKeyPress(){
-        verifyKey(MovingKey.other, true);
-        listener.keyPressed(mockevent);
+        keyInput.inputKey(MovingKey.other, true);
         verify(mockPlayer, Mockito.never()).observerUpdate(null, true);
     }
 
     @Test
     public void otherKeyRealse(){
-        verifyKey(MovingKey.other, false);
+        keyInput.inputKey(MovingKey.other, false);
         listener.keyReleased(mockevent);
         verify(mockPlayer, Mockito.never()).observerUpdate(null, false);
     }
@@ -96,25 +104,14 @@ public class keyboardListenerTest {
 
     
 
-    private void verifyKey(MovingKey key, boolean press){
-        int code = keyCode(key);
-        when(mockevent.getKeyCode()).thenReturn(code);
-        if(code == 80)
-            return;
-        if(press)
-            verifyPressKey(movingDirection(code));
-        else
-            verifyRelaseKey(movingDirection(code));
+    private void verifyPressKey(MovingKey key){
+        int Key = keyInput.keyCode(key);
+        verify(mockPlayer).observerUpdate(movingDirection(Key), true);
     }
 
-    private void verifyPressKey(MoveDirection moveDirection){
-        listener.keyPressed(mockevent);
-        verify(mockPlayer).observerUpdate(moveDirection, true);
-    }
-
-    private void verifyRelaseKey(MoveDirection moveDirection){
-        listener.keyReleased(mockevent);
-        verify(mockPlayer).observerUpdate(moveDirection, false);
+    private void verifyRelaseKey(MovingKey key){
+        int Key = keyInput.keyCode(key);
+        verify(mockPlayer).observerUpdate(movingDirection(Key), false);
     }
 
     private MoveDirection movingDirection(int code){

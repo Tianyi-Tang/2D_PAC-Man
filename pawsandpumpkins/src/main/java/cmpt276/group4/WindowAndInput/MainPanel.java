@@ -20,11 +20,9 @@ import cmpt276.group4.Logic.WindowConfig;
  * Class represent the Main menu of game 
  */
 public class MainPanel extends JPanel {
-    
-    private final int screenWidth = 48 * 16;
-    private final int screenHeight = 48 * 16;
 
     private JButton startButton;// start the game 
+    private PanelController controller;
 
     // difficulty level
     private JButton easyLevelButton;
@@ -51,12 +49,16 @@ public class MainPanel extends JPanel {
         startButton.setBounds(7* WindowConfig.tileSize,7* WindowConfig.tileSize,WindowConfig.tileSize *2,WindowConfig.tileSize);
         this.setLayout(null);
 
-        this.setPreferredSize(new Dimension(screenWidth,screenHeight));
+        this.setPreferredSize(new Dimension(WindowConfig.screenWidth,WindowConfig.screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
 
         this.add(startButton);
         createButton();
+    }
+
+    public void init(PanelController controller){
+        this.controller = controller;
     }
 
     /**
@@ -69,7 +71,7 @@ public class MainPanel extends JPanel {
         easyLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PanelController.getInstance().transformToLoadingScreen(gameLevel.BASIC);
+                controller.transformToLoadingScreen(gameLevel.BASIC);
                 super.mouseClicked(e);
             }
         });
@@ -80,7 +82,7 @@ public class MainPanel extends JPanel {
         middleLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PanelController.getInstance().transformToLoadingScreen(gameLevel.MEDIUM);
+                controller.transformToLoadingScreen(gameLevel.MEDIUM);
                 super.mouseClicked(e);
             }
         });
@@ -91,7 +93,7 @@ public class MainPanel extends JPanel {
         hardLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                 PanelController.getInstance().transformToLoadingScreen(gameLevel.HARD);
+                 controller.transformToLoadingScreen(gameLevel.HARD);
                 super.mouseClicked(e);
             }
         });
@@ -133,6 +135,7 @@ public class MainPanel extends JPanel {
         easyLevelButton.setVisible(true);
         middleLevelButton.setVisible(true);
         hardLevelButton.setVisible(true);
+        controller.getGameStatu();
     }
     
 }
