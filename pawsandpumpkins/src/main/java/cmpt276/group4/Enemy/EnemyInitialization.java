@@ -25,7 +25,7 @@ public class EnemyInitialization {
      * @param eFactory The factory used to create enemy instances.
      * @param reocrd the recordused place that asking for passing
      */
-    public EnemyInitialization(EnemyFactory eFactory, RecordUsedPlace reocrd) {
+    public EnemyInitialization(EnemyFactory eFactory, RecordUsedPlace record) {
         gc = GameConfig.getGameConfigInstance();
         spider = gc.getNumberOfSpiders();
         basicGhost = gc.getNumberOfBasicGhosts();
@@ -33,9 +33,9 @@ public class EnemyInitialization {
         //Uncomment for testing
         //System.out.println("num of spider, ghost: " + spider + ", " + basicGhost);
 
-        eFactory.createEnemies(EnemyType.SPIDER, spider,reocrd);
-        eFactory.createEnemies(EnemyType.GHOST_BASIC, basicGhost,reocrd);
-        eFactory.createEnemies(EnemyType.GHOST_ADVANCED, advancedGhost,reocrd);
+        eFactory.createEnemies(EnemyType.SPIDER, spider,record);
+        eFactory.createEnemies(EnemyType.GHOST_BASIC, basicGhost,record);
+        eFactory.createEnemies(EnemyType.GHOST_ADVANCED, advancedGhost,record);
     }
 
     /**

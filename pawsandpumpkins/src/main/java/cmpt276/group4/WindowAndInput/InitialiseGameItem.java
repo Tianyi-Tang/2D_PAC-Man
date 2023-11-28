@@ -66,8 +66,8 @@ public class InitialiseGameItem {
      /**
      * loading all enemies in the game
      */
-    public void createEnemy(RecordUsedPlace recordUsedPlace){
-        new EnemyInitialization(new EnemyFactory(),recordUsedPlace);
+    public void createEnemy(RecordUsedPlace record){
+        new EnemyInitialization(new EnemyFactory(), record);
     }
 
      /**
