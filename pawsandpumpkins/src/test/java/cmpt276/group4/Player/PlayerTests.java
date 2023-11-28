@@ -124,13 +124,19 @@ public class PlayerTests {
         assertEquals(player.getPosition(), new Position(48, 48));
     }
 
-        @Test
-    public void failSendIform(){
+    @Test
+    public void sendINullToObserverUpdate(){
         Position initalPosition = player.getPosition();
-        player.observerUpdate(null, true);
-        playerUpdate.playerUpdate(1, true);
+        keyInputPlayerUpdate(null, true, 1,true);
         assertEquals(initalPosition, player.getPosition());
         
+    }
+
+    @Test
+    public void sendOtherToObserverUpdate(){
+        Position initalPosition = player.getPosition();
+        keyInputPlayerUpdate(MoveDirection.Other, true, 1,true);
+        assertEquals(initalPosition, player.getPosition());
     }
 
     /**
@@ -139,8 +145,7 @@ public class PlayerTests {
      */
     @Test
     public void playerMovingLeft(){
-        player.observerUpdate(MoveDirection.Left, true);
-        playerUpdate.playerUpdate(1, true);
+        keyInputPlayerUpdate(MoveDirection.Left, true, 1, true);
         assertEquals(player.getPosition(), new Position(0, 48));
     }
 
@@ -150,8 +155,7 @@ public class PlayerTests {
      */
     @Test
     public void PlayerContinuesPressKey(){
-        player.observerUpdate(MoveDirection.Down, true);
-        playerUpdate.playerUpdate(2, true);
+        keyInputPlayerUpdate(MoveDirection.Down, true, 2, true);
         assertEquals(player.getPosition(), new Position(48, 144));
     }
 
@@ -171,8 +175,7 @@ public class PlayerTests {
      */
     @Test
     public void movingImageUp(){
-        player.observerUpdate(MoveDirection.Up, true);
-        playerUpdate.playerUpdate(1, true);
+        keyInputPlayerUpdate(MoveDirection.Up, true, 1, true);
         player.draw(mockGraphic);
         BufferedImage expecImage = loadImage("res/Player/up1.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
@@ -184,8 +187,7 @@ public class PlayerTests {
      */
     @Test
     public void imageAfterReleaseKey(){
-        player.observerUpdate(MoveDirection.Right, true);
-        playerUpdate.playerUpdate(1, true);
+        keyInputPlayerUpdate(MoveDirection.Right,true,1,true);
         player.draw(mockGraphic);
 
         player.observerUpdate(MoveDirection.Right, false);
@@ -200,11 +202,15 @@ public class PlayerTests {
      */
     @Test
     public void imageSwitch(){
-        player.observerUpdate(MoveDirection.Left, true);
-        playerUpdate.playerUpdate(1, false);
+        keyInputPlayerUpdate(MoveDirection.Left,true,1,false);
         player.draw(mockGraphic);
         BufferedImage expecImage = loadImage("res/Player/left2.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
+    }
+
+    private void keyInputPlayerUpdate(MoveDirection direction, boolean pressKey, int updateTime, boolean forPlayermoving){
+        player.observerUpdate(direction, pressKey);
+        playerUpdate.playerUpdate(updateTime, forPlayermoving);
     }
 
     /**
