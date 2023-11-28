@@ -89,7 +89,7 @@ public class PumpkinHead extends BonusReward {
      */
     @Override
     public void addBenefit(Player player) {
-        if (RoomEnvironment.getInstance().sameAsPlayerPosition(ppkPosition)) {
+        if (RoomEnvironment.getInstance().sameAsPlayerPosition(ppkPosition)&&isAvailable) {
             addScore(player, score);
             RoomEnvironment.getInstance().removeReward(this);
         }
@@ -101,7 +101,7 @@ public class PumpkinHead extends BonusReward {
      * @param player The player who will receive the score.
      * @param score  The score to be added to the player.
      */
-    private void addScore(Player player, int score) {
+    public void addScore(Player player, int score) {
         this.score = score;
         player.addScoreToPlayer(score, isBonusReward);
     }
