@@ -40,9 +40,9 @@ public class Ghost implements Enemy {
      * 
      * @param type The type of the ghost (BASIC or ADVANCED).
      */
-    public Ghost(EnemyType type) {
+    public Ghost(EnemyType type, RecordUsedPlace record) {
         getPlayerPosition();
-        record = RecordUsedPlace.getInstance();
+        this.record = record;
         roomEnvironment = RoomEnvironment.getInstance();
 
         enemyPosition = new Position(0, 0);

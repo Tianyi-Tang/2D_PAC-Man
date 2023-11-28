@@ -3,6 +3,8 @@ package cmpt276.group4.Enemy;
 import java.util.ArrayList;
 import java.util.List;
 
+import cmpt276.group4.GameMap.RecordUsedPlace;
+
 /**
  * Factory class for creating enemy objects in the game.
  * This class is responsible for generating various types of enemies based on
@@ -22,7 +24,7 @@ public class EnemyFactory {
      * @return A list of created enemies.
      * @throws IllegalArgumentException If an invalid enemy type is passed.
      */
-    public List<Enemy> createEnemies(EnemyType type, int number) {
+    public List<Enemy> createEnemies(EnemyType type, int number, RecordUsedPlace record) {
         if (type == null) {
             throw new IllegalArgumentException("Invalid enemy type");
         }
@@ -31,7 +33,7 @@ public class EnemyFactory {
             switch (type) {
                 case GHOST_BASIC:
                 case GHOST_ADVANCED:
-                    enemies.add(new Ghost(type));
+                    enemies.add(new Ghost(type,record));
                     // uncomment for testing
                     // System.out.println("Ghost created.");
                     break;
