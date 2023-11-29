@@ -155,7 +155,7 @@ public class GamePanel extends JPanel implements Runnable {
         for (Enemy enemy : roomEnvironment.getEnemies()) {
             enemy.catchPlayer();            
         }
-        
+            
         if (enemyMoveCounter >= ENEMY_MOVE_INTERVAL) {
             for (Enemy enemy : roomEnvironment.getEnemies()) {
                 enemy.action();
@@ -165,6 +165,7 @@ public class GamePanel extends JPanel implements Runnable {
             enemyMoveCounter++;
         }
         gameTime.countTime();
+
     }
 
     /**

@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import cmpt276.group4.Position;
 import cmpt276.group4.Enemy.Enemy;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Reward.Reward;
 
@@ -150,7 +151,7 @@ public class RoomEnvironment {
     private boolean placeAviableForEnemy(Position enmemyPos, boolean movable){
         if(record.isPlaceAviable(enmemyPos)){
             if(movable)
-                return true;
+                return !record.isPlayerNearBy(4 * WindowConfig.tileSize, enmemyPos);
             else{
                 return record.canPlaceEnemyAndObstacle(enmemyPos);
             }

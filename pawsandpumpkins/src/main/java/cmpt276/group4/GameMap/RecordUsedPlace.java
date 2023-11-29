@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import cmpt276.group4.Position;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.Player;
 
 /**
@@ -62,20 +63,37 @@ public class RecordUsedPlace {
 
     
     private List<Position> getAdjacentPositions(Position p) {
-        int tileSize = 48;
-        return Arrays.asList(
-                new Position(p.getX_axis() - tileSize, p.getY_axis() - tileSize), // Top-left
-                new Position(p.getX_axis(), p.getY_axis() - tileSize), // Top
-                new Position(p.getX_axis() + tileSize, p.getY_axis() - tileSize), // Top-right
-                new Position(p.getX_axis() - tileSize, p.getY_axis()), // Left
-                new Position(p.getX_axis() + tileSize, p.getY_axis()), // Right
-                new Position(p.getX_axis() - tileSize, p.getY_axis() + tileSize), // Bottom-left
-                new Position(p.getX_axis(), p.getY_axis() + tileSize), // Bottom
-                new Position(p.getX_axis() + tileSize, p.getY_axis() + tileSize) // Bottom-right
-        );
+        int tileSize = WindowConfig.tileSize;
+        ArrayList<Position> adjacentPositions =  new ArrayList<Position>();
+
+        int startx = p.getX_axis() - tileSize;
+        int starty = p.getY_axis() - tileSize;
+        int x_chang, y_change = 0;
+        for(int i = 0;i < 3;i++){
+            x_chang = 0;
+            for (int j=0;j < 3;j++){
+                if(startx + x_chang != p.getX_axis() || starty + y_change != p.getY_axis())
+                    adjacentPositions.add(new Position(startx + x_chang, starty + y_change));
+                x_chang += tileSize;
+            }
+            y_change += tileSize;
+        }
+        
+        return adjacentPositions;
+
+        // return Arrays.asList(
+        //         new Position(p.getX_axis() - tileSize, p.getY_axis() - tileSize), // Top-left
+        //         new Position(p.getX_axis(), p.getY_axis() - tileSize), // Top
+        //         new Position(p.getX_axis() + tileSize, p.getY_axis() - tileSize), // Top-right
+        //         new Position(p.getX_axis() - tileSize, p.getY_axis()), // Left
+        //         new Position(p.getX_axis() + tileSize, p.getY_axis()), // Right
+        //         new Position(p.getX_axis() - tileSize, p.getY_axis() + tileSize), // Bottom-left
+        //         new Position(p.getX_axis(), p.getY_axis() + tileSize), // Bottom
+        //         new Position(p.getX_axis() + tileSize, p.getY_axis() + tileSize) // Bottom-right
+        // );
     }
 
-    private static boolean containsPosition(List<Position> positions, Position position) {
+    private static boolean containsPosition(ArrayList<Position> positions, Position position) {
         for (Position pos : positions) {
             if (pos.equal(position)) {
                 return true;
@@ -94,8 +112,12 @@ public class RecordUsedPlace {
 
         // Iterate through each adjacent position and check if it's an obstacle
         for (Position adjacentPos : adjacentPositions) {
+            // if(isPositionAObstacle(adjacentPos))
+            //     return false;
             isAdjacentObstacle.add(isPositionAObstacle(adjacentPos));
         }
+        // return true;
+        
         //combinations of surrounding obstac le that will ccause problem if place enemy or obstalcce in inpt position
         boolean condition1 = (isAdjacentObstacle.get(0) && isAdjacentObstacle.get(2)) || (isAdjacentObstacle.get(5) && isAdjacentObstacle.get(7)) 
                             || (isAdjacentObstacle.get(3) && isAdjacentObstacle.get(4));
