@@ -217,6 +217,8 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
                 case Right:
                     move_right = turnOn;
                     break;
+                default:
+                    break;
             }
         }
     }
@@ -295,6 +297,8 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
                     currentImage = right1;
                 else
                     currentImage = right2;
+                break;
+            default:
                 break;
         }
 
