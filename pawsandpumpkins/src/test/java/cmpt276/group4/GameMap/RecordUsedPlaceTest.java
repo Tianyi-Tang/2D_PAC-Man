@@ -1,6 +1,7 @@
 package cmpt276.group4.GameMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.floatThat;
 
 import java.util.ArrayList;
 
@@ -81,6 +82,15 @@ public class RecordUsedPlaceTest {
     public void playerNear(){
         Position nearByPos = new Position(WindowConfig.tileSize * 2, WindowConfig.tileSize);
         assertEquals(true, record.isPlayerNearBy(4 * WindowConfig.tileSize,nearByPos));
+    }
+
+    @Test
+    public void CanPlaceObstacle(){
+        int tileSize = WindowConfig.tileSize;
+        Position obPosition1 = new Position(tileSize * 5, tileSize * 4);
+        record.addAviable(new Position(tileSize * 4, tileSize * 4));
+        record.addAviable(new Position(tileSize * 6, tileSize * 4));
+        assertEquals(true , record.canPlaceEnemyAndObstacle(obPosition1));
     }
 
     

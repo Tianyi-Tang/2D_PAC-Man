@@ -16,7 +16,6 @@ import cmpt276.group4.Player.Player;
 public class RecordUsedPlace {
     // for reward to check
     private ArrayList<Position> available;
-    private ArrayList<Position> walls_pos;
     private ArrayList<Position> obstacle_pos;
 
     public static void setInstance(RecordUsedPlace instance) {
@@ -31,7 +30,6 @@ public class RecordUsedPlace {
 
         obstacle_pos = new ArrayList<Position>();
 
-        walls_pos = new ArrayList<Position>();
 
     }
 
@@ -103,7 +101,7 @@ public class RecordUsedPlace {
     }
 
     private boolean isPositionAObstacle(Position position) {
-        return containsPosition(walls_pos, position) || containsPosition(obstacle_pos, position);
+        return  containsPosition(obstacle_pos, position);
     }
 
     public boolean canPlaceEnemyAndObstacle(Position p) {
@@ -182,14 +180,6 @@ public class RecordUsedPlace {
      */
     public ArrayList<Position> getAviablePosition() {
         return available;
-    }
-
-    /**
-     * Add wall Position to the wall_pos array
-     * @param position the position of wall
-     */
-    public void addWallPosition(Position position) {
-        walls_pos.add(position);
     }
 
     /**

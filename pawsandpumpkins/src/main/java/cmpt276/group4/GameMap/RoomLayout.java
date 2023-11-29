@@ -64,7 +64,7 @@ public class RoomLayout {
      */
     private boolean placeObstacle(CharacterAvaliablePosition element){
         if(record.canPlaceEnemyAndObstacle(element.getPosition()) && record.isPlaceAviable(element.getPosition())){
-            addPositionToRecord(element.getPosition(), false);
+            addPositionToRecord(element.getPosition());
             elements.add(element);
             obstacleNum ++;
             return true;
@@ -83,7 +83,7 @@ public class RoomLayout {
             elements.add(element);
             if(element.getTakenPlace()){
                 wallNum ++;
-                addPositionToRecord(element.getPosition(), true);
+                addPositionToRecord(element.getPosition());
             }
             else{
                 tileNum ++;
@@ -99,13 +99,10 @@ public class RoomLayout {
      * @param position the posititon of that object
      * @param isWall is that object is wall or tombstone
      */
-    private void addPositionToRecord(Position position,boolean isWall){
+    private void addPositionToRecord(Position position){
         record.removeFromAviable(position);
         unAviablePositions.add(position);
-        if(isWall)
-            record.addWallPosition(position);
-        else
-            record.addObstcalePosition(position);
+        record.addObstcalePosition(position);       
     }
 
     /**
