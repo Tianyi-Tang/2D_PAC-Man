@@ -95,13 +95,23 @@ public class RoomLayoutTest {
     }
 
     /**
-     * Test room layout reject adding obstacle if position is not available 
+     * Test room layout reject adding obstacle if position is available but block
+     * player to go to some area
      */
     @Test
     public void failAddObstacle(){
         setCanPlaceEnemyAndObstacle_result(false,availablePos);
+        addTomestone(availablePos);
         assertEquals(0, roomLayout.getObstaclesNumber());
     }
+
+    @Test
+    public void AddObstacleUnavaliable(){
+        when(mockrecord.isPlaceAviable(availablePos)).thenReturn(false);
+        addTomestone(availablePos);
+        assertEquals(0, roomLayout.getObstaclesNumber());
+    }
+
 
     /**
      * Test room layout will allow character move to that position if 
@@ -120,8 +130,8 @@ public class RoomLayoutTest {
     @Test
     public void moveToUnavailablePosition(){
         Position anotherPosition = new Position(WindowConfig.tileSize *3, 0);
-        setCanPlaceEnemyAndObstacle_result(false, anotherPosition);
-        addTomestone(anotherPosition);
+        when(mockrecord.isPlaceAviable(anotherPosition)).thenReturn(true);
+        addRoomItem(RoomItemType.Wall, anotherPosition);
         addRoomItem(RoomItemType.Wall,availablePos);
         
         assertEquals(false, roomLayout.isPositionAviable(availablePos)); 
