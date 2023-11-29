@@ -128,6 +128,10 @@ public class PumpkinHead extends BonusReward {
         return isAvailable;
     }
 
+    public void setAvailable(boolean b){
+        isAvailable = b;
+    }
+
     /**
      * Draws the pumpkin on the given Graphics2D object.
      * The pumpkin alternates its image between two states to create an animation effect.

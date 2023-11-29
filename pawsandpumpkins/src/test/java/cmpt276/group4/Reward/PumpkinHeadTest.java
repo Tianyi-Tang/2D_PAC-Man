@@ -1,11 +1,9 @@
 package cmpt276.group4.Reward;
 
-import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Position;
 import cmpt276.group4.Player.Player;
 import cmpt276.group4.Time.GameTime;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
 import java.awt.*;
@@ -63,17 +61,29 @@ class PumpkinHeadTest {
         PumpkinHead reward = new PumpkinHead();
 
         Position rewardPosition = new Position(1, 1);
-        Position playerPosition = new Position(2, 2); // Different position
+        Position playerPosition = new Position(2, 2);
         reward.setPosition(rewardPosition);
 
-        // Simulate player being at a different position
         when(mockPlayer.getPosition()).thenReturn(playerPosition);
-
         reward.addBenefit(mockPlayer);
-
-        // Verify if addScore method was not called
         verify(mockPlayer, never()).addScoreToPlayer(anyInt(), anyBoolean());
     }
+
+
+
+
+    @Test
+    void testAddBenefitWhenNotAvailable() {
+        Player mockPlayer = mock(Player.class);
+        PumpkinHead reward = new PumpkinHead();
+        Position samePosition = new Position(2, 2);
+        reward.setPosition(samePosition);
+        reward.setAvailable(false);
+        when(mockPlayer.getPosition()).thenReturn(samePosition);
+        reward.addBenefit(mockPlayer);
+        verify(mockPlayer, never()).addScoreToPlayer(anyInt(), anyBoolean());
+    }
+
 
 
     @Test

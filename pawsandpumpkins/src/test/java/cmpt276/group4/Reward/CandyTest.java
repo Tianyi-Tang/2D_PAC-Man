@@ -1,17 +1,17 @@
 package cmpt276.group4.Reward;
 
-import cmpt276.group4.Logic.WindowConfig;
+import cmpt276.group4.Player.Player;
 import cmpt276.group4.Position;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
 
 class CandyTest {
 
@@ -46,9 +46,47 @@ class CandyTest {
 
 
     @Test
-    void addBenefit_CorrectlyAddSore() {
+    void addBenefit_CorrectlyAddSoreWhenReachDifferentPosition() {
+        Player mockPlayer = mock(Player.class);
+        var reward = new Candy();
+
+        Position rewardPosition = new Position(1, 1);
+        Position playerPosition = new Position(2, 2);
+        reward.setPosition(rewardPosition);
+
+        when(mockPlayer.getPosition()).thenReturn(playerPosition);
+
+        reward.addBenefit(mockPlayer);
 
 
+        verify(mockPlayer, never()).addScoreToPlayer(anyInt(), anyBoolean());
+
+
+    }
+    @Test
+    void addBenefit_CorrectlyAddSoreWhenReachSamePosition() {
+        Player mockPlayer = mock(Player.class);
+        var reward = new Candy();
+
+        Position rewardPosition = new Position(2, 2);
+        Position playerPosition = new Position(2, 2);
+        reward.setPosition(rewardPosition);
+
+        when(mockPlayer.getPosition()).thenReturn(playerPosition);
+
+        reward.addBenefit(mockPlayer);
+
+
+        verify(mockPlayer).addScoreToPlayer(reward.getScore(), reward.isBonusReward());
+
+
+    }
+    @Test
+    void addSore_CorrectlyAddSore(){
+        var candy = new Candy();
+        Player mockPlayer = Mockito.mock(Player.class);
+        candy.addScore(mockPlayer,10);
+        verify(mockPlayer).addScoreToPlayer(10, candy.isBonusReward());
     }
 
 
