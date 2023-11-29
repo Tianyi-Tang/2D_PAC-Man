@@ -99,7 +99,7 @@ public class Candy extends GeneralReward {
      * @param player The player who will receive the score.
      * @param score  The score to be added to the player.
      */
-    private void addScore(Player player, int score) {
+    public void addScore(Player player, int score) {
         this.score = score;
         player.addScoreToPlayer(score, isBonusReward);
     }

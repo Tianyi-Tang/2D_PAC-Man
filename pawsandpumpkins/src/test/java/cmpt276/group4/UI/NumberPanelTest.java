@@ -2,14 +2,7 @@ package cmpt276.group4.UI;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import cmpt276.group4.GameStatus;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-
-import java.awt.Graphics;
-
 import javax.swing.JFrame;
 
 class NumberPanelTest {
@@ -23,7 +16,7 @@ class NumberPanelTest {
     }
 
     @Test
-    void testSetNumbersWithPositiveValues() {
+    void testSetNumbersWith5PositiveValues() {
         numberPanel.init(true);
         numberPanel.setNumbers(123, 45, 6, 78, 910);
 

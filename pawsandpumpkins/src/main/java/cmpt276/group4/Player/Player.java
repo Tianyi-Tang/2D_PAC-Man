@@ -39,7 +39,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
     private int deductScore = 0;
     private boolean interval = false;
 
-    private int collectScore = 0;
+    public int collectScore = 0;
     private int bonusReward_num = 0;
     private int generalReward_num =0;
 
@@ -71,7 +71,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
 
     /**
      * send singleton objects to set up the movement
-     * @param manager the GameManger objec
+     * @param manager the GameManger object
      * @param roomEnvironment the RoomEnvironment object
      * @param roomLayout the RoomLayout object
      */
@@ -110,7 +110,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
 
     /**
      * When player catach by enemy, give punishment to player
-     * @param deductScore how many socre need to be deduct
+     * @param deductPoint how many socre need to be deduct
      */
     public void deductPoint(int deductPoint){
         if(!interval){
