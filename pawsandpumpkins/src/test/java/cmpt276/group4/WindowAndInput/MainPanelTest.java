@@ -2,46 +2,69 @@ package cmpt276.group4.WindowAndInput;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 
 import java.awt.Component;
 import java.awt.Container;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.SwingUtilities;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import cmpt276.group4.gameLevel;
 
+/**
+ * Class for unit test MainPanel 
+ */
 public class MainPanelTest {
     public MainPanel panel;
     public PanelController mockcontroller;
-    public ActionEvent click;
 
+    public ArrayList<JButton> buttons;
+
+    /*
+     * set up the main panel and get button in the pnael
+     */
     @BeforeEach
     public void setUp(){
         panel = new MainPanel();
         mockcontroller = mock(PanelController.class);
         panel.init(mockcontroller);
+        buttons = findButton(panel);
     }
 
+    /**
+     * Test the start button will invisiable after you click it 
+     */
     @Test
-    public void numberOfButton(){
-        ArrayList<JButton> buttons = findButton(panel);
+    public void clickStartButton(){
         JButton button = buttons.get(0);
-        button.doClick();
-        assertEquals(true,button.isVisible());
-        
+        panel.clickStartButton();
+        assertEquals(false,button.isVisible());
     }
 
+    /**
+     * Test before click start button the difficult button is invisible 
+     * and after click the start button the button appear
+     */
+    @Test
+    public void easyLevelButtonAppear(){
+        JButton button = buttons.get(1);
+        assertEquals(false, button.isVisible());
+        panel.clickStartButton();
+        assertEquals(true, button.isVisible());
+    }
+
+
+    /**
+     * Get array of button that in the panel
+     * @param container the Panel you have 
+     * @return array of button that in the panel
+     */
     private  ArrayList<JButton> findButton(Container container){
         ArrayList<JButton> buttons = new ArrayList<JButton>();
         Component[] components = container.getComponents();

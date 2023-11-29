@@ -40,10 +40,8 @@ public class MainPanel extends JPanel {
         startButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                VisibleDifficultButton();
-                startButton.setVisible(false);
+                clickStartButton();
                 super.mouseClicked(e);
-
             }
         });
         startButton.setBounds(7* WindowConfig.tileSize,7* WindowConfig.tileSize,WindowConfig.tileSize *2,WindowConfig.tileSize);
@@ -61,6 +59,11 @@ public class MainPanel extends JPanel {
         this.controller = controller;
     }
 
+    public void clickStartButton(){
+        VisibleDifficultButton();
+        startButton.setVisible(false);
+    }
+
     /**
      * Set the difficulty button
      */
@@ -71,7 +74,7 @@ public class MainPanel extends JPanel {
         easyLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                controller.transformToLoadingScreen(gameLevel.BASIC);
+                 controller.transformToLoadingScreen(gameLevel.BASIC);
                 super.mouseClicked(e);
             }
         });
@@ -82,7 +85,7 @@ public class MainPanel extends JPanel {
         middleLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                controller.transformToLoadingScreen(gameLevel.MEDIUM);
+                 controller.transformToLoadingScreen(gameLevel.MEDIUM);
                 super.mouseClicked(e);
             }
         });
@@ -93,10 +96,11 @@ public class MainPanel extends JPanel {
         hardLevelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                 controller.transformToLoadingScreen(gameLevel.HARD);
+                controller.transformToLoadingScreen(gameLevel.HARD);
                 super.mouseClicked(e);
             }
         });
+
 
         easyLevelButton.setBounds(7* WindowConfig.tileSize,7* WindowConfig.tileSize,WindowConfig.tileSize *2,WindowConfig.tileSize);
         middleLevelButton.setBounds(7* WindowConfig.tileSize, 8* WindowConfig.tileSize, WindowConfig.tileSize *2, WindowConfig.tileSize);
@@ -106,7 +110,6 @@ public class MainPanel extends JPanel {
         this.add(middleLevelButton);
         this.add(hardLevelButton);
     }
-
 
     /**
      * laoding the background image
