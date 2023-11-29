@@ -69,8 +69,10 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     public void init(InitialiseGameItem initialiseGameItem){
         initialiseItem = initialiseGameItem;
-        config = initialiseItem.getConfig();
-        initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
+        if(initialiseGameItem != null){
+            config = initialiseItem.getConfig();
+            initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
+        }
     }
 
     public void setKeySingleton(RecordUsedPlace record, RoomLayout roomLayout, RoomEnvironment roomEnvironment, PanelController panelController){
@@ -84,7 +86,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Create the gamme loop for the laoding panel
     */
     public void createTimeLine(){
-        if(loadingThread == null && keySingltonReady() && config != null){
+        if(loadingThread == null && keySingltonReady() && initialiseItem != null){
             loadingThread = new Thread(this);
             loadingThread.start();
             initialiseItem.createRoom();

@@ -2,6 +2,8 @@ package cmpt276.group4.WindowAndInput;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -150,6 +152,22 @@ public class LoadingPanelTest {
         loadingPanel.createTimeLine();
         Thread.sleep(500);
         verify(mockpanelController).transformToGameScreen();
+    }
+
+    @Test
+    public void failTocreatTimeLine() throws InterruptedException{
+        loadingPanel.init(null);
+        loadingPanel.createTimeLine();
+        Thread.sleep(500);
+        verify(mockpanelController,never()).transformToGameScreen();
+    }
+
+    @Test
+    public void notCreatSecondTimeLine() throws InterruptedException{
+        loadingPanel.createTimeLine();
+        loadingPanel.createTimeLine();
+        Thread.sleep(500);
+        verify(mockpanelController,times(1)).transformToGameScreen();
     }
 
     private void loadingVaild(int expectProcess){
