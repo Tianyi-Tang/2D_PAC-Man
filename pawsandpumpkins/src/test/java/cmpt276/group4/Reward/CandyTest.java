@@ -2,6 +2,7 @@ package cmpt276.group4.Reward;
 
 import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Position;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -16,13 +17,13 @@ class CandyTest {
 
     @Test
     void getScore_ReturnCorrectScore() {
-        var candy = new Candy();
+        Candy candy = new Candy();
         assertEquals(1,candy.getScore());
     }
 
     @Test
     void getPosition() {
-        var candy = new Candy();
+        Candy candy = new Candy();
         Position newPosition = new Position(10, 20); // Replace with actual Position class.
         candy.setPosition(newPosition);
         assertEquals(newPosition, candy.getPosition());
@@ -30,7 +31,7 @@ class CandyTest {
 
     @Test
     void setPosition() {
-        var candy = new Candy();
+        Candy candy = new Candy();
         Position newPosition = new Position(10, 20);
         candy.setPosition(newPosition);
         assertEquals(newPosition, candy.getPosition());
@@ -39,7 +40,7 @@ class CandyTest {
 
     @Test
     void isBonusReward_AlwaysReturnFalse() {
-        var candy = new Candy();
+        Candy candy = new Candy();
         assertFalse(candy.isBonusReward());
     }
 

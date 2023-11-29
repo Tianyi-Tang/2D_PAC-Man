@@ -18,13 +18,13 @@ import java.io.IOException;
 
 
 public class PumpkinHead extends BonusReward {
-    private long displayDuration = 10;
+    public long displayDuration = 10;
     private int score = 5;
     private BufferedImage ppk1, ppk2, currentImage;
     private Position ppkPosition;
 
     private int stateCounter=0;
-    private boolean org_State = true;
+    public boolean org_State = true;
     private boolean available;
     private RecordUsedPlace record;
     public boolean isBonusReward = true;

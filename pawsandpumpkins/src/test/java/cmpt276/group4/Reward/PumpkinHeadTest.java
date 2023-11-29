@@ -1,8 +1,11 @@
 package cmpt276.group4.Reward;
 
+import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.Position;
 import cmpt276.group4.Player.Player;
+import cmpt276.group4.Time.GameTime;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
 import java.awt.*;
@@ -10,8 +13,7 @@ import java.awt.image.BufferedImage;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class PumpkinHeadTest {
 
@@ -53,9 +55,26 @@ class PumpkinHeadTest {
         int initialScore = 10;
         reward.addScore(mockPlayer, initialScore);
 
-        // Verify if player's score is updated
         verify(mockPlayer).addScoreToPlayer(initialScore, reward.isBonusReward());
     }
+    @Test
+    void testAddBenefitWhenPlayerNotAtSamePosition() {
+        Player mockPlayer = mock(Player.class);
+        PumpkinHead reward = new PumpkinHead();
+
+        Position rewardPosition = new Position(1, 1);
+        Position playerPosition = new Position(2, 2); // Different position
+        reward.setPosition(rewardPosition);
+
+        // Simulate player being at a different position
+        when(mockPlayer.getPosition()).thenReturn(playerPosition);
+
+        reward.addBenefit(mockPlayer);
+
+        // Verify if addScore method was not called
+        verify(mockPlayer, never()).addScoreToPlayer(anyInt(), anyBoolean());
+    }
+
 
     @Test
     void getAvailable_correctlyReturnAvailable() {
@@ -63,9 +82,27 @@ class PumpkinHeadTest {
         assertTrue(pumpkinHead.getAvailable());
 
     }
+    private boolean shouldBeDrawn(PumpkinHead pumpkinHead) {
+        GameTime gameTime = GameTime.getInstance();
+        boolean timeCondition = gameTime.getTime() % pumpkinHead.displayDuration >= pumpkinHead.displayDuration / 2;
 
+        return pumpkinHead.org_State && timeCondition;
+    }
     @Test
     void testDrawMethod() {
+        PumpkinHead pumpkinHead = new PumpkinHead();
+        Graphics2D mockedGraphics = mock(Graphics2D.class);
 
+        pumpkinHead.draw(mockedGraphics);
+
+        if (shouldBeDrawn(pumpkinHead)) {
+            verify(mockedGraphics).drawImage(any(BufferedImage.class), anyInt(), anyInt(), anyInt(), anyInt(), isNull());
+        } else {
+            verify(mockedGraphics, never()).drawImage(any(BufferedImage.class), anyInt(), anyInt(), anyInt(), anyInt(), isNull());
+        }
     }
+
+
+
+
 }
