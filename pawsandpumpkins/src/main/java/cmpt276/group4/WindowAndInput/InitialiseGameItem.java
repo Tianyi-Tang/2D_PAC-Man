@@ -3,7 +3,6 @@ package cmpt276.group4.WindowAndInput;
 import cmpt276.group4.GameManager;
 import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.Enemy.EnemyInitialization;
-import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
@@ -66,15 +65,15 @@ public class InitialiseGameItem {
      /**
      * loading all enemies in the game
      */
-    public void createEnemy(){
-        new EnemyInitialization(new EnemyFactory());
+    public void createEnemy(EnemyFactory factory){
+        new EnemyInitialization(factory);
     }
 
      /**
      * loading all rewards in the game
      */
-    public void createReward(){
-        RewardInitialization reward_initialization = new RewardInitialization(new RewardFactory());
+    public void createReward(RewardFactory factory){
+        RewardInitialization reward_initialization = new RewardInitialization(factory);
         reward_initialization.generateReward();
     }
     
