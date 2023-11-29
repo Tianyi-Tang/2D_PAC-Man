@@ -14,7 +14,6 @@ import cmpt276.group4.Reward.Reward;
  */
 public class RoomEnvironment {
    
-
     private RecordUsedPlace record;
     private static RoomEnvironment instacne;
     private Player player;
@@ -90,7 +89,7 @@ public class RoomEnvironment {
     }
 
     public boolean sameAsPlayerPosition(Position position){
-        if(position.equal(player.getPosition()))
+        if(player != null && position.equal(player.getPosition()))
             return true;
         else
             return false;
