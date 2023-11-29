@@ -29,7 +29,7 @@ public class RecordUsedPlace {
         available = new ArrayList<Position>();
 
         obstacle_pos = new ArrayList<Position>();
-
+  
 
     }
 
@@ -78,17 +78,6 @@ public class RecordUsedPlace {
         }
         
         return adjacentPositions;
-
-        // return Arrays.asList(
-        //         new Position(p.getX_axis() - tileSize, p.getY_axis() - tileSize), // Top-left
-        //         new Position(p.getX_axis(), p.getY_axis() - tileSize), // Top
-        //         new Position(p.getX_axis() + tileSize, p.getY_axis() - tileSize), // Top-right
-        //         new Position(p.getX_axis() - tileSize, p.getY_axis()), // Left
-        //         new Position(p.getX_axis() + tileSize, p.getY_axis()), // Right
-        //         new Position(p.getX_axis() - tileSize, p.getY_axis() + tileSize), // Bottom-left
-        //         new Position(p.getX_axis(), p.getY_axis() + tileSize), // Bottom
-        //         new Position(p.getX_axis() + tileSize, p.getY_axis() + tileSize) // Bottom-right
-        // );
     }
 
     private static boolean containsPosition(ArrayList<Position> positions, Position position) {
@@ -136,6 +125,9 @@ public class RecordUsedPlace {
         //can place enemy or obstacle in the input position if no above conditions are 
         return !(condition1 || condition4 || condition1 || condition7 || condition9 || condition11 || condition13 || condition15); 
     }
+
+
+    
     
     /**
      * Add position to availble array, the function will reject position 

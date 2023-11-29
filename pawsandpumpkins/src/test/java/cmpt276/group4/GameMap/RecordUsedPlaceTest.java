@@ -1,7 +1,6 @@
 package cmpt276.group4.GameMap;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.floatThat;
 
 import java.util.ArrayList;
 
@@ -84,6 +83,9 @@ public class RecordUsedPlaceTest {
         assertEquals(true, record.isPlayerNearBy(4 * WindowConfig.tileSize,nearByPos));
     }
 
+    /**
+     * Test record can place obstacle in that position 
+     */
     @Test
     public void CanPlaceObstacle(){
         int tileSize = WindowConfig.tileSize;
