@@ -42,7 +42,7 @@ public class Ghost implements Enemy {
      */
     public Ghost(EnemyType type) {
         getPlayerPosition();
-        record = RecordUsedPlace.getInstance();
+        this.record = RecordUsedPlace.getInstance();
         roomEnvironment = RoomEnvironment.getInstance();
 
         enemyPosition = new Position(0, 0);

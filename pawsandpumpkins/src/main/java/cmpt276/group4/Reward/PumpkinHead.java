@@ -18,13 +18,13 @@ import java.io.IOException;
 
 
 public class PumpkinHead extends BonusReward {
-    private long displayDuration = 10;
+    public long displayDuration = 10;
     private int score = 5;
     private BufferedImage ppk1, ppk2, currentImage;
     private Position ppkPosition;
 
     private int stateCounter=0;
-    private boolean org_State = true;
+    public boolean org_State = true;
     private boolean available;
     private RecordUsedPlace record;
     public boolean isBonusReward = true;
@@ -89,7 +89,7 @@ public class PumpkinHead extends BonusReward {
      */
     @Override
     public void addBenefit(Player player) {
-        if (RoomEnvironment.getInstance().sameAsPlayerPosition(ppkPosition)) {
+        if (RoomEnvironment.getInstance().sameAsPlayerPosition(ppkPosition)&&isAvailable) {
             addScore(player, score);
             RoomEnvironment.getInstance().removeReward(this);
         }
@@ -101,7 +101,7 @@ public class PumpkinHead extends BonusReward {
      * @param player The player who will receive the score.
      * @param score  The score to be added to the player.
      */
-    private void addScore(Player player, int score) {
+    public void addScore(Player player, int score) {
         this.score = score;
         player.addScoreToPlayer(score, isBonusReward);
     }
@@ -126,6 +126,10 @@ public class PumpkinHead extends BonusReward {
      */
     public boolean getAvailable() {
         return isAvailable;
+    }
+
+    public void setAvailable(boolean b){
+        isAvailable = b;
     }
 
     /**
