@@ -55,10 +55,17 @@ public class MainPanel extends JPanel {
         createButton();
     }
 
+    /**
+     * Setting the controller that will be used
+     * @param controller the PanelControl that mainPanel going to used
+     */
     public void init(PanelController controller){
         this.controller = controller;
     }
 
+    /**
+     * Action will been take after press start button
+     */
     public void clickStartButton(){
         VisibleDifficultButton();
         startButton.setVisible(false);
