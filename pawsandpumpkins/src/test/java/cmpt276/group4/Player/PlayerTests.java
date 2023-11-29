@@ -115,6 +115,17 @@ public class PlayerTests {
     }
 
     /**
+     * Test player can be deduct point twice
+     */
+    @Test
+    public void deductPointTwice(){
+        player.deductPoint(5);
+        player.arriveTime();
+        player.deductPoint(10);
+        assertEquals(15, player.getDeductScore());
+    }
+
+    /**
      * Test player can not immediately move after the observerUpdate pass the
      * Move direction
      */
