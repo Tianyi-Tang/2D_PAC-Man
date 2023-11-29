@@ -6,11 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameTimeTest {
 
+
+
     @Test
     void testSingleton() {
         GameTime instance1 = GameTime.getInstance();
         GameTime instance2 = GameTime.getInstance();
-        assertSame(instance1, instance2, "Instances are not the same");
+        assertSame(instance1, instance2);
     }
 
     @Test
