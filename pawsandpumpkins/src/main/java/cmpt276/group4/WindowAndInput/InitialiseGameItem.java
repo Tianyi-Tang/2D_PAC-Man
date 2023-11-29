@@ -32,19 +32,19 @@ public class InitialiseGameItem {
     }
 
     public void createRoom(){
-        if(config != null && roomFactory != null){
+        if(config != null && roomInitialization != null){
             roomInitialization.initializeRoom(config.getGameLevel(), roomFactory);
             roomInitialization.iRoom(roomFactory);
         }
     }
 
     public void createTile(){
-        if(roomFactory != null)
+        if(roomInitialization != null)
             roomInitialization.iTiles(roomFactory);
     }
 
     public void createWall(){
-        if(roomFactory != null)
+        if(roomInitialization != null)
             roomInitialization.iWalls(roomFactory);
     }
 
