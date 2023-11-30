@@ -11,6 +11,7 @@ import cmpt276.group4.gameLevel;
 import cmpt276.group4.GameMap.RoomLayout;
 
 public class RoomFactory {
+    Position position;
 
     /**
      * Creates and returns an instance of the room with the specified dimensions.
@@ -59,6 +60,7 @@ public class RoomFactory {
      */
     public void createTile(List<Position> positions){
         for (Position position : positions) {
+            this.position = position;
             RoomLayout.getInstance().addElementInMap(new Tile(position));
         };
     }
