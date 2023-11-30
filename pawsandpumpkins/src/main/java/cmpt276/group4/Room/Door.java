@@ -43,10 +43,10 @@ public class Door implements CharacterAvaliablePosition{
     }
 
     public void playerLeaveRoom(){
-        if(open){
-            if(Player.getInstance().getPosition().equal(position))
-                GameManager.getInstance().playerLeaveDoor();
-        }
+       if(open){
+           if(Player.getInstance().getPosition().equal(position))
+               GameManager.getInstance().playerLeaveDoor();
+       }
     }
 
     /**
