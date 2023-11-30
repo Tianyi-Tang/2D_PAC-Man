@@ -18,6 +18,10 @@ import cmpt276.group4.Reward.Candy;
 import cmpt276.group4.Reward.Reward;
 import cmpt276.group4.Room.Wall;
 
+/**
+ * Unit Test the player movenemt
+ */
+
 public class PlayerMovementTest {
     public PlayerMovement movement;
 
@@ -28,7 +32,7 @@ public class PlayerMovementTest {
     public Position availblePos;
 
     @BeforeEach
-    public void setUpMovement(){
+    public void setUpMovement() {
         movement = new PlayerMovement();
 
         record = new RecordUsedPlace();
@@ -36,26 +40,34 @@ public class PlayerMovementTest {
         mockRoomEnvironment = mock(RoomEnvironment.class);
 
         roomLayout.init(record);
-        availblePos = new Position(WindowConfig.tileSize,WindowConfig.tileSize);
+        availblePos = new Position(WindowConfig.tileSize, WindowConfig.tileSize);
         record.addAviable(availblePos);
-        
+
         movement.init(roomLayout, mockRoomEnvironment, Player.getInstance());
     }
 
-
+    /**
+     * Test isPositionAvailable function will return true for available position
+     */
     @Test
-    public void goToAviablePosition(){
-        assertEquals(true,movement.isPositionAvailable(availblePos));
+    public void goToAviablePosition() {
+        assertEquals(true, movement.isPositionAvailable(availblePos));
     }
 
+    /**
+     * Test isPositionAvailable function will return false for available position
+     */
     @Test
-    public void goToUnaviablePosition(){
+    public void goToUnaviablePosition() {
         roomLayout.addElementInMap(new Wall(availblePos));
         assertEquals(false, movement.isPositionAvailable(availblePos));
     }
 
+    /**
+     * Test movement will get reward if there is a reward in that position
+     */
     @Test
-    public void collectReward(){
+    public void collectReward() {
         Reward mockCandy = mock(Candy.class);
         when(mockRoomEnvironment.collectReward()).thenReturn(mockCandy);
 
@@ -63,8 +75,11 @@ public class PlayerMovementTest {
         verify(mockCandy).addBenefit(Player.getInstance());
     }
 
+    /**
+     * If movenment will not collect reward, if reward is not in that position
+     */
     @Test
-    public void failToCollect(){
+    public void failToCollect() {
         Reward mockReward = Mockito.mock(Reward.class);
         movement.checkReward();
         Mockito.verify(mockReward, Mockito.times(0)).addBenefit(Player.getInstance());
