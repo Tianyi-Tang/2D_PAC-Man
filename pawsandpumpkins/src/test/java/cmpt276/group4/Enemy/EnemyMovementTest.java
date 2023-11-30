@@ -1,4 +1,3 @@
-
 package cmpt276.group4.Enemy;
 
 import cmpt276.group4.Position;
@@ -11,6 +10,12 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit test class for EnemyMovement.
+ * This class tests the functionality of the EnemyMovement class, particularly
+ * focusing on the availability of positions for enemy movement within a room
+ * layout.
+ */
 class EnemyMovementTest {
 
     @Mock
@@ -19,6 +24,11 @@ class EnemyMovementTest {
     private EnemyMovement enemyMovement;
     private Position testPosition;
 
+    /**
+     * Sets up the testing environment before each test.
+     * Initializes mock objects and configures an EnemyMovement instance
+     * with a mocked RoomLayout for testing position availability.
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -27,7 +37,12 @@ class EnemyMovementTest {
         testPosition = new Position(10, 10);
     }
 
-    @Test
+    /**
+     * Tests the isPositionAvailable method when the position is available.
+     * Ensures that the method returns true when a position within the room layout
+     * is marked as available.
+     */
+      @Test
     void isPositionAvailableTrue() {
         
         when(mockRoomLayout.isPositionAviable(testPosition)).thenReturn(true);
@@ -37,6 +52,11 @@ class EnemyMovementTest {
         assertTrue(result, "Expected position to be available");
     }
 
+/**
+     * Tests the isPositionAvailable method when the position is not available.
+     * Ensures that the method returns false when a position within the room layout
+     * is marked as unavailable.
+     */
     @Test
     void isPositionAvailableFalse() {
         when(mockRoomLayout.isPositionAviable(testPosition)).thenReturn(false);
