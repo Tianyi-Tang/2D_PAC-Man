@@ -1,60 +1,37 @@
-// package cmpt276.group4.Room;
+package cmpt276.group4.Room;
 
+import cmpt276.group4.GameMap.RecordUsedPlace;
+import cmpt276.group4.Position;
+import org.junit.jupiter.api.Test;
 
-// import static org.junit.jupiter.api.Assertions.*;
-// import static org.mockito.Mockito.*;
+import java.awt.*;
 
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
-// import org.mockito.Mock;
-// import org.mockito.MockedStatic;
-// import org.mockito.MockitoAnnotations;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-// import cmpt276.group4.Room.Tombstone;
+class TombstoneTest {
 
-// import cmpt276.group4.Position;
-// import cmpt276.group4.GameMap.RecordUsedPlace;
-// import cmpt276.group4.GameMap.RoomEnvironment;
-// import cmpt276.group4.Logic.WindowConfig;
+    @Test
+    void constructorInitializesPosition() {
+        RecordUsedPlace mockRecord = mock(RecordUsedPlace.class);
+        Position mockPosition = new Position(5, 5);
+        when(mockRecord.getRandomFromAvailablePosition()).thenReturn(mockPosition);
+        when(mockRecord.canPlaceEnemyAndObstacle(mockPosition)).thenReturn(true);
 
-// import java.awt.Graphics2D;
-// import java.awt.image.BufferedImage;
-// import java.io.File;
+        RecordUsedPlace.setInstance(mockRecord);
 
-// import javax.imageio.ImageIO;
+        Tombstone tombstone = new Tombstone(mockPosition);
 
-// public class TombstoneTest {
-//     public Tombstone tombstone;
-//     public Position mockPosition;
+        assertNotNull(tombstone.getPosition());
+        assertEquals(mockPosition, tombstone.getPosition());
+    }
 
-//     @BeforeEach
-//     void setUp() {
-//         MockitoAnnotations.openMocks(this);
-//         tombstone = new Tombstone(mockPosition);
-//     }
+    @Test
+    void drawCallsDrawImage() {
+        Tombstone tombstone = new Tombstone(new Position(5, 5));
+        Graphics2D mockedGraphics = mock(Graphics2D.class);
 
-//     @Test
-//     void testDraw1() {
-//         // Mock dependencies
-//         Graphics2D mockGraphics2D = mock(Graphics2D.class);
-//         tombstone.tombImage = mock(BufferedImage.class);
+        tombstone.draw(mockedGraphics);
 
-//         tombstone.draw(mockGraphics2D);
-
-//         // Verify that the drawImage method is called on the Graphics2D context
-//         verify(mockGraphics2D, times(1)).drawImage(tombstone.tombImage, mockPosition.getX_axis(), mockPosition.getY_axis(),
-//                 WindowConfig.tileSize, WindowConfig.tileSize, null);
-//     }
-
-//     @Test
-//     void testDraw2() {
-//         // Mock dependencies
-//         Graphics2D mockGraphics2D = mock(Graphics2D.class);
-//         tombstone.tombImage = null; // Set tombImage to null
-
-//         tombstone.draw(mockGraphics2D);
-
-//         // Verify that the drawImage method is not called when tombImage is null
-//         verify(mockGraphics2D, never()).drawImage(any(), anyInt(), anyInt(), anyInt(), anyInt(), any());
-//     }
-// }
+        verify(mockedGraphics).drawImage(any(), anyInt(), anyInt(), anyInt(), anyInt(), isNull());
+    }}
