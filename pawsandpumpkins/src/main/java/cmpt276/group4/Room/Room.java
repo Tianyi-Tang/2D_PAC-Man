@@ -34,28 +34,24 @@ public class Room {
      * @param max_X Maximum X-coordinate of the room.
      * @param max_Y Maximum Y-coordinate of the room.
      */
-    private Room() {
-        if (WindowConfig.maxScreenRow < max_X || WindowConfig.maxScreenCol < max_Y){
-            System.out.println("Screen too small");
-        }
-        else{
-            //Assuming centre of screen will always be even after division
-            roomCenterX = GameConfig.getGameConfigInstance().getRoomColumn()/2;
-            roomCenterY = GameConfig.getGameConfigInstance().getRoomRow()/2;
+    Room() {
+        //Assuming centre of screen will always be even after division
+        roomCenterX = GameConfig.getGameConfigInstance().getRoomColumn()/2;
+        roomCenterY = GameConfig.getGameConfigInstance().getRoomRow()/2;
 
-            max_X = WindowConfig.maxScreenCol;
-            max_Y = WindowConfig.maxScreenRow;
+        max_X = WindowConfig.maxScreenCol;
+        max_Y = WindowConfig.maxScreenRow;
 
             
-            // X1 Y1 is a corner oposite of corner X2 Y2 and with these to points we
-            // can generate a room to fill in the room with tiles
-            RoomX1 = (roomCenterX -  (max_X/2));
-            RoomX2 = (roomCenterX +  (max_X/2));
-            RoomY1 = roomCenterY -  (max_Y/2);
-            RoomY2 = roomCenterY +  (max_Y/2);
-            generateAllPosition();
-            createDoors();
-        } 
+        // X1 Y1 is a corner oposite of corner X2 Y2 and with these to points we
+        // can generate a room to fill in the room with tiles
+        RoomX1 = (roomCenterX -  (max_X/2));
+        RoomX2 = (roomCenterX +  (max_X/2));
+        RoomY1 = roomCenterY -  (max_Y/2);
+        RoomY2 = roomCenterY +  (max_Y/2);
+        generateAllPosition();
+        createDoors();
+
     }
 
     public static synchronized Room getInstance(){
