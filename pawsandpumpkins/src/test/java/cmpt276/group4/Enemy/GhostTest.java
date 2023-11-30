@@ -29,6 +29,11 @@ import javax.imageio.ImageIO;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for the Ghost class in the Enemy package.
+ * It includes unit tests for various functionalities of the Ghost class,
+ * such as movement, position setting, and player interaction.
+ */
 class GhostTest {
 
     @Mock
@@ -43,6 +48,10 @@ class GhostTest {
     private GameManager mockGameManager;
     private Position ghostPosition;
 
+    /**
+     * Sets up the test environment before each test.
+     * Initializes mock objects and configures their behavior.
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -61,29 +70,42 @@ class GhostTest {
 
     }
 
-
-
+    /**
+     * Tests the constructor of the Ghost class to ensure correct initialization.
+     */
     @Test
     void testConstructor() {
         assertNotNull(ghost);
     }
 
+    /**
+     * Tests the action method of the Ghost class to verify its behavior.
+     */
     @Test
     void testAction() {
         ghost.action();
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests if the Ghost is correctly identified as movable.
+     */
     @Test
     void isMovableTest() {
         assertTrue(ghost.isMovable(), "Ghost should be movable");
     }
 
+    /**
+     * Tests if the getMovable method correctly identifies the Ghost as movable.
+     */
     @Test
     void getMovableTest() {
         assertTrue(ghost.getMovable(), "getMovable should return true for ghost");
     }
 
+    /**
+     * Tests setting a new position for the Ghost and verifies the update.
+     */
     @Test
     void setEnemyPositionTest() {
         Position newPosition = new Position(5, 5);
@@ -91,11 +113,18 @@ class GhostTest {
         assertEquals(newPosition, ghost.getPosition(), "Enemy position should be updated");
     }
 
+    /**
+     * Tests if the getPosition method correctly returns the Ghost's position.
+     */
     @Test
     void getPositionTest() {
         assertEquals(startPosition, ghost.getPosition(), "Positions should match");
     }
 
+    /**
+     * Tests the catchPlayer method when the Ghost is not catching the player.
+     * Verifies that no catching action is performed.
+     */
     @Test
     void catchPlayerTest_NotCatchingPlayer() {
         Position differentPosition = new Position(20, 20);
@@ -104,6 +133,10 @@ class GhostTest {
         verify(mockGameManager, times(0)).enemyCatachPlayer(anyBoolean());
     }
 
+    /**
+     * Tests the catchPlayer method when the Ghost catches the player.
+     * Verifies that the appropriate action is taken.
+     */
     @Test
     void catchPlayerTest_CatchingPlayer() {
         ghost.setEnemyPosition(playerPosition);
@@ -111,8 +144,11 @@ class GhostTest {
         verify(mockGameManager, times(1)).enemyCatachPlayer(anyBoolean());
     }
 
+    /**
+     * Tests Ghost's behavior when the player is directly above it.
+     */
     @Test
-    void testAction_PlayerTopOfGhost() {
+    void testGhostActionWithPlayerAbove() {
         Position playerPos = new Position(0, WindowConfig.tileSize);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(0, 0));
@@ -120,8 +156,11 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests Ghost's behavior when the player is directly below it.
+     */
     @Test
-    void testAction_PlayerBottomOfGhost() {
+    void testGhostActionWithPlayerBelow() {
         Position playerPos = new Position(0, 0);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(0, WindowConfig.tileSize));
@@ -129,8 +168,11 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests Ghost's behavior when the player is to the right of it.
+     */
     @Test
-    void testAction_PlayerRightOfGhost() {
+    void testGhostActionWithPlayerToRight() {
         Position playerPos = new Position(WindowConfig.tileSize, 0);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(0, 0));
@@ -138,8 +180,11 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests Ghost's behavior when the player is to the left of it.
+     */
     @Test
-    void testAction_PlayerLeftOfGhost() {
+    void testGhostActionWithPlayerToLeft() {
         Position playerPos = new Position(0, WindowConfig.tileSize);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(0, 0));
@@ -147,8 +192,11 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests Ghost's behavior when the player is diagonally top-left of it.
+     */
     @Test
-    void testAction_PlayerLeftOfGhost1() {
+    void testGhostActionWithPlayerDiagonalTopLeft() {
         Position playerPos = new Position(2 * WindowConfig.tileSize, WindowConfig.tileSize);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(0, 0));
@@ -156,8 +204,11 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests Ghost's behavior when the player is diagonally top-right of it.
+     */
     @Test
-    void testAction_PlayerLeftOfGhost2() {
+    void testGhostActionWithPlayerDiagonalTopRight() {
         Position playerPos = new Position(2 * WindowConfig.tileSize, WindowConfig.tileSize);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(2 * WindowConfig.tileSize, 0));
@@ -165,8 +216,11 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests Ghost's behavior when the player is diagonally bottom-right of it.
+     */
     @Test
-    void testAction_PlayerLeftOfGhost3() {
+    void testGhostActionWithPlayerDiagonalBottomRight() {
         Position playerPos = new Position(2 * WindowConfig.tileSize, WindowConfig.tileSize);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(2 * WindowConfig.tileSize, WindowConfig.tileSize));
@@ -174,8 +228,11 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests Ghost's behavior when the player is far to the left of it.
+     */
     @Test
-    void testAction_PlayerLeftOfGhost4() {
+    void testGhostActionWithPlayerFarLeft() {
         Position playerPos = new Position(2 * WindowConfig.tileSize, 10);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(3 * WindowConfig.tileSize, 0));
@@ -183,8 +240,11 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests Ghost's behavior when the player is far to the right of it.
+     */
     @Test
-    void testAction_PlayerLeftOfGhost5() {
+    void testGhostActionWithPlayerFarRight() {
         Position playerPos = new Position(2 * WindowConfig.tileSize, 0);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(3 * WindowConfig.tileSize, 0));
@@ -192,8 +252,11 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests Ghost's behavior when the player is diagonally bottom-left of it.
+     */
     @Test
-    void testAction_PlayerLeftOfGhost6() {
+    void testGhostActionWithPlayerDiagonalBottomLeft() {
         Position playerPos = new Position(2 * WindowConfig.tileSize, 2 * WindowConfig.tileSize);
         when(mockRoomEnvironment.getPlayerPosition()).thenReturn(playerPos);
         ghost.setEnemyPosition(new Position(WindowConfig.tileSize, 8 * WindowConfig.tileSize));
@@ -201,6 +264,10 @@ class GhostTest {
         verify(mockRecord, times(1)).isPlayerNearBy(anyInt(), any(Position.class));
     }
 
+    /**
+     * Tests the draw method of Ghost.
+     * Verifies that the Ghost is drawn using the provided Graphics2D object.
+     */
     @Test
     void testDrawGhostBasic() {
         Graphics2D mockGraphics = mock(Graphics2D.class);
@@ -212,6 +279,10 @@ class GhostTest {
                 eq(10), eq(10), eq(WindowConfig.tileSize), eq(WindowConfig.tileSize), isNull());
     }
 
+    /**
+     * Tests the action method when there are no available directions to move.
+     * Verifies that the Ghost does not move from its initial position.
+     */
     @Test
     void testMoveToRandomPosition_NoAvailableDirections() {
         when(mockEnemyMovement.isPositionAvailable(any(Position.class))).thenReturn(false);
@@ -221,8 +292,11 @@ class GhostTest {
         assertEquals(initialPosition, ghost.getPosition(), "Ghost should not move if no direction is available");
     }
 
-    @Test
-    void testMoveToRandomPosition_AvailableDirectionAfter0ailures() {
+   /**
+ * Tests Ghost's random movement when an available direction is immediately found.
+ */
+@Test
+void testRandomMovementWithImmediateAvailability() {
         when(mockEnemyMovement.isPositionAvailable(any(Position.class)))
             .thenReturn(true);
         Position initialPosition = new Position(ghost.getPosition().getX_axis(), ghost.getPosition().getY_axis());
@@ -230,8 +304,11 @@ class GhostTest {
         assertNotEquals(initialPosition, ghost.getPosition(), "Ghost should move if a direction becomes available");
     }
 
-    @Test
-    void testMoveToRandomPosition_AvailableDirectionAfter1Failures() {
+  /**
+ * Tests Ghost's random movement when an available direction is found after one failed attempt.
+ */
+@Test
+void testRandomMovementAfterOneFailure() {
         when(mockEnemyMovement.isPositionAvailable(any(Position.class)))
             .thenReturn(false) 
             .thenReturn(true);
@@ -240,8 +317,11 @@ class GhostTest {
         assertNotEquals(initialPosition, ghost.getPosition(), "Ghost should move if a direction becomes available");
     }
 
-    @Test
-    void testMoveToRandomPosition_AvailableDirectionAfter2Failures() {
+   /**
+ * Tests Ghost's random movement when an available direction is found after two failed attempts.
+ */
+@Test
+void testRandomMovementAfterTwoFailures() {
         when(mockEnemyMovement.isPositionAvailable(any(Position.class)))
             .thenReturn(false) 
             .thenReturn(false)
@@ -251,8 +331,11 @@ class GhostTest {
         assertNotEquals(initialPosition, ghost.getPosition(), "Ghost should move if a direction becomes available");
     }
 
-    @Test
-    void testMoveToRandomPosition_AvailableDirectionAfter3Failures() {
+   /**
+ * Tests Ghost's random movement when an available direction is found after three failed attempts.
+ */
+@Test
+void testRandomMovementAfterThreeFailures() {
         when(mockEnemyMovement.isPositionAvailable(any(Position.class)))
             .thenReturn(false)
             .thenReturn(false)
@@ -263,6 +346,10 @@ class GhostTest {
         assertNotEquals(initialPosition, ghost.getPosition(), "Ghost should move if a direction becomes available");
     }
 
+    /**
+     * Tests the Ghost's action method when the player is far away.
+     * Verifies that the Ghost's movement is random under this condition.
+     */
     @Test
     void testAction_WithPlayerFarAway_MovementIsRandom() {
         Position farPlayerPosition = new Position(1000, 1000);
@@ -273,6 +360,10 @@ class GhostTest {
         assertNotEquals(startPosition, ghost.getPosition(), "Ghost should have moved");
     }
 
+    /**
+     * Tests the Ghost's action method with limited movement options.
+     * Verifies that the Ghost moves only in available directions.
+     */
     @Test
     void testAction_WithLimitedMovementOptions() {
         Position farPlayerPosition = new Position(1000, 1000); // Far away position
@@ -291,6 +382,10 @@ class GhostTest {
                 "Ghost should have moved downwards");
     }
 
+    /**
+     * Tests getting the player movement object from a Ghost.
+     * Verifies that the returned EnemyMovement object is the same as the one set.
+     */
     @Test
     void testGetPlayerMovement() {
         EnemyMovement mockEnemyMovement = mock(EnemyMovement.class);

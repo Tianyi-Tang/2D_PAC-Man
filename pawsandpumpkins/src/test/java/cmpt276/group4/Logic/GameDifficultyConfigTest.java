@@ -10,6 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class contains unit tests for the GameDifficultyConfigurations in the
+ * game.
+ * It tests the initialization of various difficulty levels (Basic, Medium, and
+ * Hard)
+ * and verifies the correct configuration settings for each difficulty level.
+ */
 class GameDifficultyConfigTest {
 
     private BasicConfig basicConfig;
@@ -23,42 +30,50 @@ class GameDifficultyConfigTest {
         hardConfig = new HardConfig();
     }
 
+    /**
+     * Tests the initialization of the BasicConfig.
+     * It checks that the correct number of obstacles and spiders are set for the
+     * Basic difficulty level.
+     */
     @Test
     void testBasicConfigInitialization() {
         assertEquals(3, basicConfig.getNumberOfObstacles());
         assertEquals(3, basicConfig.getNumberOfSpiders());
-        // ... additional assertions for other fields
+        assertEquals(1, basicConfig.getNumberOfBasicGhosts());
+        assertEquals(0, basicConfig.getNumberOfAdvancedGhosts());
+        assertEquals(5, basicConfig.getNumberOfRegularRewards());
+        assertEquals(1, basicConfig.getNumberOfBonusRewards());
+
     }
 
+    /**
+     * Tests the initialization of the MediumConfig.
+     * It checks that the correct number of obstacles and spiders are set for the
+     * Medium difficulty level.
+     */
     @Test
     void testMediumConfigInitialization() {
         assertEquals(4, mediumConfig.getNumberOfObstacles());
         assertEquals(4, mediumConfig.getNumberOfSpiders());
-        // ... additional assertions for other fields
+        assertEquals(2, mediumConfig.getNumberOfBasicGhosts());
+        assertEquals(0, mediumConfig.getNumberOfAdvancedGhosts());
+        assertEquals(6, mediumConfig.getNumberOfRegularRewards());
+        assertEquals(3, mediumConfig.getNumberOfBonusRewards());
     }
 
+    /**
+     * Tests the initialization of the HardConfig.
+     * It checks that the correct number of obstacles and spiders are set for the
+     * Hard difficulty level.
+     */
     @Test
     void testHardConfigInitialization() {
         assertEquals(5, hardConfig.getNumberOfObstacles());
         assertEquals(5, hardConfig.getNumberOfSpiders());
-        // ... additional assertions for other fields
+        assertEquals(3, hardConfig.getNumberOfBasicGhosts());
+        assertEquals(0, hardConfig.getNumberOfAdvancedGhosts());
+        assertEquals(10, hardConfig.getNumberOfRegularRewards());
+        assertEquals(3, hardConfig.getNumberOfBonusRewards());
     }
 
-    // @Test
-    // void testSwitchMapFunctionality() {
-    //     // You might need to expose the switchMap method as public for testing
-    //     // Alternatively, you can test this indirectly via the constructor
-    //     assertEquals(expectedWallPositionsForBasicConfig, basicConfig.getWallPositions());
-    //     assertEquals(expectedWallPositionsForMediumConfig, mediumConfig.getWallPositions());
-    //     assertEquals(expectedWallPositionsForHardConfig, hardConfig.getWallPositions());
-    // }
-
-    // Helper method to create expected list of wall positions based on maze arrays
-    private List<Position> createExpectedWallPositions(int[] xArray, int[] yArray) {
-        List<Position> positions = new ArrayList<>();
-        for (int i = 0; i < xArray.length; i++) {
-            positions.add(new Position(xArray[i], yArray[i]));
-        }
-        return positions;
-    }
 }

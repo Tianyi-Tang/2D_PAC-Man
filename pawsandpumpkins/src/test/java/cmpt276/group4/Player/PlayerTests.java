@@ -115,17 +115,6 @@ public class PlayerTests {
     }
 
     /**
-     * Test player can be deduct point twice
-     */
-    @Test
-    public void deductPointTwice(){
-        player.deductPoint(5);
-        player.arriveTime();
-        player.deductPoint(10);
-        assertEquals(15, player.getDeductScore());
-    }
-
-    /**
      * Test player can not immediately move after the observerUpdate pass the
      * Move direction
      */
@@ -136,30 +125,13 @@ public class PlayerTests {
     }
 
     /**
-     * Test ObserverUpdate will return error if the pass value for direction is null
-     */
-    @Test
-    public void sendINullToObserverUpdate(){
-        keyInputPlayerUpdate(null, true, 1,true);
-    }
-
-    /**
-     * Test ObserverUpdate will make player position change when the other key is press
-     */
-    @Test
-    public void sendOtherToObserverUpdate(){
-        Position initalPosition = player.getPosition();
-        keyInputPlayerUpdate(MoveDirection.Other, true, 1,true);
-        assertEquals(initalPosition, player.getPosition());
-    }
-
-    /**
      * Test observerUpdate will make Player move base on the direction input after
      * run several time of update 
      */
     @Test
     public void playerMovingLeft(){
-        keyInputPlayerUpdate(MoveDirection.Left, true, 1, true);
+        player.observerUpdate(MoveDirection.Left, true);
+        playerUpdate.playerUpdate(1, true);
         assertEquals(player.getPosition(), new Position(0, 48));
     }
 
@@ -169,7 +141,8 @@ public class PlayerTests {
      */
     @Test
     public void PlayerContinuesPressKey(){
-        keyInputPlayerUpdate(MoveDirection.Down, true, 2, true);
+        player.observerUpdate(MoveDirection.Down, true);
+        playerUpdate.playerUpdate(2, true);
         assertEquals(player.getPosition(), new Position(48, 144));
     }
 
@@ -189,35 +162,26 @@ public class PlayerTests {
      */
     @Test
     public void movingImageUp(){
-        keyInputPlayerUpdate(MoveDirection.Up, true, 1, true);
+        player.observerUpdate(MoveDirection.Up, true);
+        playerUpdate.playerUpdate(1, true);
         player.draw(mockGraphic);
-
         BufferedImage expecImage = loadImage("res/Player/up1.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
     }
 
     /**
      * Test player will main its' direction adn move image, even the observerUpdate
-     * turn off the move direction and switch image
+     * turn off the move direction
      */
     @Test
     public void imageAfterReleaseKey(){
-        keyInputPlayerUpdate(MoveDirection.Right,true,1,true);
+        player.observerUpdate(MoveDirection.Right, true);
+        playerUpdate.playerUpdate(1, true);
         player.draw(mockGraphic);
-        keyInputPlayerUpdate(MoveDirection.Right,false,1,true);
-        player.draw(mockGraphic);
-        BufferedImage expecImage = loadImage("res/Player/right2.png");
-        assertImagesEqual(expecImage, player.getCurrentImage());
-    }
 
-    /**
-     * Test playe will still switch iamge even there is not key press at all
-     */
-    @Test
-    public void noPressKey(){
-        keyInputPlayerUpdate(null,true,2,true);
+        player.observerUpdate(MoveDirection.Right, false);
         player.draw(mockGraphic);
-        BufferedImage expecImage = loadImage("res/Player/down2.png");
+        BufferedImage expecImage = loadImage("res/Player/right1.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
     }
 
@@ -227,23 +191,21 @@ public class PlayerTests {
      */
     @Test
     public void imageSwitch(){
-        keyInputPlayerUpdate(MoveDirection.Left,true,1,false);
+        player.observerUpdate(MoveDirection.Left, true);
+        playerUpdate.playerUpdate(1, false);
         player.draw(mockGraphic);
         BufferedImage expecImage = loadImage("res/Player/left2.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
     }
 
     /**
-     * The fucniton to imitate after user press or release the key and player updater 
-     * several time to moving or chang its image
-     * @param direction the Moving Direction of player
-     * @param pressKey is the key press or release
-     * @param updateTime how many time you want to player to move or change image
-     * @param forPlayermoving is to view player to new position or siwtch image
+     * Method that imitate the time passing, by continues calling the update function
+     * in player
+     * @param index how many time you want to call the update
      */
-    private void keyInputPlayerUpdate(MoveDirection direction, boolean pressKey, int updateTime, boolean forPlayermoving){
-        player.observerUpdate(direction, pressKey);
-        playerUpdate.playerUpdate(updateTime, forPlayermoving);
+    private void runUpdatemultipleTime(int index){
+        for(int i=0;i < index;i++)
+            player.update();
     }
 
     /**

@@ -14,15 +14,27 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
+/**
+ * Integration test class for testing the interaction between Ghost,
+ * GameManager,
+ * RecordUsedPlace, RoomEnvironment, and Player classes.
+ * Specifically focuses on scenarios where a Ghost catches the player.
+ */
 public class GhostCatchPlayerIntegrationTest {
 
     private Ghost ghost;
     private GameManager gameManager;
     private RecordUsedPlace mockRecord;
     private RoomEnvironment mockRoomEnvironment;
-   static private Player mockPlayer; 
-   private Position playerPosition;
+    static private Player mockPlayer;
+    private Position playerPosition;
 
+    /**
+     * Sets up the testing environment before each test.
+     * Initializes mock objects for RecordUsedPlace, RoomEnvironment, Player, and
+     * GameManager,
+     * and sets up their interactions. Also creates a Ghost instance for testing.
+     */
     @BeforeEach
     void setUp() {
         mockRecord = Mockito.mock(RecordUsedPlace.class);
@@ -44,6 +56,12 @@ public class GhostCatchPlayerIntegrationTest {
         ghost = new Ghost(EnemyType.GHOST_BASIC);
     }
 
+    /**
+     * Tests the scenario where a Ghost catches the player.
+     * Verifies that the correct methods are called on the GameManager and Player
+     * objects
+     * when a Ghost is at the same position as the player.
+     */
     @Test
     void testGhostCatchesPlayer() {
         ghost.setEnemyPosition(playerPosition);
