@@ -68,20 +68,6 @@ class DoorTest {
         
     }
 
-    // @Test
-    // void testPlayerLeaveRoom() {
-    //     // Set up conditions
-    //     when(mockPlayer.getPosition()).thenReturn(new Position(1, 1));
-    //     when(mockGameManager.isPlayerCollectAllRewards()).thenReturn(true);
-
-    //     // Call the method under test
-    //     door.playerLeaveRoom();
-
-    //     // Verify that playerLeaveDoor is invoked on GameManager
-    //     verify(mockGameManager).playerLeaveDoor();
-    // }
-
-
 
     @Test
     void testGetPosition() {

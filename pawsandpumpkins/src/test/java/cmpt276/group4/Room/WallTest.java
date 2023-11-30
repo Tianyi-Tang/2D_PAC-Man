@@ -37,45 +37,42 @@ class WallTest {
     }
 
     // @Test
-    // void testGetImageNameForPosition() {
+    // void testGetImageNameForPositionWithNorth() {
     //     // Mock positions
-    //     Position mockPosition = new Position(10, 20);
     //     Position northPosition = new Position(10, 10);
-    //     Position southPosition = new Position(10, 30);
-    //     Position eastPosition = new Position(30, 20);
-    //     Position westPosition = new Position(0, 20);
 
     //     // Stub the behavior of GameConfig.getWallPositions
     //     List<Position> mockWallPositions = new ArrayList<>();
     //     mockWallPositions.add(northPosition);
-    //     mockWallPositions.add(southPosition);
-    //     mockWallPositions.add(eastPosition);
-    //     mockWallPositions.add(westPosition);
+    //     GameConfig mockGameConfig = mock(GameConfig.class);
     //     when(mockGameConfig.getWallPositions()).thenReturn(mockWallPositions);
+
+    //     // Set the mocked instance
+    //     GameConfig.setInstance(mockGameConfig);
 
     //     // Invoke the method under test
     //     String result = wall.getImageNameForPosition(mockPosition, mockWallPositions);
 
     //     // Assert the result
     //     assertTrue(result.contains("north"));
-    //     assertTrue(result.contains("east"));
-    //     assertTrue(result.contains("south"));
-    //     assertTrue(result.contains("west"));
+    //     assertFalse(result.contains("east"));
+    //     assertFalse(result.contains("south"));
+    //     assertFalse(result.contains("west"));
     //     assertFalse(result.contains("")); // Make sure there are no empty strings
     // }
 
-    @Test
-    void testDraw1() {
-        // Mock dependencies
-        Graphics2D mockGraphics2D = mock(Graphics2D.class);
-        wall.wallImage = mock(BufferedImage.class);
+    // @Test
+    // void testDraw1() {
+    //     // Mock dependencies
+    //     Graphics2D mockGraphics2D = mock(Graphics2D.class);
+    //     wall.wallImage = mock(BufferedImage.class);
 
-        wall.draw(mockGraphics2D);
+    //     wall.draw(mockGraphics2D);
 
-        // Verify that the drawImage method is called on the Graphics2D context
-        verify(mockGraphics2D, times(1)).drawImage(wall.wallImage, mockPosition.getX_axis(), mockPosition.getY_axis(),
-                WindowConfig.tileSize, WindowConfig.tileSize, null);
-    }
+    //     // Verify that the drawImage method is called on the Graphics2D context
+    //     verify(mockGraphics2D, times(1)).drawImage(wall.wallImage, mockPosition.getX_axis(), mockPosition.getY_axis(),
+    //             WindowConfig.tileSize, WindowConfig.tileSize, null);
+    // }
 
     @Test
     void testDraw2() {

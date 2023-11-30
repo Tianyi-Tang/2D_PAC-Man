@@ -12,22 +12,6 @@ import cmpt276.group4.Logic.WindowConfig;
 
 class RoomTest {
 
-    // @Test
-    // void testRoomWhenScreenTooSmall() {
-    //     // Mocking the WindowConfig to simulate a small screen
-    //     WindowConfig.maxScreenRow = 5;
-    //     WindowConfig.maxScreenCol = 5;
-
-    //     // Setting up the mock for GameConfig
-    //     GameConfig mockGameConfig = mock(GameConfig.class);
-    //     when(mockGameConfig.getRoomColumn()).thenReturn(10);
-    //     when(mockGameConfig.getRoomRow()).thenReturn(10);
-       
-
-    //     // Expecting a warning message to be printed
-    //     assertDoesNotThrow(() -> Room.getInstance());
-    // }
-
     @Test
     void testGetDoorPosition() {
         Room room = Room.getInstance();
