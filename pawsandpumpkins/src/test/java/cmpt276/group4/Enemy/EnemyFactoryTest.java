@@ -19,6 +19,11 @@ import cmpt276.group4.Player.Player;
 
 import java.util.List;
 
+/**
+ * This class tests the functionality of the EnemyFactory class.
+ * It ensures that the factory correctly creates different types of enemies
+ * based on the specified requirements.
+ */
 class EnemyFactoryTest {
     private EnemyFactory factory;
     private RecordUsedPlace mockRecord;
@@ -30,6 +35,10 @@ class EnemyFactoryTest {
     private Enemy mockEnemy;
     private Position mockEnemyPosition;
 
+    /**
+     * Sets up the test environment before each test case.
+     * It initializes mocked versions of various dependencies needed for the tests.
+     */
     @BeforeEach
     void setUp() {
 
@@ -51,6 +60,10 @@ class EnemyFactoryTest {
         factory = new EnemyFactory();
     }
 
+    /**
+     * Tests if the EnemyFactory correctly creates a specified number of basic
+     * ghosts.
+     */
     @Test
     void testCreateBasicGhosts() {
         List<Enemy> enemies = factory.createEnemies(EnemyType.GHOST_BASIC, 3);
@@ -58,6 +71,10 @@ class EnemyFactoryTest {
         assertTrue(enemies.stream().allMatch(e -> e instanceof Ghost), "All enemies should be basic ghosts");
     }
 
+    /**
+     * Tests if the EnemyFactory correctly creates a specified number of advanced
+     * ghosts.
+     */
     @Test
     void testCreateAdvancedGhosts() {
         List<Enemy> enemies = factory.createEnemies(EnemyType.GHOST_ADVANCED, 2);
@@ -65,6 +82,9 @@ class EnemyFactoryTest {
         assertTrue(enemies.stream().allMatch(e -> e instanceof Ghost), "All enemies should be advanced ghosts");
     }
 
+    /**
+     * Tests if the EnemyFactory correctly creates a specified number of spiders.
+     */
     @Test
     void testCreateSpiders() {
         List<Enemy> enemies = factory.createEnemies(EnemyType.SPIDER, 4);
@@ -72,6 +92,9 @@ class EnemyFactoryTest {
         assertTrue(enemies.stream().allMatch(e -> e instanceof Spider), "All enemies should be spiders");
     }
 
+    /**
+     * Tests the factory's behavior when asked to create an invalid enemy type.
+     */
     @Test
     void testCreateInvalidEnemyType() {
         assertThrows(IllegalArgumentException.class, () -> {

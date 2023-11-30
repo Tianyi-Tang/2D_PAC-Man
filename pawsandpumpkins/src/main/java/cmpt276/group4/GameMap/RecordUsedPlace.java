@@ -36,6 +36,7 @@ public class RecordUsedPlace {
 
     /**
      * Get RecordUsedPlace instance
+     * 
      * @return RecordUsedPlace instance
      */
     public static synchronized RecordUsedPlace getInstance() {
@@ -47,6 +48,7 @@ public class RecordUsedPlace {
     /**
      * Get a random position from availble, if availble is null or empty
      * retrun null
+     * 
      * @return a position in avaible array or null
      */
     public Position getRandomFromAvailablePosition() {
@@ -60,28 +62,26 @@ public class RecordUsedPlace {
         return available.get(random.nextInt(available.size()));
     }
 
-    
     private List<Position> getAdjacentPositions(Position p) {
         int tileSize = 48;
         return Arrays.asList(
-                new Position(p.getX_axis() - tileSize, p.getY_axis() - tileSize), // Top-left
-                new Position(p.getX_axis(), p.getY_axis() - tileSize), // Top
-                new Position(p.getX_axis() + tileSize, p.getY_axis() - tileSize), // Top-right
-                new Position(p.getX_axis() - tileSize, p.getY_axis()), // Left
-                new Position(p.getX_axis() + tileSize, p.getY_axis()), // Right
-                new Position(p.getX_axis() - tileSize, p.getY_axis() + tileSize), // Bottom-left
-                new Position(p.getX_axis(), p.getY_axis() + tileSize), // Bottom
-                new Position(p.getX_axis() + tileSize, p.getY_axis() + tileSize) // Bottom-right
+                createPosition(p, -tileSize, -tileSize), // Top-left
+                createPosition(p, 0, -tileSize), // Top
+                createPosition(p, tileSize, -tileSize), // Top-right
+                createPosition(p, -tileSize, 0), // Left
+                createPosition(p, tileSize, 0), // Right
+                createPosition(p, -tileSize, tileSize), // Bottom-left
+                createPosition(p, 0, tileSize), // Bottom
+                createPosition(p, tileSize, tileSize) // Bottom-right
         );
     }
 
-    private static boolean containsPosition(List<Position> positions, Position position) {
-        for (Position pos : positions) {
-            if (pos.equal(position)) {
-                return true;
-            }
-        }
-        return false;
+    private Position createPosition(Position base, int xOffset, int yOffset) {
+        return new Position(base.getX_axis() + xOffset, base.getY_axis() + yOffset);
+    }
+
+    private boolean containsPosition(List<Position> positions, Position position) {
+        return positions.stream().anyMatch(pos -> pos.equal(position));
     }
 
     private boolean isPositionAObstacle(Position position) {
@@ -90,38 +90,33 @@ public class RecordUsedPlace {
 
     public boolean canPlaceEnemyAndObstacle(Position p) {
         List<Position> adjacentPositions = getAdjacentPositions(p);
-        List<Boolean> isAdjacentObstacle = new ArrayList<>();
+        boolean[] isAdjacentObstacle = new boolean[adjacentPositions.size()];
 
-        // Iterate through each adjacent position and check if it's an obstacle
-        for (Position adjacentPos : adjacentPositions) {
-            isAdjacentObstacle.add(isPositionAObstacle(adjacentPos));
+        for (int i = 0; i < adjacentPositions.size(); i++) {
+            isAdjacentObstacle[i] = isPositionAObstacle(adjacentPositions.get(i));
         }
-        //combinations of surrounding obstac le that will ccause problem if place enemy or obstalcce in inpt position
-        boolean condition1 = (isAdjacentObstacle.get(0) && isAdjacentObstacle.get(2)) || (isAdjacentObstacle.get(5) && isAdjacentObstacle.get(7)) 
-                            || (isAdjacentObstacle.get(3) && isAdjacentObstacle.get(4));
 
-        boolean condition4 = (isAdjacentObstacle.get(0) && isAdjacentObstacle.get(5)) || (isAdjacentObstacle.get(1) && isAdjacentObstacle.get(6)) 
-                            ||(isAdjacentObstacle.get(2) && isAdjacentObstacle.get(7));
-
-        boolean condition7 = (isAdjacentObstacle.get(0) && isAdjacentObstacle.get(7)) || (isAdjacentObstacle.get(2) && isAdjacentObstacle.get(5));
-
-        boolean condition9 = (isAdjacentObstacle.get(1) && isAdjacentObstacle.get(5)) ||  (isAdjacentObstacle.get(1) && isAdjacentObstacle.get(7));
-
-        boolean condition11 = (isAdjacentObstacle.get(4) && isAdjacentObstacle.get(5)) || (isAdjacentObstacle.get(4) && isAdjacentObstacle.get(0));
-
-        boolean condition13 = (isAdjacentObstacle.get(6) && isAdjacentObstacle.get(0)) || (isAdjacentObstacle.get(6) && isAdjacentObstacle.get(2));
-
-        boolean condition15 = (isAdjacentObstacle.get(3) && isAdjacentObstacle.get(2)) || (isAdjacentObstacle.get(3) && isAdjacentObstacle.get(7));
-
-        //can place enemy or obstacle in the input position if no above conditions are 
-        return !(condition1 || condition4 || condition1 || condition7 || condition9 || condition11 || condition13 || condition15); 
+        return !checkObstacleConditions(isAdjacentObstacle);
     }
-    
+
+    private boolean checkObstacleConditions(boolean[] obstacles) {
+        return (obstacles[0] && obstacles[2]) || (obstacles[5] && obstacles[7]) ||
+                (obstacles[3] && obstacles[4]) || (obstacles[0] && obstacles[5]) ||
+                (obstacles[1] && obstacles[6]) || (obstacles[2] && obstacles[7]) ||
+                (obstacles[0] && obstacles[7]) || (obstacles[2] && obstacles[5]) ||
+                (obstacles[1] && obstacles[5]) || (obstacles[1] && obstacles[7]) ||
+                (obstacles[4] && obstacles[5]) || (obstacles[4] && obstacles[0]) ||
+                (obstacles[6] && obstacles[0]) || (obstacles[6] && obstacles[2]) ||
+                (obstacles[3] && obstacles[2]) || (obstacles[3] && obstacles[7]);
+    }
+
     /**
-     * Add position to availble array, the function will reject position 
+     * Add position to availble array, the function will reject position
      * that already in the avaible array
+     * 
      * @param position the position want to add to availble array
-     * @return If return true, it mean the position is successful adding, else fail to add
+     * @return If return true, it mean the position is successful adding, else fail
+     *         to add
      */
     public boolean addAviable(Position position) {
         if (isPlaceAviable(position))
@@ -148,6 +143,7 @@ public class RecordUsedPlace {
 
     /**
      * Get number of position in availble array
+     * 
      * @return size of availble array
      */
     public int getLengthOfAviable() {
@@ -156,6 +152,7 @@ public class RecordUsedPlace {
 
     /**
      * Get all position in avaible array
+     * 
      * @return Aviable array in record
      */
     public ArrayList<Position> getAviablePosition() {
@@ -164,6 +161,7 @@ public class RecordUsedPlace {
 
     /**
      * Add wall Position to the wall_pos array
+     * 
      * @param position the position of wall
      */
     public void addWallPosition(Position position) {
@@ -173,6 +171,7 @@ public class RecordUsedPlace {
     /**
      * Add Obstcale position to the obstacle_pos array
      * Obstcale can be fixed enemy or tombstone
+     * 
      * @param position the position of obstcale
      */
     public void addObstcalePosition(Position position) {
@@ -181,9 +180,12 @@ public class RecordUsedPlace {
 
     /**
      * Check whether the passing position is in availble array or not
-     * @param planingPosition the position want to check whether it in available array
-     * @return If true, then the position is already in availble array; if false, the 
-     * position is not in available array
+     * 
+     * @param planingPosition the position want to check whether it in available
+     *                        array
+     * @return If true, then the position is already in availble array; if false,
+     *         the
+     *         position is not in available array
      */
     public boolean isPlaceAviable(Position planingPosition) {
         for (Position position : available) {
@@ -195,6 +197,7 @@ public class RecordUsedPlace {
 
     /**
      * Romve the position from available array
+     * 
      * @param takePosition the position want to remove from available array
      */
     public void removeFromAviable(Position takePosition) {
@@ -209,14 +212,14 @@ public class RecordUsedPlace {
         }
     }
 
-        // public void initalAllInfor() {
-    //     if (GameManager.getInstance().isGameEnd()) {
-    //         obstacle_pos = new ArrayList<Position>();
-    //         walls_pos = new ArrayList<>();
-    //     }
+    // public void initalAllInfor() {
+    // if (GameManager.getInstance().isGameEnd()) {
+    // obstacle_pos = new ArrayList<Position>();
+    // walls_pos = new ArrayList<>();
+    // }
     // }
 
-        // public boolean containsCandyAtPosition(Position position) {
+    // public boolean containsCandyAtPosition(Position position) {
     // for (Reward candy : rewards) {
     // if (candy.getPosition().equals(position)) {
     // // if (candy instanceof Candy && candy.getPosition().equals(position)) {
@@ -260,7 +263,6 @@ public class RecordUsedPlace {
     // return
     // availableWithoutSpiders.get(random.nextInt(availableWithoutSpiders.size()));
     // }
-
 
     // /**
     // * Add haracterAvaliablePosition elements in the map
@@ -328,8 +330,6 @@ public class RecordUsedPlace {
     // return null;
     // }
 
-    
-
     // public Reward playerGetReward() {
     // for (Reward reward : rewards) {
     // if (player.getPosition().equal(reward.getPosition()))
@@ -345,7 +345,6 @@ public class RecordUsedPlace {
     // }
     // return null;
     // }
-
 
     // public boolean isNotSpiderPosition(Position pos) {
     // for (Enemy enemy : enemies) {
