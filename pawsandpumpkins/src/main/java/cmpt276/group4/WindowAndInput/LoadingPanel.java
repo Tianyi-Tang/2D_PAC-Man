@@ -10,11 +10,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
+import cmpt276.group4.Reward.RewardFactory;
 import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.Room.RoomInitialization;
 
@@ -67,8 +69,10 @@ public class LoadingPanel extends JPanel implements Runnable {
 
     public void init(InitialiseGameItem initialiseGameItem){
         initialiseItem = initialiseGameItem;
-        config = initialiseItem.getConfig();
-        initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
+        if(initialiseGameItem != null){
+            config = initialiseItem.getConfig();
+            initialiseItem.setRoomInitialize(new RoomInitialization(), new RoomFactory());
+        }
     }
 
     public void setKeySingleton(RecordUsedPlace record, RoomLayout roomLayout, RoomEnvironment roomEnvironment, PanelController panelController){
@@ -82,7 +86,7 @@ public class LoadingPanel extends JPanel implements Runnable {
      * Create the gamme loop for the laoding panel
     */
     public void createTimeLine(){
-        if(loadingThread == null && keySingltonReady() && config != null){
+        if(loadingThread == null && keySingltonReady() && initialiseItem != null){
             loadingThread = new Thread(this);
             loadingThread.start();
             initialiseItem.createRoom();
@@ -222,7 +226,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkObstacle (){
         if(roomLayout.getObstaclesNumber() == config.getNumberOfObstacles()){
             generateObstacle = true;
-            initialiseItem.createEnemy();
+            initialiseItem.createEnemy(new EnemyFactory());
             progress ++;
         }
     }
@@ -234,7 +238,7 @@ public class LoadingPanel extends JPanel implements Runnable {
     private void checkEnemy(){
         if(roomEnvironment.getEnemyNumber() == config.getTotalEnemy()){
             generateAllEnemies = true;
-            initialiseItem.createReward();
+            initialiseItem.createReward(new RewardFactory());
             progress ++;
         }
     }

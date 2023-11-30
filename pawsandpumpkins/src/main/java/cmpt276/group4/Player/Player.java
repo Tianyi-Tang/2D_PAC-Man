@@ -187,6 +187,10 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
         return collectScore - deductScore;
     }
 
+    /**
+     * get current character image 
+     * @return
+     */
     public BufferedImage getCurrentImage(){
         return currentImage;
     }
@@ -199,19 +203,23 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
      */
     @Override
     public void observerUpdate(MoveDirection direction, boolean turnOn) {
-        switch (direction) {
-            case Up:
-                move_up = turnOn;
-                break;
-            case Down:
-                move_down = turnOn;
-                break;
-            case Left:
-                move_left = turnOn;
-                break;
-            case Right:
-                move_right = turnOn;
-                break;
+        if(direction != null){
+            switch (direction) {
+                case Up:
+                    move_up = turnOn;
+                    break;
+                case Down:
+                    move_down = turnOn;
+                    break;
+                case Left:
+                    move_left = turnOn;
+                    break;
+                case Right:
+                    move_right = turnOn;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -289,6 +297,8 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
                     currentImage = right1;
                 else
                     currentImage = right2;
+                break;
+            default:
                 break;
         }
 

@@ -17,6 +17,9 @@ import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Player.Player;
 
+/**
+ * Class for unit test panel controller
+ */
 public class PanelControllerTest {
     public PanelController controller;
     public RecordUsedPlace mockrecord;
@@ -24,6 +27,9 @@ public class PanelControllerTest {
     public RoomEnvironment mockEnvironment;
     public RoomLayout mockLayout;
 
+    /**
+     * Set up the panel controller for testing
+     */
     @BeforeEach
     public void setUP(){
         controller = new PanelController();
@@ -34,6 +40,9 @@ public class PanelControllerTest {
         mockLayout = mock(RoomLayout.class);
     }
 
+    /**
+     * Test panel controller will gennerate one instance in the game
+     */
     @Test
     public void testGetInstance(){
         PanelController instance1 = PanelController.getInstance();
@@ -41,18 +50,27 @@ public class PanelControllerTest {
         assertEquals(instance1, instance2);
     }
 
+    /**
+     * Test panel controller can load the main panel
+     */
     @Test
     public void laodMainWind(){
         controller.createMainWindow(mockGameManager, mockrecord, mockLayout, mockEnvironment);
         verify(mockGameManager).init(controller);
     }
 
+    /**
+     * Test panel controller can load the loading panel
+     */
     @Test
     public void loadLoadingPanel(){
         controller.transformToLoadingScreen(gameLevel.BASIC);
         assertEquals(GameStatus.LoadingPanel, controller.getGameStatu());
     }
 
+    /**
+     * Test panel controller can load the game panel
+     */
     @Test
     public void loadGamePanel(){
         controller.createMainWindow(mockGameManager, mockrecord, mockLayout, mockEnvironment);
@@ -60,6 +78,9 @@ public class PanelControllerTest {
         verify(mockGameManager).setPlayer(Player.getInstance());
     }
 
+    /**
+     * Test panel controller can laod the end screen panel
+     */
     @Test
     public void loadEndScreen(){
         when(mockGameManager.isGameEnd()).thenReturn(true);
@@ -68,6 +89,9 @@ public class PanelControllerTest {
         verify(mockGameManager).isPalyerWin();
     }
 
+    /**
+     * Test panel controller will reject loading the final screen if the games is not end
+     */
     @Test
     public void failLoadEndScreen(){
         when(mockGameManager.isGameEnd()).thenReturn(false);

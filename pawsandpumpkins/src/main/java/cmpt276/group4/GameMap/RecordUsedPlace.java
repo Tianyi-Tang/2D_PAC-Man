@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import cmpt276.group4.Position;
+import cmpt276.group4.Logic.WindowConfig;
 import cmpt276.group4.Player.Player;
 
 /**
@@ -15,7 +16,6 @@ import cmpt276.group4.Player.Player;
 public class RecordUsedPlace {
     // for reward to check
     private ArrayList<Position> available;
-    private ArrayList<Position> walls_pos;
     private ArrayList<Position> obstacle_pos;
 
     public static void setInstance(RecordUsedPlace instance) {
@@ -29,8 +29,7 @@ public class RecordUsedPlace {
         available = new ArrayList<Position>();
 
         obstacle_pos = new ArrayList<Position>();
-
-        walls_pos = new ArrayList<Position>();
+  
 
     }
 
@@ -63,6 +62,7 @@ public class RecordUsedPlace {
     }
 
     private List<Position> getAdjacentPositions(Position p) {
+<<<<<<< HEAD
         int tileSize = 48;
         return Arrays.asList(
                 createPosition(p, -tileSize, -tileSize), // Top-left
@@ -82,23 +82,66 @@ public class RecordUsedPlace {
 
     private boolean containsPosition(List<Position> positions, Position position) {
         return positions.stream().anyMatch(pos -> pos.equal(position));
+=======
+        int tileSize = WindowConfig.tileSize;
+        ArrayList<Position> adjacentPositions =  new ArrayList<Position>();
+
+        int startx = p.getX_axis() - tileSize;
+        int starty = p.getY_axis() - tileSize;
+        int x_chang, y_change = 0;
+        for(int i = 0;i < 3;i++){
+            x_chang = 0;
+            for (int j=0;j < 3;j++){
+                if(startx + x_chang != p.getX_axis() || starty + y_change != p.getY_axis())
+                    adjacentPositions.add(new Position(startx + x_chang, starty + y_change));
+                x_chang += tileSize;
+            }
+            y_change += tileSize;
+        }
+        
+        return adjacentPositions;
+    }
+
+    private static boolean containsPosition(ArrayList<Position> positions, Position position) {
+        for (Position pos : positions) {
+            if (pos.equal(position)) {
+                return true;
+            }
+        }
+        return false;
+>>>>>>> 2d67acb2a8b0a39848fed58e2a26db85e65b2cdf
     }
 
     private boolean isPositionAObstacle(Position position) {
-        return containsPosition(walls_pos, position) || containsPosition(obstacle_pos, position);
+        return  containsPosition(obstacle_pos, position);
     }
 
     public boolean canPlaceEnemyAndObstacle(Position p) {
         List<Position> adjacentPositions = getAdjacentPositions(p);
         boolean[] isAdjacentObstacle = new boolean[adjacentPositions.size()];
 
+<<<<<<< HEAD
         for (int i = 0; i < adjacentPositions.size(); i++) {
             isAdjacentObstacle[i] = isPositionAObstacle(adjacentPositions.get(i));
         }
+=======
+        // Iterate through each adjacent position and check if it's an obstacle
+        for (Position adjacentPos : adjacentPositions) {
+            // if(isPositionAObstacle(adjacentPos))
+            //     return false;
+            isAdjacentObstacle.add(isPositionAObstacle(adjacentPos));
+        }
+        // return true;
+        
+        //combinations of surrounding obstac le that will ccause problem if place enemy or obstalcce in inpt position
+        boolean condition1 = (isAdjacentObstacle.get(0) && isAdjacentObstacle.get(2)) || (isAdjacentObstacle.get(5) && isAdjacentObstacle.get(7)) 
+                            || (isAdjacentObstacle.get(3) && isAdjacentObstacle.get(4));
+>>>>>>> 2d67acb2a8b0a39848fed58e2a26db85e65b2cdf
 
         return !checkObstacleConditions(isAdjacentObstacle);
     }
 
+<<<<<<< HEAD
     private boolean checkObstacleConditions(boolean[] obstacles) {
         return (obstacles[0] && obstacles[2]) || (obstacles[5] && obstacles[7]) ||
                 (obstacles[3] && obstacles[4]) || (obstacles[0] && obstacles[5]) ||
@@ -110,6 +153,11 @@ public class RecordUsedPlace {
                 (obstacles[3] && obstacles[2]) || (obstacles[3] && obstacles[7]);
     }
 
+=======
+
+    
+    
+>>>>>>> 2d67acb2a8b0a39848fed58e2a26db85e65b2cdf
     /**
      * Add position to availble array, the function will reject position
      * that already in the avaible array
@@ -160,6 +208,7 @@ public class RecordUsedPlace {
     }
 
     /**
+<<<<<<< HEAD
      * Add wall Position to the wall_pos array
      * 
      * @param position the position of wall
@@ -169,6 +218,8 @@ public class RecordUsedPlace {
     }
 
     /**
+=======
+>>>>>>> 2d67acb2a8b0a39848fed58e2a26db85e65b2cdf
      * Add Obstcale position to the obstacle_pos array
      * Obstcale can be fixed enemy or tombstone
      * 
