@@ -10,6 +10,7 @@ import cmpt276.group4.gameLevel;
 class GameConfigTest {
 
     private GameConfig gameConfig;
+    
 
     @BeforeEach
     void setUp() {
