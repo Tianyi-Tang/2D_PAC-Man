@@ -14,68 +14,104 @@ import cmpt276.group4.Reward.RewardInitialization;
 import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.Room.RoomInitialization;
 
+/**
+ * Class to create and initlalise all object in the game
+ */
 public class InitialiseGameItem {
     private GameConfig config;
     private RoomInitialization roomInitialization;
     private RoomFactory roomFactory;
 
-    public InitialiseGameItem(GameConfig config){
+    /**
+     * Setting the game config to InitialiseGameItem will use
+     * 
+     * @param config game config that InitialiseGameItem will use
+     */
+    public InitialiseGameItem(GameConfig config) {
         this.config = config;
     }
 
-    public GameConfig getConfig(){
+    /**
+     * Give the game config in InitialiseGameItem
+     * 
+     * @return
+     */
+    public GameConfig getConfig() {
         return config;
     }
 
-    public void setRoomInitialize(RoomInitialization roomInitialization, RoomFactory roomFactory){
+    /**
+     * Setting the room initialization and room factory will be used
+     * 
+     * @param roomInitialization room initialization will used by InitialiseGameItem
+     * @param roomFactory        room factory will be used by InitialiseGameItem
+     */
+    public void setRoomInitialize(RoomInitialization roomInitialization, RoomFactory roomFactory) {
         this.roomInitialization = roomInitialization;
-        this.roomFactory = roomFactory;        
+        this.roomFactory = roomFactory;
     }
 
-    public void createRoom(){
-        if(config != null && roomFactory != null){
+    /**
+     * Create the room for the game
+     */
+    public void createRoom() {
+        if (config != null && roomFactory != null) {
             roomInitialization.initializeRoom(config.getGameLevel(), roomFactory);
             roomInitialization.iRoom(roomFactory);
         }
     }
 
-    public void createTile(){
-        if(roomFactory != null)
+    /**
+     * Create the tile in game
+     */
+    public void createTile() {
+        if (roomInitialization != null)
             roomInitialization.iTiles(roomFactory);
     }
 
-    public void createWall(){
-        if(roomFactory != null)
+    /**
+     * Create the wall in game
+     */
+    public void createWall() {
+        if (roomInitialization != null)
             roomInitialization.iWalls(roomFactory);
     }
 
-    public void createPlayer(RoomLayout roomLayout ,RoomEnvironment roomEnvironment){
-        Player player = PlayerGenerator.creatPlayer(GameManager.getInstance(), roomEnvironment,roomLayout);
+    /**
+     * Create player character and pass it to room rnvironment
+     * 
+     * @param roomLayout      roomLayout that player will use
+     * @param roomEnvironment room environment that going to get player
+     */
+    public void createPlayer(RoomLayout roomLayout, RoomEnvironment roomEnvironment) {
+        Player player = PlayerGenerator.creatPlayer(GameManager.getInstance(), roomEnvironment, roomLayout);
         roomEnvironment.setPlayer(player);
     }
 
-
-     /**
+    /**
      * loading all obstacles in the game
      */
-    public void  createObstacle(){
-        if(roomInitialization != null)
+    public void createObstacle() {
+        if (roomInitialization != null)
             roomInitialization.iTombs(roomFactory);
     }
 
-     /**
+    /**
      * loading all enemies in the game
+     * * @param factory factory that going to create enemy
      */
-    public void createEnemy(){
-        new EnemyInitialization(new EnemyFactory());
+    public void createEnemy(EnemyFactory factory) {
+        new EnemyInitialization(factory);
     }
 
-     /**
+    /**
      * loading all rewards in the game
+     * 
+     * @param factory factory that going to create reward
      */
-    public void createReward(){
-        RewardInitialization reward_initialization = new RewardInitialization(new RewardFactory());
+    public void createReward(RewardFactory factory) {
+        RewardInitialization reward_initialization = new RewardInitialization(factory);
         reward_initialization.generateReward();
     }
-    
+
 }
