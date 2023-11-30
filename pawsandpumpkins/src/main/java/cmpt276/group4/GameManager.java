@@ -119,5 +119,61 @@ public class GameManager {
         controll.transformToEndScreen();
     }
 
-    
+        /**
+     * Player succesful go out of door and he win
+     */
+    // public void leaveDoor(){
+    //     if(player.playerWin()){
+    //         status = GameStatus.Win;
+    //         endOfGame();
+    //     }
+    // }
+        /**
+     * laoding the main menu to window and start of game
+     */
+    // public void createMainWindow(){
+    //     status = GameStatus.MainPanel;
+    //     layout.show(cardContainer, "main");
+
+    //     window.setVisible(true);
+    // }
+
+
+
+    // /**
+    //  * lading the result panel to window and it is end of game
+    //  */
+    // public void createNumberPanel(){
+    //     status = GameStatus.Win;
+
+    //     layout.show(cardContainer, "gameEnd");
+    //     window.setVisible(true);
+    // }
+
+       /**
+     * Switch the main panel to laoding panel
+     * @param level the difficulty of game 
+     */
+    // public void transformToLoadingScreen(gameLevel level){
+    //     if(status == GameStatus.MainPanel){
+    //         layout.show(cardContainer, "load");
+    //         loadPanel.gameLevelSending(level);
+    //         status = GameStatus.LoadingPanel;
+    //     }
+    // }
+
+    /**
+     * Switch the loading panel to game panel
+     */
+    // public void transformToGameScreen(){
+    //     if(status == GameStatus.LoadingPanel){
+    //         layout.show(cardContainer, "game");
+    //         gamePanel.createTimeLine();
+    //         player = Player.getInstance();
+    //         gamePanel.setPlayer(player);
+    //         addKeyboardListener();
+    //         status = GameStatus.GamePanel;
+    //     }
+    // }
+
 }

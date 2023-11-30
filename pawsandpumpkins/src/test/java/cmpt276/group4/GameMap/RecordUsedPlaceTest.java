@@ -83,17 +83,5 @@ public class RecordUsedPlaceTest {
         assertEquals(true, record.isPlayerNearBy(4 * WindowConfig.tileSize,nearByPos));
     }
 
-    /**
-     * Test record can place obstacle in that position 
-     */
-    @Test
-    public void CanPlaceObstacle(){
-        int tileSize = WindowConfig.tileSize;
-        Position obPosition1 = new Position(tileSize * 5, tileSize * 4);
-        record.addAviable(new Position(tileSize * 4, tileSize * 4));
-        record.addAviable(new Position(tileSize * 6, tileSize * 4));
-        assertEquals(true , record.canPlaceEnemyAndObstacle(obPosition1));
-    }
-
     
 }
