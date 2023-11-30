@@ -13,6 +13,14 @@ import org.mockito.Mockito;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
+/**
+ * This class contains integration tests for the GameManager class in scenarios
+ * where the player exits the game.
+ * It tests the functionality of showing the game score when the player
+ * successfully exits or is caught by a ghost.
+ * The tests use Mockito to mock dependencies like Player, PanelController, and
+ * Door.
+ */
 public class PlayerExitShowScoreIntegrationTest {
 
     private GameManager gameManager;
@@ -23,7 +31,7 @@ public class PlayerExitShowScoreIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        rewardAmount = 5 ; 
+        rewardAmount = 5;
         mockControll = mock(PanelController.class);
         mockPlayer = mock(Player.class);
         gameManager = new GameManager();
@@ -45,6 +53,12 @@ public class PlayerExitShowScoreIntegrationTest {
 
     }
 
+    /**
+     * Tests if the game correctly shows the score and ends the game when the player
+     * exits with all rewards collected.
+     * It verifies that the game state is changed to 'end' and the end screen is
+     * displayed.
+     */
     @Test
     void testShowScoreOnPlayerExitandWin() {
 
@@ -56,6 +70,12 @@ public class PlayerExitShowScoreIntegrationTest {
         verify(mockControll).transformToEndScreen();
     }
 
+    /**
+     * Tests if the game correctly shows the score and ends the game when the player
+     * is caught by a ghost.
+     * It verifies that the game state is changed to 'end' and the end screen is
+     * displayed.
+     */
     @Test
     void testShowScoreOnPlayerCaughtByGhost() {
 

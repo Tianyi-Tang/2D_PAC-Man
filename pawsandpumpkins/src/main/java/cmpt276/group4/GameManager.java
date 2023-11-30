@@ -7,7 +7,7 @@ import cmpt276.group4.WindowAndInput.PanelController;
 
 
 /**
- * Class that controll the switch of different panel and end of game
+ * Class that control the switch of different panel and end of game
  */
 public class GameManager {    
     private GameStatus status;
@@ -53,6 +53,12 @@ public class GameManager {
     public boolean isPalyerWin(){
         return playerWin;
     }
+
+    public int getGeneralRewards_num(){return generalRewards_num;}
+
+    public boolean isCollectAllRewards(){return collectAllRewards;}
+
+
 
     public void setNumberOfGeneralRewards(GameConfig config){
         generalRewards_num = config.getNumberOfRegularRewards();
@@ -108,7 +114,7 @@ public class GameManager {
     }
 
     /**
-     * laoding the result panel to end of gmae
+     * loading the result panel to end of game
      */
     private  void endOfGame(){
         gameEnd =true;
@@ -118,62 +124,5 @@ public class GameManager {
             playerWin = false;
         controll.transformToEndScreen();
     }
-
-        /**
-     * Player succesful go out of door and he win
-     */
-    // public void leaveDoor(){
-    //     if(player.playerWin()){
-    //         status = GameStatus.Win;
-    //         endOfGame();
-    //     }
-    // }
-        /**
-     * laoding the main menu to window and start of game
-     */
-    // public void createMainWindow(){
-    //     status = GameStatus.MainPanel;
-    //     layout.show(cardContainer, "main");
-
-    //     window.setVisible(true);
-    // }
-
-
-
-    // /**
-    //  * lading the result panel to window and it is end of game
-    //  */
-    // public void createNumberPanel(){
-    //     status = GameStatus.Win;
-
-    //     layout.show(cardContainer, "gameEnd");
-    //     window.setVisible(true);
-    // }
-
-       /**
-     * Switch the main panel to laoding panel
-     * @param level the difficulty of game 
-     */
-    // public void transformToLoadingScreen(gameLevel level){
-    //     if(status == GameStatus.MainPanel){
-    //         layout.show(cardContainer, "load");
-    //         loadPanel.gameLevelSending(level);
-    //         status = GameStatus.LoadingPanel;
-    //     }
-    // }
-
-    /**
-     * Switch the loading panel to game panel
-     */
-    // public void transformToGameScreen(){
-    //     if(status == GameStatus.LoadingPanel){
-    //         layout.show(cardContainer, "game");
-    //         gamePanel.createTimeLine();
-    //         player = Player.getInstance();
-    //         gamePanel.setPlayer(player);
-    //         addKeyboardListener();
-    //         status = GameStatus.GamePanel;
-    //     }
-    // }
 
 }

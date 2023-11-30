@@ -42,14 +42,10 @@ public class RewardFactory {
      * @throws IllegalArgumentException If the specified reward type is invalid or not supported.
      */
     private Reward createSingleReward(RewardType type) {
-        switch (type) {
-            case Candy:
-                return new Candy();
-            case PumpkinHead:
-                return new PumpkinHead();
-            default:
-                throw new IllegalArgumentException("Invalid Reward type");
-        }
+        return switch (type) {
+            case Candy -> new Candy();
+            case PumpkinHead -> new PumpkinHead();
+        };
     }
 
 
