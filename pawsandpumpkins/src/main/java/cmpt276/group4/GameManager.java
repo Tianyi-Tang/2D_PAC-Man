@@ -7,7 +7,7 @@ import cmpt276.group4.WindowAndInput.PanelController;
 
 
 /**
- * Class that controll the switch of different panel and end of game
+ * Class that control the switch of different panel and end of game
  */
 public class GameManager {    
     private GameStatus status;
@@ -108,7 +108,7 @@ public class GameManager {
     }
 
     /**
-     * laoding the result panel to end of gmae
+     * loading the result panel to end of game
      */
     private  void endOfGame(){
         gameEnd =true;

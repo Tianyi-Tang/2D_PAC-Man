@@ -7,22 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameManagerTest {
 
     @Test
-    void setInstance() {
-    }
-
-    @Test
-    void getInstance() {
-    }
-
-    @Test
-    void init() {
-    }
-
-    @Test
-    void setPlayer() {
-    }
-
-    @Test
     void isGameEnd() {
     }
 
@@ -39,10 +23,6 @@ class GameManagerTest {
     }
 
     @Test
-    void isPlayerCollectAllRewards() {
-    }
-
-    @Test
     void collectReward() {
     }
 
@@ -52,9 +32,5 @@ class GameManagerTest {
 
     @Test
     void enemyCatachPlayer() {
-    }
-
-    @Test
-    void negativePoint() {
     }
 }
