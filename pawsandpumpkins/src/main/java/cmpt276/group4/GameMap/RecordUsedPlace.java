@@ -62,6 +62,16 @@ public class RecordUsedPlace {
         return available.get(random.nextInt(available.size()));
     }
 
+    /**
+     * Generates a list of adjacent positions around a given position.
+     * This method calculates positions in all eight directions (top-left, top,
+     * top-right,
+     * left, right, bottom-left, bottom, bottom-right) relative to the provided
+     * position.
+     *
+     * @param p The base position to calculate adjacent positions from.
+     * @return A list of positions adjacent to the given position.
+     */
     private List<Position> getAdjacentPositions(Position p) {
         int tileSize = 48;
         return Arrays.asList(
@@ -76,18 +86,49 @@ public class RecordUsedPlace {
         );
     }
 
+    /**
+     * Creates a new position based on a base position and x/y offsets.
+     *
+     * @param base    The base position to which the offsets are applied.
+     * @param xOffset The offset in the x-axis.
+     * @param yOffset The offset in the y-axis.
+     * @return A new Position object offset from the base.
+     */
     private Position createPosition(Position base, int xOffset, int yOffset) {
         return new Position(base.getX_axis() + xOffset, base.getY_axis() + yOffset);
     }
+
+    /**
+     * Checks if a given position is contained within a list of positions.
+     *
+     * @param positions The list of positions to check against.
+     * @param position  The position to be checked.
+     * @return True if the position is contained in the list, otherwise false.
+     */
 
     private boolean containsPosition(List<Position> positions, Position position) {
         return positions.stream().anyMatch(pos -> pos.equal(position));
     }
 
+    /**
+     * Determines if a given position is considered an obstacle.
+     * 
+     * @param position The position to check.
+     * @return True if the position is an obstacle, otherwise false.
+     */
     private boolean isPositionAObstacle(Position position) {
         return containsPosition(walls_pos, position) || containsPosition(obstacle_pos, position);
     }
 
+    /**
+     * Determines whether an enemy or obstacle can be placed at a given position.
+     * This method checks adjacent positions to ensure that placing an enemy or
+     * obstacle
+     * does not cause path-blocking scenarios.
+     *
+     * @param p The position to check for placement feasibility.
+     * @return True if an enemy or obstacle can be safely placed, otherwise false.
+     */
     public boolean canPlaceEnemyAndObstacle(Position p) {
         List<Position> adjacentPositions = getAdjacentPositions(p);
         boolean[] isAdjacentObstacle = new boolean[adjacentPositions.size()];
@@ -99,6 +140,15 @@ public class RecordUsedPlace {
         return !checkObstacleConditions(isAdjacentObstacle);
     }
 
+    /**
+     * Evaluates a set of boolean conditions to determine if placing an obstacle
+     * would result in path-blocking.
+     *
+     * @param obstacles An array of boolean values representing the presence of
+     *                  obstacles
+     *                  in adjacent positions.
+     * @return True if any condition for path-blocking is met, otherwise false.
+     */
     private boolean checkObstacleConditions(boolean[] obstacles) {
         return (obstacles[0] && obstacles[2]) || (obstacles[5] && obstacles[7]) ||
                 (obstacles[3] && obstacles[4]) || (obstacles[0] && obstacles[5]) ||
