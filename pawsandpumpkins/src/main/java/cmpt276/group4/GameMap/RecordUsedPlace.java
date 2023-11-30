@@ -140,6 +140,8 @@ public class RecordUsedPlace {
         return !checkObstacleConditions(isAdjacentObstacle);
     }
 
+    
+
     /**
      * Evaluates a set of boolean conditions to determine if placing an obstacle
      * would result in path-blocking.
