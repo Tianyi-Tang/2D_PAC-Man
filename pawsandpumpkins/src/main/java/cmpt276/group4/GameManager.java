@@ -54,6 +54,12 @@ public class GameManager {
         return playerWin;
     }
 
+    public int getGeneralRewards_num(){return generalRewards_num;}
+
+    public boolean isCollectAllRewards(){return collectAllRewards;}
+
+
+
     public void setNumberOfGeneralRewards(GameConfig config){
         generalRewards_num = config.getNumberOfRegularRewards();
     }
@@ -119,5 +125,4 @@ public class GameManager {
         controll.transformToEndScreen();
     }
 
-    
 }

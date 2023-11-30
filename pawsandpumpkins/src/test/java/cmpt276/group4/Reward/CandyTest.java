@@ -97,7 +97,9 @@ class CandyTest {
         Graphics2D mockedGraphics = mock(Graphics2D.class);
         Position cdposition = new Position(1, 1);
         candy.setPosition(cdposition);
+
         candy.draw(mockedGraphics);
+
         verify(mockedGraphics).drawImage(any(BufferedImage.class), eq(1), eq(1), eq(48), eq(48), isNull());
     }
     }
