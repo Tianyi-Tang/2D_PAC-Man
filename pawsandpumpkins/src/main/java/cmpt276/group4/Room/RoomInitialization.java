@@ -20,8 +20,7 @@ public class RoomInitialization {
     private int max_X;
     private int max_Y;
     public int wall,tombstone;
-    private Obstacletype obstacletype;
-    private Position position;
+    public Position position;
     private GameConfig gc;
     public List<Position> wallPositionList;
     public List<Position> tilesPosition;

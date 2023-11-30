@@ -1,6 +1,7 @@
 package cmpt276.group4.Room;
 
 import java.awt.Graphics2D;
+import java.util.function.BooleanSupplier;
 
 import cmpt276.group4.CharacterAvaliablePosition;
 import cmpt276.group4.GameManager;
@@ -42,10 +43,10 @@ public class Door implements CharacterAvaliablePosition{
     }
 
     public void playerLeaveRoom(){
-        if(open){
-            if(Player.getInstance().getPosition().equal(position))
-                GameManager.getInstance().playerLeaveDoor();
-        }
+       if(open){
+           if(Player.getInstance().getPosition().equal(position))
+               GameManager.getInstance().playerLeaveDoor();
+       }
     }
 
     /**
@@ -76,5 +77,9 @@ public class Door implements CharacterAvaliablePosition{
     @Override
     public void draw(Graphics2D g2) {
         
+    }
+
+    public Boolean isOpen() {
+        return open;
     }
 }

@@ -207,7 +207,7 @@ public class RoomLayoutTest {
     /**
      * Set the mock RecordUsedPlace to allow or reject the position can place the obstacle
      * @param result allow or reject place obstacle in that position
-     * @param position the position you want to set
+     * @param position the ppsition you want to set
      */
     private void setCanPlaceEnemyAndObstacle_result(boolean result,Position position){
         when(mockrecord.canPlaceEnemyAndObstacle(position)).thenReturn(result);

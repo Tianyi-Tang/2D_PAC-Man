@@ -7,7 +7,7 @@ import cmpt276.group4.WindowAndInput.PanelController;
 
 
 /**
- * Class that controll the switch of different panel and end of game
+ * Class that control the switch of different panel and end of game
  */
 public class GameManager {    
     private GameStatus status;
@@ -53,6 +53,12 @@ public class GameManager {
     public boolean isPalyerWin(){
         return playerWin;
     }
+
+    public int getGeneralRewards_num(){return generalRewards_num;}
+
+    public boolean isCollectAllRewards(){return collectAllRewards;}
+
+
 
     public void setNumberOfGeneralRewards(GameConfig config){
         generalRewards_num = config.getNumberOfRegularRewards();
@@ -108,7 +114,7 @@ public class GameManager {
     }
 
     /**
-     * laoding the result panel to end of gmae
+     * loading the result panel to end of game
      */
     private  void endOfGame(){
         gameEnd =true;
@@ -119,5 +125,4 @@ public class GameManager {
         controll.transformToEndScreen();
     }
 
-    
 }

@@ -10,15 +10,15 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import cmpt276.group4.Enemy.EnemyFactory;
 import cmpt276.group4.GameMap.RecordUsedPlace;
 import cmpt276.group4.GameMap.RoomEnvironment;
 import cmpt276.group4.GameMap.RoomLayout;
 import cmpt276.group4.Logic.GameConfig;
 import cmpt276.group4.Logic.WindowConfig;
-import cmpt276.group4.Reward.RewardFactory;
 import cmpt276.group4.Room.RoomFactory;
 import cmpt276.group4.Room.RoomInitialization;
+import cmpt276.group4.Enemy.EnemyFactory;
+import cmpt276.group4.Reward.RewardFactory;
 
 
 /**

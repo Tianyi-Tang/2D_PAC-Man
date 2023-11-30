@@ -92,4 +92,6 @@ public class Wall extends Obstacle {
         if(wallImage != null)
             g2.drawImage(wallImage, position.getX_axis(), position.getY_axis(), WindowConfig.tileSize , WindowConfig.tileSize, null);
     }
+
+    
 }

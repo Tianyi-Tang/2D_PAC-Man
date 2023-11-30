@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-
 import javax.imageio.ImageIO;
 
 import cmpt276.group4.GameManager;
@@ -28,54 +27,56 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
     private Position destination;
     private static Player _instance = null;
 
-    private boolean move_up, move_down, move_left, move_right = false;//directions player can move
-    private MoveDirection direction = MoveDirection.Down; //the current direction playe move
+    private boolean move_up, move_down, move_left, move_right = false;// directions player can move
+    private MoveDirection direction = MoveDirection.Down; // the current direction playe move
     private boolean org_State = true;
     private int stateCounter = 0;
 
-    private PlayerMovement movement;//check player move to avalibale position
+    private PlayerMovement movement;// check player move to avalibale position
     private int time_counter = 0;
 
     private int deductScore = 0;
     private boolean interval = false;
 
-    private int collectScore = 0;
+    public int collectScore = 0;
     private int bonusReward_num = 0;
-    private int generalReward_num =0;
+    private int generalReward_num = 0;
 
-   private  BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;//images for player moving 
-   private  BufferedImage currentImage = null;// The image will draw on the window
+    private BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;// images for player moving
+    private BufferedImage currentImage = null;// The image will draw on the window
 
-   /**
-    * constructor for the player initlization
-    */
-    public Player(){
+    /**
+     * constructor for the player initlization
+     */
+    public Player() {
         playerPosition = new Position(1 * WindowConfig.tileSize, 1 * WindowConfig.tileSize);
         RecordUsedPlace.getInstance().removeFromAviable(playerPosition);
         movement = new PlayerMovement();
-        
+
         getPlayerImage();
         destination = new Position(0, 0);
     }
 
     /**
-     * a static function to get player instance 
+     * a static function to get player instance
+     * 
      * @return the instance of Player
      */
-    public static synchronized Player getInstance(){
-        if(_instance == null){
+    public static synchronized Player getInstance() {
+        if (_instance == null) {
             _instance = new Player();
-        }      
+        }
         return _instance;
     }
 
     /**
      * send singleton objects to set up the movement
-     * @param manager the GameManger objec
+     * 
+     * @param manager         the GameManger object
      * @param roomEnvironment the RoomEnvironment object
-     * @param roomLayout the RoomLayout object
+     * @param roomLayout      the RoomLayout object
      */
-    public void init(GameManager manager, RoomEnvironment roomEnvironment,RoomLayout roomLayout){
+    public void init(GameManager manager, RoomEnvironment roomEnvironment, RoomLayout roomLayout) {
         this.manager = manager;
         movement.init(roomLayout, roomEnvironment, this);
     }
@@ -83,9 +84,9 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
     /**
      * try to load the player image from resource
      */
-    private void getPlayerImage(){
+    private void getPlayerImage() {
         try {
-            //String directory = System.getProperty("user.dir");
+            // String directory = System.getProperty("user.dir");
             up1 = ImageIO.read(new File("res/Player/up1.png"));
             up2 = ImageIO.read(new File("res/Player/up2.png"));
             down1 = ImageIO.read(new File("res/Player/down1.png"));
@@ -102,108 +103,119 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
 
     /**
      * get the player position
+     * 
      * @return player position
      */
-    public Position getPosition(){
+    public Position getPosition() {
         return playerPosition;
     }
 
     /**
      * When player catach by enemy, give punishment to player
-     * @param deductScore how many socre need to be deduct
+     * 
+     * @param deductPoint how many socre need to be deduct
      */
-    public void deductPoint(int deductPoint){
-        if(!interval){
+    public void deductPoint(int deductPoint) {
+        if (!interval) {
             undeductInterval();
             deductScore += deductPoint;
-            if(deductScore > collectScore){
+            if (deductScore > collectScore) {
                 manager.negativePoint();
             }
         }
-        
+
     }
 
     /**
      * Player shouldn't deduct score during 0.5 second interval
      */
-    private void undeductInterval(){
+    private void undeductInterval() {
         interval = true;
         GameTime.getInstance().setTimeInterval(this, 500);
     }
 
     /**
-     * When player get reward, add score to player and check player collect all general rewards or not
-     * @param number how many score add to player
+     * When player get reward, add score to player and check player collect all
+     * general rewards or not
+     * 
+     * @param number        how many score add to player
      * @param isBonusReward is this reward a bonus reward
      */
-    public void addScoreToPlayer(int number, boolean isBonusReward){
+    public void addScoreToPlayer(int number, boolean isBonusReward) {
         collectScore += number;
-        if(isBonusReward)
-            bonusReward_num ++;
-        else{
-            generalReward_num ++;
+        if (isBonusReward)
+            bonusReward_num++;
+        else {
+            generalReward_num++;
             manager.collectReward(generalReward_num);
         }
-            
+
     }
 
     /**
-     * Get the totoal score player gain without count the deduct point for punishment
+     * Get the totoal score player gain without count the deduct point for
+     * punishment
+     * 
      * @return total score of player
      */
-    public int getCollectScore(){
+    public int getCollectScore() {
         return collectScore;
     }
 
     /**
      * Get the number of bonuse rewards dose player collect
-     * @return number of bonuse rewards 
+     * 
+     * @return number of bonuse rewards
      */
-    public int getBonusRewardNum(){
+    public int getBonusRewardNum() {
         return bonusReward_num;
     }
 
     /**
      * Get number of bonuse general rewards dose player collect
+     * 
      * @return number of general rewards
      */
-    public int getGeneralRewardNum(){
+    public int getGeneralRewardNum() {
         return generalReward_num;
     }
-    
+
     /**
      * How many point people deduct for punishment
+     * 
      * @return deduct point
      */
-    public int getDeductScore(){
+    public int getDeductScore() {
         return deductScore;
     }
 
     /**
      * The total scores of player which count the deduct point for punishment
+     * 
      * @return total scores
      */
-    public int totalScore(){
+    public int totalScore() {
         return collectScore - deductScore;
     }
 
     /**
-     * get current character image 
+     * get current character image
+     * 
      * @return
      */
-    public BufferedImage getCurrentImage(){
+    public BufferedImage getCurrentImage() {
         return currentImage;
     }
 
-
     /**
-     * Get information send from KeybaordListener and change player moving direction 
-     * @param direction the direction player move to 
-     * @param turnOn is people press or release keyboard
+     * Get information send from KeybaordListener and change player moving direction
+     * 
+     * @param direction the direction player move to
+     * @param turnOn    is people press or release keyboard
      */
     @Override
     public void observerUpdate(MoveDirection direction, boolean turnOn) {
-        if(direction != null){
+        if (direction != null) {
             switch (direction) {
                 case Up:
                     move_up = turnOn;
@@ -224,7 +236,7 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
     }
 
     /**
-     * the undeduct time is end, player should available for deduct score 
+     * the undeduct time is end, player should available for deduct score
      */
     @Override
     public void arriveTime() {
@@ -234,66 +246,64 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
     /**
      * Logical update for player to change position base on keyboard input
      */
-    public void update(){
+    public void update() {
         stateCounter++;
-        time_counter ++;
-        if(stateCounter >= 15){
-            if(org_State)
+        time_counter++;
+        if (stateCounter >= 15) {
+            if (org_State)
                 org_State = false;
             else
                 org_State = true;
-            stateCounter =0;
+            stateCounter = 0;
         }
-        
-        if(time_counter >= 10){
-            if(move_up){
+
+        if (time_counter >= 10) {
+            if (move_up) {
                 direction = MoveDirection.Up;
                 updatePosition(0, -48);
-            }
-            else if(move_down){
+            } else if (move_down) {
                 direction = MoveDirection.Down;
                 updatePosition(0, 48);
-            }
-            else if(move_right){
+            } else if (move_right) {
                 direction = MoveDirection.Right;
                 updatePosition(48, 0);
-            }
-            else if(move_left){
+            } else if (move_left) {
                 direction = MoveDirection.Left;
                 updatePosition(-48, 0);
             }
-            time_counter =0;
+            time_counter = 0;
             movement.checkReward();
         }
-        
+
     }
 
     /**
      * Draw the player position on the map
+     * 
      * @param g2 a Graphics2D that represent game window
      */
-    public void draw(Graphics2D g2){
+    public void draw(Graphics2D g2) {
         switch (direction) {
             case Up:
-                if(org_State)
+                if (org_State)
                     currentImage = up1;
                 else
                     currentImage = up2;
                 break;
             case Down:
-                if(org_State)
+                if (org_State)
                     currentImage = down1;
                 else
                     currentImage = down2;
                 break;
             case Left:
-                if(org_State)
+                if (org_State)
                     currentImage = left1;
                 else
                     currentImage = left2;
                 break;
             case Right:
-                if(org_State)
+                if (org_State)
                     currentImage = right1;
                 else
                     currentImage = right2;
@@ -302,15 +312,19 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
                 break;
         }
 
-        g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), WindowConfig.tileSize, WindowConfig.tileSize,null); 
+        g2.drawImage(currentImage, playerPosition.getX_axis(), playerPosition.getY_axis(), WindowConfig.tileSize,
+                WindowConfig.tileSize, null);
     }
 
     /**
      * Change the destination base on the keyboard input
-     * @param x_increment the different of x-axis between player current position and  destination position
-     * @param y_increment the different of y-axis between player current position and  destination position
+     * 
+     * @param x_increment the different of x-axis between player current position
+     *                    and destination position
+     * @param y_increment the different of y-axis between player current position
+     *                    and destination position
      */
-    private void updateDestination(int x_increment,int y_increment){
+    private void updateDestination(int x_increment, int y_increment) {
         destination.setPosition(playerPosition);
         destination.addOnX_axis(x_increment);
         destination.addOnY_axis(y_increment);
@@ -321,12 +335,10 @@ public class Player implements KeyMovingObserver, TimeElapsedListener {
      * destination position to player position and check the destination has
      * reward or enemy
      */
-    private void updatePosition(int x_increment,int y_increment){
+    private void updatePosition(int x_increment, int y_increment) {
         updateDestination(x_increment, y_increment);
-        if(movement.isPositionAvailable(destination))
+        if (movement.isPositionAvailable(destination))
             playerPosition.setPosition(destination);
     }
-
-
 
 }
