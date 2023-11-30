@@ -9,7 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-
 import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +34,7 @@ public class PlayerTests {
      * Set up the player before testing
      */
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         player = new Player();
 
         mockGameManager = mock(GameManager.class);
@@ -50,17 +49,17 @@ public class PlayerTests {
      * Test the inital posititon of player is always in (1,1) in the map
      */
     @Test
-    public void initalPosition(){
-        assertEquals(new Position( WindowConfig.tileSize, WindowConfig.tileSize), player.getPosition());
+    public void initalPosition() {
+        assertEquals(new Position(WindowConfig.tileSize, WindowConfig.tileSize), player.getPosition());
     }
 
-
     /**
-     * Test player can record how many general reward it collect and call the collectReward
+     * Test player can record how many general reward it collect and call the
+     * collectReward
      * function in GameManager
      */
     @Test
-    public void addGeneralRewards(){
+    public void addGeneralRewards() {
         player.addScoreToPlayer(5, false);
         player.addScoreToPlayer(2, false);
         verify(mockGameManager).collectReward(player.getGeneralRewardNum());
@@ -68,10 +67,10 @@ public class PlayerTests {
     }
 
     /**
-    * Test player can record how many bonus reward it collect
-    */
+     * Test player can record how many bonus reward it collect
+     */
     @Test
-    public void addBonusReward(){
+    public void addBonusReward() {
         player.addScoreToPlayer(6, true);
         assertEquals(player.getBonusRewardNum(), 1);
     }
@@ -80,38 +79,71 @@ public class PlayerTests {
      * Check the score is successfully adding to player
      */
     @Test
-    public void addScoreToPlayer(){
+    public void addScoreToPlayer() {
         player.addScoreToPlayer(4, true);
         assertEquals(player.getCollectScore(), 4);
     }
+
     /**
-     * Check will player score can be deducted 
+     * Check will player score can be deducted
      */
     @Test
-    public void deductPoint(){
+    public void deductPoint() {
         player.addScoreToPlayer(15, false);
         player.deductPoint(10);
         assertEquals(player.totalScore(), 5);
     }
 
     /**
-     * Test player will call the negativePoint function in GameManger after player has negative point
+     * Test player will call the negativePoint function in GameManger after player
+     * has negative point
      */
     @Test
-    public void negativePoint(){
+    public void negativePoint() {
         mockGameManager.setPlayer(player);
         player.deductPoint(4);
         verify(mockGameManager).negativePoint();
     }
 
     /**
-     * Test after player first deduct score, the second deduction will not success within 0.5 second
+     * Test after player first deduct score, the second deduction will not success
+     * within 0.5 second
      */
     @Test
-    public void deductPointInShortTime(){
+    public void deductPointInShortTime() {
         player.deductPoint(5);
         player.deductPoint(10);
         assertEquals(player.getDeductScore(), 5);
+    }
+
+    /**
+     * Test player can be deduct point twice
+     */
+    @Test
+    public void deductPointTwice() {
+        player.deductPoint(5);
+        player.arriveTime();
+        player.deductPoint(10);
+        assertEquals(15, player.getDeductScore());
+    }
+
+    /**
+     * Test ObserverUpdate will return error if the pass value for direction is null
+     */
+    @Test
+    public void sendINullToObserverUpdate() {
+        keyInputPlayerUpdate(null, true, 1, true);
+    }
+
+    /**
+     * Test ObserverUpdate will make player position change when the other key is
+     * press
+     */
+    @Test
+    public void sendOtherToObserverUpdate() {
+        Position initalPosition = player.getPosition();
+        keyInputPlayerUpdate(MoveDirection.Other, true, 1, true);
+        assertEquals(initalPosition, player.getPosition());
     }
 
     /**
@@ -119,19 +151,18 @@ public class PlayerTests {
      * Move direction
      */
     @Test
-    public void playerFailToMoving(){
+    public void playerFailToMoving() {
         player.observerUpdate(MoveDirection.Up, true);
         assertEquals(player.getPosition(), new Position(48, 48));
     }
 
     /**
      * Test observerUpdate will make Player move base on the direction input after
-     * run several time of update 
+     * run several time of update
      */
     @Test
-    public void playerMovingLeft(){
-        player.observerUpdate(MoveDirection.Left, true);
-        playerUpdate.playerUpdate(1, true);
+    public void playerMovingLeft() {
+        keyInputPlayerUpdate(MoveDirection.Left, true, 1, true);
         assertEquals(player.getPosition(), new Position(0, 48));
     }
 
@@ -140,9 +171,8 @@ public class PlayerTests {
      * the moving direction turn off
      */
     @Test
-    public void PlayerContinuesPressKey(){
-        player.observerUpdate(MoveDirection.Down, true);
-        playerUpdate.playerUpdate(2, true);
+    public void PlayerContinuesPressKey() {
+        keyInputPlayerUpdate(MoveDirection.Down, true, 2, true);
         assertEquals(player.getPosition(), new Position(48, 144));
     }
 
@@ -150,20 +180,19 @@ public class PlayerTests {
      * Test the intial image of player is image of player moving down
      */
     @Test
-    public void initialmovingImage(){
+    public void initialmovingImage() {
         player.draw(mockGraphic);
         BufferedImage expectImage = loadImage("res/Player/down1.png");
-        assertImagesEqual(expectImage,player.getCurrentImage());
+        assertImagesEqual(expectImage, player.getCurrentImage());
     }
 
     /**
-     * Test player will update image base on direction Input after 
-     * several time of update 
+     * Test player will update image base on direction Input after
+     * several time of update
      */
     @Test
-    public void movingImageUp(){
-        player.observerUpdate(MoveDirection.Up, true);
-        playerUpdate.playerUpdate(1, true);
+    public void movingImageUp() {
+        keyInputPlayerUpdate(MoveDirection.Up, true, 1, true);
         player.draw(mockGraphic);
         BufferedImage expecImage = loadImage("res/Player/up1.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
@@ -174,46 +203,59 @@ public class PlayerTests {
      * turn off the move direction
      */
     @Test
-    public void imageAfterReleaseKey(){
-        player.observerUpdate(MoveDirection.Right, true);
-        playerUpdate.playerUpdate(1, true);
+    public void imageAfterReleaseKey() {
+        keyInputPlayerUpdate(MoveDirection.Right, true, 1, true);
         player.draw(mockGraphic);
-
-        player.observerUpdate(MoveDirection.Right, false);
+        keyInputPlayerUpdate(MoveDirection.Right, false, 1, true);
         player.draw(mockGraphic);
-        BufferedImage expecImage = loadImage("res/Player/right1.png");
+        BufferedImage expecImage = loadImage("res/Player/right2.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
     }
 
     /**
-     * Test the player image will switch another version of moveing direction when player 
+     * Test playe will still switch iamge even there is not key press at all
+     */
+    @Test
+    public void noPressKey() {
+        keyInputPlayerUpdate(null, true, 2, true);
+        player.draw(mockGraphic);
+        BufferedImage expecImage = loadImage("res/Player/down2.png");
+        assertImagesEqual(expecImage, player.getCurrentImage());
+    }
+
+    /**
+     * Test the player image will switch another version of moveing direction when
+     * player
      * maintain direction during several update
      */
     @Test
-    public void imageSwitch(){
-        player.observerUpdate(MoveDirection.Left, true);
-        playerUpdate.playerUpdate(1, false);
+    public void imageSwitch() {
+        keyInputPlayerUpdate(MoveDirection.Left, true, 1, false);
         player.draw(mockGraphic);
         BufferedImage expecImage = loadImage("res/Player/left2.png");
         assertImagesEqual(expecImage, player.getCurrentImage());
     }
 
     /**
-     * Method that imitate the time passing, by continues calling the update function
+     * Method that imitate the time passing, by continues calling the update
+     * function
      * in player
+     * 
      * @param index how many time you want to call the update
      */
-    private void runUpdatemultipleTime(int index){
-        for(int i=0;i < index;i++)
-            player.update();
+    private void keyInputPlayerUpdate(MoveDirection direction, boolean pressKey, int updateTime,
+            boolean forPlayermoving) {
+        player.observerUpdate(direction, pressKey);
+        playerUpdate.playerUpdate(updateTime, forPlayermoving);
     }
 
     /**
      * Provide the buffedImage laoding base on path of image
-     * @param path the path of image which you want to load 
-     * @return the loading image 
+     * 
+     * @param path the path of image which you want to load
+     * @return the loading image
      */
-    private BufferedImage loadImage(String path){
+    private BufferedImage loadImage(String path) {
         BufferedImage image = null;
         try {
             image = ImageIO.read(new File(path));
@@ -225,16 +267,17 @@ public class PlayerTests {
 
     /**
      * Check Player provide image is smae as the expectation
+     * 
      * @param expectImage the expect image that player will provide
      * @param actualImage the acutal image that player provide
      */
-    private void  assertImagesEqual(BufferedImage expectImage, BufferedImage actualImage){
-        int[] expectedPixels = expectImage.getRGB(0, 0, expectImage.getWidth(), expectImage.getHeight(), null, 0, expectImage.getWidth());
-        int[] actualPixels = actualImage.getRGB(0, 0, actualImage.getWidth(), actualImage.getHeight(), null, 0, actualImage.getWidth());
+    private void assertImagesEqual(BufferedImage expectImage, BufferedImage actualImage) {
+        int[] expectedPixels = expectImage.getRGB(0, 0, expectImage.getWidth(), expectImage.getHeight(), null, 0,
+                expectImage.getWidth());
+        int[] actualPixels = actualImage.getRGB(0, 0, actualImage.getWidth(), actualImage.getHeight(), null, 0,
+                actualImage.getWidth());
 
         assertArrayEquals(expectedPixels, actualPixels);
     }
 
-
-    
 }
