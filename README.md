@@ -19,3 +19,30 @@ After you finished you game, you will able to see your performance
 - Java JDK (Version 20 or above)
 - Maven (Version 3.6.0 or above)
 - Git (latest stable version)
+
+## Installation
+#### Clone the project
+```bash
+git clone https://github.com/Tianyi-Tang/Paws-Pumpkins.git
+```
+
+#### Go to the project directory
+```bash
+cd .\pawsandpumpkins\
+```
+
+## Build and Run
+#### Clean and Install Dependencies
+```bash
+mvn clean install
+```
+
+#### Compile the project
+```bash
+mvn clean compile
+```
+
+#### Run the Game
+```bash
+mvn exec:java
+```
