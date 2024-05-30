@@ -28,6 +28,13 @@ class TombstoneTest {
 
     @Test
     void drawCallsDrawImage() {
+        RecordUsedPlace mockRecord = mock(RecordUsedPlace.class);
+        Position mockPosition = new Position(5, 5);
+        when(mockRecord.getRandomFromAvailablePosition()).thenReturn(mockPosition);
+        when(mockRecord.canPlaceEnemyAndObstacle(mockPosition)).thenReturn(true);
+
+        RecordUsedPlace.setInstance(mockRecord);
+
         Tombstone tombstone = new Tombstone(new Position(5, 5));
         Graphics2D mockedGraphics = mock(Graphics2D.class);
 

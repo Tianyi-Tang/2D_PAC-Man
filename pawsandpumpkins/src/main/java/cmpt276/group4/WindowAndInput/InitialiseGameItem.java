@@ -55,7 +55,7 @@ public class InitialiseGameItem {
      * Create the room for the game
      */
     public void createRoom() {
-        if (config != null && roomFactory != null) {
+        if (config != null && roomFactory != null && roomInitialization != null) {
             roomInitialization.initializeRoom(config.getGameLevel(), roomFactory);
             roomInitialization.iRoom(roomFactory);
         }
