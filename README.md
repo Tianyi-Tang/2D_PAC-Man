@@ -4,23 +4,22 @@ Paws and Pumpkins is a captivating 2D PAC-MAN game where the player controls a c
 ## Project Demonstration
 When you enter the game you will see the Main Menu with start button
 <br>
-<img src="/Game_demonstrate_img/Game_start.png" alt="Game_start" width="500" height="500">
+<img src="/Game_demonstrate_img/Game_start.png" alt="Game_start" width="350" height="350">
 <br>
 
 After clicking the start button, you can chose any difficulty you want
 <br>
-<img src="/Game_demonstrate_img/Difficulty_level.png" alt="Difficulty_level" width="500" height="500">
+<img src="/Game_demonstrate_img/Difficulty_level.png" alt="Difficulty_level" width="350" height="350">
 <br>
 
 The game will load and display the game level base on the difficulty you chose
 <br>
-<img src="/Game_demonstrate_img/Game_scene.png" alt="Game_scene" width="500" height="500">
+<img src="/Game_demonstrate_img/Game_scene.png" alt="Game_scene" width="350" height="350">
 <br>
-![plot](./Game_demonstrate_img/Game_scene.pdf)
 
 After you finished you game, you will able to see your performance
 <br>
-<img src="/Game_demonstrate_img/Fianll_score.png" alt="Fianll_score" width="500" height="500">
+<img src="/Game_demonstrate_img/Fianll_score.png" alt="Fianll_score" width="350" height="350">
 <br>
 
 ## Getting Started
