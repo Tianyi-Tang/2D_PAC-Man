@@ -36,7 +36,17 @@ git clone https://github.com/Tianyi-Tang/Paws-Pumpkins.git
 
 #### Go to the project directory
 ```bash
-cd .\pawsandpumpkins\
+cd ./pawsandpumpkins
+```
+
+### Go to source code
+```bash
+cd ./pawsandpumpkins/src/main/java/cmpt276/group4
+```
+
+### GO to test case
+```bash
+cd ./pawsandpumpkins/test/main/java/cmpt276/group4
 ```
 
 ## Build and Run
