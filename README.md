@@ -3,7 +3,7 @@ Paws and Pumpkins is a captivating 2D PAC-MAN game where the player controls a c
 
 ## Project Demonstration
 When you enter the game you will see the Main Menu with start button
-[View PDF](./Game_demonstrate_img/Game_start.pdf)
+![Game_start](./Game_demonstrate_img/Game_start.png)
 
 After clicking the start button, you can chose any difficulty you want
 ![plot](./Game_demonstrate_img/Difficulty_level.pdf)
